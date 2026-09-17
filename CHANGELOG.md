@@ -14,7 +14,7 @@ All 35 skills share one version number. No skill has a version of its own.
 - **Patch.** A correction inside a skill: a legal or channel rule updated to match its current
   source, or a step rewritten to read more clearly.
 
-## [1.0.0] - Unreleased
+## [1.0.0] - 2026-09-17
 
 First public release.
 
