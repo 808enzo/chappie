@@ -1,0 +1,3 @@
+# GitHub Linguist: count Markdown in the language stats.
+# This library is prose, not code, so the language bar should say so.
+*.md linguist-detectable=true
