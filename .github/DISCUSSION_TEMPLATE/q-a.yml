@@ -1,0 +1,22 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ask here which skill fits your case, how to read a step, or how a mechanic applies to your setup. If a skill gets something wrong, open an issue instead, so the maintainer can track the fix.
+
+        The library carries no market benchmarks. Asked what rate is normal, the maintainer points you to [ROADMAP.md](https://github.com/808enzo/chappie/blob/main/ROADMAP.md#on-numbers) and shows how to build a baseline from your own data.
+
+        Discussions are public. Remove email addresses, phone numbers, names, order and account IDs, and rows from CRM exports. Replace them with made-up values that keep the shape of the problem.
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: What you are trying to run, and where you got stuck.
+    validations:
+      required: true
+  - type: input
+    id: skills
+    attributes:
+      label: Skills you looked at
+      description: Optional. The slugs, if you know them.
+      placeholder: repeat-purchase, lapse-and-winback

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "chappie",
+  "displayName": "Chappie",
+  "version": "1.0.0",
+  "description": "35 skills for lifecycle, CRM and retention in B2C and B2B: the steps, thresholds, timing, edge cases and failure modes that a framework leaves to you.",
+  "author": {
+    "name": "808enzo",
+    "url": "https://github.com/808enzo"
+  },
+  "homepage": "https://github.com/808enzo/chappie#readme",
+  "repository": "https://github.com/808enzo/chappie",
+  "license": "MIT",
+  "keywords": ["agent-skills", "lifecycle-marketing", "crm", "retention", "email-marketing"]
+}

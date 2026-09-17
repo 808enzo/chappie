@@ -1,0 +1,68 @@
+name: Installation fails
+description: The skills don't install, don't show up, or don't load in your agent.
+title: "Install: "
+labels: ["install"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Issues are public. Before you paste the output, remove access tokens and anything else you wouldn't post, such as your username in file paths.
+  - type: dropdown
+    id: method
+    attributes:
+      label: Install method
+      options:
+        - npx skills
+        - Claude Code plugin
+        - Claude app, ZIP upload
+        - Copied the folders by hand
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: agent
+    attributes:
+      label: Agent and version
+      placeholder: Claude Code 2.1
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      description: For the Claude app, name the browser or the desktop app instead.
+      placeholder: macOS 15, Windows 11, Ubuntu 24.04
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Chappie version or commit
+      description: Optional. The version from CHANGELOG.md, or the commit you installed from.
+      placeholder: 1.0.0
+  - type: textarea
+    id: steps
+    attributes:
+      label: What you did
+      description: The commands you ran, word for word, or the steps you took in the app.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: What you saw
+      description: The full output of the command, including any error, or the message the app showed.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+      description: For example, which skill you expected to see in the list or to load on a request.
+  - type: checkboxes
+    id: pull-request
+    attributes:
+      label: Fixing it yourself
+      options:
+        - label: I plan to open a pull request for this. CONTRIBUTING.md says how.

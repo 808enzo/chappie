@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question
+    url: https://github.com/808enzo/chappie/discussions/new?category=q-a
+    about: Ask which skill fits your case or how to read a step.
+  - name: Why the library carries no benchmarks
+    url: https://github.com/808enzo/chappie/blob/main/ROADMAP.md#on-numbers
+    about: Read this before asking what rate is normal.
+  - name: How contributions work
+    url: https://github.com/808enzo/chappie/blob/main/CONTRIBUTING.md
+    about: Report a problem as an issue, or fix it yourself in a pull request.

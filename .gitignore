@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# Skills installed into this checkout by npx skills or Claude Code, and local agent settings
+.claude/
+.agents/
+skills-lock.json
+
+# Python bytecode cache
+__pycache__/

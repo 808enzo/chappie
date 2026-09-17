@@ -1,0 +1,108 @@
+name: A legal or channel rule has changed
+description: A law, a regulator's guidance, or a platform's requirement no longer matches what a skill says.
+title: "Rule changed: "
+labels: ["rule-changed"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Every rule a skill quotes names its primary source and the date the source was opened. Use this form when the source now says something else, or has moved to a new address. You don't need to be a lawyer to file it.
+  - type: dropdown
+    id: skill
+    attributes:
+      label: Skill
+      description: Pick every skill that quotes the rule.
+      multiple: true
+      options:
+        - crm-program-design
+        - scenario-map
+        - segmentation
+        - rfm-segments
+        - list-building
+        - martech-stack
+        - welcome-and-activation
+        - triggered-messages
+        - repeat-purchase
+        - lapse-and-winback
+        - offer-design
+        - promo-calendar
+        - loyalty-program-design
+        - loyalty-program-launch
+        - personalization
+        - email-program
+        - email-copy
+        - email-design
+        - deliverability
+        - onsite-capture
+        - push-notifications
+        - in-product-messaging
+        - chat-and-bots
+        - messaging-channels
+        - transactional-messaging
+        - contact-orchestration
+        - consent-and-preferences
+        - metric-definitions
+        - experiments-and-holdouts
+        - crm-reporting
+        - program-audit-and-ops
+        - voice-of-customer
+        - b2b-lifecycle
+        - b2b-retention
+        - subscription-retention
+    validations:
+      required: true
+  - type: input
+    id: location
+    attributes:
+      label: File and section
+      description: The file inside the skill folder, and the heading the rule sits under. If several skills quote the rule, name one place for each.
+      placeholder: references/sending-identity.md, under "Thresholds and timings"
+    validations:
+      required: true
+  - type: textarea
+    id: current-text
+    attributes:
+      label: What the skill says now
+      description: Paste the sentence or the table row as it reads today.
+    validations:
+      required: true
+  - type: textarea
+    id: rule-today
+    attributes:
+      label: What the rule says today
+      description: Quote the source where you can, and name the date the change took effect if the source gives one.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Primary source
+      description: The law itself, the regulator's page, or the platform's own documentation.
+      placeholder: https://
+    validations:
+      required: true
+  - type: input
+    id: opened
+    attributes:
+      label: Date you opened the source
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Where you heard about the change
+      description: Optional. A blog post, a vendor notice or a news item that pointed you to the source.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      options:
+        - label: The link above goes to the primary source, not to a summary of it.
+          required: true
+  - type: checkboxes
+    id: pull-request
+    attributes:
+      label: Fixing it yourself
+      options:
+        - label: I plan to open a pull request for this. CONTRIBUTING.md says how.

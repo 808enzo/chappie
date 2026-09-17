@@ -1,0 +1,113 @@
+name: A mechanic is missing
+description: A skill covers your area but stops short of your case, such as a missing step, edge case, failure mode or variant of the mechanic.
+title: "Missing: "
+labels: ["mechanic-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form when an existing skill is the right place for your case and something inside it is missing. If no skill covers the area at all, use the new skill form instead.
+
+        Describe the situation you are in. "Our replenishment reminder reaches people who already reordered in the store" gives the maintainer something to work with. "Improve repeat-purchase" doesn't.
+  - type: markdown
+    attributes:
+      value: |
+        Issues are public. Remove email addresses, phone numbers, names, order and account IDs, and rows from CRM exports. Replace them with made-up values that keep the shape of the problem.
+  - type: dropdown
+    id: skills
+    attributes:
+      label: Skill
+      description: The skill where the mechanic should live. Pick more than one if the case crosses a boundary.
+      multiple: true
+      options:
+        - crm-program-design
+        - scenario-map
+        - segmentation
+        - rfm-segments
+        - list-building
+        - martech-stack
+        - welcome-and-activation
+        - triggered-messages
+        - repeat-purchase
+        - lapse-and-winback
+        - offer-design
+        - promo-calendar
+        - loyalty-program-design
+        - loyalty-program-launch
+        - personalization
+        - email-program
+        - email-copy
+        - email-design
+        - deliverability
+        - onsite-capture
+        - push-notifications
+        - in-product-messaging
+        - chat-and-bots
+        - messaging-channels
+        - transactional-messaging
+        - contact-orchestration
+        - consent-and-preferences
+        - metric-definitions
+        - experiments-and-holdouts
+        - crm-reporting
+        - program-audit-and-ops
+        - voice-of-customer
+        - b2b-lifecycle
+        - b2b-retention
+        - subscription-retention
+        - Not sure which skill
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is missing
+      multiple: true
+      options:
+        - A step in the sequence
+        - An edge case
+        - A failure mode
+        - A threshold or timing rule
+        - A variant of the mechanic for a different setup
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: situation
+    attributes:
+      label: What you are trying to run
+      description: The program, the customer event or the decision in front of you.
+    validations:
+      required: true
+  - type: textarea
+    id: gap
+    attributes:
+      label: Where the skill stops short
+      description: What the skill says now, with the file and section, and the point where it no longer tells you what to do.
+    validations:
+      required: true
+  - type: dropdown
+    id: model
+    attributes:
+      label: Business model
+      multiple: true
+      options:
+        - B2C, one-off purchases
+        - B2C, subscription
+        - B2B
+        - Other
+    validations:
+      required: true
+  - type: checkboxes
+    id: territory
+    attributes:
+      label: Before you submit
+      options:
+        - label: I'm not asking for a market benchmark.
+          required: true
+  - type: checkboxes
+    id: pull-request
+    attributes:
+      label: Fixing it yourself
+      options:
+        - label: I plan to open a pull request for this. CONTRIBUTING.md says how.

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "chappie",
+  "description": "Marketing skills that don't stop at the framework.",
+  "owner": {
+    "name": "808enzo",
+    "url": "https://github.com/808enzo"
+  },
+  "plugins": [
+    {
+      "name": "chappie",
+      "source": "./",
+      "description": "35 skills for lifecycle, CRM and retention in B2C and B2B: the steps, thresholds, timing, edge cases and failure modes that a framework leaves to you.",
+      "category": "marketing"
+    }
+  ]
+}

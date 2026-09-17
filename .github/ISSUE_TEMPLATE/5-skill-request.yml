@@ -1,0 +1,89 @@
+name: Request a new skill
+description: No skill covers an area of lifecycle, CRM or retention work that you run.
+title: "New skill: "
+labels: ["skill-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form when no skill covers the work, not when a skill covers it and misses a case. For a missing case, use the missing mechanic form.
+
+        Start from the work, not from a skill name. "We host in-store events for existing customers, and no skill says whom to invite, when to remind them or how to follow up with people who didn't come" gives the maintainer something to work with. "Add an events skill" doesn't.
+
+        The maintainer decides whether a request becomes a new skill, a section in an existing one, a line in ROADMAP.md, or a refusal with the reason. Calls and voice, and AI inside the program, are already planned for version 2.
+  - type: markdown
+    attributes:
+      value: |
+        Issues are public. Remove email addresses, phone numbers, names, order and account IDs, and rows from CRM exports. Replace them with made-up values that keep the shape of the problem.
+  - type: textarea
+    id: work
+    attributes:
+      label: The work the skill would cover
+      description: What you run, who it reaches, and which decisions you make along the way.
+    validations:
+      required: true
+  - type: textarea
+    id: requests
+    attributes:
+      label: What you would ask the agent
+      description: Two or three requests, written the way you would type them.
+      placeholder: |
+        1. ...
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: checked
+    attributes:
+      label: Skills you read first
+      description: Which skills came closest, and why none of them is the right place for this work.
+    validations:
+      required: true
+  - type: dropdown
+    id: block
+    attributes:
+      label: Closest block
+      description: The group in the README skill table where the new skill would sit.
+      options:
+        - Program, data and segments
+        - Lifecycle mechanics
+        - Channels
+        - Orchestration and consent
+        - Measurement and customer voice
+        - B2B and subscription
+        - None of them
+    validations:
+      required: true
+  - type: dropdown
+    id: model
+    attributes:
+      label: Business model
+      multiple: true
+      options:
+        - B2C, one-off purchases
+        - B2C, subscription
+        - B2B
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: name
+    attributes:
+      label: Suggested name
+      description: Optional. Lowercase words joined by hyphens. The maintainer picks the final name.
+      placeholder: referral-program
+  - type: checkboxes
+    id: territory
+    attributes:
+      label: Before you submit
+      options:
+        - label: The work is about customers already in your database, not paid advertising, search, PR, social publishing or brand.
+          required: true
+        - label: I'm not asking for a market benchmark or a setup guide for one platform.
+          required: true
+  - type: checkboxes
+    id: pull-request
+    attributes:
+      label: Writing it yourself
+      options:
+        - label: I'd like to write this skill in a pull request once the maintainer accepts the request.
