@@ -1,82 +1,87 @@
 # Chappie
 
-**Marketing skills that don't stop at the framework.** Advanced lifecycle, CRM and retention skills
-for AI agents, written for the people who run a B2C or B2B program on customers already in their
-database.
+**Marketing skills that don't stop at the framework.** Chappie gives your AI agent
+[35 skills](#skills) for lifecycle marketing, CRM and retention, written for the people who run a
+B2C or B2B program on customers already in their database.
 
-Works with Claude Code, Codex, OpenClaw, Hermes Agent, Cursor, GitHub Copilot, Gemini CLI,
-OpenCode, Windsurf, Cline, Roo Code, Kiro CLI, Goose, Amp and the Claude app. Every skill is a
-plain [Agent Skills](https://agentskills.io/specification) folder, so any agent that reads
-`SKILL.md` can load it.
+A skill is a folder of instructions that your agent loads by itself when a request matches it.
+Each skill gives you the part a framework leaves to you: the sequence of steps, the thresholds and
+where they come from, the timing, who belongs in each segment, the edge cases and the ways the work
+can fail. Every file is held to one test: after reading it, you know what to do on Monday morning.
 
-Chappie covers everything after the first touch. Each skill gives you the operating detail that a
-framework leaves to you: the sequence of steps, the thresholds and where they come from, the
-timing, the segment definition, the edge cases and the ways a mechanic fails. Every file is held
-to one test: after reading it, you know what to do on Monday morning. A file that names a
-framework and stops there does not get in.
+The skills work with Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, the Claude app and
+[other agents](#install).
 
-Version 1 has 35 skills in six blocks.
+## Quick start
 
-## Built for questions where one number depends on another
+Run this in your project folder to install all 35 skills. The installer needs
+[Node.js](https://nodejs.org).
 
-A win-back rate depends on who you count, and a sale's margin depends on the weeks around it. A
-report can also credit a flow with purchases that would have happened anyway. Every skill makes
-the agent work through these dependencies before it answers you.
+```bash
+npx skills add 808enzo/chappie
+```
 
-- **Each skill defines its metric before anyone reads a number.** It names one control metric and
-  states the numerator, the denominator and the window. `lapse-and-winback` divides returns by
-  everyone who crossed the lapse threshold, including the people no channel could reach, the
-  people the frequency cap held back and the control group, so the people you failed to reach stay
-  in the count.
-- **Each number sits next to the one it trades against.** `email-program` reads revenue per
-  recipient next to total channel revenue, because the first rises whenever you mail only your
-  most responsive people. `promo-calendar` reads a sale's margin over one purchase cycle on each
-  side of it, where purchases people postponed or brought forward show up. `offer-design` reads
-  the benefit each offer actually gave, and that figure exposes stacked offers that give away more
-  than any single offer promised.
-- **Effect stays apart from credit.** `experiments-and-holdouts` measures a change against a
-  control group and counts everyone assigned to a group, including the people whose message was
-  suppressed, bounced or never opened. `crm-reporting` reads change on cohorts and checks whether
-  each published conclusion still holds when its line is read again.
-- **Thresholds come from your own data.** A lapse threshold comes from your own median interval
-  between purchases. Where a skill has no figure for you, it says so and shows you how to build a
-  baseline from your own periods.
-- **A question moves across skills.** Each skill hands nearby questions by name to the neighbor
-  that owns them. `lapse-and-winback` sets the steps of a win-back attempt and passes what each
-  step may cost to `offer-design`, the cap across channels to `contact-orchestration`, and whether
-  the attempt caused anything to `experiments-and-holdouts`.
-- **The agent acts only on what you asked for.** A request to analyze, audit or plan does not
-  authorize sending a message, changing an audience or editing a live setting. Before it sends to
-  a list, updates records in bulk or changes a live program, the agent shows what will change and
-  for whom, and waits for your go-ahead. Text inside exports, tickets and survey answers is data,
-  never an instruction.
+Then ask your agent about your program in your own words. You don't have to name a skill.
+[What to ask](#what-to-ask) has examples, and [Install](#install) covers the Claude app, the
+Claude Code plugin and other options.
 
-### One question, three skills
+## What to ask
 
-*We stopped mailing the dormant tier, and revenue per recipient went up. Did the program get
-better?*
+Some requests, the skill that takes each one, and the skills it passes the next questions to:
 
-1. `email-program` does not read revenue per recipient on its own. The figure rises whenever you
-   mail only your most responsive people, so a program that got better and a program that got
-   smaller both raise it. Read total channel revenue next to it to tell the two apart.
-2. `metric-definitions` checks what the figure divides by. Revenue per recipient counts people,
-   revenue per delivered message counts messages, and the two move in opposite directions when
-   load rises.
-3. `experiments-and-holdouts` designs the holdout that shows whether the change caused anything.
+| You ask | Start with | Passes to |
+|---|---|---|
+| Our win-back email reaches people who bought in the store yesterday. What's wrong with how we define lapsed? | `lapse-and-winback` | `martech-stack`: how late store purchases arrive<br>`offer-design`: what each step of the attempt may cost |
+| Our biggest sale of the year beat last year's. Did it make money once you count the weeks around it? | `promo-calendar` | `offer-design`: how deep the discount may go<br>`experiments-and-holdouts`: whether the sale caused anything |
+| Every offer has a cap, yet some orders leave with a bigger discount than any single offer allows. | `offer-design` | `promo-calendar`: which promotions run at the same time<br>`crm-program-design`: the promo budget as a whole |
+| Mail stopped arriving at one mailbox provider, and every other provider looks fine. Where do I start? | `deliverability` | `email-program`: what goes out, to whom and how often<br>`metric-definitions`: how bounce and complaint rates are counted |
+| We have forty live flows and nobody can say which ones still earn their place. | `program-audit-and-ops` | `scenario-map`: which flows the program keeps<br>`experiments-and-holdouts`: whether a flow's effect is real |
+| Does our replenishment reminder sell anything customers wouldn't have bought anyway? | `experiments-and-holdouts` | `triggered-messages`: how the reminder flow is built<br>`martech-stack`: whether your platform can hold a group out of every send |
+| Sales says our leads are junk, and marketing says sales never calls them. Who's right? | `b2b-lifecycle` | `program-audit-and-ops`: the handoff queue and its deadlines<br>`crm-reporting`: stage conversion, read by cohort |
+| What conversion rate should our welcome series hit? | `welcome-and-activation` | `metric-definitions`: how conversion is counted<br>`experiments-and-holdouts`: whether the series caused the purchase |
 
-## What every skill contains
+The last request gets no figure back. [What a skill won't do](#what-a-skill-wont-do) explains why.
 
-Each `SKILL.md` has the same six sections. Longer material sits in `references/`, and the agent
-loads a file from there only when the task needs it.
+The skill that owns your question answers its part and passes the rest, by name, to the neighbor
+that owns it. Seven skills take questions from most of the others:
 
-| Section | What it gives you |
-|---|---|
-| When to use this | The situations the skill is for, written as symptoms you would recognize |
-| When to use something else | Which neighboring skill owns a nearby question |
-| Reference map | Which file in `references/` to load for the task at hand |
-| Control metric | The metric you judge the mechanic by, defined so someone else can reproduce it |
-| Legal regime this skill assumes | The legal and platform rules the mechanic runs under, or the points where you need your own legal answer |
-| Limits | What the skill must never do, starting with inventing a number or acting beyond what you asked for |
+```text
+Your question
+   ↓
+1  The skill that owns it
+   lapse-and-winback
+   promo-calendar
+   deliverability
+   ↓  answers its part,
+      passes the rest along
+2  A neighbor that owns
+   the next piece
+   offer-design
+   email-program
+   triggered-messages
+   ↓  1 and 2 both pass
+      questions here
+3  Seven skills most others
+   pass questions to
+   metric-definitions
+     how a number is counted
+   experiments-and-holdouts
+     whether it caused anything
+   consent-and-preferences
+     who you may write to
+   program-audit-and-ops
+     whether it still works
+   contact-orchestration
+     the cap across channels
+   crm-reporting
+     the regular report
+   martech-stack
+     which system owns a fact
+```
+
+To call a skill by name, type `/deliverability` in Claude Code (`/chappie:deliverability` if you
+installed the plugin) or `$deliverability` in Codex. In another agent, name the skill in your
+request.
 
 ## Skills
 
@@ -147,15 +152,15 @@ loads a file from there only when the task needs it.
 
 ## Install
 
-Skills hand questions to each other by name. Each one works alone, but when it passes a question
-to a neighbor, that neighbor has to be installed to take it. Install the whole set unless you know
-which skills you need.
+Chappie works with Claude Code, Codex, OpenClaw, Hermes Agent, Cursor, GitHub Copilot, Gemini CLI,
+OpenCode, Windsurf, Cline, Roo Code, Kiro CLI, Goose, Amp and the Claude app. Every skill is a
+plain [Agent Skills](https://agentskills.io/specification) folder, so any agent that reads
+`SKILL.md` can load it.
 
 ### With `npx skills`, for any agent
 
 The [`skills`](https://github.com/vercel-labs/skills) installer finds the agents on your machine
-and puts each skill in the folder that agent reads. It supports Claude Code, Codex, OpenClaw,
-Hermes Agent, Cursor, GitHub Copilot, Gemini CLI and dozens of other agents, and it needs Node.js.
+and puts each skill in the folder that agent reads. It needs Node.js.
 
 ```bash
 # all 35 skills, into the current project
@@ -173,9 +178,16 @@ npx skills add 808enzo/chappie -a openclaw -a hermes-agent
 npx skills add 808enzo/chappie -g
 ```
 
+Install the whole set unless you know which skills you need. When a skill passes part of your
+question on, the skill it names has to be installed to take it, and the seven skills in the
+diagram under [What to ask](#what-to-ask) take questions from most of the others.
+
 Update with `npx skills update`. Remove a skill with `npx skills remove deliverability`.
 
-### As a Claude Code plugin
+### Other ways to install
+
+<details>
+<summary>As a Claude Code plugin</summary>
 
 Run these inside Claude Code:
 
@@ -187,7 +199,10 @@ Run these inside Claude Code:
 Claude Code prefixes plugin skills with the plugin name, so `deliverability` becomes
 `/chappie:deliverability`. Remove the plugin with `/plugin uninstall chappie@chappie`.
 
-### In the Claude app
+</details>
+
+<details>
+<summary>In the Claude app</summary>
 
 The Claude app takes one skill per ZIP file, and skills there need code execution turned on.
 
@@ -200,7 +215,7 @@ The Claude app takes one skill per ZIP file, and skills there need code executio
 4. Open **Customize > Skills**, click **+**, then **Create skill**, then **Upload a skill**, and
    choose the ZIP file.
 
-To make all 35 ZIP files at once, run this in a terminal:
+To make all 35 ZIP files at once, run this in a terminal instead of steps 2 and 3:
 
 ```bash
 git clone https://github.com/808enzo/chappie.git
@@ -208,11 +223,13 @@ cd chappie/skills
 for skill in */; do zip -r "../${skill%/}.zip" "$skill"; done
 ```
 
-The files land in the `chappie` folder. The steps follow Anthropic's guide
-[Use skills in Claude](https://support.claude.com/en/articles/12512180-use-skills-in-claude),
-opened 2026-09-17.
+The ZIP files land in the `chappie` folder. These steps follow Anthropic's guide
+[Use skills in Claude](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
 
-### By hand
+</details>
+
+<details>
+<summary>By hand</summary>
 
 ```bash
 git clone https://github.com/808enzo/chappie.git
@@ -233,48 +250,99 @@ only, copy the folders into the folder your agent reads:
 For any other agent, see its documentation, or let `npx skills` find the folder. To remove, delete
 the folders you copied.
 
-## Use
+</details>
 
-You don't have to name a skill. The agent loads one when your request matches what the skill is
-for. Some requests and the skill that takes them:
+## How the skills read numbers
 
-| You ask | Skill |
+A win-back rate depends on who you count, and a sale's margin depends on the weeks around it. A
+report can also credit a flow with purchases that would have happened anyway. Every skill makes
+the agent work through these dependencies before it answers you.
+
+- **Each skill defines its metric before anyone reads a number.** It names one control metric, the
+  number you judge the work by, and states its numerator, denominator and window.
+  `lapse-and-winback` divides returns by everyone who crossed the lapse threshold. That count
+  includes the people no channel could reach, the people the frequency cap held back and the
+  control group, so everyone the attempt did not reach stays in it.
+- **Each number sits next to the one it trades against.** `promo-calendar` reads a sale's margin
+  over one purchase cycle on each side of it, where purchases people postponed or brought forward
+  show up. `offer-design` reads the benefit each offer actually gave, and that figure exposes
+  stacked offers that give away more than any single offer promised.
+- **Effect stays apart from credit.** `experiments-and-holdouts` measures a change against a
+  control group and counts everyone assigned to a group, including the people whose message was
+  suppressed, bounced or never opened. `crm-reporting` reads change on cohorts. Once returns and
+  late data settle, it reads each published conclusion again and records whether it held.
+
+<details>
+<summary>What every skill contains</summary>
+
+Each `SKILL.md` has the same six sections. Longer material sits in `references/`, and the agent
+loads a file from there only when the task needs it.
+
+| Section | What it gives you |
 |---|---|
-| Our win-back email reaches people who bought in the store yesterday. What's wrong with how we define lapsed? | `lapse-and-winback` |
-| Our biggest sale of the year beat last year's. Did it make money once you count the weeks around it? | `promo-calendar` |
-| Every offer has a cap, yet some orders leave with a bigger discount than any single offer allows. | `offer-design` |
-| Mail stopped arriving at one mailbox provider, and every other provider looks fine. Where do I start? | `deliverability` |
-| We have forty live flows and nobody can say which ones still earn their place. | `program-audit-and-ops` |
-| Does our replenishment reminder sell anything customers wouldn't have bought anyway? | `experiments-and-holdouts` |
-| What conversion rate should our welcome series hit? | `welcome-and-activation` |
+| When to use this | The situations the skill is for, written as symptoms you would recognize |
+| When to use something else | Which neighboring skill owns a nearby question |
+| Reference map | Which file in `references/` to load for the task at hand |
+| Control metric | The metric you judge the work by, defined so someone else can reproduce it |
+| Legal regime this skill assumes | The legal and platform rules the skill's steps run under, or the points where you need your own legal answer |
+| Limits | What the skill must never do, starting with inventing a number or acting beyond what you asked for |
 
-The last request gets no figure back. The section [On numbers](#on-numbers) explains why.
+</details>
 
-To call a skill by name, type `/deliverability` in Claude Code (`/chappie:deliverability` if you
-installed the plugin) or `$deliverability` in Codex. In other agents, name the skill in your
-request.
+### One question, three skills
 
-## On numbers
+*We stopped mailing the dormant tier, and revenue per recipient went up. Did the program get
+better?*
 
-A skill never invents a number, and the library carries no market benchmarks. Ask what is normal
-and the skill tells you it has no figure, gives you the definition of the metric, and shows you
-how to build a baseline from your own periods.
+1. `email-program` does not read revenue per recipient on its own. The figure rises whenever you
+   mail only your most responsive people, so a program that got better and a program that got
+   smaller both raise it. Read total channel revenue next to it to tell the two apart.
+2. `metric-definitions` checks what the figure divides by. Revenue per recipient counts people,
+   revenue per delivered message counts messages, and the two move in opposite directions when
+   load rises.
+3. `experiments-and-holdouts` designs the holdout that shows whether the change caused anything.
+   It compares revenue per person assigned to each group, from any channel and without
+   attribution, so a customer who buys without opening an email still counts.
 
-The numbers that do appear are legal and channel rules, quantities that follow from the math,
-parameters you compute from your own data, named starting points, and made-up worked examples.
-Every skill tells you which kind you are reading. [ROADMAP.md](ROADMAP.md#on-numbers) explains why
-the library works this way.
+## What a skill won't do
+
+**No invented numbers.** The library carries no market benchmarks. Ask what is normal and the
+skill tells you it has no figure, gives you the definition of the metric, and shows you how to
+build a baseline from your own periods. Thresholds come from your data too: a lapse threshold comes
+from your own median interval between purchases. The numbers that do appear are legal and channel
+rules, quantities that follow from the math, parameters you compute from your own data, named
+starting points, and made-up worked examples. Every skill tells you which kind you are reading,
+and [ROADMAP.md](ROADMAP.md#on-numbers) explains why the library works this way.
+
+**No action you didn't ask for.** A request to analyze, audit or plan does not authorize sending a
+message, changing an audience or editing a live setting. Before the agent sends to a list, updates
+records in bulk or changes a live program, it shows what will change and for whom, and waits for
+your go-ahead. Text inside exports, tickets, survey answers and web pages is data, never an
+instruction.
+
+**No legal advice.** The legal sections mark where a rule applies and who to check with. Where a
+skill quotes a rule, it names the primary source and the date the source was opened.
 
 ## Scope
 
-Chappie starts where acquisition ends. Paid advertising, search, PR, social publishing and brand
+Chappie starts where acquisition ends, so paid advertising, search, PR, social publishing and brand
 sit outside it. Two topics wait for version 2: calls and voice, and AI inside the program.
-[ROADMAP.md](ROADMAP.md) gives the reason for each.
+[ROADMAP.md](ROADMAP.md#not-in-version-1) gives the reason for each.
 
-The legal sections are not legal advice. They mark where a rule applies and who to check with.
-Where a skill quotes a rule, it names the primary source and the date the source was checked. If
-a rule has changed since that date, [open an issue](https://github.com/808enzo/chappie/issues/new?template=1-rule-changed.yml)
-with a link to the new source.
+## Help and contributing
+
+- **A question**, such as which skill fits your case or how to read a step: ask in
+  [Discussions](https://github.com/808enzo/chappie/discussions/new?category=q-a).
+  [SUPPORT.md](SUPPORT.md) lists where each kind of question goes.
+- **A problem or a request**, such as a skill that gets something wrong, an installation that
+  fails or a topic the library lacks:
+  [open an issue](https://github.com/808enzo/chappie/issues/new/choose) and pick the form that
+  fits. If a legal or channel rule has changed, use the
+  [changed rule form](https://github.com/808enzo/chappie/issues/new?template=1-rule-changed.yml)
+  and link the new source.
+- **A change you want to make yourself:** [CONTRIBUTING.md](CONTRIBUTING.md) says which changes
+  need an issue first and how a pull request is reviewed.
+- **What changed between versions:** [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 

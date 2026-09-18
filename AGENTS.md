@@ -321,8 +321,9 @@ claude plugin validate .claude-plugin/plugin.json
   calls it by its old name, starting with commands such as `/chappie:deliverability`, so it takes a
   major version.
 - **Adding, renaming, merging or removing a skill is the maintainer's decision.** Such a change
-  also means updating the skill table in `README.md`, the skill count wherever the root files and
-  both manifests state it, the skill lists in the issue forms under `.github/ISSUE_TEMPLATE/`, and
+  also means updating the skill table in `README.md`, the What to ask table and the diagram under
+  it wherever the skill appears there, the skill count wherever the root files and both manifests
+  state it, the skill lists in the issue forms under `.github/ISSUE_TEMPLATE/`, and
   `CHANGELOG.md`.
 - **The maintainer writes `CHANGELOG.md` and sets the version** when a change ships. A pull request
   leaves both alone.
