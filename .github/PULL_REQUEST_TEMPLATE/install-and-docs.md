@@ -25,8 +25,6 @@ write "not needed". -->
 - [ ] If I changed installation steps, I ran them start to finish in an empty folder.
 - [ ] The anchors other files link to still work: `README.md#install`, `README.md#skills`,
       `ROADMAP.md#on-numbers`, `ROADMAP.md#not-in-version-1`.
-- [ ] If I changed the What to ask table in `README.md`, every skill under Passes to appears in the
-      `When to use something else` table of the skill that starts the row.
 - [ ] If I changed a manifest, `claude plugin validate --strict .` passes, and
       `claude plugin validate .claude-plugin/plugin.json` shows no warning beyond the one `AGENTS.md`
       names.

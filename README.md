@@ -22,66 +22,28 @@ npx skills add 808enzo/chappie
 ```
 
 Then ask your agent about your program in your own words. You don't have to name a skill.
-[What to ask](#what-to-ask) has examples, and [Install](#install) covers the Claude app, the
+[How to use](#how-to-use) has examples, and [Install](#install) covers the Claude app, the
 Claude Code plugin and other options.
 
-## What to ask
+## How to use
 
-Some requests, the skill that takes each one, and the skills it passes the next questions to:
+Your agent picks the skill from what you describe. To pick one yourself, type `/deliverability` in
+Claude Code (`/chappie:deliverability` if you installed the plugin) or `$deliverability` in Codex.
+In any other agent, name the skill in your request. The skill answers its part of the question and
+names the skill that owns the rest.
 
-| You ask | Start with | Passes to |
-|---|---|---|
-| Our win-back email reaches people who bought in the store yesterday. What's wrong with how we define lapsed? | `lapse-and-winback` | `martech-stack`: how late store purchases arrive<br>`offer-design`: what each step of the attempt may cost |
-| Our biggest sale of the year beat last year's. Did it make money once you count the weeks around it? | `promo-calendar` | `offer-design`: how deep the discount may go<br>`experiments-and-holdouts`: whether the sale caused anything |
-| Every offer has a cap, yet some orders leave with a bigger discount than any single offer allows. | `offer-design` | `promo-calendar`: which promotions run at the same time<br>`crm-program-design`: the promo budget as a whole |
-| Mail stopped arriving at one mailbox provider, and every other provider looks fine. Where do I start? | `deliverability` | `email-program`: what goes out, to whom and how often<br>`metric-definitions`: how bounce and complaint rates are counted |
-| We have forty live flows and nobody can say which ones still earn their place. | `program-audit-and-ops` | `scenario-map`: which flows the program keeps<br>`experiments-and-holdouts`: whether a flow's effect is real |
-| Does our replenishment reminder sell anything customers wouldn't have bought anyway? | `experiments-and-holdouts` | `triggered-messages`: how the reminder flow is built<br>`martech-stack`: whether your platform can hold a group out of every send |
-| Sales says our leads are junk, and marketing says sales never calls them. Who's right? | `b2b-lifecycle` | `program-audit-and-ops`: the handoff queue and its deadlines<br>`crm-reporting`: stage conversion, read by cohort |
-| What conversion rate should our welcome series hit? | `welcome-and-activation` | `metric-definitions`: how conversion is counted<br>`experiments-and-holdouts`: whether the series caused the purchase |
+Examples, as you would type them in Claude Code:
 
-The last request gets no figure back. [What a skill won't do](#what-a-skill-wont-do) explains why.
-
-The skill that owns your question answers its part and passes the rest, by name, to the neighbor
-that owns it. Seven skills take questions from most of the others:
-
-```text
-Your question
-   ↓
-1  The skill that owns it
-   lapse-and-winback
-   promo-calendar
-   deliverability
-   ↓  answers its part,
-      passes the rest along
-2  A neighbor that owns
-   the next piece
-   offer-design
-   email-program
-   triggered-messages
-   ↓  1 and 2 both pass
-      questions here
-3  Seven skills most others
-   pass questions to
-   metric-definitions
-     how a number is counted
-   experiments-and-holdouts
-     whether it caused anything
-   consent-and-preferences
-     who you may write to
-   program-audit-and-ops
-     whether it still works
-   contact-orchestration
-     the cap across channels
-   crm-reporting
-     the regular report
-   martech-stack
-     which system owns a fact
-```
-
-To call a skill by name, type `/deliverability` in Claude Code (`/chappie:deliverability` if you
-installed the plugin) or `$deliverability` in Codex. In another agent, name the skill in your
-request.
+- `/lapse-and-winback` Our win-back email reaches people who bought in the store yesterday. What's
+  wrong with how we define lapsed?
+- `/promo-calendar` Our biggest sale of the year beat last year's. Did it make money once you count
+  the weeks around it?
+- `/deliverability` Mail stopped arriving at one mailbox provider, and every other provider looks
+  fine. Where do I start?
+- `/experiments-and-holdouts` Does our replenishment reminder sell anything customers wouldn't have
+  bought anyway?
+- `/b2b-lifecycle` Sales says our leads are junk, and marketing says sales never calls them. Who's
+  right?
 
 ## Skills
 
@@ -179,8 +141,9 @@ npx skills add 808enzo/chappie -g
 ```
 
 Install the whole set unless you know which skills you need. When a skill passes part of your
-question on, the skill it names has to be installed to take it, and the seven skills in the
-diagram under [What to ask](#what-to-ask) take questions from most of the others.
+question on, the skill it names has to be installed to take it. Seven skills take questions from
+most of the others: `metric-definitions`, `experiments-and-holdouts`, `consent-and-preferences`,
+`program-audit-and-ops`, `contact-orchestration`, `crm-reporting` and `martech-stack`.
 
 Update with `npx skills update`. Remove a skill with `npx skills remove deliverability`.
 

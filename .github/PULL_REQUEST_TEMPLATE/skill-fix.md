@@ -30,8 +30,6 @@ run the same request again and say what comes back now. -->
 - [ ] Every step, threshold, timing, edge case and failure mode outside the fix is still there.
 - [ ] If the fix moves a question between skills, I changed both sides, and the neighbor's table doesn't
       hand it back.
-- [ ] If the skill starts a row of the What to ask table in `README.md`, every skill that row passes to
-      is still in its `When to use something else` table.
 - [ ] Every number in the paragraphs I changed belongs to a class under Numbers in `AGENTS.md`.
 - [ ] I ran the three passes in `AGENTS.md` on every file I changed.
 - [ ] `python scripts/validate <slug>` shows no new errors, and I read every warning.
