@@ -28,7 +28,7 @@ write "not needed". -->
 - [ ] If I changed a manifest, `claude plugin validate --strict .` passes, and
       `claude plugin validate .claude-plugin/plugin.json` shows no warning beyond the one `AGENTS.md`
       names.
-- [ ] If I changed a Limits block in `AGENTS.md` or in `scripts/validate`, I changed it in the other file
+- [ ] If I changed a fixed block in `AGENTS.md` or in `scripts/validate`, I changed it in the other file
       too.
 - [ ] I ran the style pass from `AGENTS.md` on the text I changed.
 - [ ] `python scripts/validate` shows no new errors.
