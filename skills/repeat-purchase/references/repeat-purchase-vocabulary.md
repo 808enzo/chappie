@@ -119,6 +119,32 @@ run out, before the advance. Zero means the model lands; a persistent negative v
 interval is too long. It reads the next purchase from the same history as the interval, so it
 cannot see a channel that history does not hold.
 
+## Seams with neighbors
+
+Five seams get crossed by accident, so state them outright.
+
+- **The date is computed here and fired elsewhere.** `triggered-messages` knows what to do on a
+  date and has no way to work out which date. Everything about where the date comes from, including
+  the fact that it has four possible sources rather than one, is in
+  `references/interval-model.md`.
+- **Somebody with one purchase has no interval, and that is a fact about arithmetic.** It is why
+  `lapse-and-winback` does not build their absence threshold from an interval, and why their date
+  comes from rung 2 of the substitution ladder, which counts consumption, before rung 3, which
+  counts people who already came back. After a first order, the neighbor's threshold is the end of
+  the cohort window in `references/second-purchase.md`, so its attempt starts where this mechanic
+  stops and never inside it.
+- **The handover from the welcome series happens at the first purchase, not at the end of its
+  window.** The series breaks when the purchase happens, and the person belongs here from that
+  moment, although this skill's clock starts only when the order closes. The days in between are
+  the silent pause at the start of the cohort window: there is no period in which two mechanics own
+  the person, and none in which nobody does.
+- **This skill sets the condition on a selection; `personalization` performs the choosing.** What
+  may not appear alongside this order, and why, is settled here. How the choosing is done, trained
+  and substituted is the neighbor's.
+- **A monetary add on and an offer are different objects.** Whether an add on takes money out of
+  the margin is a flag set here. What it costs, how deep it goes and what happens when two of them
+  meet on one order is `offer-design`.
+
 ## Words shared with neighboring skills
 
 - **Interval.** Here it is the gap between purchases of a subject, computed per person down the
