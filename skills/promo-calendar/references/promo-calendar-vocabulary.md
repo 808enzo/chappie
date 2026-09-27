@@ -151,6 +151,33 @@ What a base learns from a calendar it can predict. People who can predict it and
 stop buying at full price and wait, which shows up as shoulders eroding cycle over cycle while the
 windows grow.
 
+## Seams with neighbors
+
+Five seams get crossed by accident, so state them outright.
+
+- **The register is built before the channel calendar, not after.** `email-program` lays anchors
+  first and calls a peak season one of them, but a channel cannot work out where the peak is; that
+  is a fact about demand. The register is its input. A channel that has already laid out its slots
+  will fit the year around its own rhythm and meet the peak late.
+- **A promise already issued cannot be shortened, so the calendar controls issuance instead.**
+  Promises in circulation are a wall in the year with a known expiry date. The lever is the
+  issuance cutoff in `references/seasonal-shape.md`, not a negotiation with `offer-design` over a
+  rule that is not negotiable.
+- **The cap belongs to the neighbor; the term of the exception belongs to the window.**
+  `contact-orchestration` grants a raised cap for a named term with an automatic fallback, and
+  wants three things named in advance: how far the cap rises, until what date, and which number
+  is read afterward. What this skill owes it is a request made before the window opens that
+  carries all three: the extra messages per person, the date the cap returns, and the window's
+  unsubscribe and complaint rate as the number read after it.
+- **This skill decides when demand should land; `offer-design` decides what moving it costs.**
+  Both are needed for a shift and they are settled in that order. A shift priced before its
+  direction is chosen is a discount with a date on it, nothing more.
+- **The register is what tells a cohort reader that a cohort came out of a sale.** Every first
+  order closed inside a window carries the occasion tag, which is why `repeat-purchase`,
+  `rfm-segments` and `crm-reporting` can read cohorts recruited in a peak separately instead of
+  pooling them. How a later window overlaps such a cohort is answered here as well, in step 8 of
+  `references/seasonal-shape.md`.
+
 ---
 
 ## Words this skill shares with its neighbors
