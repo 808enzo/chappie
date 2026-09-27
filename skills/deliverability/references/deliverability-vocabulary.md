@@ -10,6 +10,18 @@ checked: 2026-09-12
 The terms the three mechanics assume. The last section lists eight words this skill shares with its
 neighbors, most of them under different meanings.
 
+## What sets this work apart
+
+Three properties make this unlike anything else in the library.
+
+1. **The decision belongs to a third party.** The mailbox provider decides, by its own rules, and
+   it publishes those rules only in part.
+2. **The most important event is invisible.** An unsubscribe is an event and a complaint is an
+   event. None of the providers named in this skill report which folder they chose: the provider
+   accepted the message and said nothing about where it put it.
+3. **Reputation belongs to a pair, not to a sender.** The same domain can stand well with one
+   provider and badly with another, and that is an ordinary state rather than a fault.
+
 ## The unit
 
 **Sending identity.** A domain or subdomain, the signatures that prove mail under it is yours, the
@@ -119,6 +131,28 @@ never on messages sent. Read per provider against its own median, because the di
 quality of the send from the number.
 
 ---
+
+## Seams with neighbors
+
+- **A message decides whose case it is; a pair decides whether there is a case.** If the sending
+  platform never attempted delivery, because the flow did not fire, the segment came out empty or
+  the send was never created, nothing was handed to the channel and the case is
+  `program-audit-and-ops`. From the moment the platform attempted delivery the case is this
+  skill's, whatever came back, including nothing at all: a connection that times out or is refused
+  is a signal this skill reads. That handover has no volume threshold: one refusal carrying a code
+  you have not seen before opens the diagnosis, and a silent block opens it with no refusal at
+  all.
+- **This skill sets the unreachable state; `list-building` decides the fate of the record.** The
+  state comes in four classes, a retest clears exactly one of them, and one of the four is not a
+  property of the address at all (`references/placement-recovery.md`, step 8). Hand the class over
+  with the state, because `list-building` cannot decide the fate of a record from the word alone.
+- **Active here means active to the provider.** Somebody who opens and clicks is active for
+  deliverability purposes. Somebody who buys is active for the business. The two populations
+  overlap and do not coincide, and a warmup audience picked on the second one warms slowly or not
+  at all.
+- **This library does not ship a list of spam words.** Providers say plainly that their filters learn
+  and that no such list exists. A word list carries no threshold, no edge case and no failure mode,
+  so this library does not ship one and does not link to one.
 
 ## Words this skill shares with its neighbors
 
