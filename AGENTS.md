@@ -105,7 +105,7 @@ headings, in this order:
 | `When to use this` | The situations, written as symptoms the reader would recognize |
 | `When to use something else` | The handoff block, then a table that hands each nearby question to one neighbor, then one line per seam (see Boundaries) |
 | `Reference map` | A table of the files in `references/`, with each file's claim type and what it is for |
-| `Control metric` | One metric, defined so someone else can reproduce it, the answer to "what is normal", why this metric and not a nearby one, and a pointer to the rest (see Numbers) |
+| `Control metric` | One metric, defined so someone else can reproduce it, the answer to "what is normal", why this metric and not a nearby one, how it rises when the work gets worse, and a pointer to the rest (see Numbers) |
 | `Legal regime this skill assumes` | One line per regime on what it governs, what the skill leaves to the reader, and a pointer to the quoted rules (see Legal and channel rules) |
 
 **Size.** Aim for a body of 15,000 characters or less, with the opening under 2,000 before the
@@ -257,11 +257,13 @@ When a user brings an outside figure, the skill neither confirms nor disputes it
 whether the figure's numerator, denominator and window match the skill's own definition.
 
 **The `Control metric` section in `SKILL.md`** keeps what an agent needs on every call: the definition, the
-answer to "what is normal" above, and the paragraphs on why this metric and not a nearby one
-(`Why X and not Y`). An agent asked to judge a user's conclusion may answer from the body without
-opening a reference file, and those paragraphs keep it from accepting the wrong metric. The rest
-goes to `references/control-metric.md`: when a period's reading closes, the unit, what moves the
-metric, what to read beside it and what it cannot see. Point to the file with a sentence that
+answer to "what is normal" above, the paragraphs on why this metric and not a nearby one
+(`Why X and not Y`), and the ways the metric rises when the work gets worse, each with the line
+that catches it. An agent asked to judge a user's conclusion may answer from the body without
+opening a reference file: the first paragraphs keep it from accepting the wrong metric, the last
+from reading a rise as progress. The rest goes to `references/control-metric.md`: when a period's
+reading closes, the unit, what else moves the metric, what to read beside it and what it cannot
+see. Point to the file with a sentence that
 names the moment to open it, `Before you <step>, read references/control-metric.md`, followed by
 what the file settles.
 
