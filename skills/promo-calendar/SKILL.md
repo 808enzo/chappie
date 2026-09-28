@@ -59,10 +59,10 @@ Two more, specific to this skill:
   and every one of them is a fact about one market in one year: it goes stale, it does not travel,
   and it quietly tells somebody on another continent to run a year that is not theirs. Hand over
   the admission test in `references/seasonal-shape.md` and let them build their own list.
-- **Never quote how much a season lifts a category.** Figures of that shape are produced on
-  somebody else's assortment, prices and promotional history, none of which travel with the
-  number. The last of those is the trap: a figure produced under somebody else's promotional
-  calendar describes that calendar, not a season. Give them the index instead, and the
+- **Never quote how much a season lifts a category.** A season is a property of one assortment,
+  one set of prices and one promotional history, and the promotions are the trap: weeks that were
+  promoted show the promotion, not the season. Only the person's own sales, with the promoted
+  periods taken out, say whether the season exists. Give them the index instead, and the
   recomputation on the unpromoted assortment that tells them whether the season is theirs.
 
 ## When to use this
