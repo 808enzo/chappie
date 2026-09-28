@@ -61,7 +61,7 @@ figure written out.
 
 **A violation is fixed by moving the action into text, not by adding an image of it.** An image that
 carries information gets a text alternative that serves the same purpose; a decorative image gets an
-empty one, so assistive technology skips it (WCAG 1.1.1; its scope is in `SKILL.md`).
+empty one, so assistive technology skips it (WCAG 1.1.1; its scope is in `legal-regimes.md`).
 
 **5. Declare every layer above the base, and give each one a fallback on which the job survives.**
 The layers are dark scheme tuning, web fonts, background images, animation, interactive parts and
@@ -113,7 +113,7 @@ duty.
 | Value | What sets it |
 |---|---|
 | Minimum of a block | the block's layout in your narrowest and widest environments |
-| Contrast, target size, reflow | WCAG 2.2 as the reference measure; its scope is in `SKILL.md` |
+| Contrast, target size, reflow | WCAG 2.2 as the reference measure; its scope is in `legal-regimes.md` |
 | Clip point and size budget | a seed send of a long message in each of your environments |
 | Cycle after which an unused template retires | your own program's cycle (`email-program`) |
 
@@ -152,7 +152,7 @@ in every environment at once. People are building messages around the frame: an 
 HTML block, a copy of an old message. The defect is identical in every environment, so the index
 cannot see it. **The question that separates the two:** which version did the send go out on? The
 sign is a growing share of sends with no released version. Quiet removal of a block gives the same
-flat indices (`block-states.md`); the order to read the causes in is in `SKILL.md`.
+flat indices (`block-states.md`); the order to read the causes in is in `control-metric.md`.
 
 **What to do:** bring those sends into the registry or stop them, and ask which block the library was
 missing.

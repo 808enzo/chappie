@@ -11,6 +11,22 @@ The terms the three mechanics assume. The last section lists eleven words this s
 neighbors. Provider and window keep the neighbor's meaning, version keeps it and adds the release
 gate, and the other eight do not.
 
+## What sets this work apart
+
+Three properties separate this skill from everything around it.
+
+1. **The sender looks at the message somewhere other than where it is read.** The reader and their
+   mail client choose the environment: the device, the color scheme, whether images load, where a
+   long message is cut, whether animation plays, whether the interactive part or its fallback is
+   shown. The author looks in one environment, the editor, and a defect that lives in another is
+   invisible to the person who made it until somebody looks there.
+2. **A template outlives every message built on it.** A defect in the frame ships with every send
+   until the version changes, and a change to the template changes every message at once. That
+   makes a template change a release rather than an edit.
+3. **A template has to hold states nobody drew.** An empty block, a short block, a removed block, an
+   image that did not load, inverted colors, the first frame of an animation, a fallback part in place
+   of an interactive one. A layout is drawn in one state, and the message goes out in all of them.
+
 ## The template
 
 **Template.** The frame and the block library, released together as a version.
@@ -100,6 +116,28 @@ among them, are outside the numerator. The environment is set from clicks before
 cleared.
 
 **Row.** One pair of provider and environment, as the control metric reads it.
+
+## Seams with neighbors
+
+- **`email-copy` checks whether the meaning survives; this skill checks whether the template holds.**
+  Both look at a message with images off and at a clipped message. The words that carry the job are
+  theirs. The requirement that the job and the action live in text rather than in an image is shared:
+  they check it on each message, and this skill builds the template so that the check can pass.
+- **`personalization` decides what a block gets; this skill lays out what it got.** The neighbor
+  has two rules. For a substituted value, the fallback ladder: a neutral value, a rewritten version
+  of the block, removal. For a selection, the anchor ladder down to its floor, and the short fill
+  rule where fewer items qualify than there are slots: top up from the anchor below, show a shorter
+  block, or suppress it. Every level of both lands in one of four layout states here, and the layout
+  adds the one number the neighbor's shorter block was missing: the minimum, below which no layout
+  of the block holds.
+- **`deliverability` reads a provider against the whole send; this skill reads an environment against
+  its own provider.** Both control metrics divide one click rate by another, and the seam runs
+  through the denominator. When a provider's index falls, the question that separates the two cases
+  is in the control metric section of `SKILL.md`.
+- **This library does not ship a support table.** A list of which client supports which property
+  carries no date, no threshold and no failure mode, and clients change what they render without
+  notifying the list. `references/rendering-check.md` replaces it with a check in your own
+  environments and the client's own documentation, with the date you read it.
 
 ## Eleven words this skill shares with neighbors
 
