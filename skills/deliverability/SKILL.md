@@ -134,7 +134,7 @@ Load the file that matches the task. Each one stands alone.
 | `references/warmup-and-volume.md` | mechanic | A domain, subdomain, IP or platform is new, mail has been paused, or volume has to rise. The ladder, the audience it starts from, and the signal that authorizes each step. |
 | `references/placement-recovery.md` | mechanic | Mail stopped arriving. The ordered diagnosis, blocklist delisting, the four classes of unreachable, and the way back. |
 | `references/deliverability-vocabulary.md` | definition | Terms the three mechanics assume: sending identity, acceptance against placement, alignment, silent block, the classes of bounce, spam trap, and the eight words shared with neighbors. |
-| `references/control-metric.md` | definition | You are about to read the index or act on it: grouping addresses by provider, the index on invented numbers, every class of the denominator, why held back addresses need two numbers beside it, and when a send is old enough to read. |
+| `references/control-metric.md` | definition | You are about to read the index or act on it: grouping addresses by provider, the index on invented numbers, every class of the denominator, what counts as held back, and when a send is old enough to read. |
 | `references/legal-regimes.md` | definition | You are about to state a provider requirement, a legal deadline or a delisting step: each rule with who it does not bind, which window wins where they disagree, and every source with its date. |
 
 Read `deliverability-vocabulary.md` first when acceptance and placement are not already separate
@@ -171,10 +171,19 @@ providers accepted, never on what you sent. Divide clicks by addresses sent and 
 the index moves with your overall acceptance, lifting every provider's index in the week one of
 them starts refusing, which is the week you are reading the index to find out which one.
 
+**Up as well when the work gets worse.** Held back addresses enter neither half, and how the index reacts to
+holding them back depends on where you do it. Narrow the audience everywhere at once and both halves move
+together, so the index stays roughly where it was. Narrow it at one provider, which is exactly what a recovery
+does, and that provider's half rises while the whole-send half barely moves, so its index goes up. That is the
+metric working as intended during a recovery and the metric failing to notice a retreat: on the index alone, a
+channel that recovered and a channel that gave up on most of its base look the same. Read two numbers beside it
+and promote neither: the share of the base held back for delivery reasons, per provider as well as in total,
+which separates the two cases; and the absolute count of messages this provider accepted. Zero gives a perfect
+index and a dead channel.
+
 Before you group addresses into providers, read a send's index, or act on a change in it, read
 `references/control-metric.md`: it says how to map an address to its provider, where every class of the
-denominator is read, why holding addresses back needs two numbers beside the index, and when a send is old
-enough to read.
+denominator is read, what counts as held back, and when a send is old enough to read.
 
 **This skill's own vanity metric, named so nobody reports it as a win: the delivered share.** It
 improves precisely when a sender stops mailing everybody doubtful, and it is the number that ends

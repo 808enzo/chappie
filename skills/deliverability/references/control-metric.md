@@ -8,8 +8,9 @@ checked: 2026-09-12
 # Control metric: how to read the provider response index
 
 `SKILL.md` defines the index: its numerator and denominator, the division, reading it over time against
-the provider's own median, why it divides, why not inbox placement rate or the delivered share, and why
-both halves count accepted messages. This file holds how to read it.
+the provider's own median, why it divides, why not inbox placement rate or the delivered share, why
+both halves count accepted messages, and how it rises when the work gets worse. This file holds how to
+read it.
 
 ## The unit: a provider, not a domain
 
@@ -40,25 +41,16 @@ the campaign itself performed normally.
 | deferred and still being retried | not yet: it joins the denominator if a retry is accepted and the refusal share if the retries run out | `references/placement-recovery.md`; read the index only once the retry queue for that send has emptied |
 | refused permanently | no | the refusal share, `references/placement-recovery.md`; the record is `list-building`'s |
 | refused temporarily | no | the refusal share, `references/placement-recovery.md` |
-| not sent because the address is unreachable | no, and this is the gap the second number below closes | `references/placement-recovery.md`, step 8 |
+| not sent because the address is unreachable | no, and this is the gap the held back share below closes | `references/placement-recovery.md`, step 8 |
 | not sent by a decision of the program | no | `contact-orchestration`, `email-program` |
 
-## What moves it, and what to read beside it
+## What counts as held back
 
-**The index is a ratio, so held back addresses enter neither half, and how the index reacts to
-holding them back depends on where you do it.** Narrow the audience everywhere at once and both
-halves move together, so the index stays roughly where it was. Narrow it at one provider, which is
-exactly what a recovery does, and that provider's half rises while the whole-send half barely
-moves, so its index goes up. That is the metric working as intended during a recovery and the
-metric failing to notice a retreat: on the index alone, a channel that recovered and a channel that
-gave up on most of its base look the same. Read two numbers beside it and promote neither.
+`SKILL.md` says why a narrowed audience lifts the index and names the two numbers read beside it.
 
 - **The share of the base held back for delivery reasons** in the period: addresses the program
   sent nothing to because they were unreachable, suppressed after a complaint, or outside the
-  narrowed audience of a warmup, against the addresses it would otherwise have sent to. This is the
-  number that separates the two cases above, so read it per provider as well as in total.
-- **The absolute count of messages this provider accepted.** Zero gives a perfect index and a dead
-  channel.
+  narrowed audience of a warmup, against the addresses it would otherwise have sent to.
 
 ## When a send is old enough to read
 
