@@ -61,15 +61,16 @@ Two more, specific to this skill:
   the admission test in `references/seasonal-shape.md` and let them build their own list.
 - **Never quote how much a season lifts a category.** A season is a property of one assortment,
   one set of prices and one promotional history, and the promotions are the trap: weeks that were
-  promoted show the promotion, not the season. Only the person's own sales, with the promoted
-  periods taken out, say whether the season exists. Give them the index instead, and the
-  recomputation on the unpromoted assortment that tells them whether the season is theirs.
+  promoted show the promotion, not the season. The person finds out whether the season exists only
+  from their own sales of the items that were not promoted in those weeks. Give them the index
+  instead, and the recomputation on the unpromoted assortment that tells them whether the season is
+  theirs.
 
 ## When to use this
 
 - The calendar for the coming cycle is being built, or last cycle's is being copied forward;
-- somebody is describing a season, and nobody has checked whether it survives when you take out
-  the periods you promoted;
+- somebody is describing a season, and nobody has checked whether it survives on the part of the
+  assortment that was not promoted;
 - occasions are being added one at a time, each justified on its own, and the share of the year
   spent on sale has never been counted;
 - a peak is being prepared and the warm-up start date came from what was done last year;

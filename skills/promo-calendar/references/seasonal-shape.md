@@ -121,7 +121,7 @@ about them is negotiable, then the movable ones into what is left. Two placement
   gap binds the people in both: keep it, or take the overlap out of the later window. The gap is
   a floor for placement and not enough for reading. A shoulder is also one purchase cycle, so two
   windows at the minimum gap share a shoulder, and the register marks such a pair to be read as
-  one span (the control metric in `SKILL.md`).
+  one span (`control-metric.md`).
 - **The promotional share of the year is a budget, not a residual.** Decide in advance what share
   of periods, and what share of revenue, may go at a promotional price, and refuse the window
   that breaks it. Left as a residual the register fills on its own: every window is justified on
