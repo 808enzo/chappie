@@ -11,6 +11,25 @@ The three mechanics assume these terms. The first three, *session*, *message* an
 the reason arguments about "how many is too many" do not settle in a team: one side counts messages
 in the queue, the other counts interruptions in a session, and they are counting different things.
 
+## What sets this work apart
+
+Three properties make this work unlike the other channels in this library.
+
+1. **Nothing is sent; the message waits for the person.** An email, a push, an SMS go out at a time
+   the program chose. A message inside the product is queued and shows at the next qualifying
+   session. So every message needs an expiry, because an offer that ended has no right to appear;
+   the "when" belongs to the person, so the people who see a message are the people who came, not
+   the people you selected; and the denominator of any reading is appearances, not sends.
+2. **No permission stands between the product and the person, so the limiter is restraint.**
+   Push needs the system's permission, email needs a basis. The product shows whatever it likes to
+   whoever opens it. The cost of a display is the person's task: every blocking display interrupts
+   what they came to do, and deleting the app is one tap.
+3. **The person is known and in the middle of something.** On a public site the unit is a session,
+   the visitor is anonymous, and recognition runs on the device. In the product it is known who came,
+   which screen they are on, what is in their cart and on their balance; state lives on the server
+   and follows the person across devices. So does the state of a message: closed on the phone, it is
+   not shown on the tablet.
+
 ## The units
 
 **Product.** The app, and the part of a site that exists only for an identified person: the account
@@ -110,6 +129,28 @@ with closed and completion as `SKILL.md` defines them.
 at least one appearance in its window.
 
 **Budget breach.** A session with two or more blocking displays.
+
+## Seams with neighbors
+
+- **A display to a known person is a touch when it would have been a message.** A campaign, a flow,
+  a perishable message or an ask shown to a known person is written into `contact-orchestration`'s
+  log, and it counts against the person's total: a blocking display each time it shows, a passive
+  one once per person within the message's window. Guidance on a screen, service, and embedded
+  content are not touches. The session budget is this skill's; the cap across channels is the
+  neighbor's.
+- **The pre-permission screen is this skill's display and the neighbor's ask.** Its slot, its
+  frequency and its precedence live here; its moment, its promise and the record of the answer live
+  in `push-notifications`.
+- **The proactive invitation of a bot inside the product lives by this skill's display rule**, and
+  the conversation it opens belongs to `chat-and-bots`. The invitation is an ask in any format,
+  passive by default, and to a known person it is a touch, which is how `chat-and-bots` counts a
+  proactive opener.
+- **A survey's carrier is here, its questions are not.** Which screens, for how long, how many
+  times, and who counts as a participant are this skill's; the questions and what follows a low
+  score are `voice-of-customer`'s.
+- **A service message that took on a promotional block changed class.** The change happens in the
+  register, and the display rule reads the class; what a service message has to contain is
+  `transactional-messaging`'s.
 
 ## Words shared with neighbors
 

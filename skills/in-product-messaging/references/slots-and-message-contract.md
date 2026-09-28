@@ -131,7 +131,7 @@ visible as an edit to a row, not as a quiet change of content.
 | Asking again for consent to a data-for-discount exchange after a refusal, California | not before 12 months have passed | statute, Cal. Civ. Code §1798.125(b)(3), opened 2026-09-13 |
 
 The first four are yours. The last three are dictated from outside, and each carries its source in
-`SKILL.md`, with the people it does not bind.
+`references/legal-regimes.md`, with the people it does not bind.
 
 ## Edge cases
 
@@ -153,7 +153,7 @@ The first four are yours. The last three are dictated from outside, and each car
   next screen or the next session.
 - **An app version without the feature, or without the display layer.** A message about a feature
   shows only to versions that have it. Installs on an SDK version that cannot display anything
-  show nothing; their share is read in the reach of eligible appearances (`SKILL.md`), and it is not
+  show nothing; their share is read in the reach of eligible appearances (`references/control-metric.md`), and it is not
   restraint.
 - **Local time.** "Tonight until midnight" runs on the person's clock, not the server's; so does the
   expiry.
