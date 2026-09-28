@@ -10,6 +10,18 @@ checked: 2026-09-11
 The terms all three mechanics assume. The last section lists seven words this skill shares with
 its neighbors, most of them under different meanings.
 
+## What sets this work apart
+
+Three properties make the channel unlike any other in this library.
+
+1. **The system grants the permission to the app, one endpoint at a time.** Somebody with a phone,
+   a tablet and two browsers holds four permissions.
+2. **Refusal is silent.** An unsubscribe from email is an event. Switching notifications off is a
+   state on the device, and the app learns about it the next time it runs and reads its settings,
+   or never.
+3. **The system prompt is spent.** On iOS the system asks once. After a refusal, the way back runs
+   through the phone's settings.
+
 ## The unit
 
 **Endpoint.** One installed app on one device, or one browser profile on one site. The operating
@@ -101,6 +113,25 @@ time sensitive, critical.
 
 **In-channel gap.** The minimum interval between two non-urgent pushes to one person, across all of
 their endpoints. A property of the channel, checked at the moment of sending against reserved sends.
+
+## Seams with neighbors
+
+- **The display permission is not marketing consent.** On apps distributed through the App Store,
+  promotional pushes need an explicit opt-in through consent language in the app, and the system
+  prompt contains no such language. The ask records both (`references/permission-ask.md`).
+- **A message goes to a person; delivery goes to endpoints.** This skill decides which endpoints
+  receive a message, by class. The cap is `contact-orchestration`'s, and a message delivered to three
+  endpoints is one touch against it.
+- **Quiet hours belong to `contact-orchestration`; local send time and expiry belong here.** A push
+  held for quiet hours still needs an expiry that fits its content.
+- **A switch-off is a reachability loss for `contact-orchestration` only when it takes the person's
+  last displayable endpoint.** It has no exact date, only an interval, and it counts in the period in
+  which you discovered it. It does not open another channel for marketing. Service messages move;
+  promotions do not.
+- **The web push invitation on a site is `onsite-capture`'s capture point.** This skill covers what
+  the browser allows, the endpoint that results, what the program then owes it, and how the ask is
+  read: a web endpoint has no fields and, before sign-in, no person, so it is not a usable contact in
+  that skill's numerator.
 
 ---
 
