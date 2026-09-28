@@ -154,13 +154,13 @@ person stays with the standing program.
 term of the permission you are sending on, the model produces a date by which that permission has
 lapsed. The model is not what failed here: the date is right and sending on it is not allowed. Ask
 for express permission while the basis still stands rather than sending on an expired one. The
-terms, which of them expire at all, and the edges of each regime are in `SKILL.md`.
+terms, which of them expire at all, and the edges of each regime are in `references/legal-regimes.md`.
 
 **History is stitched only partly.** Some purchases sit in another system and the interval is
 computed over a subset. This one has a distinctive signature: the interval comes out **longer**
 than the true one, because the invisible purchases stretch the gaps between the visible ones. The
 reminders therefore run late rather than early, which is why nobody complains and why this failure
 is invisible in feedback. It is caught by reconciling the order count in the system against the
-order count at the till. The signed miss described under the control metric in `SKILL.md` does not
+order count at the till. The signed miss described in `references/control-metric.md` does not
 catch it: it reads the next purchase from the same partial history and finds the interval on
 time.
