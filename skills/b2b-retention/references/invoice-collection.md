@@ -75,7 +75,7 @@ ceiling. A termination is the departure date, and the account is gone with the r
 bring it back is `lapse-and-winback`'s, and its first message is the way back with the debt settled, not an offer.
 
 **7. Treat statutory interest and compensation as a written policy, not a reaction.** In the European Union and the United
-Kingdom the right to interest and to a fixed compensation arises without a reminder (`SKILL.md`); whether you charge them
+Kingdom the right to interest and to a fixed compensation arises without a reminder (`legal-regimes.md`); whether you charge them
 is set by a policy per class of customer, written before the first invoice. A "not received" caused by your own error is a
 delay the debtor is not responsible for (Directive 2011/7/EU, Article 3(1)(b)), so charge no interest on it.
 
@@ -133,6 +133,6 @@ billed revenue holds while receipts stop. Remedy: the ceiling on the day the cas
 **Interest charged for your own error.** The sign: interest on invoices of class "not received"; interest disputes from
 customers with no history of late payment. Remedy: classify before charging (step 7).
 
-**Sources for the rules in this file, each opened 2026-09-15.** The addresses stand in `SKILL.md`: Directive 2011/7/EU,
+**Sources for the rules in this file, each opened 2026-09-15.** The addresses stand in `legal-regimes.md`: Directive 2011/7/EU,
 Articles 2, 3 and 6; Late Payment of Commercial Debts (Interest) Act 1998, sections 1, 2, 4 and 5A; Late Payment of
 Commercial Debts (Rate of Interest) (No. 3) Order 2002, article 4; 15 U.S.C. § 1692a.

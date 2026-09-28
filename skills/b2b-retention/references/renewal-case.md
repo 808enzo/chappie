@@ -65,7 +65,7 @@ renewal provision in "a contract for service, maintenance or repair to or for an
 unenforceable against the recipient unless the provider gives written notice, "served personally or by certified mail",
 at least 15 and not more than 30 days before the time for serving notice of non-renewal; a "person" includes a firm and a
 corporation, and the section does not apply where the renewal period is one month or less (the quotations and the address
-are in `SKILL.md`). The notice is a row of the service register whose method is personal service or certified mail, not a
+are in `legal-regimes.md`). The notice is a row of the service register whose method is personal service or certified mail, not a
 message from the program; record its date and method in the case. Whether a software contract is a contract "for
 service, maintenance or repair" is a question for counsel. In Germany, § 309 of the Civil Code, the rule on tacit
 extensions included, does not apply to standard terms used against a business (§ 310(1)), while § 307 still applies where
@@ -146,7 +146,7 @@ confirmation of the notice with its effective date; the window for exporting dat
 access. Where you process personal data on the customer's behalf, at the end of the services the data are deleted or
 returned at the customer's choice (GDPR Article 28(3)(g)), with the form and timing set by the data processing agreement.
 For a cloud service in the European Union, the customer's request to switch to another provider runs on its own clock
-under the Data Act (`SKILL.md`): a notice period of no more than two months, a transitional period of no more than 30
+under the Data Act (`legal-regimes.md`): a notice period of no more than two months, a transitional period of no more than 30
 calendar days, and data retrieval for at least 30 calendar days after it; none of these waits for the decision point.
 After the effective date the account is gone, with its reason code: the one finite attempt to bring it back is
 `lapse-and-winback`'s, and marketing sends to its contacts follow the basis record (`consent-and-preferences`: in Canada
@@ -237,6 +237,6 @@ Remedy: a written extension with a ceiling, or the end of access under the contr
 earlier every year, because customers have learned the pause. Remedy: one alternative per reason; the concession is
 `offer-design`'s; a discount for silence is not an instrument.
 
-**Sources for the rules in this file, each opened 2026-09-15.** The addresses stand in `SKILL.md`: New York General
+**Sources for the rules in this file, each opened 2026-09-15.** The addresses stand in `legal-regimes.md`: New York General
 Obligations Law § 5-903; Bürgerliches Gesetzbuch § 310; Regulation (EU) 2023/2854 (Data Act), Articles 25 and 29;
 Regulation (EU) 2016/679, Article 28.
