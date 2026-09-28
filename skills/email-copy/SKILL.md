@@ -172,6 +172,12 @@ machine opens that no human made, and it rises with a subject line that promises
 message delivers, which this skill forbids outright. How to place it beside its counterweight in a
 regular report belongs to `crm-reporting`.
 
+**Up as well when the work gets worse**, in two ways, each with a counterweight. Strip the menu out of the
+template and the denominator shrinks everywhere at once, so the share rises although not one word changed.
+A template change therefore starts a new baseline instead of continuing the old one. And the share holds up
+while almost nobody clicks: the absolute share of recipients who clicked a work link, against delivered,
+stands beside it. An on-job share of 1.0 built on three clickers is perfect and dead.
+
 Before you read the share for a message, compare it with another message, or change the template or
 the link set, read `references/control-metric.md`: it says when the reading closes, why the link roles
 have to exist before the template, how the share reacts to a change in the template, which two numbers

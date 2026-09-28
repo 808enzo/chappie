@@ -8,8 +8,8 @@ checked: 2026-09-12
 # Control metric: how to read the on-job click share
 
 `SKILL.md` defines the metric: the numerator, the denominator with the required links kept out of it,
-the messages it is compared against, why it divides, and why not click-to-open rate or open rate. This
-file holds how to read it.
+the messages it is compared against, why it divides, why not click-to-open rate or open rate, and how
+it rises when the work gets worse. This file holds how to read it.
 
 ## When the reading closes
 
@@ -37,17 +37,15 @@ the place to fix it the first block rather than the subject line.
 ## What moves it
 
 **The share is a ratio, so its reaction depends on where you intervene, and that is computed rather
-than guessed.** Strip the menu out of the template and the denominator shrinks everywhere at once,
-so the share rises although not one word changed. A template change therefore starts a new baseline
-instead of continuing the old one. The opposite case is real too: add a block of supporting links
-and the share falls although the message got clearer.
+than guessed.** `SKILL.md` says how it rises when the work gets worse. The opposite case is real
+too: add a block of supporting links and the share falls although the message got clearer.
 
 ## Read beside it
 
 **Read two numbers beside it and promote neither.**
 
-- **The absolute share of recipients who clicked a work link**, against delivered. An on-job share
-  of 1.0 built on three clickers is perfect and dead.
+- **The absolute share of recipients who clicked a work link**, against delivered: the counterweight
+  `SKILL.md` names beside a rise.
 - **The share of messages whose job is not observable at all**, meaning the action leaves no event
   anywhere. This is the honest coverage number: while it is large, the control metric describes a
   minority of your messages, and you cannot quote a program-wide figure. Count it in three classes:
