@@ -80,7 +80,7 @@ find out what the listing is for, fix it permanently, then ask. A request withou
 and repeated refused requests make the position worse. Who may ask depends on the list: the IP
 lists take a request only from the network or hosting company that controls the address, so an
 ordinary sender goes through their platform or provider, while a domain listing is handled through
-the operator's own checker. Details and the sources are in `SKILL.md`. Do not move to a new domain
+the operator's own checker. Details and the sources are in `legal-regimes.md`. Do not move to a new domain
 or a new IP to escape a listing: it reads as evasion rather than remediation.
 
 **7. Narrow the audience to recent responders and switch off the low-response flows.** This is the
