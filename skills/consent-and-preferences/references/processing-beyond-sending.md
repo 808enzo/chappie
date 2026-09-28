@@ -171,7 +171,7 @@ when, and who received it.
 | Retention of test logs | until the reading is frozen (`experiments-and-holdouts`) | parameter |
 | Retention of conversation records | the service window of the subject plus your dispute window | parameter |
 
-The legal rows carry their sources and the people they do not bind in `SKILL.md`. The rest are yours.
+The legal rows carry their sources and the people they do not bind in `legal-regimes.md`. The rest are yours.
 
 ## Edge cases
 

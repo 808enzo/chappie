@@ -41,9 +41,11 @@ resolve, which is what keeps this line from becoming the flag share that `SKILL.
   receipt inside a period already read reopens that period once, and the reading is written again with
   the date.
 
-It is never added to the join line: the join counts every send and the trace counts a sample, and one
-number made of both moves with the size of the sample instead of with the base. A period with no trace
-read reports the trace line as "not read"; it does not report it as zero.
+## How the two lines are reported
+
+The trace line is never added to the join line: the join counts every send and the trace counts a
+sample, and one number made of both moves with the size of the sample instead of with the base. A period
+with no trace read reports the trace line as "not read"; it does not report it as zero.
 
 **An empty period leaves both lines undefined**, not zero.
 
