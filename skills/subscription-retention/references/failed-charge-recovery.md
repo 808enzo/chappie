@@ -210,7 +210,7 @@ holds; the link leads to an empty page.
 **A case with no messages.** The sign: cases closed on the deadline with zero messages. The row's route is
 down, which `program-audit-and-ops` reads as the row's heartbeat (`transactional-messaging`).
 
-**Sources for the rules in this file, each opened 2026-09-15.** The addresses stand in `SKILL.md`: Visa
+**Sources for the rules in this file, each opened 2026-09-15.** The addresses stand in `references/legal-regimes.md`: Visa
 article AI10325; J.P. Morgan Payments, Authorization retry logic; Stripe, Automate payment retries, How
 subscriptions work, Automate customer emails, and How cards work; Chargebee, Dunning; Apple, Enable
 Billing Grace Period, and Reducing involuntary subscriber churn; Google Play, Subscriptions, and
