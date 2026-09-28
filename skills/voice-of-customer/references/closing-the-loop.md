@@ -132,7 +132,7 @@ chargeback), and two contacts per obligation.
   gets an individual reply. The closure is per person, by that person's fix event, confirmation or quiet period;
   the common reply closes nobody by itself. The wave is a candidate incident for `program-audit-and-ops`.
 - **An employee named in the text.** The route is the same; access to the text is limited to the owner of the
-  part (the employee's personal data, in `SKILL.md`); the reading attributes to the shift and the batch before
+  part (the employee's personal data, in `legal-regimes.md`); the reading attributes to the shift and the batch before
   the person.
 - **A late answer**, after the ask's window. The obligation opens anyway; the answer does not count toward
   the ration.
