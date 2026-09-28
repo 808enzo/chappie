@@ -79,7 +79,7 @@ message and page reads as dishonesty even when it was caused by honest aging.
 
 One figure takes neither route. A value quoted to one person as their final figure is the promise
 itself, so `offer-design` has you compute it at the send and hold it at checkout. A condition
-attached to that figure contradicts it, and the claim rules in `SKILL.md` say a disclaimer that
+attached to that figure contradicts it, and the claim rules in `legal-regimes.md` say a disclaimer that
 contradicts the main claim rescues nothing. Where you cannot hold the figure, do not quote it.
 
 **10. The footer offers another way out and does not compete with the action.** Its links are
