@@ -205,6 +205,7 @@ questions: whether an ask is a marketing or commercial message; what a business 
 invites a public review, under the law and under the platform's own rule; and on what basis an answer collected
 to fix an experience becomes an attribute for marketing. No permission to send is granted here; the basis for an
 ask that counts as marketing belongs to `consent-and-preferences`.
+
 Before you state whether an ask counts as marketing, what a review invitation may offer, or which reviews you may
 leave unpublished, read `references/legal-regimes.md`: it quotes each rule, names who it does not bind, and dates
 every source. The list below says only what each rule governs.
