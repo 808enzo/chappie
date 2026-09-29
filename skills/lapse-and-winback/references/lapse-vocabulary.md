@@ -114,6 +114,40 @@ reached.
 Whether a returner reached their next qualifying action inside their own interval. It catches the
 attempt that produces one order and an immediate second lapse.
 
+## Seams with neighbors
+
+Six seams get crossed by accident, so state them outright.
+
+- **The unit here is the attempt, not the send.** An attempt is the cohort that crossed the
+  threshold in a period, and the people no channel could reach are inside it. Every neighbor
+  measures on something that received a message; this skill measures on people who qualified,
+  which is why its denominator is larger than any campaign report's.
+- **Neither silence threshold outranks the other, and for two different reasons.** The tier in
+  `email-program` is computed from response inside one channel, so it sits on the other axis and
+  answers another question. The silence threshold in `list-building` sits on this same commercial
+  axis, since it requires no purchase as well as no reaction, and it is that axis read later: a
+  threshold of ending against the threshold of starting that `references/defining-lapse.md`
+  computes from the qualifying action. That leaves an ordering check rather than a ranking, and it
+  is in that file.
+- **The steps of the argument are set here, the economics of each step is not.** How many rungs,
+  in what order, and whether adjacent rungs are even distinguishable is this skill. What each rung
+  costs, how deep the margin allows, and what happens to an issued promise is `offer-design`.
+- **The attempt finishes before the cleanup starts.** `list-building` removes records from the
+  active base and deletes them. This skill has to reach its declared end first, and its last
+  message has to say what happens next, because after it there is nowhere left to say it.
+- **Signals before the threshold, the attempt after it.** The interception mechanic works on
+  somebody still present, measures a drop rather than an absence, and outputs a reason to look
+  rather than an argument to send. Everything past the threshold is a win-back, and a unit does
+  not get scored in both.
+- **A failed payment and a cancel screen are not lapse.** Those are `subscription-retention`, and
+  the renewal of a contract billed by invoice, the QBR and expansion are `b2b-retention`. What
+  arrives here from that side is
+  the part before and after: signals of a departure forming, and an attempt to bring back somebody
+  already gone. An account under contract gets its criteria from `b2b-retention`
+  (`references/early-interception.md`, edge cases), and a person or an account handed over from either
+  side arrives with a reason code that picks the attempt's branch (`references/return-attempt.md`, entry
+  conditions).
+
 ## Words this skill shares with its neighbors
 
 - **Reactivation.** In `email-program` it is work with a tier inside the standing program: the

@@ -122,14 +122,15 @@ all four at once applies to none of them.
 - **Silent.** A repeat down the same cascade changes nothing: what they ran out of is not
   arguments, it is a channel. So the repeat is conditional on the cascade having changed, meaning a
   channel now exists that did not exist for them last time, and it carries the same pause.
-- **Refused.** No repeat, and the grounds are the legal ones in `SKILL.md` rather than tactical
+- **Refused.** No repeat, and the grounds are the legal ones in `legal-regimes.md` rather than tactical
   ones.
 - **Never attempted.** Not a repeat at all. You tried nothing on them, so once you fix the channel
   they get a first attempt, and the pause has nothing to bound.
 
-**9. Read the result as a cohort, not as a campaign.** The denominator is everybody who crossed
-the threshold in the period, including the unreachable and the suppressed, which is the population
-the fifth outcome names. The full reading is in the control metric section of `SKILL.md`.
+**9. Read the result as a cohort, not as a campaign.** The denominator is everybody who crossed the
+threshold in the period, including the unreachable and the suppressed, which is the population the fifth
+outcome names. The full reading is in the control metric section of `SKILL.md`, and the metric on
+invented numbers in `control-metric.md`.
 
 ## Thresholds and timings
 

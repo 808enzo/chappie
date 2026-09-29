@@ -93,7 +93,7 @@ classes, each derived from a state rather than from a guess about mood:
 - **out of the category by fact**: the product no longer fits, or the need was met once and does
   not recur. Children's clothing and a child who grew is the clean case;
 - **said so out loud**: unsubscribed, refused, asked you to stop. They get no attempt, and the
-  reason is legal rather than tactical (see the legal section of `SKILL.md`);
+  reason is legal rather than tactical (see `legal-regimes.md`);
 - **natural departure**: moved away, circumstances changed. It differs from the others in that
   nothing in this skill's toolkit addresses it;
 - **a model with no return in it**: the purchase cycle is longer than any defensible attempt
