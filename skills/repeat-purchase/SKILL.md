@@ -201,6 +201,7 @@ from its neighbors sits at the center of the work: **a reminder to buy again loo
 message and is marketing**. It is tied to a specific order, it names the item that was bought, and
 it arrives looking like a delivery notice, which is exactly why it keeps being sent on a basis that
 does not cover marketing.
+
 Before you state whether a reminder counts as marketing, which conditions an exception for existing customers
 needs, or how long a basis for sending lasts, read `references/legal-regimes.md`: it quotes each rule, names
 who it does not bind, and dates every source. The list below says only what each rule governs.
