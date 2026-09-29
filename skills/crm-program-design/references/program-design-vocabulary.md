@@ -87,6 +87,35 @@ blocked list. Verdicts on rows that are already live belong to the roster review
 **Handover.** The dated point at which the program stops cutting its own build order and the roster
 in `scenario-map` takes it over.
 
+## Seams with neighbors
+
+Five seams get crossed by accident, so state them outright.
+
+- **"Program" names three different things.** Here it is all the work after first contact, across
+  every channel, with one goal and one owner per number. In `email-program` it is a single channel
+  run as a program. In `loyalty-program-design` and `loyalty-program-launch` it is a construct
+  inside the program, with its own rules and its own launch.
+- **"Owner" names five different things.** Here it is the person answerable for moving one number.
+  In `scenario-map` it is the person a row is admitted with, who answers for that mechanic after
+  launch. In `program-audit-and-ops` it is whoever the broken object goes to. In
+  `metric-definitions` it is whoever owns the definition. In `martech-stack` it is the system where
+  a fact comes into existence. Who grows the number, who runs the mechanic, who fixes it, who
+  defines it, where it lives. The first two land on one person in a small program and on two in a
+  large one, which is exactly why they are named apart.
+- **The first queue is ours, the roster's order is not.** Before a program has a roster there is a
+  goal, a team and nothing to sort: the queue that comes out of that is here, and so is the floor it
+  stands on. From the moment a roster exists and more rows are admitted than can be built, order
+  among them is a property of the rows, and `scenario-map` cuts it. The handover has a date, and
+  after it the program re-cuts its goal and its resource envelope rather than the build order.
+- **Three reviews on three objects.** The program review here re-cuts the goal and the resource
+  behind it. The roster review in `scenario-map` gives every live row a verdict and is the only
+  place a row is retired. The audit in `program-audit-and-ops` establishes that a running object is
+  broken and sends the finding to the roster review. A goal that no longer justifies a row is a
+  program finding, and it travels the same route as any other: to the roster, not to the platform.
+- **We split the budget across segments, `offer-design` sets the depth.** How much money a segment
+  gets follows from the gap between the forecast and the goal, which is a program decision. How
+  deep the discount goes and what it costs per order is not.
+
 ## Four words this skill shares with neighbors
 
 **Program.** Here it is all the work after first contact. In `email-program` it is one channel run
