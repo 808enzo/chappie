@@ -210,6 +210,7 @@ once you hold two full revision cycles (`crm-program-design`).
 This skill **sends messages to people at organizations and reaches their colleagues.** Two questions of its own
 subject decide the regime: whether the recipient is a person or an organization, and where a colleague's address
 came from. No permission to send is granted here; the basis for a contact is `consent-and-preferences`'.
+
 Before you state whether an address needs consent, how fast an opt-out must be honored, or when a colleague must
 be told where their address came from, read `references/legal-regimes.md`: it quotes each rule, names who it does not bind, and dates
 every source. The list below says only what each rule governs.
