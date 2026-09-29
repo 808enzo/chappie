@@ -70,7 +70,9 @@ at the end. This is not legal advice.
 - **Children.** Every regime opened in this library draws an age line, and they differ: the GDPR
   line, the UK line, COPPA and California each sit at a different age, and `consent-and-preferences`
   keeps the lines. A point whose audience may include children asks the age before it writes any
-  record; where the line runs is the neighbor's, placing the gate is this skill's.
+  record; where the line runs is the neighbor's, placing the gate is this skill's. **Who this does not
+  bind:** a point whose audience cannot include children; `consent-and-preferences` states whom each age
+  line binds and whom it does not.
 - **Platforms.** Two documents written by a search engine and by an industry coalition rather than
   by law, and only one of them reaches a capture point. Google Search Central, *Avoid intrusive
   interstitials and dialogs*, covers overlays "usually for promotional purposes" and names newsletter
