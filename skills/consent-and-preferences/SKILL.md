@@ -212,6 +212,7 @@ still grants no permission: for every regime, the rule says what it requires and
 the reader supplies the country, the recipient type and the channel. Where the regime of the reader is
 unknown, the ten questions of `references/lawful-basis-and-collection.md`, step 2, are asked instead of a
 rule being applied.
+
 Before you state a deadline, an age, a lifetime or an exemption, read `references/legal-regimes.md`: it
 quotes each rule from its primary source, names who it does not bind, and dates every source. The list
 below says only what each rule governs.
