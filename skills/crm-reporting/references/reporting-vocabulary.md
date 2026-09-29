@@ -10,6 +10,21 @@ checked: 2026-09-13
 The three mechanics assume these terms. Four of them are units. When two people disagree about a report, check
 first whether one of them means the line and the other the conclusion drawn from it. Several words here are shared with neighbors, and those are marked at the end.
 
+## What sets this work apart
+
+Three properties make this work unlike its neighbors.
+
+1. **The report is read by people who were not there when the numbers were made.** They act on a line,
+not on a definition, and the line has to carry its comparison base, its counterweight, and whether it is
+still provisional. The definition lives in `metric-definitions`; only the line reaches the reader. 2.
+**Reported numbers keep moving after they are published.** Returns come back, offline data arrives late,
+cohorts mature, a holdout gets read. The report states conclusions before the numbers settle. Publishing
+early is a decision with a known settling time, and it stays one as long as the report says so and
+checks later. 3. **The numbers the business asks for first are the ones that improve when the work gets
+worse.** The CRM share of revenue, open rate, the share of the base enrolled in loyalty, repeat purchase
+share across the base. Skills across this library name such numbers and hand them here, because the
+report is where they get quoted.
+
 ## The units
 
 **Report line.** One metric, on one population, for one period, carrying its comparison base, its counterweight
@@ -136,6 +151,25 @@ it. Never added to direct credit.
 
 **Attribution multiple.** Attributed revenue divided by incremental revenue, on the same population for the same
 period, per channel.
+
+## Seams with neighbors
+
+- **The definition is `metric-definitions`'; the line is this skill's.** A definition can be flawless
+  and the line built on it still misleading: a correct rate with no base, a correct share with no total,
+  correct attribution added up across channels. Choosing the attribution model is here; naming the model
+  in force, the conversion key, the credit rule and whether channel figures add up are written into the
+  definition there.
+- **The effect is read in `experiments-and-holdouts` and placed here.** A holdout result arrives with
+  its interval and read date, and this skill puts it beside the attributed figure for the same
+  population.
+- **The duty slot is not the report.** Watching live objects is `program-audit-and-ops`. Its signals do
+  not appear on a report page; a stale source takes the affected line off the page and goes to that
+  skill.
+- **Neighbors define cohorts; this skill reads them.** The arrival cohort, the first purchase cohort,
+  the install cohort and the attempt cohort keep their definitions. Laying a table of them out, marking
+  when a cell is final and splitting a base-wide change happen here.
+- **A breakdown with no decision behind it lives here, as a slice.** A cut that changes what somebody
+  gets is a segment, and it belongs to `segmentation`.
 
 ## Words shared with neighbors
 
