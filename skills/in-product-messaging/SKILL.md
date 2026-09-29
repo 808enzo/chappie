@@ -184,6 +184,7 @@ with the first sessions of an install on a line of their own.**
   event in that session.
 - **The denominator** is every session of the product in the period on that platform, sessions with
   no display included.
+
 Before you explain a move in the share, or report the reach of a message, the budget breach share or
 the holdout on a screen, read `references/control-metric.md`: it gives what moves the share either way,
 and how each line beside it is counted.
