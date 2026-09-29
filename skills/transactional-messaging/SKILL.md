@@ -201,6 +201,8 @@ and `scenario-map` say so from their side.
 status questions before anybody counts them; the timeline sample and counting at the person's first
 message catch those.
 
+**Read this line beside the chase share, and do not promote it.**
+
 - **Complaints and switch-offs after service sends, for each row:** spam reports on the service identity,
   and push switch-offs inside the loss interval after a service push (`push-notifications`). Doubling the
   service messages per transaction at the same quality leaves the chase share flat or lower, so the cost
