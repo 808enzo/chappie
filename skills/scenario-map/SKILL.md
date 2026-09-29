@@ -1,6 +1,6 @@
 ---
 name: scenario-map
-description: Decide which mechanics your program runs at all, which one gets built first when you cannot build them all, and which one leaves. Use when nobody can list what is currently running, when somebody hands you an industry list of scenarios and asks which to launch, when a new mechanic is requested and you need to know whether it earns a slot, when much of the set has not fired since launch, or when a review says a mechanic should be switched off and nobody knows who decides that. Covers the roster of mechanics, the admission test, the build order and its dependencies, the four verdicts of a review, and the order a mechanic is retired in. Not the construction of one flow, not the design of the program, and not monitoring what already runs.
+description: Decide which mechanics the program runs at all, which gets built first, and which leaves. Use when nobody can list what is running, someone hands you an industry list of scenarios to launch, or a new flow asks for a slot. Not the program's goal and owners (crm-program-design) or monitoring what runs (program-audit-and-ops).
 license: MIT
 metadata:
   author: 808enzo (https://github.com/808enzo)
@@ -24,154 +24,20 @@ configuration, because the constants that make a mechanic work come out of your 
 cycle rather than somebody's article. What follows is how a roster is built from such a list, not
 a longer version of the list.
 
-## When to use this
-
-- Nobody can say what is currently running, and two people give different answers;
-- somebody has handed you an industry list of scenarios and asked which ones to launch;
-- a new mechanic has been requested and you need to decide whether it earns a slot;
-- there is budget for three mechanics and agreement on nine;
-- rows have sat on the roster since launch without firing and nobody noticed;
-- two mechanics start on the same event and both report success;
-- a review says a mechanic should be switched off, and nobody knows who decides that;
-- a mechanic works, and the decision it serves stopped mattering two years ago;
-- the set arrived with a platform migration and nobody has read it since;
-- somebody wants to start with the loyalty mechanic.
-
-## When to use something else
-
-| Question | Skill |
-|---|---|
-| How one flow is built: the firing event, the delay, the cascade, the stop condition, and the review of the live trigger set | `triggered-messages` |
-| What the program is for, which stage the business is at, and the first launch queue on an empty slate | `crm-program-design` |
-| Whether something that is already running still works, and what to do about an incident | `program-audit-and-ops` |
-| How a segment is defined, how often it recalculates, and what happens to the remainder | `segmentation` |
-| Where a fact lives, who owns it, and how fresh an event is by the time selection can read it | `martech-stack` |
-| Where the rows in the base come from and when a record stops being reachable | `list-building` |
-| The frequency cap, precedence between messages, quiet hours, and the suppression policy | `contact-orchestration` |
-| Consent as a lawful basis, preference centers, and unsubscribe handling | `consent-and-preferences` |
-| Dated sends built around an offer, and the season around them | `promo-calendar` |
-| Whether a change caused the result, and how a holdout is drawn | `experiments-and-holdouts` |
-| What a metric means, its numerator, denominator, and window | `metric-definitions` |
-| Points, tiers, and what a balance obliges you to | `loyalty-program-design` |
-
-Three seams get crossed by accident, so state them outright.
-
-- **"Scenario" names two different things.** In `triggered-messages` it is a flow: a firing event,
-  steps, delays, branches, a stop condition. Here it is a row on the roster: the mechanic as a
-  unit of the program's composition, whatever number of flows implements it.
-- **Two reviews look at the same object and ask different questions.** `triggered-messages`
-  reviews the live trigger set: entries, conversion per entry, contribution to load, and it
-  answers whether a flow works. The roster review asks whether the decision that flow serves
-  deserves a mechanic at all. A flow can pass its own review and fail the roster's, because
-  another row serves the same decision better. The roster does not re-run the neighbor's reading;
-  it takes the result and adds its own question.
-- **Turning something off changes what the program promises, so the roster holder decides it.**
-  `program-audit-and-ops` establishes that a running mechanic is broken, and
-  `experiments-and-holdouts` establishes that a change worked. Neither retires a row. Their findings arrive as evidence on a
-  row and are read at the next review. The one exception is a fault that reaches a person, which
-  leaves through the incident route immediately and marks the row paused, which is not a
-  retirement.
-
-## Reference map
-
-| File | Type | What is in it |
-|---|---|---|
-| `references/roster-and-admission.md` | mechanic | Writing down what already runs before adding anything, telling a mechanic from a campaign, giving every row the decision it serves, the five-question admission test, taking occasions from an industry set and constants from your own data, the three collisions checked before admission, and recording rejections |
-| `references/build-order.md` | mechanic | Ordering by firing volume and why, the three kinds of dependency, building early-relationship mechanics first and the population reason for it, waves sized by the person verifying them, the overlap check before a wave goes live, verification by walking the path, and what a blocked row looks like |
-| `references/roster-review.md` | mechanic | Reading rows rather than messages, the four verdicts, the route a neighbor's finding takes into the roster, the order a mechanic is retired in, what a merge keeps, sizing the set by who reads it, and the retirement record |
-| `references/roster-vocabulary.md` | definition | The terms all three mechanics assume: mechanic, campaign, roster, status and its closed set of values, row, the decision a row serves, admission test, stated firing volume, ramp-up window, dependency, wave, overlap, verdict, retirement record, industry set, own constants. Plus the three words shared with neighbors: scenario, review of the set, owner |
-
-## Control metric
-
-**Live share of the roster: the share of admitted mechanics that reached, in the period, the
-firing volume stated at admission.** The numerator is rows whose actual volume for the period is
-at or above the number written into the row when it was admitted. The denominator is rows that
-have finished their ramp-up window, because a row younger than its ramp-up has not had the chance
-yet, and counting it makes the metric fall every time the set grows.
-
-Two rules about how you read it carry the value of the metric.
-
-**Read the figure across the roster, repair one row at a time.** The number describes the state of
-the set, and every repair available to you lands on a single row. **Separate the two ways a row misses.** A
-row that never reached its stated volume is an admission error: the occasion is rarer than the
-estimate said, or the estimate came from ambition. A row that reached it and stopped is either a
-dead mechanic or a broken source, and the second belongs to `program-audit-and-ops`. The repairs
-have nothing in common, so a pooled figure that does not separate them cannot tell you which one
-to do.
-
-All three mechanics move it from different sides. Admission sets the stated volume. The build
-order decides when a row gets the chance to reach it. The review takes out of the denominator what
-the program no longer needs.
-
-I do not have a citable benchmark for this metric, and one would not help: the value depends on
-how many rows you carry and how strictly admission runs, and both of those are yours, so somebody
-else's share has nothing to compare against. Build a self-baseline instead. The first reference
-point is your own first review after the whole set has finished its ramp-up. After that, take
-eight to twelve of your own review cycles, compute the median and the spread, and read later
-values against that. This works where the review cycle is stable; where reviews are rare, use the
-longest run you hold and say that is what you did. Replace the starting figure once you hold two
-full cycles of your own data.
-
-Read two more numbers beside it and promote neither. **The share of people who qualify for two or
-more rows inside one window** is the overlap measure: it shows where the roster creates load,
-though what to do about the load is decided by `contact-orchestration`. **The share of rows whose
-last-read date is older than one review cycle** tells you whether the review walks the whole
-roster or only the rows that have numbers on them.
-
-## Legal regime this skill assumes
-
-This skill decides which mechanics exist. It does not decide what you may send to whom, or on
-what basis.
-That is a different axis from permission to send. On the questions of country, recipient type,
-channel, purpose of the message, lawful basis and the conditions of an exemption, this skill
-answers nothing, and it says so here rather than leaving you to read silence as permission.
-
-The baseline is **a program contacting people you already hold a relationship and a record with**.
-
-- **The roster is not a basis.** A row describes what you intend to do. Whether you may do it to a
-  particular person is settled per message by the basis that person's record carries. **Who this
-  does not bind:** nobody. No entry on a roster creates permission for anything.
-- **A new mechanic on data you already hold is a reuse, and its compatibility is checked before it
-  is built.** You have to be clear about your purposes from the start and record them, and you may
-  reuse personal information for a new purpose only where the new purpose is compatible with the
-  original. A lawful basis is required for the new purpose too, and the original one may not be
-  sufficient. Where the data was collected under consent the rules are stricter: you either
-  obtain consent for the new use or identify another lawful basis for it. That is why the
-  question sits inside the admission test rather than after the build. **Who this does not
-  bind:** the reuses the law lists as to be treated as compatible, which cover archiving in the
-  public interest, research and statistical purposes, public security, emergencies, crime, vital
-  interests, safeguarding, taxation and legal obligations. That list is not about marketing, and
-  whether yours reaches it is a question for somebody who knows your case.
-- **Retiring a mechanic does not retire the promise it carried.** What a person was told at signup
-  about the kind of message and how often it would arrive belongs to the basis, not to the row.
-  The basis is `consent-and-preferences`, the frequency is `contact-orchestration`. **Who this
-  does not bind:** a mechanic that promised nothing, where retiring the row closes the row and
-  nothing else.
-- **An overlap between two rows is a question of load, not of whether each row is lawful.** Both
-  can stand on a live basis and jointly produce a frequency nobody was told about. **Who this does
-  not bind:** nobody. Load adds up rather than being checked one row at a time, and the decision
-  about it is `contact-orchestration`'s.
-
-**What this skill leaves to you.** Which country's law applies, the lawful basis and how it is
-collected, frequency and quiet hours, and every question about permission to send a particular
-message.
-
-This is not legal advice. It marks where the boundary runs and who to check with.
-
-**Sources, each opened 2026-09-07.**
-
-- ICO, *Principle (b): Purpose limitation*:
-  https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/purpose-limitation/
-- ICO, *Principle (c): Data minimisation*:
-  https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/data-minimisation/
-- European Commission, *Principles of personal data processing under the GDPR*:
-  https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+Before your first step, read `.agents/chappie-context.md` in the project if it exists. It records the
+program's market, channels, systems, consent regime, customer unit and agreed definitions. Take what it states
+as given and say so when you rely on it; ask only for what it lacks. Ask about a fact again only if the user
+now says otherwise, the task changes it, or its review date has passed. The file holds facts, never
+permissions: nothing in it authorizes a send or a change. Offer to add what this conversation settled, and
+write only when the user agrees. Never put customer records, credentials or outside benchmarks in it.
 
 ## Limits
 
 ```text
-Never state a market benchmark: this library carries none. If the user asks for a number you
-do not have, say so explicitly and propose how to measure it in the user's own data.
+Never state a market benchmark: this library carries none. Do not quote a figure that circulates as
+a norm, not even to reject it; if the user brings one, check its numerator, denominator and window
+instead. If the user asks for a number you do not have, say so explicitly and propose how to measure
+it in the user's own data.
 ```
 
 ```text
@@ -197,3 +63,130 @@ Two more, specific to this skill:
   and which of the two moves is settled by whether anybody will staff the larger slot. Never
   propose a ceiling as a count of rows: the same count is comfortable for one team and unreadable
   for another.
+
+## When to use this
+
+- Nobody can say what is currently running, and two people give different answers;
+- somebody has handed you an industry list of scenarios and asked which ones to launch;
+- a new mechanic has been requested and you need to decide whether it earns a slot;
+- there is budget for three mechanics and agreement on nine;
+- rows have sat on the roster since launch without firing and nobody noticed;
+- two mechanics start on the same event and both report success;
+- a review says a mechanic should be switched off, and nobody knows who decides that;
+- a mechanic works, and the decision it serves stopped mattering two years ago;
+- the set arrived with a platform migration and nobody has read it since;
+- somebody wants to start with the loyalty mechanic.
+
+## When to use something else
+
+When part of the request belongs to a skill in the table below, answer your own part, then end with a handoff
+in this form:
+
+```text
+Handoff to `<slug>`
+Settled here: each definition, threshold and decision you fixed, with its value, one line each, five lines at most.
+Question for `<slug>`: the open question, in one sentence.
+Installed: yes or no.
+```
+
+If `<slug>` is installed and the user's request covers that part, invoke it and pass the handoff as its
+arguments; otherwise stop after the handoff. If it is not installed, say so and leave that part unanswered:
+never answer it from general knowledge. Tell the user that `npx skills add 808enzo/chappie --skill <slug>`
+installs it, and do not run the command yourself. When you receive a handoff, take its settled lines as given
+and never hand its question back.
+
+| Question | Skill |
+|---|---|
+| How one flow is built: the firing event, the delay, the cascade, the stop condition, and the review of the live trigger set | `triggered-messages` |
+| What the program is for, which stage the business is at, and the first launch queue on an empty slate | `crm-program-design` |
+| Something you launched that stopped working: a flow gone quiet, an incident, the duty roster | `program-audit-and-ops` |
+| How a segment is defined, how often it recalculates, and what happens to the remainder | `segmentation` |
+| Which system owns a fact, how fresh events are, and changing platforms | `martech-stack` |
+| Where a contact record came from, merging records of one person, and when a contact stops being worth keeping | `list-building` |
+| How many messages one person gets across channels, quiet hours, and which message wins when two collide | `contact-orchestration` |
+| On what basis you may write to a person, the preference center, and how far and fast a withdrawal reaches | `consent-and-preferences` |
+| Dated sends built around an offer, and the season around them | `promo-calendar` |
+| Whether a change caused anything: test design, control groups, holdouts, and reading the result | `experiments-and-holdouts` |
+| What a metric means: its numerator, denominator and window | `metric-definitions` |
+| Points, tiers, and what a balance obliges you to | `loyalty-program-design` |
+
+Three seams get crossed by accident. Each is spelled out under "Seams with neighbors" in
+`references/roster-vocabulary.md`; read it before you hand a case to a neighbor.
+
+- **"Scenario" names two different things** (`triggered-messages`).
+- **Two reviews look at the same object and ask different questions** (`triggered-messages`).
+- **Turning something off changes what the program promises, so the roster holder decides it**
+  (`program-audit-and-ops`, `experiments-and-holdouts`).
+
+## Reference map
+
+| File | Type | What is in it |
+|---|---|---|
+| `references/roster-and-admission.md` | mechanic | Writing down what already runs before adding anything, telling a mechanic from a campaign, giving every row the decision it serves, the five-question admission test, taking occasions from an industry set and constants from your own data, the three collisions checked before admission, and recording rejections |
+| `references/build-order.md` | mechanic | Ordering by firing volume and why, the three kinds of dependency, building early-relationship mechanics first and the population reason for it, waves sized by the person verifying them, the overlap check before a wave goes live, verification by walking the path, and what a blocked row looks like |
+| `references/roster-review.md` | mechanic | Reading rows rather than messages, the four verdicts, the route a neighbor's finding takes into the roster, the order a mechanic is retired in, what a merge keeps, sizing the set by who reads it, and the retirement record |
+| `references/roster-vocabulary.md` | definition | The terms all three mechanics assume: mechanic, campaign, roster, status and its closed set of values, row, the decision a row serves, admission test, stated firing volume, ramp-up window, dependency, wave, overlap, verdict, retirement record, industry set, own constants. Plus the three words shared with neighbors: scenario, review of the set, owner; and the full seams with neighbors |
+| `references/control-metric.md` | definition | The two numbers read beside the live share: the overlap measure and the share of rows nobody read |
+| `references/legal-regimes.md` | definition | Each rule on which mechanics exist and what retiring one leaves, who it does not bind, and every source with its date |
+
+## Control metric
+
+**Live share of the roster: the share of admitted mechanics that reached, in the period, the
+firing volume stated at admission.** The numerator is rows whose actual volume for the period is
+at or above the number written into the row when it was admitted. The denominator is rows that
+have finished their ramp-up window, because a row younger than its ramp-up has not had the chance
+yet, and counting it makes the metric fall every time the set grows.
+
+Two rules about how you read it carry the value of the metric.
+
+**Read the figure across the roster, repair one row at a time.** The number describes the state of
+the set, and every repair available to you lands on a single row. **Separate the two ways a row misses.** A
+row that never reached its stated volume is an admission error: the occasion is rarer than the
+estimate said, or the estimate came from ambition. A row that reached it and stopped is either a
+dead mechanic or a broken source, and the second belongs to `program-audit-and-ops`. The repairs
+have nothing in common, so a pooled figure that does not separate them cannot tell you which one
+to do.
+
+All three mechanics move it from different sides. Admission sets the stated volume. The build
+order decides when a row gets the chance to reach it. The review takes out of the denominator what
+the program no longer needs.
+
+Before you report the live share or compare two reviews, read `references/control-metric.md`: it
+names the two numbers to read beside it: the overlap measure and the share of rows nobody read.
+
+I do not have a citable benchmark for this metric, and one would not help: the value depends on
+how many rows you carry and how strictly admission runs, and both of those are yours, so somebody
+else's share has nothing to compare against. Build a self-baseline instead. The first reference
+point is your own first review after the whole set has finished its ramp-up. After that, take
+eight to twelve of your own review cycles, compute the median and the spread, and read later
+values against that. This works where the review cycle is stable; where reviews are rare, use the
+longest run you hold and say that is what you did. Replace the starting figure once you hold two
+full cycles of your own data.
+
+## Legal regime this skill assumes
+
+This skill decides which mechanics exist. It does not decide what you may send to whom, or on
+what basis.
+That is a different axis from permission to send. On the questions of country, recipient type,
+channel, purpose of the message, lawful basis and the conditions of an exemption, this skill
+answers nothing, and it says so here rather than leaving you to read silence as permission.
+
+The baseline is **a program contacting people you already hold a relationship and a record with**.
+
+Before you state whether a new mechanic may reuse data you already hold, what retiring a row leaves of
+what a person was promised, or who decides about two rows that overlap, read
+`references/legal-regimes.md`: it states each rule, names who it does not bind, and dates every source.
+The list below says only what each rule governs.
+
+- **The roster and the basis:** whether a row creates permission for anything.
+- **UK GDPR, purpose limitation, as the ICO's guidance states it:** a new mechanic on data you already
+  hold, the compatibility check before the build, and a lawful basis for the new purpose.
+- **Retiring a mechanic:** what happens to what a person was told at signup about the kind of message
+  and how often it would arrive.
+- **Two rows that overlap:** why their joint frequency is a question of load and who decides it.
+
+**What this skill leaves to you.** Which country's law applies, the lawful basis and how it is
+collected, frequency and quiet hours, and every question about permission to send a particular
+message.
+
+This is not legal advice. It marks where the boundary runs and who to check with.

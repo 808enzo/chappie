@@ -61,8 +61,7 @@ rows, even where one flow will implement both.
 - **Will it fire often enough to earn a slot?** Estimate from your own data: how many people met
   the condition over the last comparable period. Not from the ambition.
 - **Is a basis available** for the audience the row names, and where the data was collected for
-  something else, is the reuse compatible with the original purpose? See the legal section of
-  `SKILL.md`.
+  something else, is the reuse compatible with the original purpose? See `legal-regimes.md`.
 - **Is there a named person who owns the row after launch?**
 
 A "no" to any of these is a prerequisite rather than a rejection: it gets an owner and a date, and
