@@ -224,6 +224,7 @@ person, on what basis were their details obtained, and does that basis cover mar
 one place in the library where the message contains an assertion about price rather than an
 invitation: it says what something used to cost, or that the terms end on Friday. Both are
 regulated, independently of whether you were allowed to send the message at all.
+
 Before you state what a former price must rest on, which prior price an announced reduction shows, or when a
 time limit on an offer is a banned claim, read `references/legal-regimes.md`: it quotes each rule, names who
 it does not bind, and dates every source. The list below says only what each rule governs.
