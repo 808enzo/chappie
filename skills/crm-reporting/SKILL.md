@@ -59,9 +59,10 @@ Three more, specific to this skill:
   average an index across the rows it compares.** Quoted alone, those numbers read as progress at the moment
   the work gets worse.
 - **Never give a target for the held share.** The share is a property of one report: which lines it
-  publishes, how wide their noise bands are and how fast its data settles. A target set from outside
-  the report can be met by widening the bands and dropping volatile lines, the two ways the share rises
-  while the report gets worse. Give the person the self baseline instead, built from their own re-reads.
+  publishes, how wide their noise bands are and how fast its data settles. Whoever publishes can meet a
+  target set from outside the report in the three ways the share rises while the report gets worse:
+  widening the bands, dropping volatile lines, or holding the report until every line is final. Give the
+  person the self baseline instead, built from their own re-reads.
 
 ## When to use this
 

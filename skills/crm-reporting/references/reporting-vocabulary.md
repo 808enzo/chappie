@@ -15,15 +15,16 @@ first whether one of them means the line and the other the conclusion drawn from
 Three properties make this work unlike its neighbors.
 
 1. **The report is read by people who were not there when the numbers were made.** They act on a line,
-not on a definition, and the line has to carry its comparison base, its counterweight, and whether it is
-still provisional. The definition lives in `metric-definitions`; only the line reaches the reader. 2.
-**Reported numbers keep moving after they are published.** Returns come back, offline data arrives late,
-cohorts mature, a holdout gets read. The report states conclusions before the numbers settle. Publishing
-early is a decision with a known settling time, and it stays one as long as the report says so and
-checks later. 3. **The numbers the business asks for first are the ones that improve when the work gets
-worse.** The CRM share of revenue, open rate, the share of the base enrolled in loyalty, repeat purchase
-share across the base. Skills across this library name such numbers and hand them here, because the
-report is where they get quoted.
+   not on a definition, and the line has to carry its comparison base, its counterweight, and whether it
+   is still provisional. The definition lives in `metric-definitions`; only the line reaches the reader.
+2. **Reported numbers keep moving after they are published.** Returns come back, offline data arrives
+   late, cohorts mature, a holdout gets read. The report states conclusions before the numbers settle.
+   Publishing early is a decision with a known settling time, and it stays one as long as the report says
+   so and checks later.
+3. **The numbers the business asks for first are the ones that improve when the work gets worse.** The
+   CRM share of revenue, open rate, the share of the base enrolled in loyalty, repeat purchase share
+   across the base. Skills across this library name such numbers and hand them here, because the report
+   is where they get quoted.
 
 ## The units
 
