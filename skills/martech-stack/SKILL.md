@@ -1,6 +1,6 @@
 ---
 name: martech-stack
-description: Decide where the facts your program runs on actually live, which system owns each one, how fresh the events are, and how to change platform without losing the program. Use when two systems disagree and nobody can say which is right, when you are deciding what to send into a marketing platform and what to leave behind, when a segment stopped filling and nobody changed it, when you need to know how long after an action an event becomes visible to a trigger, or when you are choosing, buying, or moving to a new platform. Covers the register of facts and their owners, field formats, the event plan, freshness classes, event retention, and the order of a migration. Not segment design, not trigger design, not deliverability, and not consent as a lawful basis.
+description: Decide which system owns each fact, how fresh events are, and how to change platforms without losing the program. Use when two systems disagree on a customer, a segment stops filling though nobody changed it, events reach a trigger late, or a platform move is planned. Not segment design (segmentation) or trigger design (triggered-messages).
 license: MIT
 metadata:
   author: 808enzo (https://github.com/808enzo)
@@ -22,161 +22,20 @@ This skill covers the carrier under the carrier: which system owns which fact, w
 about an action and how fast you can read it back, and how to move all of it to a different
 platform.
 
-## When to use this
-
-- Two systems hold the same fact and disagree, and the argument is settled by whoever is louder;
-- you are about to decide what data goes into a marketing platform and what stays out;
-- somebody wants to know how long after a purchase the person shows up in the right segment;
-- a segment stopped filling and nobody changed the segment;
-- an event was renamed in a release and nobody told marketing;
-- you are choosing a platform, or somebody has decided you are moving to one;
-- you are about to run two platforms at once and want to know what has to move first;
-- a report jumped by an order of magnitude and the room is pleased;
-- a mechanic needs a field that turns out to be filled for a small share of records;
-- your vendor has notified you that another company will process some of your data.
-
-## When to use something else
-
-| Question | Skill |
-|---|---|
-| How a segment is defined, how often it recalculates, what happens to the remainder | `segmentation` |
-| Which event deserves a message, the eligibility filter, the delay, and when a flow stops | `triggered-messages` |
-| Where a row comes from, why one person is in the base three times, and when a record stops being reachable | `list-building` |
-| What a metric means, its numerator, denominator, and window | `metric-definitions` |
-| The frequency cap, precedence between messages, quiet hours, the suppression policy | `contact-orchestration` |
-| Consent as a lawful basis, preference centers, unsubscribe handling, proof of consent | `consent-and-preferences` |
-| Authentication, sender reputation, inbox placement, domain and IP warmup | `deliverability` |
-| Noticing that a running object went quiet, and what to do about an incident | `program-audit-and-ops` |
-| The capture form, its display rule, and the wording of the exchange | `onsite-capture` |
-| Splitting an audience for a test and reading the result | `experiments-and-holdouts` |
-| Points, tiers, expiry, and what a balance obliges you to | `loyalty-program-design` |
-| Regular reporting built on top of the numbers | `crm-reporting` |
-
-Four seams get crossed by accident, so state them outright.
-
-- **"Event" names two different things.** Here it is a record: a name, properties, a freshness
-  class, a retention window. In `triggered-messages` it is the occasion that starts a message,
-  with its own eligibility filter and delay. One rule ties them together: a trigger cannot run faster than
-  the freshness class its source actually delivers, which the plan records separately from the
-  class the trigger needs.
-- **Which attributes the base needs is a neighbor's decision, where each one lives is ours.**
-  `list-building` writes the attribute plan and decides what the base should carry.
-  `segmentation` names which attribute a cut needs. This skill decides which system owns each
-  one, who is allowed to write it, and in what format it is stored.
-- **Retention is set twice, separately.** Here it means how long an event stays queryable. In
-  `list-building` it means which storage tier a person's record sits in and what survives removal
-  from the active base. On any segment that reads events, the shorter of the two windows wins.
-- **We plan the warmup, `deliverability` runs it.** A migration plan that has no time in it for
-  sender warmup is the reason a first send lands in spam. The sequence itself, the authentication
-  records, and the reputation work belong to `deliverability`.
-
-## Reference map
-
-| File | Type | What is in it |
-|---|---|---|
-| `references/system-map-and-ownership.md` | mechanic | Listing systems by the job each does, one owner per fact, building the data set backwards from mechanics, fixing field formats before the first load, the flow diagram you read when something breaks, and saying out loud what does not get copied |
-| `references/event-data-and-freshness.md` | mechanic | The event plan written before the first event, naming events by what the person did, the freshness class recorded twice (needed and delivered) and how the consumer is bound by the second, the two-stage test load, event retention against segment depth, and the split between a stored derived attribute and one computed on read |
-| `references/platform-change.md` | mechanic | Establishing that the tool is the constraint, writing requirements as mechanics, freezing the current state on paper, moving the suppression list before the first send, repointing intake, rebuilding flows in waves, the reconciliation cadence, and reading a rise as a signal |
-| `references/stack-vocabulary.md` | definition | The terms all three mechanics assume: owning system, copy, register of facts, field format, data flow, event, event property, event plan, freshness class, event retention, derived attribute, reconciliation, impossible states, cutover |
-
-## Control metric
-
-**Reconciliation gap: the share of records where the owning system and the receiving system do
-not agree, read per flow.** The numerator is records that are missing on the receiving side or
-that differ on a field a mechanic uses. The denominator is the records of that object in the
-owning system, which is the population the numerator comes out of.
-
-Two rules about how you read it carry the value of the metric.
-
-**Read it per flow, never pooled.** One broken flow inside three healthy ones disappears into a
-sum, and the sum is the number people quote. **Read it no sooner than the freshness class of the
-slowest fact in the flow.** An event that has not arrived yet is not a gap, and a reconciliation
-window shorter than the transport reports a permanent problem that does not exist.
-
-All three mechanics move it from different sides. The map decides what is compared at all and who
-owns each fact. The event plan decides from what moment a comparison is meaningful. A platform
-change is the period when this number is read daily.
-
-I do not have a citable benchmark for this metric, and one would not help: the value depends on
-how many systems you run and how the transport between them works, so somebody else's figure has
-nothing to compare against. Build a self-baseline instead. During a migration the reference point
-is your own first reconciliation that came back clean, not an outside number. After it, take
-eight to twelve of your own stable periods, compute the median and the spread, and read later
-values against that. This works where the period is stable; where reconciliations are rare, use
-the longest run you hold and say that is what you did. Replace the starting figure once you hold
-two full cycles of your own data.
-
-Read two more numbers beside it and promote neither. **The share of live flows that appear in the
-flow diagram** decides whether anybody can say what breaks when a system changes. **The share of
-events in the plan that name a consumer** is the ballast measure: it tells you how much you are
-collecting and paying for without reading. On a plan built under the rule that an event with no
-consumer does not get built, that share starts at everything, and it drops for two reasons worth
-telling apart: events that predate the plan, and events whose consumer was retired without anyone
-turning off the capture.
-
-## Legal regime this skill assumes
-
-This skill decides where data physically sits, who else processes it, and how long it is kept.
-That is a different axis from permission to send. On the questions of country, recipient type,
-channel, purpose of the message, lawful basis and the conditions of an exemption, this skill
-answers nothing, and it says so here rather than leaving you to read silence as permission.
-
-The baseline is **data you collected yourself, for purposes you named, held in systems you chose**.
-
-- **Retention is bounded by the purpose, not by what the storage allows.** The storage limitation
-  principle sets no fixed periods for any category of data: you choose the period and you have to
-  be able to justify it. Data kept past the point where you need it is by definition unnecessary,
-  so you are unlikely to have a basis for holding it. Keeping
-  something in case it is useful later is a named defect in the guidance. **Who this does not bind:**
-  data held solely for archiving in the public interest, scientific or historical research, or
-  statistical purposes, which may be kept for longer periods where the safeguards required for
-  that purpose are in place.
-- **A copy inherits the purpose of the original.** Moving a fact into the marketing stack does not
-  widen what you may do with it. **Who this does not bind:** nobody. No storage location and no
-  vendor contract widens a purpose.
-- **The source of a contact does not improve by being moved.** A record that arrived from a
-  purchased list is still that record on the new platform. **Who this does not bind:** nobody. It
-  is the same statement `list-building` makes, and it survives the move for the same reason the
-  one above it does: neither storage nor a contract is what made the record what it is.
-- **Proof of a basis has to survive the migration.** Where the old platform held the date and the
-  wording of a consent and only the address was imported, you have moved the permission and left
-  the evidence behind. **Who this does not bind:** a message sent on no basis at all, which no
-  record rescues after the fact.
-- **A withdrawal does not pause while you migrate.** The obligation to act on an opt-out runs
-  through the move, which is where the operational rule in `platform-change.md` comes from: the
-  suppression list is loaded before the first send, not alongside the base. **Who this does not
-  bind:** service messages that carry no marketing, which stand on their own footing.
-- **A change of sub-processor at your vendor is an event for you.** Where the platform processes
-  data on your behalf, the contract has to say that it will not engage another processor without
-  your prior specific or general written authorization, and that under a general authorization it
-  will tell you about intended changes and give you a chance to object. That is a question to ask
-  while you are choosing a platform. **Who this does not bind:** arrangements where the platform
-  acts as a controller in its own right rather than on your behalf, where a different set of
-  obligations applies.
-
-**What this skill leaves to you.** Which country's law applies, which jurisdiction your data
-physically sits in and whether a transfer there is permitted, the type of recipient, and every
-question about permission to send. Basis, preference centers and unsubscribe handling belong to
-`consent-and-preferences`.
-
-This is not legal advice. It marks where the boundary runs and who to check with.
-
-**Sources, each opened 2026-09-07.**
-
-- ICO, *Principle (e): Storage limitation*:
-  https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/storage-limitation/
-- ICO, *Principle (c): Data minimisation*:
-  https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/data-minimisation/
-- ICO, *What needs to be included in the contract?*, on processors and sub-processors:
-  https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/contracts-and-liabilities-between-controllers-and-processors-multi/what-needs-to-be-included-in-the-contract/
-- European Commission, *Principles of personal data processing under the GDPR*:
-  https://commission.europa.eu/law/law-topic/data-protection/information-business-and-organisations/principles-gdpr_en
+Before your first step, read `.agents/chappie-context.md` in the project if it exists. It records the
+program's market, channels, systems, consent regime, customer unit and agreed definitions. Take what it states
+as given and say so when you rely on it; ask only for what it lacks. Ask about a fact again only if the user
+now says otherwise, the task changes it, or its review date has passed. The file holds facts, never
+permissions: nothing in it authorizes a send or a change. Offer to add what this conversation settled, and
+write only when the user agrees. Never put customer records, credentials or outside benchmarks in it.
 
 ## Limits
 
 ```text
-Never state a market benchmark: this library carries none. If the user asks for a number you
-do not have, say so explicitly and propose how to measure it in the user's own data.
+Never state a market benchmark: this library carries none. Do not quote a figure that circulates as
+a norm, not even to reject it; if the user brings one, check its numerator, denominator and window
+instead. If the user asks for a number you do not have, say so explicitly and propose how to measure
+it in the user's own data.
 ```
 
 ```text
@@ -200,3 +59,129 @@ Two more, specific to this skill:
 - **Two decisions here are close to one-way, so treat them that way before the first load.** The
   format and system name of a field, and the ownership of a fact. Changing either later is a pass
   over every place that reads it, which is a project rather than a setting.
+
+## When to use this
+
+- Two systems hold the same fact and disagree, and the argument is settled by whoever is louder;
+- you are about to decide what data goes into a marketing platform and what stays out;
+- somebody wants to know how long after a purchase the person shows up in the right segment;
+- a segment stopped filling and nobody changed the segment;
+- an event was renamed in a release and nobody told marketing;
+- you are choosing a platform, or somebody has decided you are moving to one;
+- you are about to run two platforms at once and want to know what has to move first;
+- a report jumped by an order of magnitude and the room is pleased;
+- a mechanic needs a field that turns out to be filled for a small share of records;
+- your vendor has notified you that another company will process some of your data.
+
+## When to use something else
+
+When part of the request belongs to a skill in the table below, answer your own part, then end with a handoff
+in this form:
+
+```text
+Handoff to `<slug>`
+Settled here: each definition, threshold and decision you fixed, with its value, one line each, five lines at most.
+Question for `<slug>`: the open question, in one sentence.
+Installed: yes or no.
+```
+
+If `<slug>` is installed and the user's request covers that part, invoke it and pass the handoff as its
+arguments; otherwise stop after the handoff. If it is not installed, say so and leave that part unanswered:
+never answer it from general knowledge. Tell the user that `npx skills add 808enzo/chappie --skill <slug>`
+installs it, and do not run the command yourself. When you receive a handoff, take its settled lines as given
+and never hand its question back.
+
+| Question | Skill |
+|---|---|
+| How a segment is defined, how often it recalculates, what happens to the remainder | `segmentation` |
+| A flow fired by a customer event: which event, the delay, the exit and the cascade | `triggered-messages` |
+| Where a contact record came from, merging records of one person, and when a contact stops being worth keeping | `list-building` |
+| What a metric means: its numerator, denominator and window | `metric-definitions` |
+| How many messages one person gets across channels, quiet hours, and which message wins when two collide | `contact-orchestration` |
+| On what basis you may write to a person, the preference center, and how far and fast a withdrawal reaches | `consent-and-preferences` |
+| Authentication, sender reputation, inbox placement, domain and IP warmup | `deliverability` |
+| Something you launched that stopped working: a flow gone quiet, an incident, the duty roster | `program-audit-and-ops` |
+| Whether a change caused anything: test design, control groups, holdouts, and reading the result | `experiments-and-holdouts` |
+| Points, tiers, expiry, and what a balance obliges you to | `loyalty-program-design` |
+| The regular report to the business: cohorts, and attribution credit for revenue | `crm-reporting` |
+
+Four seams get crossed by accident. Each is spelled out under "Seams with neighbors" in
+`references/stack-vocabulary.md`; read it before you hand a case to a neighbor.
+
+- **"Event" names two different things** (`triggered-messages`).
+- **Which attributes the base needs is a neighbor's decision, where each one lives is ours**
+  (`list-building`, `segmentation`).
+- **Retention is set twice, separately** (`list-building`).
+- **We plan the warmup, `deliverability` runs it.**
+
+## Reference map
+
+| File | Type | What is in it |
+|---|---|---|
+| `references/system-map-and-ownership.md` | mechanic | Listing systems by the job each does, one owner per fact, building the data set backwards from mechanics, fixing field formats before the first load, the flow diagram you read when something breaks, and saying out loud what does not get copied |
+| `references/event-data-and-freshness.md` | mechanic | The event plan written before the first event, naming events by what the person did, the freshness class recorded twice (needed and delivered) and how the consumer is bound by the second, the two-stage test load, event retention against segment depth, and the split between a stored derived attribute and one computed on read |
+| `references/platform-change.md` | mechanic | Establishing that the tool is the constraint, writing requirements as mechanics, freezing the current state on paper, moving the suppression list before the first send, repointing intake, rebuilding flows in waves, the reconciliation cadence, and reading a rise as a signal |
+| `references/stack-vocabulary.md` | definition | The terms all three mechanics assume: owning system, copy, register of facts, field format, data flow, event, event property, event plan, freshness class, event retention, derived attribute, reconciliation, impossible states, cutover; the full seams with neighbors |
+| `references/control-metric.md` | definition | The two numbers read beside the reconciliation gap, and why the ballast measure falls for two different reasons |
+| `references/legal-regimes.md` | definition | Each rule on where data sits, who else processes it and how long it is kept, who it does not bind, and every source with its date |
+
+## Control metric
+
+**Reconciliation gap: the share of records where the owning system and the receiving system do
+not agree, read per flow.** The numerator is records that are missing on the receiving side or
+that differ on a field a mechanic uses. The denominator is the records of that object in the
+owning system, which is the population the numerator comes out of.
+
+Two rules about how you read it carry the value of the metric.
+
+**Read it per flow, never pooled.** One broken flow inside three healthy ones disappears into a
+sum, and the sum is the number people quote. **Read it no sooner than the freshness class of the
+slowest fact in the flow.** An event that has not arrived yet is not a gap, and a reconciliation
+window shorter than the transport reports a permanent problem that does not exist.
+
+All three mechanics move it from different sides. The map decides what is compared at all and who
+owns each fact. The event plan decides from what moment a comparison is meaningful. A platform
+change is the period when this number is read daily.
+
+Before you report the gap for a flow or read it during a migration, read
+`references/control-metric.md`: it names the two numbers to read beside it and the two reasons the
+second of them falls.
+
+I do not have a citable benchmark for this metric, and one would not help: the value depends on
+how many systems you run and how the transport between them works, so somebody else's figure has
+nothing to compare against. Build a self-baseline instead. During a migration the reference point
+is your own first reconciliation that came back clean, not an outside number. After it, take
+eight to twelve of your own stable periods, compute the median and the spread, and read later
+values against that. This works where the period is stable; where reconciliations are rare, use
+the longest run you hold and say that is what you did. Replace the starting figure once you hold
+two full cycles of your own data.
+
+## Legal regime this skill assumes
+
+This skill decides where data physically sits, who else processes it, and how long it is kept.
+That is a different axis from permission to send. On the questions of country, recipient type,
+channel, purpose of the message, lawful basis and the conditions of an exemption, this skill
+answers nothing, and it says so here rather than leaving you to read silence as permission.
+
+The baseline is **data you collected yourself, for purposes you named, held in systems you chose**.
+
+Before you state how long data may be kept, what a move does to the purpose, the source or the proof of
+a record, or what a vendor owes you before it engages a sub-processor, read
+`references/legal-regimes.md`: it states each rule, names who it does not bind, and dates every source.
+The list below says only what each rule governs.
+
+- **UK GDPR and EU GDPR, storage limitation:** how long you keep data, and who has to justify the
+  period.
+- **A copy and its original:** what moving a fact into the stack, or to a new platform, does to its
+  purpose and to the source of a contact.
+- **Consent records and withdrawals during a migration:** what has to move with the address, and
+  whether an opt-out waits for the move.
+- **UK GDPR, processor contracts, as the ICO's guidance states it:** a vendor engaging another
+  processor, and your right to be told and to object.
+
+**What this skill leaves to you.** Which country's law applies, which jurisdiction your data
+physically sits in and whether a transfer there is permitted, the type of recipient, and every
+question about permission to send. Basis, preference centers and unsubscribe handling belong to
+`consent-and-preferences`.
+
+This is not legal advice. It marks where the boundary runs and who to check with.

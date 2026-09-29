@@ -81,6 +81,26 @@ one. The unit of a migration. **`loyalty-program-launch` uses the word for an in
 stages of moving a loyalty program from an old construction to a new one; one program cutover in
 that sense contains many cutovers in this one.
 
+## Seams with neighbors
+
+Four seams get crossed by accident, so state them outright.
+
+- **"Event" names two different things.** Here it is a record: a name, properties, a freshness
+  class, a retention window. In `triggered-messages` it is the occasion that starts a message,
+  with its own eligibility filter and delay. One rule ties them together: a trigger cannot run faster than
+  the freshness class its source actually delivers, which the plan records separately from the
+  class the trigger needs.
+- **Which attributes the base needs is a neighbor's decision, where each one lives is ours.**
+  `list-building` writes the attribute plan and decides what the base should carry.
+  `segmentation` names which attribute a cut needs. This skill decides which system owns each
+  one, who is allowed to write it, and in what format it is stored.
+- **Retention is set twice, separately.** Here it means how long an event stays queryable. In
+  `list-building` it means which storage tier a person's record sits in and what survives removal
+  from the active base. On any segment that reads events, the shorter of the two windows wins.
+- **We plan the warmup, `deliverability` runs it.** A migration plan that has no time in it for
+  sender warmup is the reason a first send lands in spam. The sequence itself, the authentication
+  records, and the reputation work belong to `deliverability`.
+
 ## Two words this skill shares with a neighbor
 
 **Event.** Here it is the record: name, properties, freshness, retention. In `triggered-messages`

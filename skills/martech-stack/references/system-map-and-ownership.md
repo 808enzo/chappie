@@ -55,8 +55,7 @@ its own.
 stack when a named mechanic stops working without it. The instinct to send everything because it
 is technically easier costs three ways: storage, slower segment recomputation, and the loss of
 any answer to who fills this field. The second reason is not cost: what you may keep at all is
-bounded by the purpose you collected it for, which the legal section of `SKILL.md`
-sets out.
+bounded by the purpose you collected it for, which `legal-regimes.md` sets out.
 
 This is the seam with `list-building`. Which attributes the base should carry is that skill's
 decision, taken from the decisions each attribute serves. Where each attribute lives, who may
