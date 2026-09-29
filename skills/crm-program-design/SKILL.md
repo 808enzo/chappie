@@ -127,7 +127,7 @@ Five seams get crossed by accident. Each is spelled out under "Seams with neighb
 | `references/ownership-and-resource.md` | mechanic | One owner per number, splitting by lifecycle stage rather than by task, attaching a segment to each owner, deciding in advance who yields, naming the infrastructure owner, the shapes a program takes at one, two and three people, and splitting the promo budget from the gap |
 | `references/launch-queue.md` | mechanic | The floor a program needs before its first mechanic, writing each item with its dependencies, two lanes split by dependency rather than by effect, the work in progress cap, launching on a slice, reading on a named date, and the dated handover of build order to the roster |
 | `references/program-design-vocabulary.md` | definition | The terms all three mechanics assume: program, program goal, target metric, key result, balancing metric, leading metric, link model, read cycle, revision cycle, zero point, owner, ownership map, infrastructure owner, service model, queue item, dependency, blocked item, lane, work in progress cap, slice launch, re-cut, handover, budget gap; the full seams with neighbors |
-| `references/control-metric.md` | definition | The two numbers read beside the unclaimed share, and why neither gets promoted |
+| `references/control-metric.md` | definition | The two numbers read beside the unclaimed share and never promoted |
 | `references/legal-regimes.md` | definition | Each rule on the purpose of processing a program inherits, who it does not bind, and every source with its date |
 
 ## Control metric
@@ -157,8 +157,8 @@ number improves at the moment the business gets worse. And it depends on an attr
 program does not choose. Report it; do not design against it.
 
 Before you report the unclaimed share or compare it with an earlier pass, read
-`references/control-metric.md`: it names the two numbers to read beside it and says why neither gets
-promoted.
+`references/control-metric.md`: it names the two numbers to read beside it and tells you to promote
+neither.
 
 This library has no citable benchmark for the control metric, and one would not help: the value
 depends on how many mechanics the business managed to start before it named a goal. Take your
