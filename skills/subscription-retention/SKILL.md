@@ -211,6 +211,7 @@ This skill **sends notices and accepts cancellations**. The lawful basis for a m
 cancellation belongs to `consent-and-preferences`; the class of a service row belongs to
 `transactional-messaging`. This skill owns what the law and the card networks require of the
 subscription itself: the content and timing of notices, the form of the exit, and the limits on retries.
+
 Before you state a notice window, a retry limit, a grace length or a cancel-button rule, read
 `references/legal-regimes.md`: it quotes each rule, names who it does not bind, and dates every source. The
 list below says only what each rule governs.
