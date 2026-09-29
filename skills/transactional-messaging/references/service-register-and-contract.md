@@ -63,10 +63,10 @@ schedule.
   a failed delivery attempt, a pickup hold about to end, an address problem, a sign-in from a new device.
 
 The kind decides the deadline anchor, the channels, failover, whether repeated updates collapse, and the
-severity class when the row fails. In `contact-orchestration`'s classes all four kinds are service. Where
-a law requires the row (the confirmation in the EU and the UK, the delay notice in the US, both in
-`SKILL.md`), write that into the row: its failure is a missed obligation in `program-audit-and-ops`'s
-severity classes.
+severity class when the row fails. In `contact-orchestration`'s classes all four kinds are service.
+Where a law requires the row (the confirmation in the EU and the UK, the delay notice in the US, both in
+`legal-regimes.md`), write that into the row: its failure is a missed obligation in
+`program-audit-and-ops`'s severity classes.
 
 Subscriptions and contracts bring rows of their own, and their deadlines come from the obligation, not
 from a next event.
@@ -88,8 +88,8 @@ from a next event.
   date; the window for exporting data; the date of deletion; the end of access.
 
 The register holds the rows, not the rules. The quotations, the addresses, the date each page was opened
-(2026-09-15) and the people each rule does not bind are in the `SKILL.md` of `subscription-retention` and
-of `b2b-retention`.
+(2026-09-15) and the people each rule does not bind are in the `legal-regimes.md` of
+`subscription-retention` and of `b2b-retention`.
 
 **5. Trigger a row one of two ways: by a state change, or by a promise timer.** Access, confirmation and
 progress fire on a state change. Some exceptions arrive as events too: a failed payment, a failed
@@ -107,7 +107,7 @@ minus the time the remaining states take in your own data. Firing at the window'
 then the person has waited through it. An exception that gives no revised time still gives a time: when
 the next update comes. That time is a promised time like any other and registers its own timer;
 without it, "we cannot give a date yet" leaves the transaction with nothing watching it, which is the
-silence the timers exist to end. In the US the delay notice has a legal outer limit (`SKILL.md`).
+silence the timers exist to end. In the US the delay notice has a legal outer limit (`legal-regimes.md`).
 
 **6. Write the content contract.** Every service message answers, in this order:
 
@@ -138,16 +138,16 @@ as an exception message, never as a quiet edit of the tracking page.
 
 **8. Decide what else a message may carry at the template version, by class.** By default, nothing that
 promotes. Help with what was bought (how to use it, care, assembly, how a return works) belongs to the
-transaction. A promotional block changes the class, and each regime in `SKILL.md` draws that line in its
-own terms: the subject line and the start of the body in the US, significant promotional material in the
-UK, the word "solely" in Canada, and a mailbox provider asking senders to keep promotions out of receipts.
-The working rule: a service frame reserves no place for promotion (`email-design`), and a cross-sell goes
-as a message of its own, a flow in `triggered-messages` or `repeat-purchase` on the marketing identity, on
-a lawful basis and inside the cap, after the service message it wanted to ride on. If the business decides
-to carry promotion inside a service message anyway, that is a new row with a changed class, made in the
-register rather than in the content. Take it through the regime question with whoever owns
-`consent-and-preferences` questions where you work, and move it off the service identity
-(`deliverability`).
+transaction. A promotional block changes the class, and each regime in `legal-regimes.md` draws that
+line in its own terms: the subject line and the start of the body in the US, significant promotional
+material in the UK, the word "solely" in Canada, and a mailbox provider asking senders to keep
+promotions out of receipts. The working rule: a service frame reserves no place for promotion
+(`email-design`), and a cross-sell goes as a message of its own, a flow in `triggered-messages` or
+`repeat-purchase` on the marketing identity, on a lawful basis and inside the cap, after the service
+message it wanted to ride on. If the business decides to carry promotion inside a service message
+anyway, that is a new row with a changed class, made in the register rather than in the content. Take it
+through the regime question with whoever owns `consent-and-preferences` questions where you work, and
+move it off the service identity (`deliverability`).
 
 **Where the class of a send gets checked: two moments.** At the release of a template version, the
 version records the class of every block, and a service row may reference only a version whose blocks are
@@ -191,7 +191,7 @@ cancellation.
 | UK: the same; treated as provided once sent or made available | Consumer Contracts Regulations 2013, regulation 16, opened 2026-09-13 | legal |
 
 The first six are yours. The last three are dictated from outside, and each carries its source and the
-people it does not bind in `SKILL.md`.
+people it does not bind in `legal-regimes.md`.
 
 ## Edge cases
 

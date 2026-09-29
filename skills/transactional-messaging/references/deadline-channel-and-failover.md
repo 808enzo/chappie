@@ -53,7 +53,7 @@ largest campaign send, the tail latency of service rows stays inside their deadl
 
 - **Access** goes where the screen told the person it would go, and nowhere else.
 - **Confirmation** goes by email, the durable record the person keeps (in the EU and the UK, the durable
-  medium in `SKILL.md`), with the order page as its twin.
+  medium in `legal-regimes.md`), with the order page as its twin.
 - **Progress** goes to the channel that shows on a device when the event matters: a displayable push
   endpoint under `push-notifications`' fan-out rule, otherwise failover (step 5). An email copy is
   optional.
