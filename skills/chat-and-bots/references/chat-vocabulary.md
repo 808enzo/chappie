@@ -153,7 +153,7 @@ the person later can be promised until an address is taken for it.
   promotional block.
 - **The reply window of a messaging platform is not the settle window of this skill.** The first is
   how long the platform lets you answer freely, and it belongs to `messaging-channels`. The second is
-  how long you wait before counting an issue as settled (`references/chat-vocabulary.md`).
+  how long you wait before counting an issue as settled (*Settle window*, above).
 - **The survey hangs on the closure event.** Its questions belong to `voice-of-customer`; the event
   it waits for is defined here (`references/routing-and-assignees.md`, step 8). A survey sent on
   closure does not reach the people who left before anyone answered, so it cannot see the conversations that failed before an answer.
