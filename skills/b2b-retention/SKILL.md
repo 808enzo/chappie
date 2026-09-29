@@ -209,6 +209,7 @@ lack of an exception for business-to-business email, CASL) stands in the legal s
 repeated here. The class of a service row is `transactional-messaging`'s. This skill owns what the law says about the
 contract itself after the deal: renewal under a provision, the end of a cloud service contract, personal data at the end,
 and late payment between businesses.
+
 Before you state a notice period, a switching or data retrieval period, an interest rate or a compensation sum,
 read `references/legal-regimes.md`: it quotes each rule, names who it does not bind, and dates
 every source. The list below says only what each rule governs.
