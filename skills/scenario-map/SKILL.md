@@ -97,7 +97,8 @@ and never hand its question back.
 
 | Question | Skill |
 |---|---|
-| How one flow is built: the firing event, the delay, the cascade, the stop condition, and the review of the live trigger set | `triggered-messages` |
+| A flow fired by a customer event: which event, the delay, the exit and the cascade | `triggered-messages` |
+| The review of the live trigger set: entries, conversion per entry, contribution to load | `triggered-messages` |
 | What the program is for, which stage the business is at, and the first launch queue on an empty slate | `crm-program-design` |
 | Something you launched that stopped working: a flow gone quiet, an incident, the duty roster | `program-audit-and-ops` |
 | How a segment is defined, how often it recalculates, and what happens to the remainder | `segmentation` |
@@ -152,7 +153,7 @@ order decides when a row gets the chance to reach it. The review takes out of th
 the program no longer needs.
 
 Before you report the live share or compare two reviews, read `references/control-metric.md`: it
-names the two numbers to read beside it: the overlap measure and the share of rows nobody read.
+names the two numbers to read beside it (the overlap measure and the share of rows nobody read).
 
 I do not have a citable benchmark for this metric, and one would not help: the value depends on
 how many rows you carry and how strictly admission runs, and both of those are yours, so somebody
