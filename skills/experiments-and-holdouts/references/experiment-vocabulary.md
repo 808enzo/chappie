@@ -285,8 +285,8 @@ short test of a new format tends to overstate what the rollout will produce.
 
 ## Seams with neighbors
 
-Three seams are worth stating outright, because this skill inherited obligations from the three
-written before it:
+Three seams are worth stating outright, because each is an obligation a neighbor hands to this
+skill:
 
 - **From `segmentation`: verifying an exclusion.** A cut used to withhold a send is a decision
   about money. Split the people the rule selects at random, and send to one part as if the rule did

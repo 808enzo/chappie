@@ -116,7 +116,7 @@ Three seams get crossed by accident. Each is spelled out under "Seams with neigh
 - **From `triggered-messages`: the holdout comes from entries.**
 - **From `email-program`: hold out when the send is testing something.**
 
-Neighbors written later handed over the population and the unit for their own objects: exit
+Other neighbors hand over the population and the unit for their own objects: exit
 requests, accounts, locations in a rollout, people who reached an in-product slot, an optional
 service row. Each one has a row in `references/control-groups-and-holdouts.md`, step 2.
 
