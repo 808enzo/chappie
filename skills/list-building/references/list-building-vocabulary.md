@@ -97,6 +97,26 @@ keep the state without a time limit.
 two median interpurchase intervals in your own data, so that it moves with the category rather than
 being carried in from one.
 
+## Seams with neighbors
+
+Four seams get crossed by accident, so state them outright.
+
+- **"Deduplication" names two different jobs.** Here it means merging several records of one person
+  into one. Not repeating the same argument to that person in a second channel is
+  `contact-orchestration`, and the word belongs to both of us. Ask which one you mean before you
+  start: one is about rows, the other is about messages.
+- **The reason for collecting an attribute comes from a neighbor, the collecting happens here.**
+  `segmentation` names which attribute is missing and which decision it unlocks. `onsite-capture`
+  owns the form, the display rule and the wording of the exchange. This skill owns the plan: which
+  attributes the base needs at all, and on which rung of the ladder you ask for each one.
+- **`deliverability` sets unreachable, you decide the fate of the record here.** Bounces, inbox
+  placement and reputation belong to `deliverability`. Whether a record you can no longer reach
+  should leave the active base, and what survives when it does, belongs here.
+- **Merging records is not merging permissions.** Two rows about one person become one row. Their
+  consents, their subscriptions and their loyalty obligations do not pool. The legal side of
+  consent is `consent-and-preferences`; the requirement that a merge must not move a permission
+  from one record to another is a property of the merge, and it lives here.
+
 ## Two words this skill shares with a neighbor
 
 **Deduplication.** Here it means merging several records of one person into one. In
