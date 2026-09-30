@@ -135,3 +135,24 @@ frequency of response is `rfm-segments`' axis. A tier belongs to a channel: emai
 tier; the total cap uses a tier on the person computed by the same rule from response in any
 channel, because one cap for every tier hits dormant people hardest at the point where they are
 still recoverable.
+
+## Seams with neighbors
+
+Four seams with neighbors get crossed by accident, so state them outright:
+
+- **The gap inside one channel belongs to that channel.** `email-program` owns how close two
+  emails may sit; `triggered-messages` owns the order of two flows inside the automated layer;
+  `segmentation` owns collisions inside one segment set in one wave. Each of them keeps the gap
+  inside its own set. What arrives here is the total across all of them, which no single set can
+  see.
+- **Test design belongs to `experiments-and-holdouts`.** Changing a cap is an experiment, and how
+  to run it is written there: the unit is the person over a period, the window is longer than a
+  content test, and unsubscribes move later than revenue. What stays here is the decision: which
+  reading changes the cap and by how much.
+- **Merging duplicate profiles belongs to `list-building`.** That is record deduplication, and it
+  is a different job from deduplicating a pitch: making sure one argument already delivered in one
+  channel does not repeat in another. The second one stays here.
+- **Whether two systems can share a claim belongs to `martech-stack`.** Deduplicating a pitch across
+  systems needs one place that holds claims before anything sends. The contract that place has to
+  satisfy stays here, and so does what to do when the stack cannot offer one: name the limit rather
+  than describe a guarantee you do not have.

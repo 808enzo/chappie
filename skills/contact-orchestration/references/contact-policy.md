@@ -70,18 +70,17 @@ measured it did so on another category, another purchase frequency and another b
 a cheap, mild one. The total cap survives alongside it: three messages in three channels is three
 messages, not one in each.
 
-**4. Set quiet hours.** In the recipient's local time, not yours. Exclude the night for every
-channel that puts a sound on a device. Apply the window by class. A service message the person can
-act on now (a login code, access, an exception whose deadline falls inside the night) and a
-mandatory notice whose deadline falls inside the night go at once; which service rows those are is
-`transactional-messaging`'s register. Everything else waits for morning, and a perishable message
-whose shelf life ends before morning is dropped rather than held (`collisions-and-enforcement.md`,
-step 2). For phone channels in the US a federal window runs from
-8:00 to 21:00 local to the recipient, and it covers cold solicitation: a call or message sent with
-prior express permission, or inside an established business relationship, falls outside the
-definition the rule uses, and the rule does not reach email or push at all (the legal section of
-`SKILL.md` carries the citation). Treat the window as the outer edge for whatever you cannot place
-inside those exclusions. It is not a floor under everything you send. For every other channel,
+**4. Set quiet hours.** In the recipient's local time, not yours. Exclude the night for every channel
+that puts a sound on a device. Apply the window by class. A service message the person can act on now (a
+login code, access, an exception whose deadline falls inside the night) and a mandatory notice whose
+deadline falls inside the night go at once; which service rows those are is `transactional-messaging`'s
+register. Everything else waits for morning, and a perishable message whose shelf life ends before
+morning is dropped rather than held (`collisions-and-enforcement.md`, step 2). For phone channels in the
+US a federal window runs from 8:00 to 21:00 local to the recipient, and it covers cold solicitation: a
+call or message sent with prior express permission, or inside an established business relationship,
+falls outside the definition the rule uses, and the rule does not reach email or push at all
+(`legal-regimes.md` carries the citation). Treat the window as the outer edge for whatever you cannot
+place inside those exclusions. It is not a floor under everything you send. For every other channel,
 derive the window from your own activity data. Work out the recipient's time zone yourself.
 
 **5. Name what is exempt, and where the exemption ends.** Exempt what the person is waiting for as
