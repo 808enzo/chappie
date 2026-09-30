@@ -205,7 +205,7 @@ designed.
   guardrail that matters, unsubscribes, moves later than revenue. Such a test needs a longer window
   than a content test and a decision rule that waits for it.
 - **A test that changes price.** Design runs into law and into trust. The safer form varies the
-  offer at a constant price; see the legal section of `SKILL.md`.
+  offer at a constant price; see `legal-regimes.md`.
 
 ## Failure modes
 

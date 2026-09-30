@@ -282,3 +282,21 @@ freezes the reading.
 
 A lift produced by a format being new rather than by it being better. It fades, which is why a
 short test of a new format tends to overstate what the rollout will produce.
+
+## Seams with neighbors
+
+Three seams are worth stating outright, because this skill inherited obligations from the three
+written before it:
+
+- **From `segmentation`: verifying an exclusion.** A cut used to withhold a send is a decision
+  about money. Split the people the rule selects at random, and send to one part as if the rule did
+  not exist. Read the difference as the margin given up, set against the send cost saved. The
+  design belongs here; the construction of the rule belongs there.
+- **From `triggered-messages`: the holdout comes from entries.** For an event-fired flow, draw the
+  control from the people who fired the trigger, not from the base. Everyone who enters has
+  already shown intent, so a control drawn from the base compares different people and flatters
+  the flow.
+- **From `email-program`: hold out when the send is testing something.** A holdout on every send
+  costs reach and returns no information. Against a holdout the program's figure is revenue per
+  person assigned to each group, in any channel and with no credit rule, and a diagnosis of
+  declining returns without a holdout produces no trustworthy conclusion.
