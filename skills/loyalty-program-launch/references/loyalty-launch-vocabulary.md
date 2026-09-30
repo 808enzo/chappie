@@ -109,3 +109,21 @@ on the old platform and starts on the new one. A program cutover contains many o
 
 **Frozen window.** The announced interval during which some operations, redemption above all, are
 unavailable. Its length comes from a measured import, and it is announced before it starts.
+
+## Seams with neighbors
+
+State three seams with neighbors outright, because they are the ones people cross by accident:
+
+- **The model belongs to `loyalty-program-design`.** What is earned, at what rate, on which
+  tiers, is written there. What this skill does with that design is test whether it can be
+  launched: can the till compute it at the moment of payment, can a member of staff explain it in
+  one sentence, can finance carry the liability the points create. A design that fails any of the
+  three goes back to that skill rather than getting patched here.
+- **General contact collection belongs to `list-building`.** Sources, stitching, deduplication
+  and decay are written there. What stays here is enrollment as a property of the program itself:
+  the ask at the point of sale trades a program benefit for an identity, and its length, its field
+  order and its carrier are parameters of the program rather than of contact collection at large.
+- **Running a live program belongs to `program-audit-and-ops`.** Monitoring, alerting and
+  incident work are written there. What stays here is the stretch that gets no second attempt:
+  reading the first months in a way that separates build quality from effect, and making the
+  first revision to the rules.
