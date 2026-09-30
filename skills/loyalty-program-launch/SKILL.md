@@ -108,6 +108,7 @@ The program touches the whole business, so hold this boundary:
 | The regular report to the business: cohorts, and attribution credit for revenue | `crm-reporting` |
 | Which mechanics to build and in what order | `crm-program-design`, `scenario-map` |
 | Bringing back members who stopped buying | `lapse-and-winback` |
+| Paid subscription as a retention model | `subscription-retention` |
 
 This skill decides how a program reaches a working state and how people get into it. The
 neighboring skills decide what it is made of and what happens to it afterward.
