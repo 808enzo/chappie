@@ -110,8 +110,7 @@ Two seams are worth stating outright:
 - **Definition here, comparison there.** The formula, the denominator and the window belong to
   this skill. Whether a difference between two numbers is real belongs to
   `experiments-and-holdouts`. A metric with no definition makes any comparison meaningless, and
-  a comparison with no design makes any definition pointless, which is why the two skills were
-  written together.
+  a comparison with no design makes any definition pointless.
 - **Definition here, pipeline there.** Writing the definition, naming the system of record and
   reconciling two sources sit here. Monitoring that the export ran and paging someone when it
   did not sits in `program-audit-and-ops`. The failure modes in these files name symptoms; they
