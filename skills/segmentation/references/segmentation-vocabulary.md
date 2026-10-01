@@ -150,6 +150,24 @@ other segment: against the same people, selected by the same rule, who did recei
 cost side shows up in the channel invoice and its revenue side stays invisible unless you run
 that comparison.
 
+## Seams with neighbors
+
+State three seams with neighbors outright, because people cross them by accident:
+
+- **RFM belongs to `rfm-segments`.** It is a named method with settled group boundaries and its
+  own recompute ritual. The general mechanics of building an attribute live here, and that
+  method lives there. People with no purchase history go there too. They are a known group rather
+  than the remainder of your base, and `rfm-segments` splits them by tenure into a welcome route
+  and a first-purchase route.
+- **Engagement tiers belong to `email-program`.** Active, occasional, dormant and suppressed,
+  the engagement window behind them and the rhythm each receives, are written there already. A
+  tier is a property of the channel program, not a cut of the base. Read that skill and move on.
+- **Count segment size against the reachable base, not base size.** `list-building` owns the
+  difference: base size counts every record, the reachable base counts the records you can still
+  reach through a channel on a basis that holds. A cut sized against base size looks larger than
+  anything the send will find, and the gap widens as the base ages. Take the number from the
+  reachable base before you call a segment too small.
+
 ## Terms that belong to neighbors
 
 Named here so that nobody redefines them by accident:

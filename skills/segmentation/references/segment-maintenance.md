@@ -40,8 +40,7 @@ identical until you check step 1.
 **3. Check separation.** Does the segment still behave differently from the rest of the base on
 the target metric, with both sides counted on the reachable base and read under the same
 treatment? If it does not, the cut has stopped carrying information, however tidy the definition
-and however many people it returns. This is the control metric of the skill (`SKILL.md` gives its
-three conditions and a worked example), and it decides whether a segment kept for its response
+and however many people it returns. This is the control metric of the skill (`SKILL.md` gives its three conditions, and `segmentation-vocabulary.md` works an example through), and it decides whether a segment kept for its response
 earns its keep. A segment kept for a stated reason is judged by that reason, as the edge cases
 below say.
 
