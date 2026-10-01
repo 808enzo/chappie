@@ -182,3 +182,23 @@ market and sample size, and it is read beside the cart flow, not against this me
 build a self-baseline: one point per period, computed on that period's entries once their window
 has closed, eight to twelve points, and read later points against your own median and spread. A
 period too short to hold a readable number of entries is lengthened rather than skipped.
+
+## Seams with neighbors
+
+Three seams are worth stating outright, because people cross them by accident:
+
+- **Running flows belong to `program-audit-and-ops`.** Construction is here: eligibility, the
+  recheck before sending, exit conditions. Operations are there: monitoring, diagnosing a flow
+  that stopped firing, pulling a message that should not have gone. One question separates them:
+  an answer that changes the trigger definition belongs here, an answer that changes who watches
+  what on a Monday belongs there. The failure modes in these files name symptoms; they do not set
+  up the watch.
+- **Priority between flows is here, the contact cap is not.** `contact-orchestration` owns total
+  load across channels, quiet hours, and priority between campaigns. What stays here is priority
+  **between triggers**: which flow goes when two fire on one person in the same moment. That is
+  a property of the flow set, not of a schedule.
+- **`email-program` already ranked the layers.** An automated flow goes before a campaign and
+  yields to a service message, and the two classes between them, the mandatory notice and the
+  perishable and personal message, are `contact-orchestration`'s full order. That ranking is not
+  rewritten here, a site-wide sale included. This skill adds the next level down: the order inside
+  the automated layer.
