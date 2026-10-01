@@ -116,3 +116,26 @@ of the goal and the resource behind it. In `email-copy` it is the review of a dr
 send, the one sense whose object is not live yet; a blocking defect found there in a flow that is
 already sending arrives here as an incident. An audit finding travels to the roster review rather
 than acting on the composition of the program itself.
+
+## Seams with neighbors
+
+Four seams get crossed by accident, so state them outright.
+
+- **Construction belongs to the neighbor, operation belongs here.** Neighboring skills hand this
+  one the same seam, and all of them draw it the same way: if you are changing what the object is, you
+  are in the neighbor's file; if you are changing how it gets watched, you are in this one.
+  Adding a delay to a cart flow is `triggered-messages`. Noticing that the cart flow sent nothing
+  for nine days is this skill.
+- **Severity is not a size, and it does not queue behind one.** Disclosure of personal data, a right
+  granted or lost by mistake, and a required message that failed all leave the marketing queue the
+  moment you name them, however few people they touched. Exposure orders what is left over.
+  Reporting duties have an owner outside marketing, and this skill routes to that owner rather than
+  describing the procedure.
+- **This skill points at causes, it does not prove effects.** Comparing a flow inside a failure
+  window against its own norm outside that window tells you where to look. It does not separate
+  the fault from seasonality or from anything else that changed the same week. Any claim that a
+  fix produced a result goes through `experiments-and-holdouts`.
+- **A silent object is not a deliverability problem until the mail leaves.** Bounces, inbox
+  placement and reputation belong to `deliverability`. A flow that never handed a message to the
+  channel at all belongs here, and the two get confused because both look like "the
+  emails are not arriving".

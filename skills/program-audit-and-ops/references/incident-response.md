@@ -51,7 +51,7 @@ either way, and the log carries a cause class and the check that would have caug
    Write the route down before you need it: the role, the person currently in it, and how to reach
    them outside working hours. Invent the route during an incident and the first hour goes to
    finding somebody instead of to stopping the fault. Reporting runs on a clock somebody else sets
-   (`SKILL.md` quotes the EU articles that set it), and this library does not describe the procedure: name the person who owns it where you work,
+   (`legal-regimes.md` quotes the EU articles that set it), and this library does not describe the procedure: name the person who owns it where you work,
    and route to them. `consent-and-preferences` covers lawful basis and the records you keep,
    `transactional-messaging` covers what a required message must contain and how fast it has to
    go.
