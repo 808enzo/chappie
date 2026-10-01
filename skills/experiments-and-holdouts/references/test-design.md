@@ -225,3 +225,61 @@ designed.
   turns the confidence level into decoration.
 - **The test was rerun until it won.** The same failure spread over months, and harder to see
   because each individual run looked fine.
+
+## Worked example (made-up numbers)
+
+This section runs steps 6 to 8 for a message added to a triggered flow, and every number in this
+worked example is made up. The decision metric is a second order within the outcome window, counted
+per person from entry.
+
+| Field | Type | What it holds | Where it comes from |
+|---|---|---|---|
+| `week_start` | date, ISO | the Monday of the entry week | the flow's entry log |
+| `entered` | count | people whose first entry fell in the week | the flow's entry log |
+| `converted` | count | of those, people with a second order inside the outcome window of their own entry | the order export, joined on the customer key |
+
+You set four more inputs: the outcome window, the finalization wait, the break-even lift and the date
+the decision is due.
+
+**Data.** In this worked example the outcome window is 21 days, finalization is 7 days, the data is
+pulled on 2026-09-28, the decision is due on 2027-02-01, and the new message costs, per week, the
+margin on 30 second orders. The counts of the last four weeks are partial: their outcome windows are
+still open on the pull date.
+
+| `week_start` | `entered` | `converted` | `week_start` | `entered` | `converted` |
+|---|---|---|---|---|---|
+| 2026-07-06 | 2,940 | 229 | 2026-08-17 | 2,900 | 229 |
+| 2026-07-13 | 3,110 | 256 | 2026-08-24 | 2,990 | 240 |
+| 2026-07-20 | 2,870 | 221 | 2026-08-31 | 3,020 | 201 |
+| 2026-07-27 | 3,050 | 247 | 2026-09-07 | 3,080 | 158 |
+| 2026-08-03 | 2,980 | 236 | 2026-09-14 | 2,860 | 97 |
+| 2026-08-10 | 3,160 | 262 | 2026-09-21 | 3,040 | 22 |
+
+**Steps on the worked example:**
+
+1. Baseline rate from the weeks whose last entrant has had the outcome window and finalization by the
+   pull date, the eight weeks through 2026-08-24: 1,920 of 24,000, 8.0%. Pooling in the four open
+   weeks reads the rate at 6.66%, and step 4 at that rate sizes the test at seven weeks instead of
+   nine, too small for the true rate.
+2. Entry rate from all twelve weeks, since an entry is known on the day: 36,000, or 3,000 a week.
+3. MDE from the decision: the message repays itself at 30 extra second orders a week, 30 of 3,000
+   entries, so 1.0 point, from 8.0% to 9.0%.
+4. Sample per arm for two proportions, two sided, at 95% and 80%: (1.96 + 0.84)² × (0.08 × 0.92 +
+   0.09 × 0.91) ÷ 0.01² = 7.84 × 0.1555 ÷ 0.0001, 12,192 people. Both arms: 24,384.
+5. Run time: 24,384 ÷ 3,000 = 8.1 weeks, rounded up to a whole number: nine weeks of assignment,
+   2026-10-05 to 2026-12-06.
+6. Read date: 2026-12-06 plus 21 days of outcome window plus 7 of finalization, 2027-01-03. It falls
+   before 2027-02-01, so the test fits the decision's shelf life.
+
+**What it returns in this worked example:** person as the unit, MDE 1.0 point, 12,192 per arm, nine
+weeks, read on 2027-01-03. This size gives 80% power to clear zero when the true lift is 1.0 point,
+not to clear the 1.0-point threshold, so write down in the plan what an interval that clears zero
+and crosses 1.0 point leads to (step 6).
+
+**When the data is too little.** Here that means too few people before the decision is due: the sample
+at the starting pair of 95% confidence and 80% power (Thresholds and timings) does not accumulate in
+the assignment time the decision leaves. The procedure then returns no test: decide on other grounds
+and record the decision as decided without a test (step 7). Do not raise the MDE to make it fit, since
+it comes from the decision; lower the confidence only if the cost of being wrong in this decision
+allows it, and log it. In this worked example, a decision due on 2026-12-01 leaves four whole weeks of
+assignment before the 28 days of window and finalization, 12,000 people against the 24,384 required.
