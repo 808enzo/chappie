@@ -177,8 +177,8 @@ holdout rate, times treated entries) and entries as a share of fire volume next 
 **Where the benchmark is.** None exists for this metric: the value depends on which event you
 picked, and a published figure would need a holdout drawn from entries. A published cart recovery
 rate is a different ratio, recovered carts over abandoned carts or over messages sent, credited by
-the sender and read without a holdout; a figure like that belongs in `references/` with its source,
-market and sample size, and it is read beside the cart flow, not against this metric. Say so, then
+the sender and read without a holdout. This library does not carry a figure like that; if you bring
+one, read it beside the cart flow, not against this metric. Say so, then
 build a self-baseline: one point per period, computed on that period's entries once their window
 has closed, eight to twelve points, and read later points against your own median and spread. A
 period too short to hold a readable number of entries is lengthened rather than skipped.
