@@ -54,8 +54,8 @@ each of the two thresholds, so take them one at a time.
   of response inside one channel, so it does not answer "has this person lapsed" at all. Different
   axis, different question, and no contest to settle.
 - **The silence threshold in `list-building` sits on this same commercial axis**, which is where a
-  seniority contest looks real. It requires no reaction *and* no purchase across two of the
-  person's own intervals, and the no purchase half of it is commercial silence. It is not a rival
+  seniority contest looks real. It requires no reaction *and* no purchase across two median
+  interpurchase intervals, and the no purchase half of it is commercial silence. It is not a rival
   answer to the same question: it is the same axis read at a later point, a threshold of **ending**
   against the one computed here, which is a threshold of **starting**.
 
@@ -74,7 +74,7 @@ typical cycles; take the median rather than the mean, because a tail of long int
 mean upward and pushes the threshold past the point where an attempt is still worth making; the
 entry threshold is one median interval plus a tolerance.
 
-The deletion threshold is a different number on the same axis, read later: two of the person's own
+The deletion threshold is a different number on the same axis, read later: two median interpurchase
 intervals with no reaction and no purchase (step 2). Everything this skill does happens between the
 two, and the ordering check is what protects that room.
 
@@ -126,7 +126,7 @@ attempt has an end, and its last message says what happens next.
 | Entry threshold | your own median interpurchase interval for the category, plus a tolerance |
 | Number of threshold steps | the number of distinguishable routes, not round calendar numbers |
 | The cut the threshold is computed on | a segment with its own purchase cycle, not the whole base |
-| Deletion threshold | owned by `list-building`: two of the person's own intervals with no reaction and no purchase |
+| Deletion threshold | owned by `list-building`: two median interpurchase intervals with no reaction and no purchase |
 | Moment recency is rechecked | immediately before the send, not at assembly |
 
 ## Edge cases
@@ -172,7 +172,7 @@ assortment and the price, so a threshold with no date on it is a threshold nobod
 ## Worked example (made-up numbers)
 
 This section runs step 3 and the ordering check of step 2 on one category, and every number in this
-worked example is made up. It derives the entry threshold from the person's own purchase intervals.
+worked example is made up. It derives the entry threshold from your own purchase intervals in the category.
 
 **Input schema.** One row per purchase in the category, from the order history stitched across every
 sales channel.
@@ -215,12 +215,12 @@ intervals fall into these bands:
 5. Entry threshold: one median interval plus a tolerance. In this worked example the tolerance is
    seven days, a value the team sets, so the threshold is 31 plus 7, 38 days without a purchase in
    the category. Taken from the mean it would be 47 days, nine days later.
-6. Ordering check: the deletion threshold in `list-building` sits at two of the person's own
-   intervals, 62 days at the median. 38 falls before 62, which leaves 24 days for the attempt.
+6. Ordering check: the deletion threshold in `list-building` sits at two median intervals, 62 days.
+   38 falls before 62, which leaves 24 days for the attempt.
 
 **What it returns in this worked example:** dog food, entry threshold 38 days, built on 2026-10-01
 from the median of 31 days plus a tolerance of 7, with 24 days of room before the deletion threshold
-at the median. Another category in the same base gets its own run on its own intervals (step 4).
+at 62 days. Another category in the same base gets its own run on its own intervals (step 4).
 Recompute and redate the threshold when the assortment or the price moves.
 
 **When the data is too little.** A period that covers fewer than two typical cycles is too little:
