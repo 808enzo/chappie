@@ -153,3 +153,67 @@ afterward.
   quietly.
 - **The cap is written in campaigns.** "No more than two sends a week" says nothing about a
   person: two campaigns plus four flows is six messages.
+
+## Worked example (made-up numbers)
+
+This section runs step 2 for the email cap of one engagement tier, and every number in this worked
+example is made up. The same run repeats for each tier, each channel and the total cap, on its own
+load and its own loss.
+
+**Input schema.** One row per load bucket, built from the contact log over the load window and the
+outcomes over the observation period.
+
+| Field | Type | What it holds | Where it comes from |
+|---|---|---|---|
+| `load` | count | emails one person received in the 30-day window | the contact log, delivered state |
+| `people` | count | messaged people in the tier with that load, all of them addressed in email | the contact log, joined to the tier `email-program` computes |
+| `lost` | count | of those, people who lost email in the observation period, one loss per person | the contact log and the platform's unsubscribes, complaints and hard bounces |
+| `loss_rate` | percent, two decimals | `lost` over `people` | computed per bucket |
+| `revenue_per_person` | dollars, two decimals | revenue in the observation period over `people` | the order export, joined on the customer key |
+
+**Data.** In this worked example the tier is email's active tier, the load window is 2026-08-01 to
+2026-08-30, and the observation period runs 45 days from 2026-08-01, longer than the median
+interpurchase interval of 38 days.
+
+| `load` | `people` | `lost` | `loss_rate` | `revenue_per_person` |
+|---|---|---|---|---|
+| 1 | 3,000 | 12 | 0.40% | 9.00 |
+| 2 | 4,200 | 18 | 0.43% | 14.00 |
+| 3 | 5,400 | 24 | 0.44% | 18.50 |
+| 4 | 6,600 | 31 | 0.47% | 22.50 |
+| 5 | 7,800 | 39 | 0.50% | 26.00 |
+| 6 | 8,400 | 44 | 0.52% | 29.00 |
+| 7 | 7,200 | 40 | 0.56% | 31.50 |
+| 8 | 5,400 | 35 | 0.65% | 31.80 |
+| 9 | 4,200 | 32 | 0.76% | 31.90 |
+| 10 | 3,000 | 27 | 0.90% | 31.90 |
+| 11 | 1,800 | 20 | 1.11% | 31.70 |
+| 12 | 1,200 | 16 | 1.33% | 31.50 |
+| 13 or more | 1,800 | 31 | 1.72% | 31.00 |
+
+**Steps on the worked example:**
+
+1. Messaged people in the tier: 60,000. People in the tier with no email in the window are counted
+   beside the table and stay out of it, or every percentile drops.
+2. The knee. Up to 7, revenue per person grows faster than the loss rate: from 6 to 7 revenue gains
+   8.6% and loss 6.1%, each against the bucket before. From 8 on, revenue per person stays flat,
+   between $31.00 and $31.90, while the loss rate keeps rising, from 0.65% to 1.72%. The knee is at 8.
+3. The 90th percentile: the cumulative count reaches 52,200 people at load 9, 87.0%, and 55,200 at
+   load 10, 92.0%. The first cap is 10 emails per 30 days.
+4. Count above the cap before announcing it: loads 11, 12 and 13 or more hold 4,800 people, 8.0% of
+   messaged people, under a tenth, because 3,000 people sit exactly on 10. They keep receiving, ten
+   at most.
+
+**What it returns in this worked example:** email, active tier, first cap 10 per 30 days from the
+90th percentile, 4,800 people trimmed, knee at 8. The cap starts at 10 and not at the knee: the 90th
+percentile breaks nothing that already works, and a knee read across buckets of different people is
+a correlation (Failure modes in `contact-load-inventory.md`). The step down to 9 runs in the next
+period with a randomized group, and the step after it waits for that read.
+
+**When the data is too little.** Less than one full load window in the contact log is too little:
+the 30-day window is the starting point under Thresholds and timings in `contact-load-inventory.md`.
+The procedure then returns no cap, only the register of sending streams and the count of systems
+that send, both of which you can deliver on day one. Count forward from the day the log starts and
+do not rebuild the past from campaign reports, which count sends rather than people. In this worked
+example, a log that starts on 2026-09-01 gives the first load window on 2026-09-30; read the knee
+once the observation period closes on 2026-10-15.
