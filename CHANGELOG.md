@@ -40,8 +40,8 @@ keep working.
 - `Limits` is now the first section of every `SKILL.md`, right after the opening.
 - Every description is 350 characters or less, in three parts: what the skill decides, when to
   use it, and which neighbor takes a nearby question.
-- Quoted legal rules, the people each rule does not bind and the source addresses moved from
-  `SKILL.md` to `references/legal-regimes.md`. Details of the control metric moved to
+- Where a skill quotes a legal rule, the quotation, the people the rule does not bind and the
+  source addresses moved from `SKILL.md` to `references/legal-regimes.md`. Details of the control metric moved to
   `references/control-metric.md`. `SKILL.md` keeps the metric's definition, the answer to "what is
   normal", and why this metric and not a nearby one.
 - A skill hands part of a question to a neighbor in one form: what it settled, the question it
@@ -51,6 +51,12 @@ keep working.
   skill, or a question that belongs to one of the skills most others hand work to.
 - The first block of `Limits` also rules out quoting a figure that circulates as a norm, even to
   reject it.
+
+### Fixed
+
+- Reference files in `triggered-messages`, `metric-definitions` and `crm-program-design` allowed a
+  market figure if it came with its source, which contradicted each skill's `Limits`. They now say
+  what `Limits` says: the library carries no market benchmark, with a source or without one.
 
 ## [1.0.0] - 2026-09-17
 
