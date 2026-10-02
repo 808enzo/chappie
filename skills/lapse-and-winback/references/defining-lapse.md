@@ -168,3 +168,66 @@ up toward it mean people learned to wait.
 
 The repair is to recompute the threshold from your own median and to date it. It drifts with the
 assortment and the price, so a threshold with no date on it is a threshold nobody will revisit.
+
+## Worked example (made-up numbers)
+
+This section runs step 3 and the ordering check of step 2 on one category, and every number in this
+worked example is made up. It derives the entry threshold from the person's own purchase intervals.
+
+**Input schema.** One row per purchase in the category, from the order history stitched across every
+sales channel.
+
+| Field | Type | What it holds | Where it comes from |
+|---|---|---|---|
+| `person` | identifier | the customer key that survives across channels | the stitched order history |
+| `category` | name | the category the threshold is computed for | the product catalog |
+| `purchase_date` | date, ISO | the day of the qualifying action | the order history, returns and cancellations per the written definition |
+| `interval_days` | count | days since the same person's previous purchase in the same category; empty on their first | computed per person, never across people |
+
+**Data.** In this worked example the category is dog food, the purchases run from 2025-10-01 to
+2026-09-30, the category has no season, the export is pulled on 2026-10-01, and the 20,000 non-empty
+intervals fall into these bands:
+
+| `interval_days` | intervals | cumulative share |
+|---|---|---|
+| 0 to 6 | 300 | 1.5% |
+| 7 to 13 | 800 | 5.5% |
+| 14 to 20 | 2,300 | 17.0% |
+| 21 to 27 | 4,400 | 39.0% |
+| 28 to 34 | 4,400 | 61.0% |
+| 35 to 41 | 2,600 | 74.0% |
+| 42 to 48 | 1,500 | 81.5% |
+| 49 to 55 | 900 | 86.0% |
+| 56 to 69 | 1,000 | 91.0% |
+| 70 to 90 | 800 | 95.0% |
+| 91 to 180 | 700 | 98.5% |
+| 181 to 365 | 300 | 100.0% |
+
+**Steps on the worked example:**
+
+1. Drop the empty intervals: a first purchase has no interval before it. People with only that one
+   purchase are the one-purchase edge case, not part of this median.
+2. Median: the 10,000th interval falls in the 28 to 34 band, where the cumulative share crosses 50%,
+   and the export reads it at 31 days.
+3. Check the period: 2025-10-01 to 2026-09-30 is 365 days, more than two typical cycles of 31 days.
+4. Not the mean: the export reads it at 40 days. Even with every interval counted at the bottom of
+   its band the mean is 34.1 days, above the median, because the tail runs to a year.
+5. Entry threshold: one median interval plus a tolerance. In this worked example the tolerance is
+   seven days, a value the team sets, so the threshold is 31 plus 7, 38 days without a purchase in
+   the category. Taken from the mean it would be 47 days, nine days later.
+6. Ordering check: the deletion threshold in `list-building` sits at two of the person's own
+   intervals, 62 days at the median. 38 falls before 62, which leaves 24 days for the attempt.
+
+**What it returns in this worked example:** dog food, entry threshold 38 days, built on 2026-10-01
+from the median of 31 days plus a tolerance of 7, with 24 days of room before the deletion threshold
+at the median. Another category in the same base gets its own run on its own intervals (step 4).
+Recompute and redate the threshold when the assortment or the price moves.
+
+**When the data is too little.** A period that covers fewer than two typical cycles is too little:
+two cycles is the period step 3 asks for. The procedure then returns no threshold for the category,
+and nobody in it enters a win-back attempt; a person with one purchase there belongs to
+`repeat-purchase`, as under Edge cases. Intervals longer than the history cannot appear in it yet,
+so a median read this early runs short rather than long. In this worked example, a raw food line
+launched on 2026-08-17 holds 44 days of history on 2026-09-30, and its intervals so far give a
+median of 26 days. Two cycles of 26 are 52 days, more than 44, so the line reads "no threshold yet,
+recheck on 2026-10-08", 52 days after launch. If the median has grown by then, the date moves later.
