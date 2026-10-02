@@ -241,10 +241,11 @@ per person from entry.
 You set four more inputs: the outcome window, the finalization wait, the break-even lift and the date
 the decision is due.
 
-**Data.** In this worked example the outcome window is 21 days, finalization is 7 days, the data is
+**Data.** In this worked example the outcome window is 28 days, finalization is 7 days, the data is
 pulled on 2026-09-28, the decision is due on 2027-02-01, and the new message costs, per week, the
-margin on 30 second orders. The counts of the last four weeks are partial: their outcome windows are
-still open on the pull date.
+margin on 30 second orders. The counts of the last five weeks are partial: on the pull date,
+finalization is still open for the week of 2026-08-24, and the outcome window for the four weeks
+after it.
 
 | `week_start` | `entered` | `converted` | `week_start` | `entered` | `converted` |
 |---|---|---|---|---|---|
@@ -258,9 +259,9 @@ still open on the pull date.
 **Steps on the worked example:**
 
 1. Baseline rate from the weeks whose last entrant has had the outcome window and finalization by the
-   pull date, the eight weeks through 2026-08-24: 1,920 of 24,000, 8.0%. Pooling in the four open
-   weeks reads the rate at 6.66%, and step 4 at that rate sizes the test at seven weeks instead of
-   nine, too small for the true rate.
+   pull date, the seven weeks through 2026-08-17: 1,680 of 21,010, 8.0%. Pooling in the five open
+   weeks reads the rate at 6.66%, and step 4 at that rate sizes the test at seven weeks of assignment
+   instead of nine, too small for the true rate.
 2. Entry rate from all twelve weeks, since an entry is known on the day: 36,000, or 3,000 a week.
 3. MDE from the decision: the message repays itself at 30 extra second orders a week, 30 of 3,000
    entries, so 1.0 point, from 8.0% to 9.0%.
@@ -268,11 +269,11 @@ still open on the pull date.
    0.09 × 0.91) ÷ 0.01² = 7.84 × 0.1555 ÷ 0.0001, 12,192 people. Both arms: 24,384.
 5. Run time: 24,384 ÷ 3,000 = 8.1 weeks, rounded up to a whole number: nine weeks of assignment,
    2026-10-05 to 2026-12-06.
-6. Read date: 2026-12-06 plus 21 days of outcome window plus 7 of finalization, 2027-01-03. It falls
+6. Read date: 2026-12-06 plus 28 days of outcome window plus 7 of finalization, 2027-01-10. It falls
    before 2027-02-01, so the test fits the decision's shelf life.
 
 **What it returns in this worked example:** person as the unit, MDE 1.0 point, 12,192 per arm, nine
-weeks, read on 2027-01-03. This size gives 80% power to clear zero when the true lift is 1.0 point,
+weeks, read on 2027-01-10. This size gives 80% power to clear zero when the true lift is 1.0 point,
 not to clear the 1.0-point threshold, so write down in the plan what an interval that clears zero
 and crosses 1.0 point leads to (step 6).
 
@@ -281,5 +282,5 @@ at the starting pair of 95% confidence and 80% power (Thresholds and timings) do
 the assignment time the decision leaves. The procedure then returns no test: decide on other grounds
 and record the decision as decided without a test (step 7). Do not raise the MDE to make it fit, since
 it comes from the decision; lower the confidence only if the cost of being wrong in this decision
-allows it, and log it. In this worked example, a decision due on 2026-12-01 leaves four whole weeks of
-assignment before the 28 days of window and finalization, 12,000 people against the 24,384 required.
+allows it, and log it. In this worked example, a decision due on 2026-12-01 leaves three whole weeks of
+assignment before the 35 days of window and finalization, 9,000 people against the 24,384 required.
