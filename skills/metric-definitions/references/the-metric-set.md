@@ -132,7 +132,7 @@ system of record.
 | `period` | month, ISO | the reporting period | the definition's period |
 | `version` | integer | the definition version in force for the period | the register row's version history |
 | `denominator` | count | delivered messages of the period's campaign sends | the sending platform |
-| `numerator` | count | unique clickers on those sends | the sending platform, after each send's collection window |
+| `numerator` | count | unique clickers of each send, added up over those sends | the sending platform, after each send's collection window |
 | `status` | completed or provisional | completed once the last send's collection window has closed | the definition's provisional period |
 | `rate` | percent, two decimals | numerator over denominator | computed per period, never averaged across periods |
 
@@ -169,9 +169,10 @@ baseline is built on 2026-08-10, once July has closed.
 4. Spread: the lowest period, 3.64%, and the highest, 4.21%. That range is the band.
 5. Write the rule before the next period closes: a completed period outside 3.64% to 4.21% is a
    signal; one inside the band is noise.
-6. Minimum denominator. One extra clicker moves a rate on n delivered messages by 1/n. From the median,
-   the nearer edge of the band is 3.92% minus 3.64%, 0.28 points, so 1/n stays under 0.0028 only when
-   n is above 357.1: the floor is 358 delivered. Publish a send with fewer as counts, not as a rate.
+6. Minimum denominator. One clicker more or one fewer moves a rate on n delivered messages by 1/n, up
+   or down, so the nearer edge of the band sets the floor. From the median, that edge is 3.92% minus
+   3.64%, 0.28 points, so 1/n stays under 0.0028 only when n is above 357.1: the floor is 358 delivered.
+   Publish a send with fewer as counts, not as a rate.
 
 **What it returns in this worked example:** a register line that reads click rate, version 2, median
 3.92%, band 3.64% to 4.21%, built from 2025-11 to 2026-07, minimum denominator 358. August closes at
