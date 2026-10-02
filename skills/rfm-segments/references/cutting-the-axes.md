@@ -68,9 +68,10 @@ describes the last campaign rather than the base.
 
 **5. Let your own distribution decide how many bands frequency can carry.** The number of bands
 is bounded by the number of distinct values you have. A base where the largest share of
-people bought exactly once cannot support three frequency bands: two of them come back empty and
-the third contains everybody. Look at the distribution before choosing the number of bands, which
-is the opposite of the order the published tables imply.
+people bought exactly once may not carry three frequency bands: if both quantile boundaries land on
+one purchase, tied people stay together and the middle band comes back empty. Look at the
+distribution before choosing the number of bands, which is the opposite of the order the published
+tables imply.
 
 **6. Say what money measures and over which window.** Total spend over all time, or spend over
 the same window as recency and frequency. All time money rewards tenure: somebody who spent a lot
