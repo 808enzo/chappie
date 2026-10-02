@@ -169,7 +169,7 @@ outcomes over the observation period.
 | `people` | count | messaged people in the tier with that load, all of them addressed in email | the contact log, joined to the tier `email-program` computes |
 | `lost` | count | of those, people who lost email in the observation period, one loss per person | the contact log and the platform's unsubscribes, complaints and hard bounces |
 | `loss_rate` | percent, two decimals | `lost` over `people` | computed per bucket |
-| `revenue_per_person` | dollars, two decimals | revenue in the observation period over `people` | the order export, joined on the customer key |
+| `revenue_per_person` | multiple, two decimals | revenue in the observation period over `people`, divided by the tier's average order value | the order export, joined on the customer key |
 
 **Data.** In this worked example the tier is email's active tier, the load window is 2026-08-01 to
 2026-08-30, and the observation period runs 45 days from 2026-08-01, longer than the median
@@ -177,27 +177,28 @@ interpurchase interval of 38 days.
 
 | `load` | `people` | `lost` | `loss_rate` | `revenue_per_person` |
 |---|---|---|---|---|
-| 1 | 3,000 | 12 | 0.40% | 9.00 |
-| 2 | 4,200 | 18 | 0.43% | 14.00 |
-| 3 | 5,400 | 24 | 0.44% | 18.50 |
-| 4 | 6,600 | 31 | 0.47% | 22.50 |
-| 5 | 7,800 | 39 | 0.50% | 26.00 |
-| 6 | 8,400 | 44 | 0.52% | 29.00 |
-| 7 | 7,200 | 40 | 0.56% | 31.50 |
-| 8 | 5,400 | 35 | 0.65% | 31.80 |
-| 9 | 4,200 | 32 | 0.76% | 31.90 |
-| 10 | 3,000 | 27 | 0.90% | 31.90 |
-| 11 | 1,800 | 20 | 1.11% | 31.70 |
-| 12 | 1,200 | 16 | 1.33% | 31.50 |
-| 13 or more | 1,800 | 31 | 1.72% | 31.00 |
+| 1 | 3,000 | 12 | 0.40% | 0.30 |
+| 2 | 4,200 | 18 | 0.43% | 0.47 |
+| 3 | 5,400 | 24 | 0.44% | 0.62 |
+| 4 | 6,600 | 31 | 0.47% | 0.75 |
+| 5 | 7,800 | 39 | 0.50% | 0.87 |
+| 6 | 8,400 | 44 | 0.52% | 0.97 |
+| 7 | 7,200 | 40 | 0.56% | 1.05 |
+| 8 | 5,400 | 35 | 0.65% | 1.06 |
+| 9 | 4,200 | 32 | 0.76% | 1.06 |
+| 10 | 3,000 | 27 | 0.90% | 1.06 |
+| 11 | 1,800 | 20 | 1.11% | 1.06 |
+| 12 | 1,200 | 16 | 1.33% | 1.05 |
+| 13 or more | 1,800 | 31 | 1.72% | 1.03 |
 
 **Steps on the worked example:**
 
 1. Messaged people in the tier: 60,000. People in the tier with no email in the window are counted
    beside the table and stay out of it, or every percentile drops.
 2. The knee. Up to 7, revenue per person grows faster than the loss rate: from 6 to 7 revenue gains
-   8.6% and loss 6.1%, each against the bucket before. From 8 on, revenue per person stays flat,
-   between $31.00 and $31.90, while the loss rate keeps rising, from 0.65% to 1.72%. The knee is at 8.
+   8.2% and loss 6.1% (computed on the counts), each against the bucket before. From 8 on, revenue
+   per person stays flat, between 1.03 and 1.06 times the average order value, while the loss rate
+   keeps rising, from 0.65% to 1.72%. The knee is at 8.
 3. The 90th percentile: the cumulative count reaches 52,200 people at load 9, 87.0%, and 55,200 at
    load 10, 92.0%. The first cap is 10 emails per 30 days.
 4. Count above the cap before announcing it: loads 11, 12 and 13 or more hold 4,800 people, 8.0% of
