@@ -31,12 +31,12 @@ Your agent picks the skill from what you describe. To pick one yourself, type `/
 Claude Code (`/chappie:deliverability` if you installed the plugin) or `$deliverability` in Codex.
 In any other agent, name the skill in your request.
 
-When part of your question belongs to another skill, the skill answers its own part and ends with a
-handoff. It names the skill that owns the rest, lists what was settled, one line per item, and
-states the question passed on.
-If that skill is installed and your request covers its part, the agent calls it with the handoff,
-so the next skill starts from what was settled instead of asking you again. If it isn't installed,
-the skill says so, leaves that part unanswered and gives you the command that installs it.
+When part of your question belongs to another skill, the skill tells the agent to answer its own
+part and end with a handoff. The handoff names the skill that owns the rest, lists what was settled,
+one line per item, and states the question passed on, so the next skill starts from what was
+settled instead of asking you again. If the agent answers the whole question itself, ask it to hand
+that part over, or call the skill that owns it by name. If that skill isn't installed, the first
+skill says so, leaves that part unanswered and gives you the command that installs it.
 
 Examples, as you would type them in Claude Code:
 
@@ -370,8 +370,8 @@ better?*
    It compares revenue per person assigned to each group, from any channel and without
    attribution, so a customer who buys without opening an email still counts.
 
-Each part moves on in a handoff, so the next skill starts from what the last one settled. The
-handoff `email-program` passes to `experiments-and-holdouts` could read:
+A part that moves on travels in a handoff, so the next skill starts from what the last one settled.
+The handoff `email-program` passes to `experiments-and-holdouts` could read:
 
 ```text
 Handoff to `experiments-and-holdouts`
