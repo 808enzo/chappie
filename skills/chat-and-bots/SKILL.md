@@ -1,6 +1,6 @@
 ---
 name: chat-and-bots
-description: Decide whether a bot or a person answers someone who writes in, how the matter reaches whoever can settle it, and when it closes. Use when a bot traps people, handoffs lose context, chats bounce between agents or shifts, or promised reply times slip. Not messaging platform rules (messaging-channels) or surveys (voice-of-customer).
+description: Decide whether a bot or a person answers someone who writes in, how the matter reaches whoever can settle it, and when it closes. Use when a bot traps people, handoffs lose context, reply times slip, or you ask what first-pass share is normal. Not messaging platform rules (messaging-channels) or surveys (voice-of-customer).
 license: MIT
 metadata:
   author: 808enzo (https://github.com/808enzo)
