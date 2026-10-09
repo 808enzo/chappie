@@ -1,6 +1,6 @@
 ---
 name: email-design
-description: Make an email template hold up in the inboxes, apps and modes its author never looked at. Use when a template is built or changed, a message looks right in the editor and broken in an inbox, images are off or dark mode breaks it, a long message gets clipped, or it breaks on mobile. Not the words (email-copy) or inbox placement (deliverability).
+description: Make an email template hold up in the inboxes, apps and modes its author never looked at. Use when a template is built or changed, a message looks right in the editor and broken in an inbox, images are off, or dark mode or mobile breaks it, or you ask what click rate is normal per app. Not the words (email-copy) or inbox placement (deliverability).
 license: MIT
 metadata:
   author: 808enzo (https://github.com/808enzo)
