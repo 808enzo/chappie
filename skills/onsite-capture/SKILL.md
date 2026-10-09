@@ -1,6 +1,6 @@
 ---
 name: onsite-capture
-description: Turn anonymous site visitors into contacts you may write to, and decide what to ask and give. Use when placing or auditing pop-ups, forms and quizzes, setting when a widget may appear, fixing overlays that pile up, or finding why captured contacts never buy. Not the welcome series (welcome-and-activation) or consent (consent-and-preferences).
+description: Turn anonymous site visitors into contacts you may write to, and decide what to ask and give. Use when placing or auditing pop-ups, forms and quizzes, setting when a widget may appear, fixing overlays that pile up, or asking what pop-up conversion is normal. Not the welcome series (welcome-and-activation) or consent (consent-and-preferences).
 license: MIT
 metadata:
   author: 808enzo (https://github.com/808enzo)
