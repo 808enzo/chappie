@@ -54,9 +54,9 @@ export (`martech-stack`). An event visible a day late breaks the series a day la
 exactly the day somebody is asked to do what they have already done.
 
 **4. Compute the window.** The length of the series is **your own median time to first purchase,
-computed on the people who did buy**. It is not thirty days. Thirty is a name for the problem, not a
-parameter of it. A long purchase cycle gets a long window, a short one gets a short window, and both
-get it from their own data.
+computed on the people who did buy**. It is not a round number of days: such a number names the
+problem, not a parameter of it. A long purchase cycle gets a long window, a short one gets a short
+window, and both get it from their own data.
 
 `rfm-segments` computes the same figure to decide who is not in the grid yet, and the agreement is
 not a coincidence. Below that median, an absent purchase is not yet a fact about the person, which
