@@ -112,7 +112,7 @@ chargeback), and two contacts per obligation.
 |---|---|---|
 | Obligation threshold | six and below on the zero to ten recommend scale; below the satisfied options on the satisfaction scale (`metric-definitions`) | 3, from the definition |
 | Fast-route boundary | the lowest third of the scale as a starting point; replaced by your own distribution of outcomes by score | 5 |
-| Promised time of a route | your own reply capacity per route; named in the ask | 4 |
+| Promised time of a route | your own reply capacity per route: a late point, not the median, of the time from an answer to the first substantive reply on the route's obligations in recent periods; named in the ask | 4 |
 | Quiet period before closure | the topic's rule in `chat-and-bots`; set per theme the same way where no chat program runs | the neighbor's |
 | Attempts before unreachable | a parameter of the route, over more than one channel | 4 |
 | Reopen window | the settle window of the topic (`chat-and-bots`) or the return window of the experience | 4 |
