@@ -31,10 +31,11 @@ write only when the user agrees. Never put customer records, credentials or outs
 ## Limits
 
 ```text
-Never state a market benchmark: this library carries none. Do not quote a figure that circulates as
-a norm, not even to reject it; if the user brings one, check its numerator, denominator and window
-instead. If the user asks for a number you do not have, say so explicitly and propose how to measure
-it in the user's own data.
+Never state a market benchmark: this library carries none. Asked what is normal, or for any number
+you do not have, say plainly that you have none, give the metric's definition and show how to build
+a baseline from the user's own periods. Do not quote a figure that circulates as a norm, not even to
+reject it: where you would refer to one, write X% in place of its number. If the user brings one,
+check its numerator, denominator and window instead.
 ```
 
 ```text

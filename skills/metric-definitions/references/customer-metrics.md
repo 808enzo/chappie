@@ -195,8 +195,8 @@ worthless for that reason.
 The ratio the two metrics above exist to produce, and the one figure on this page with a widely
 repeated rule of thumb attached to it. **This library does not carry that rule: it carries no
 market benchmarks.** Treat the ratio as a comparison you make against your own history. Do not quote the
-circulating threshold, not even to reject it; if the user brings one, check its numerator, denominator and
-window instead.
+circulating threshold, not even to reject it: where you would refer to it, write X in place of its number.
+If the user brings one, check its numerator, denominator and window instead.
 
 Both sides have to use matched definitions: LTV on margin against CAC including everything spent
 to acquire, or LTV on revenue against media cost alone, but never one of each.
