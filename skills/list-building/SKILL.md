@@ -1,6 +1,6 @@
 ---
 name: list-building
-description: Know where every contact record came from, which record wins when two disagree, and when a contact stops being worth keeping. Use when one person sits in the base several times, two sources disagree on the same field, or nobody knows which attributes to collect. Not the capture form (onsite-capture) or segments (segmentation).
+description: Know where every contact record came from, which record wins when two disagree, and when a contact stops being worth keeping. Use when one person sits in the base several times, two sources disagree on a field, nobody knows what to collect, or you ask what base growth is normal. Not the capture form (onsite-capture) or segments (segmentation).
 license: MIT
 metadata:
   author: 808enzo (https://github.com/808enzo)
