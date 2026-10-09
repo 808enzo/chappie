@@ -50,13 +50,17 @@ keep working.
   tables now routes a question the skill's own work leads to, one that users bring to the wrong
   skill, or a question that belongs to one of the skills most others hand work to.
 - The first block of `Limits` also rules out quoting a figure that circulates as a norm, even to
-  reject it.
+  reject it. Where a skill would refer to such a figure, it writes X% in place of the number.
 
 ### Fixed
 
 - Reference files in `triggered-messages`, `metric-definitions` and `crm-program-design` allowed a
   market figure if it came with its source, which contradicted each skill's `Limits`. They now say
   what `Limits` says: the library carries no market benchmark, with a source or without one.
+- `welcome-and-activation` no longer names a number of days for the welcome window, even to reject
+  it: the window is your own median time to first purchase.
+- `voice-of-customer` now gives the recipe for a route's promised time: a late point of your own
+  time from an answer to the first substantive reply on that route.
 
 ## [1.0.0] - 2026-09-17
 
