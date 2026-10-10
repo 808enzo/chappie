@@ -10,6 +10,24 @@ checked: 2026-09-12
 The terms the four mechanics assume. The last section lists eight words this skill shares with its
 neighbors, most of them under different meanings.
 
+## What sets this work apart
+
+Three properties separate it from everything
+around it.
+
+1. **Words reach the reader as themselves.** The segment, the schedule and the authentication reach
+   them as consequences rather than as text; the template reaches them whole as well, and it has a
+   skill of its own. An error in the segment sends a good message to the wrong person. An error in
+   the words makes a promise the company did not mean to make, to exactly the right person.
+2. **The promise is inherited, not invented.** A message almost never starts the conversation.
+   Before it there was a capture point with its own wording, an event the person performed, and a
+   live offer with its own arithmetic. The text owes all three and can break all three while
+   knowing nothing about them.
+3. **The words measure worse than anything a neighbor owns.** Response to an email carries the
+   quality of the audience, the offer, the delivery and the timing all at once. The words are the
+   term left over after the others are subtracted, and the only honest place to subtract them is
+   inside a single message.
+
 ## The unit
 
 **Job of a message.** What the message changes in the reader: the state they are in when it arrives
@@ -85,6 +103,22 @@ hold and the action becomes a pause through `program-audit-and-ops`.
 by unique clickers on a work, support or navigation link in that message. Required links are
 outside both halves. Normalized inside one message, which is what removes the audience and the
 delivery from the number.
+
+## Seams with neighbors
+
+- **A neighbor decides that a message goes; this skill decides what it says.** The line is not
+  the calendar entry, it is the sentence. `email-program` owns the slot, `triggered-messages` owns
+  the firing condition, and both stop at the words.
+- **The offer is not the sentence about the offer.** `offer-design` sets what may be promised and
+  in what combination. This skill writes the promise and checks it against that combination before
+  the send, because two benefits applied in sequence do not add up while a person reads a sum.
+- **`personalization` chooses the fallback level; this skill writes the fallback words.** The level
+  is a neutral value, a second version of the block, or dropping the block. The words are copy, and
+  they are written next to the original sentence rather than during the incident.
+- **This library does not ship a list of spam words.** Neither a list of banned words nor a list of
+  magic ones. A word list carries no threshold, no edge case and no failure mode, and the same
+  words turn up on both kinds of list. What replaces both is in `references/body-and-action.md`:
+  every claim carries a fact you can point at, or it is cut.
 
 ## Eight words this skill shares with neighbors
 

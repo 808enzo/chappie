@@ -10,6 +10,22 @@ checked: 2026-09-15
 The terms all three mechanics assume. The last section lists the words this skill shares with its
 neighbors, several of them under other meanings.
 
+## What sets this work apart
+
+Three properties set it apart from the rest of the library.
+
+1. **The end arrives by the calendar, not by behavior.** `lapse-and-winback` defines a departure as an
+   absence inside a window derived from the purchase interval. Here every term has a date on which one
+   of three things happens: a charge, a bank's refusal, or a cancellation. Silence on that date is not "no
+   purchase yet"; it is a failure of the record.
+2. **A payment system, and sometimes an app store, stands between the program and the person.** The
+   bank answers with a code, the card networks limit how often a declined charge may be retried, and the
+   app store runs its own retries and grace period and only sends notifications. Part of the work is out
+   of the program's hands; it reads the result.
+3. **The law dictates the content and timing of notices and the form of the exit.** A notice before the
+   charge, a cancel button beside any offer to stay, a cancellation available in the same medium as the
+   signup. On the cancel screen a statute says what a button must look like and where it must stay.
+
 ## The units
 
 **Term.** One billing period of one subscription: its start, its end date, its price, its length, and
@@ -147,6 +163,40 @@ regimes, of a renewal, with a refund. Its arithmetic is left to the reader.
 **The store as payer.** For a subscription bought through Apple's or Google's store, the store holds the
 payment method, runs the retries and the grace period, and reports by notification; the program reads,
 sets the grace length in the store's console, and messages inside the product.
+
+## Seams with neighbors
+
+Seven seams get crossed by accident, so state them outright.
+
+- **A person in a recovery case is not gone.** The state is "in recovery", it belongs to a live
+  subscription, and it has a ceiling: the case's deadline, written on the day the case opens. Until that
+  day the subscription is live for every retention denominator; the departure date is the day the case
+  closes, by decision or by deadline. A bank's refusal is never the departure date. The rule has a
+  price. On every day of the window, a subscription that does not pay, and after the grace is not
+  served, still counts as retained, so a longer window or hold raises retention by construction. Read
+  the count of subscriptions in recovery on the end date, by access class, beside the retention line.
+- **The renewal date splits by billing method, not by who pays.** A subscription charged to a card, a
+  direct debit or an app store belongs here whether a person or a company pays. A contract billed by
+  invoice and held by an account manager, including the collection of an unpaid invoice, is
+  `b2b-retention`. The billing method assigns the charge and the contract assigns the decision. The one
+  split term is a contract with an account manager that is paid by card: its term, its notices and its
+  recovery case stay here, its decision point and renewal case are `b2b-retention`'s, and both registers
+  carry the contract's identifier (`references/term-end-and-notices.md`, edge cases).
+- **The trial is the neighbor's; the trial's first charge is ours.** `welcome-and-activation` owns the
+  trial period and the conversion. The notice before the trial's first charge, and that charge's failure,
+  open here: the recovery case gets the class "first charge", because the person entered the card for the
+  trial and no charge has succeeded on it yet.
+- **A notice carries no offer.** "Renew at a discount" inside a pre-charge notice makes the row marketing
+  with the law, with the messaging platform's gatekeeper and with the consent record at the same time. The
+  offer goes as its own message on its own basis.
+- **The cancel screen is a consequence of the person's action, not a touch.** It sits outside the
+  session budget of `in-product-messaging` and outside the cap of `contact-orchestration`; its content and
+  order sit here.
+- **One reason list.** The cancel screen asks the reason once, from the theme list that
+  `voice-of-customer` versions and keeps by identifier, and keeps no list of its own. The
+  post-cancellation survey goes only to people who gave no reason.
+- **A retry is not an attempt.** `lapse-and-winback` uses "attempt" for its one finite try to bring a
+  person back. A repeated charge is a retry, and the platforms' `attempt_count` is their field.
 
 ## Words shared with neighbors
 

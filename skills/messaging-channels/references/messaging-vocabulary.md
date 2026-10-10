@@ -10,6 +10,23 @@ checked: 2026-09-15
 The terms all three mechanics assume. The last section lists the words this skill shares with its
 neighbors, several of them under other meanings.
 
+## What sets this work apart
+
+Three properties make the channel unlike any other in this library.
+
+1. **The gatekeeper prices every message and scores the sender collectively.** A carrier bills per
+   segment; a messaging platform bills per delivered template, by category. The platform reads
+   blocks and reports, pauses a template or holds the business at its limit. One bad send costs every
+   send after it.
+2. **A message from the business and a reply to the person are two regimes.** Outside a reply window
+   the business speaks only through approved templates of a declared category; inside 24 hours of
+   the person's last message it speaks freely. SMS has no window, and instead has keywords that have
+   to work.
+3. **The address is a phone number, and the person may not be on the platform.** Reachability is
+   checked per platform: RCS by a capability check on the device, WhatsApp by the provider's error on
+   a number with no account, and SMS goes to any mobile number and returns no signal that anyone read
+   it.
+
 ## The units
 
 **Origin.** A registered number or name a message leaves from: a ten-digit number under its
@@ -162,6 +179,31 @@ beside the control metric.
 **One-way origin.** An origin that cannot receive a reply, such as an alphanumeric sender ID. Its
 texts carry the disclosure that two-way texting is not available and an alternative route for
 withdrawal.
+
+## Seams with neighbors
+
+- **The origin's standing is not the person's basis for receiving texts.** The basis is a record
+  in `consent-and-preferences`, one per person, channel and purpose. Standing is the gatekeeper's
+  judgment of the origin. A green rating grants nobody permission, and a written opt-in does not keep
+  a template from being paused.
+- **The cascade decides the order; this skill decides what each status means.** `triggered-messages`
+  says SMS comes after the app message and how long to wait. This skill says which statuses count as
+  reached, which as failed, which as held and which as unknown, so that a message that never landed
+  moves the cascade on a fact. Once a message is delivered, whether the cascade moves on is the
+  response condition `triggered-messages` sets for the step.
+- **The reply window is not the settle window.** The platform's window says how long you may answer
+  freely, and belongs here. How long `chat-and-bots` waits before an issue counts as settled is its own
+  window, with the same person and a different clock.
+- **A class is the neighbors' word; a category is the gatekeeper's.** `transactional-messaging` and
+  `contact-orchestration` give a message its class. This skill maps the class onto the category the
+  platform approves and prices, and the mapping is not free: mixed content is marketing on both sides.
+- **The keyword is caught on two levels.** The provider blocks the number in its own pool. The record
+  receives the instruction and carries it to every other system that texts. Only the second is the
+  withdrawal `consent-and-preferences` measures.
+- **The price of a text decides where the in-product message comes first.** `in-product-messaging`
+  shows a pitch inside the product first to people who open the product more often than the pitch's
+  window lasts, and the text goes only to those who did not appear by its cut-off. The price sits here;
+  the order sits with `triggered-messages`.
 
 ## Words shared with neighbors
 

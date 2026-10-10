@@ -72,3 +72,27 @@ happen or happens to no effect. A target for touches in its own right.
 
 **First value.** What somebody came for, received at least once. Not the same as finishing the
 onboarding: a product tour clicked through to the end counts as finished and is not a value.
+
+## Seams with neighbors
+
+Four seams get crossed by accident, so state them outright.
+
+- **A flow fires on behavior; this series fires on a biography.** A cart event repeats, and running
+  the same flow for the same person next month is ordinary work. Arrival happens once, and when it
+  happens again it is a separate case with a separate decision, which is why second entry is a
+  mechanic here rather than a branch in a flow. `triggered-messages` keeps everything that enters on
+  catalog behavior; entry on signup or registration is here.
+- **The denominator is the seam, not the metric.** `triggered-messages` measures conversion per
+  entry into a flow, and that denominator is right for a flow: somebody who never entered is not the
+  flow's failure. Here the construction is a person's first weeks, so somebody who arrived and
+  received nothing is exactly this construction's failure. Same shape of metric, different unit, and
+  the difference between the two numbers is the thing this skill is for.
+- **The capture point decides whether the series starts at all.** `onsite-capture` owns the form,
+  the display rule and the handover state, and it keeps the ordering rule that the program comes
+  before the point feeding it. The consequence runs back the other way and belongs here: a
+  *requested message* state does not start a series, and a *pending* state delays the first touch
+  until a basis is recorded.
+- **The window is one boundary named from two sides.** `rfm-segments` uses your median time to first
+  purchase to decide who is not in RFM yet. This skill uses the same figure as the length of the
+  series. They agree by construction: the series ends exactly where a person stops belonging to the
+  welcome mechanic.

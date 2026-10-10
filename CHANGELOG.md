@@ -14,6 +14,55 @@ All 35 skills share one version number. No skill has a version of its own.
 - **Patch.** A correction inside a skill: a legal or channel rule updated to match its current
   source, or a step rewritten to read more clearly.
 
+## [1.1.0] - 2026-10-11
+
+Each skill now takes less of the agent's context: a short description in the list the agent picks
+skills from, the rules that must hold at the top, and a body short enough to come back whole after
+a long session is compacted. No skill is renamed, so commands such as `/chappie:deliverability`
+keep working.
+
+### Added
+
+- A program context file, in beta. Every skill reads `.agents/chappie-context.md` in your project
+  before its first step, takes what it records as given, and asks only for what it lacks.
+  [README.md](README.md#program-context-beta) has the template and what never goes in the file.
+- `references/control-metric.md` in every skill, and `references/legal-regimes.md` in every skill
+  that quotes a legal rule.
+- Worked examples on made-up numbers in five reference files, for `metric-definitions`,
+  `experiments-and-holdouts`, `lapse-and-winback`, `rfm-segments` and `contact-orchestration`:
+  the input fields, sample rows, the steps in order, and what the procedure returns when there is
+  too little data.
+- Advice for Claude Code with a 200K context window, where the agent sees skill names without
+  descriptions. [README.md](README.md#with-npx-skills-for-any-agent) has the setting.
+
+### Changed
+
+- `Limits` is now the first section of every `SKILL.md`, right after the opening.
+- Every description is 350 characters or less, in three parts: what the skill decides, when to
+  use it, and which neighbor takes a nearby question.
+- Where a skill quotes a legal rule, the quotation, the people the rule does not bind and the
+  source addresses moved from `SKILL.md` to `references/legal-regimes.md`. Details of the control metric moved to
+  `references/control-metric.md`. `SKILL.md` keeps the metric's definition, the answer to "what is
+  normal", and why this metric and not a nearby one.
+- A skill hands part of a question to a neighbor in one form: what it settled, the question it
+  passes on, and whether the neighbor is installed. If the neighbor is not installed, the skill
+  leaves that part unanswered and gives the command that installs it. Each row in the neighbor
+  tables now routes a question the skill's own work leads to, one that users bring to the wrong
+  skill, or a question that belongs to one of the skills most others hand work to.
+- The first block of `Limits` also rules out quoting a figure that circulates as a norm, even to
+  reject it. Where the agent would refer to such a figure, the block tells it to write X% in place of
+  the number.
+
+### Fixed
+
+- Reference files in `triggered-messages`, `metric-definitions` and `crm-program-design` allowed a
+  market figure if it came with its source, which contradicted each skill's `Limits`. They now say
+  what `Limits` says: the library carries no market benchmark, with a source or without one.
+- `welcome-and-activation` no longer names a number of days for the welcome window, even to reject
+  it: the window is your own median time to first purchase.
+- `voice-of-customer` now gives the recipe for a route's promised time: a late point of your own
+  time from an answer to the first substantive reply on that route.
+
 ## [1.0.0] - 2026-09-17
 
 First public release.
@@ -47,4 +96,5 @@ First public release.
 Version 2 takes two topics this release leaves out: calls and voice, and AI inside the program.
 [ROADMAP.md](ROADMAP.md#not-in-version-1) gives the reason for each.
 
+[1.1.0]: https://github.com/808enzo/chappie/releases/tag/v1.1.0
 [1.0.0]: https://github.com/808enzo/chappie/releases/tag/v1.0.0

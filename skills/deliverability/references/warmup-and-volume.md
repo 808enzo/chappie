@@ -74,7 +74,7 @@ does not know what the provider saw.
 more slowly you should increase the volume, and the more frequently you send, the faster you can.
 It also names the move to avoid, doubling a previous volume suddenly, and notes that sending at a
 consistent rate beats sending in bursts. Those are Google's statements about mail to Gmail, opened
-on the date in `SKILL.md`; other providers publish less, and the shape generalizes better than any
+on the date in `legal-regimes.md`; other providers publish less, and the shape generalizes better than any
 number would.
 
 **7. Step back at the first adverse signal.** Rising refusals, messages being deferred, a

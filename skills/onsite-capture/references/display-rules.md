@@ -97,8 +97,8 @@ page, and never send the person to a separate page for their input. The search e
 guidance on intrusive dialogs names newsletter sign-up prompts, says intrusive overlays may lead to
 poor search performance, and recommends a banner over a full-page interstitial. It sets no size, no
 delay and no device, so those stay parameters from your own data. The ad format standards the
-browser enforces bind third-party ads, not your own point. Quotes and dates are in `SKILL.md`,
-under Platforms.
+browser enforces bind third-party ads, not your own point. Quotes and dates are in
+`references/legal-regimes.md`, under Platforms.
 
 ## Edge cases
 

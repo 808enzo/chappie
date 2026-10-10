@@ -11,6 +11,18 @@ The three mechanics assume these terms. Two of them, *issue* and *settle window*
 in the tools or in a neighbor's vocabulary, and a third, *assignee*, stands where the library already
 uses another word for something else. The confusion changes what gets counted. Settle them before the discussion.
 
+## What sets this work apart
+
+Three properties make this work unlike the other channels in this library.
+
+1. **The person picks the moment.** Every other channel skill decides when to send. Here the person
+   writes when they need something, and the program controls only how fast and how well it answers.
+   The constraint is capacity at a given hour, not the audience.
+2. **One side waits.** Silence in a conversation is a promise running out, measured in the person's minutes.
+3. **The tool counts threads; the person has a matter.** One matter crosses threads, channels and
+   shifts, and one thread can hold two matters. A metric counted on threads rewards splitting a
+   matter and closing it early.
+
 ## The unit
 
 **Issue.** One matter one person raised, from their first message until it is settled, across every
@@ -126,6 +138,25 @@ somebody reads it.
 
 **Anonymous issue.** An issue not tied to a record by a key when it opened. Nothing that has to reach
 the person later can be promised until an address is taken for it.
+
+## Seams with neighbors
+
+- **A capture bot and a conversation are different objects.** A bot the program opens to exchange
+  something for a contact is a capture point, and it belongs to `onsite-capture` together with its
+  display rules. A conversation the person opens with a question is an issue, and it belongs here.
+  A person who types a question into a capture bot, outside the fields the bot asked for, opens an issue. An address taken so that
+  an answer can reach the person later holds the handover state *requested message* from
+  `onsite-capture`: it permits that answer and nothing else.
+- **Replies inside an issue are not program sends.** `contact-orchestration` exempts from the cap
+  what a person is waiting for as a consequence of their own action, and an answer to their own question is that. Three things are touches and count: a proactive opener to a person you
+  know, a follow-up that pushes the decision in a sales conversation, and any reply that carries a
+  promotional block.
+- **The reply window of a messaging platform is not the settle window of this skill.** The first is
+  how long the platform lets you answer freely, and it belongs to `messaging-channels`. The second is
+  how long you wait before counting an issue as settled (*Settle window*, above).
+- **The survey hangs on the closure event.** Its questions belong to `voice-of-customer`; the event
+  it waits for is defined here (`references/routing-and-assignees.md`, step 8). A survey sent on
+  closure does not reach the people who left before anyone answered, so it cannot see the conversations that failed before an answer.
 
 ## Words shared with neighbors
 

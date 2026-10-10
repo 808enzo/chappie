@@ -29,8 +29,8 @@ practice exists elsewhere. -->
 
 ## Checks
 
-- [ ] `SKILL.md` has the frontmatter and the six sections from `AGENTS.md`, in order, with both Limits
-      blocks copied character for character.
+- [ ] `SKILL.md` has the frontmatter, the opening and the six sections from `AGENTS.md`, in order, with
+      the four fixed blocks copied character for character.
 - [ ] The skill has at least two mechanic files and one definition file, or `SKILL.md` says why a single
       mechanic file is enough.
 - [ ] The control metric has a numerator, a denominator and a window, and says what to do when someone

@@ -50,7 +50,7 @@ number in it spends the same limit. RCS: an agent, verified and launched. Alphan
 registration rules differ by country and are left to you, and the ID cannot receive a reply. Under the
 United States rule, a texting protocol that does not allow reply texts obliges the sender to put on
 each text a clear disclosure that two-way texting is not available and a reasonable alternative way to
-revoke consent (47 CFR 64.1200(a)(10); the rule and its boundary are in `SKILL.md`). A one-way origin
+revoke consent (47 CFR 64.1200(a)(10); the rule and its boundary are in `legal-regimes.md`). A one-way origin
 therefore carries that line in every text and an opt-out route that works without a reply.
 
 **3. Split the classes across origins, and write down the question that decided it.** Ask of every
@@ -133,7 +133,7 @@ table across with it, and treat the new origin as new for the ramp.
 | What the register reads | step 5 | this file |
 
 The platform and industry rows are class 2 and carry their sources below; the boundary of each is in
-`SKILL.md`. The last three are yours.
+`legal-regimes.md`. The last three are yours.
 
 ## Edge cases
 

@@ -27,8 +27,8 @@ who is asked when two systems disagree. Whoever is answerable for making the num
 different role, held in `crm-program-design`, and the two are separated on purpose: a metric whose
 definition and whose target sit with the same person can be hit by redefining it.
 Each program area has one control metric with guardrails named next to it. A written protocol
-covers changing a definition, and every metric with no citable benchmark has a self-baseline or
-says "no base yet" with the date it will have one.
+covers changing a definition, and every metric in the set has a self-baseline or says "no base yet"
+with the date it will have one.
 
 ## Sequence
 
@@ -65,8 +65,8 @@ changed.
 
 **7. Build a self-baseline instead of a market number.** Take eight to twelve completed periods as a
 starting point, compute the median and the spread, and state in advance what movement counts as signal and what
-counts as noise. This is the standing answer when no citable benchmark exists, which for most
-lifecycle metrics is the normal state rather than a gap.
+counts as noise. This is the standing answer to what is normal for any metric in the set: this
+library carries no market benchmark.
 
 **8. Do not fit an outside benchmark to your own definition.** A market figure is usable only
 together with the numerator, denominator and window its source used. A matching metric name
@@ -118,3 +118,73 @@ guarantees none of the three.
   it happened.
 - **The control metric improved and the business did not.** Usually a missing guardrail: the
   improvement came from a narrower base, a cleaned list, or a definition that quietly moved.
+
+## Worked example (made-up numbers)
+
+This section runs step 7 on one rate, and every number in this worked example is made up. It builds
+the self-baseline and, from the same periods, the minimum denominator of `writing-a-definition.md`.
+
+**Input schema.** One row per reporting period, from the report the metric's definition names as its
+system of record.
+
+| Field | Type | What it holds | Where it comes from |
+|---|---|---|---|
+| `period` | month, ISO | the reporting period | the definition's period |
+| `version` | integer | the definition version in force for the period | the register row's version history |
+| `denominator` | count | delivered messages of the period's campaign sends | the sending platform |
+| `numerator` | count | unique clickers of each send, added up over those sends | the sending platform, after each send's collection window |
+| `status` | completed or provisional | completed once the last send's collection window has closed | the definition's provisional period |
+| `rate` | percent, two decimals | numerator over denominator | computed per period, never averaged across periods |
+
+**Data.** In this worked example the metric is the click rate of campaign sends, version 2 counts
+unique clickers where version 1 counted every click, the collection window is seven days, and the
+baseline is built on 2026-08-10, once July has closed.
+
+| `period` | `version` | `denominator` | `numerator` | `status` | `rate` |
+|---|---|---|---|---|---|
+| 2025-09 | 1 | 38,400 | 2,074 | completed | 5.40% |
+| 2025-10 | 1 | 39,100 | 2,197 | completed | 5.62% |
+| 2025-11 | 2 | 40,200 | 1,576 | completed | 3.92% |
+| 2025-12 | 2 | 41,500 | 1,702 | completed | 4.10% |
+| 2026-01 | 2 | 40,800 | 1,514 | completed | 3.71% |
+| 2026-02 | 2 | 41,200 | 1,586 | completed | 3.85% |
+| 2026-03 | 2 | 42,000 | 1,768 | completed | 4.21% |
+| 2026-04 | 2 | 42,300 | 1,684 | completed | 3.98% |
+| 2026-05 | 2 | 41,900 | 1,525 | completed | 3.64% |
+| 2026-06 | 2 | 42,600 | 1,725 | completed | 4.05% |
+| 2026-07 | 2 | 43,100 | 1,672 | completed | 3.88% |
+| 2026-08 | 2 | 56,400 | 1,867 | completed on 2026-09-07 | 3.31% |
+| 2026-09 | 2 | 18,900 | 397 | provisional | 2.10% |
+
+**Steps on the worked example:**
+
+1. Keep the completed periods of the version in force. 2025-09 and 2025-10 count another numerator,
+   so drop them: pooled in, they would lift the median to 3.98% and stretch the top of the band to
+   5.62%. 2026-09 is still inside its collection window, and its rate will rise until the window
+   closes.
+2. Take the span: 2025-11 to 2026-07, nine completed periods, inside the starting point of eight to
+   twelve. 2026-08 has not closed on the day the baseline is built, so it becomes the first period
+   read against it.
+3. Median of the nine period rates: 3.92%.
+4. Spread: the lowest period, 3.64%, and the highest, 4.21%. That range is the band.
+5. Write the rule before the next period closes: a completed period outside 3.64% to 4.21% is a
+   signal; one inside the band is noise.
+6. Minimum denominator. One clicker more or one fewer moves a rate on n delivered messages by 1/n, up
+   or down, so the nearer edge of the band sets the floor. From the median, that edge is 3.92% minus
+   3.64%, 0.28 points, so 1/n stays under 0.0028 only when n is above 357.1: the floor is 358 delivered.
+   Publish a send with fewer as counts, not as a rate.
+
+**What it returns in this worked example:** a register line that reads click rate, version 2, median
+3.92%, band 3.64% to 4.21%, built from 2025-11 to 2026-07, minimum denominator 358. August closes at
+3.31%, outside the band, so it is a signal. Its denominator grew from 43,100 to 56,400, so check the
+base before the work (The base grew or was cleaned, under Edge cases). This example assumes the rate
+has no season; where it has one, compare with the same period of the previous cycle.
+
+**When the data is too little.** Fewer than eight completed periods of the version in force is too
+little: eight is the low end of the starting point in Thresholds and timings. The procedure then
+returns "no base yet" with the date the eighth period closes, and nothing it would have computed: no
+median, no band, no alert, no minimum denominator, since the floor comes from the spread. Until that
+date, publish each period's rate with its denominator beside it. In this worked example, had version
+2 started on 2026-03-01, the register on 2026-08-10 would hold five completed periods and read "no
+base yet, 2026-11-07": October is the eighth period, its last send goes out on 2026-10-31, and the
+collection window closes seven days later.

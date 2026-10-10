@@ -118,6 +118,28 @@ A value derived from behavior rather than supplied by the person. Use it to choo
 it out of the copy as a statement about the person, because an inference can be wrong and a wrong
 statement about somebody reads as a mistake about them rather than about the data.
 
+## Seams with neighbors
+
+Four seams get crossed by accident, so state them outright.
+
+- **The unit here is a place, not a message and not a person.** One message holds several of them,
+  each with its own source, its own moment of resolution and its own behavior when empty. A rule
+  written on the message treats them as one thing, and they break one at a time.
+- **The display rule belongs to `onsite-capture` on the site and to `in-product-messaging` inside
+  an app or a signed-in account area, all of it.** Whether a block shows, in what order, and how many
+  windows one page or one screen may open is a property of the surface. What the block holds
+  arrives from here, from `offer-design` or from `voice-of-customer`, and none of the three gets
+  to decide when it appears.
+- **The algorithm is here, the comparison is not.** Picking what fills a block is this skill.
+  Proving the personalized block beats a fixed one is `experiments-and-holdouts`, including the
+  trap it names: the block and the algorithm are two changes, and separating them takes a third
+  arm with a random selection.
+- **Fill rate and resolved share are two different numbers.** `segmentation` measures the share of
+  the base holding a value for an attribute. This skill measures the share of one place's
+  evaluations that got a value from the source assigned to it. Different unit, different failure
+  modes, and the second one is the control metric here. The first also predicts the second before
+  any baseline exists.
+
 ## Terms shared with neighbors
 
 **Fill rate** is `segmentation`'s: the share of the base holding a value for an attribute, measured

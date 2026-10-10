@@ -8,9 +8,9 @@ checked: 2026-09-05
 # Customer and money metrics
 
 Formulas and denominators for the metrics a lifecycle program is judged by. Each entry names the
-population, the window and the traps. No ranges appear here: a market figure is only usable
-alongside the definition its source used, and this library states a number only with that source
-attached.
+population, the window and the traps. No ranges appear here: this library carries no market
+benchmark, with a source or without one. If the user brings a market figure, neither confirm nor
+dispute it: check its numerator, denominator and window against the entries below.
 
 Several metrics on this page circulate in more than one formula. Where that is true it is said
 outright, because picking one and recording the other as a known variant is the entire job.
@@ -194,8 +194,9 @@ worthless for that reason.
 
 The ratio the two metrics above exist to produce, and the one figure on this page with a widely
 repeated rule of thumb attached to it. **This library does not carry that rule: it carries no
-market benchmarks.** Treat the ratio as a comparison you make against your own history, and if you quote an
-outside threshold, quote the source with it or do not quote it.
+market benchmarks.** Treat the ratio as a comparison you make against your own history. Do not quote the
+circulating threshold, not even to reject it: where you would refer to it, write X in place of its number.
+If the user brings one, check its numerator, denominator and window instead.
 
 Both sides have to use matched definitions: LTV on margin against CAC including everything spent
 to acquire, or LTV on revenue against media cost alone, but never one of each.

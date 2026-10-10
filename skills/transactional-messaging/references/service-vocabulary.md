@@ -12,6 +12,23 @@ arguments about "how many statuses to send" do not settle: one side counts messa
 questions people ask about their order, and they are counting different things. Several words here are
 shared with neighbors, and those are marked at the end.
 
+## What sets this work apart
+
+Three properties make this work unlike the marketing channels in this library.
+
+1. **The person is waiting for the message, because they caused it.** They notice when it does not
+   come, and lateness has a moment after which the message is worth nothing: the courier already came,
+   the code expired, the pickup hold ended. So the next event in the person's world sets the deadline,
+   not a response curve.
+2. **A service message keeps its exemptions only while it stays a service message.** Exemptions from
+   consent requirements, from the frequency cap, from marketing suppression. Content is what loses them,
+   so "what else can go in" is a question of class, not of layout.
+3. **The events come from systems marketing does not own.** Order management, the payment provider, the
+   carrier, the warehouse, the booking engine. They hold more internal statuses than a person can tell
+   apart, and the statuses change without notice. The message people need most is about something that
+   did not happen: a system of record writes down what occurred, and it emits no event called "not
+   shipped by the date we gave".
+
 ## The units
 
 **Transaction.** What a person set in motion and is waiting on: an order with all its shipments, a
@@ -57,9 +74,9 @@ cancellation, a refund, a change.
 
 **Exception.** A row for a transaction that departed from what was promised or needs the person to act.
 
-**Required row.** A row a law obliges you to send, or one the person cannot get the service without: every
-access row, the confirmation, the first message of an exception, and rows named in `SKILL.md`'s legal
-section. It is not withheld for a test and does not retire on data.
+**Required row.** A row a law obliges you to send, or one the person cannot get the service without:
+every access row, the confirmation, the first message of an exception, and rows named in
+`legal-regimes.md`. It is not withheld for a test and does not retire on data.
 
 **Optional row.** A row that repeats what was already delivered: a reminder, an extra progress row. It can
 be tested against its absence.
@@ -127,6 +144,24 @@ promised time, a chase before anything was due, a mislabeled topic.
 
 **Chase share.** The control metric: transactions in a cohort with at least one chase, over all
 transactions in the cohort, by type and path.
+
+## Seams with neighbors
+
+- **An order placed and awaiting payment is service; a cart never submitted is a flow.** The test is
+  whether the person agreed to a transaction. A payment reminder for a placed order carries the payment
+  link and the time left; an abandoned cart belongs to `triggered-messages`.
+- **A cross-sell does not ride inside a service message; it goes as a message of its own after it,** on
+  the marketing identity, on a lawful basis, inside the cap (`triggered-messages`, `repeat-purchase`).
+  Carrying promotion inside a service message is a change of class made in the register, not an edit of
+  content (`references/service-register-and-contract.md`, step 8).
+- **Precedence and the cap are `contact-orchestration`'s; this skill decides which rows are service and
+  which are required.** Every row in the register is service in that skill's classes. Quiet hours apply by
+  kind (`references/deadline-channel-and-failover.md`, step 7).
+- **A review request after delivery is `voice-of-customer`'s**, even when the same system sends it. It is
+  not a row of this register and does not inherit its class.
+- **Service messages are judged here on chases and on time, not on revenue.** `program-audit-and-ops`
+  and `scenario-map` hand that criterion to this skill. Watching running rows stays with
+  `program-audit-and-ops`; this skill defines the expected ratio of messages to events for each row.
 
 ## Words shared with neighbors
 

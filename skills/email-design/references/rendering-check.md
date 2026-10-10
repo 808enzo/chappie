@@ -129,7 +129,7 @@ by comparing the lists from your last two periods.
   off, the first frame is all that shows.
 - **Video** ships as a still frame linking to a page where it plays, unless your check showed it
   playing inside the message in your environments. A claim made aloud in the video is repeated in
-  text (the FTC disclosure guidance in `SKILL.md`).
+  text (the FTC disclosure guidance in `legal-regimes.md`).
 - **Forms, carousels and choices inside the message.** The action is also reachable by a link to a
   page. A form that collects personal data carries the wording of its basis, which is
   `consent-and-preferences`.
@@ -155,7 +155,7 @@ by comparing the lists from your last two periods.
 - **A base concentrated in one environment.** The matrix has one or two rows and the unchecked share
   is close to nothing. The risk left is a rendering change in that one client, so re-run the
   matrix whenever it announces one. The index of that environment sits at 1 by construction and
-  moves by no more than the other rows' share (`SKILL.md`); the seed mailbox and the absolute rate
+  moves by no more than the other rows' share (`control-metric.md`); the seed mailbox and the absolute rate
   are what you have.
 - **Test sends with the same subject line get grouped into one conversation** and shown as one long
   message, so take the clip point from a message with a subject nobody else used.

@@ -74,6 +74,27 @@ not a line in a report.
 people moving. Possible whenever the axis is cut by quantile, since the band is defined relative
 to a distribution that moves.
 
+## Seams with neighbors
+
+Four seams get crossed by accident, so state them outright.
+
+- **The grid decides who is in a group, not what the group hears.** Every cell in every published
+  RFM table arrives with a suggested action attached, which is why people read the method as a
+  campaign plan. The suggestion is the neighbor's territory: what a lapsing buyer is offered is
+  `lapse-and-winback` and `offer-design`, and whether that mechanic exists at all is
+  `scenario-map`.
+- **"Recency" is counted from three different clocks in this library.** Here it is time since the
+  last purchase. In `email-program` an engagement tier is counted from response in the channel.
+  In `list-building` silence is counted across every channel against the purchase cycle. A person
+  can be recent on one clock and lapsed on another, and the word alone will not tell you which
+  report you are reading.
+- **People with no purchase history are a group, not a remainder.** `segmentation` hands them
+  here for that reason. They have no value on any axis, so the grid cannot place them, and a grid
+  that places them anyway drops them into its worst cell and sends them its worst cell's route.
+- **The readable floor applies to the group, not to the cell.** A cell below the floor is
+  material for a merge rather than a failed segment. `segmentation` owns the floor and this
+  skill owns the merge, because the merge needs a grid to merge inside.
+
 ## Four words this skill shares with neighbors
 
 **Segment.** In `segmentation` it is a rule for selecting people. A group here is such a rule and

@@ -155,7 +155,7 @@ moment of handoff, the reading that tests the grid, which arrives a cycle later.
   and the quiet inside it are a stage of `buying-group-and-stalls.md`.
 - **Bought without sales.** Self-service converted the account inside the sequence: a win without a handoff; the
   won-deal record for `b2b-retention` is written all the same (`buying-group-and-stalls.md`, step 10).
-- **A purchased or scraped address.** This skill gives it no basis (question 5 of the map, `SKILL.md`); the contact
+- **A purchased or scraped address.** This skill gives it no basis (the cut on the law in `SKILL.md`); the contact
   is outside the grid until a basis exists.
 
 ## Failure modes

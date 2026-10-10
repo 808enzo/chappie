@@ -99,10 +99,10 @@ Take a worked example with invented numbers. The email tool claims 420 orders, t
 credit is 210. Where the tools claim on windows and anchors of their own, the difference also holds claims the
 model rejects: show duplicates and claims outside the model as two lines.
 
-**8. Publish what the model cannot see.** The share of revenue with no identified person (offline sales, guest
-checkout), and on the website the share of sessions without consent to analytics (see the legal regime in
-`SKILL.md`). Compute attribution shares on identified or consented revenue, and say so on the line. Put a
-channel's share of revenue beside total revenue.
+**8. Publish what the model cannot see.** The share of revenue with no identified person (offline sales,
+guest checkout), and on the website the share of sessions without consent to analytics (see
+`legal-regimes.md`). Compute attribution shares on identified or consented revenue, and say so on the
+line. Put a channel's share of revenue beside total revenue.
 
 **9. Show assisted conversions on a line of their own.** Conversions credited to another channel that had a
 program touch inside the window before them, per channel. Never add them to direct credit. When direct credit

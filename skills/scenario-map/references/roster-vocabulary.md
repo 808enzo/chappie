@@ -75,6 +75,26 @@ without a date it has not been given.
 **Retirement record.** What the row did, why it went, and what would bring it back. Without it a
 retired mechanic returns in a year as a fresh idea and passes admission a second time.
 
+## Seams with neighbors
+
+Three seams get crossed by accident, so state them outright.
+
+- **"Scenario" names two different things.** In `triggered-messages` it is a flow: a firing event,
+  steps, delays, branches, a stop condition. Here it is a row on the roster: the mechanic as a
+  unit of the program's composition, whatever number of flows implements it.
+- **Two reviews look at the same object and ask different questions.** `triggered-messages`
+  reviews the live trigger set: entries, conversion per entry, contribution to load, and it
+  answers whether a flow works. The roster review asks whether the decision that flow serves
+  deserves a mechanic at all. A flow can pass its own review and fail the roster's, because
+  another row serves the same decision better. The roster does not re-run the neighbor's reading;
+  it takes the result and adds its own question.
+- **Turning something off changes what the program promises, so the roster holder decides it.**
+  `program-audit-and-ops` establishes that a running mechanic is broken, and
+  `experiments-and-holdouts` establishes that a change worked. Neither retires a row. Their findings arrive as evidence on a
+  row and are read at the next review. The one exception is a fault that reaches a person, which
+  leaves through the incident route immediately and marks the row paused, which is not a
+  retirement.
+
 ## Three words this skill shares with a neighbor
 
 **Scenario.** In `triggered-messages` it is a flow: a firing event, steps, delays, branches, a stop

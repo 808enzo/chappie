@@ -114,7 +114,7 @@ the sentence test is what makes that visible before the send rather than in the 
 | Entry threshold | a multiplier on the recipient's own average order value |
 | Redemption window | a fraction of the category's median interpurchase interval |
 | Recovery window after removing a benefit | two purchase cycles of the category as a starting figure, replaced by what your own first removal shows (see the failure modes for where it applies) |
-| Prior price in a reduction announcement | the lowest price applied in the 30 days before, in the EU regime (see SKILL.md, including who it does not bind) |
+| Prior price in a reduction announcement | the lowest price applied in the 30 days before, in the EU regime (see `legal-regimes.md`, including who it does not bind) |
 
 ## Edge cases
 

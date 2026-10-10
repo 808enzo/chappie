@@ -54,9 +54,9 @@ export (`martech-stack`). An event visible a day late breaks the series a day la
 exactly the day somebody is asked to do what they have already done.
 
 **4. Compute the window.** The length of the series is **your own median time to first purchase,
-computed on the people who did buy**. It is not thirty days. Thirty is a name for the problem, not a
-parameter of it. A long purchase cycle gets a long window, a short one gets a short window, and both
-get it from their own data.
+computed on the people who did buy**. It is not a round number of days: such a number names the
+problem, not a parameter of it. A long purchase cycle gets a long window, a short one gets a short
+window, and both get it from their own data.
 
 `rfm-segments` computes the same figure to decide who is not in the grid yet, and the agreement is
 not a coincidence. Below that median, an absent purchase is not yet a fact about the person, which
@@ -141,13 +141,13 @@ first touch**, and confirm that nothing else arrived.
 
 - **The series is healthy and the cohort is not growing.** The sign is a share of the arrival cohort
   that entered no series at all, larger than zero and unexplained. The cause sits at a seam and not
-  inside the series: an entry point with no mapping, a basis that was never recorded, a pending
-  state that never resolved, an address undeliverable from day one. Find it by comparing two
-  numbers, how many arrived and how many entered, and put that comparison in the cohort report.
+  inside the series: an entry point with no mapping, a basis that was never recorded, a pending state
+  that never resolved, an address undeliverable from day one. Find it by comparing two numbers, how many
+  arrived and how many entered, and put that comparison in the cohort report.
 - **One series for every entry point.** The sign is unsubscribes and complaints concentrated on the
-  first touch rather than spread across the series. The first touch is talking to the wrong person:
-  they did not subscribe, they placed an order.
+  first touch rather than spread across the series. The first touch is talking to the wrong person: they
+  did not subscribe, they placed an order.
 - **The series outlives its basis.** This one is not visible in a metric, it is visible in the
-  specification: the window was computed from a purchase cycle while the entry point gives the basis
-  a shorter life. The series has to be shorter than the basis, and the legal section of `SKILL.md`
-  says which entry point gives which.
+  specification: the window was computed from a purchase cycle while the entry point gives the basis a
+  shorter life. The series has to be shorter than the basis, and `legal-regimes.md` says which entry
+  point gives which.

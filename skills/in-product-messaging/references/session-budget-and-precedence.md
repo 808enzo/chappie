@@ -34,7 +34,7 @@ week means "every session". Everything below is set relative to this distributio
 **2. Budget the blocking displays: one per session per person, across every source.** One is the
 starting point. It holds for products opened more often than a few times a month; a product opened
 once a quarter can carry more in a session before the person reads it as pressure. Revise it from
-two readings in `SKILL.md`: when deferred messages expire unseen while wasted interruptions stay
+two readings in `SKILL.md` and `references/control-metric.md`: when deferred messages expire unseen while wasted interruptions stay
 rare, the budget is too tight; when wasted interruptions are common with an empty deferral queue,
 the budget is not the problem. Passive formats do not count against the session budget; they have a
 placement budget instead: one strip, one snackbar, one inline card per screen region at a time.

@@ -103,8 +103,8 @@ per system; the system with the longest lag is the one to fix.
 | The window a reply opens | 24 hours | platform rule, Meta |
 | Your distribution target | inside `consent-and-preferences`' propagation deadline for texts, with the lag read per system | yours |
 
-The statute rows are class 2; the rule and its boundary stand in `SKILL.md`, whose owner is
-`consent-and-preferences`. The platform rows carry their sources below. The last row is yours.
+The statute rows are class 2; the rule, whose owner is `consent-and-preferences`, and its boundary
+stand in `legal-regimes.md`. The platform rows carry their sources below. The last row is yours.
 
 ## Edge cases
 

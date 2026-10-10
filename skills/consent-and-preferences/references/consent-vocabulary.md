@@ -12,6 +12,22 @@ the reason arguments about "whether we have consent" do not settle: one side mea
 means a record that would survive a challenge, and a third means whether the churn model may run at all.
 Several words here are shared with neighbors, and those are marked at the end.
 
+## What sets this work apart
+
+Three properties make this work unlike the rest of the library.
+
+1. **A basis is a record, not a flag.** A flag says "subscribed". A record says who was asked, when,
+   through which point, with which wording, for which channels and purposes, on what the permission
+   rests, and when it ends. A challenge, from a regulator, a mailbox provider or the person, reads the
+   record. A flag with nothing behind it is what the control metric of this skill counts.
+2. **The person's instruction outranks the program's construction everywhere it reaches, and it reaches
+   as far as the wording said, not as far as the platform's lists go.** A withdrawal has a deadline set
+   from outside the company, by law and by the mailbox providers, and the shortest window that applies
+   wins. An instruction honored in one system and not in another is a send with no basis.
+3. **Sending is not the only use.** Choosing whom to send to, predicting what a person will do, inferring
+   what they are, assigning them to a test group, and keeping the records are processing with a basis
+   of their own. An objection to marketing stops the selection, not only the send.
+
 ## The units
 
 **Basis record.** One person, one channel, one purpose, with: what the permission rests on (the basis
@@ -166,6 +182,30 @@ exception the event date inside the term and the refusal-offered flag; under an 
 source), and whose regime's definition of a basis is met: request and proof under consent; event and all
 conditions under an exception; source and honored opt-out under an opt-out regime. A record with a
 field that does not resolve is no record for the join.
+
+## Seams with neighbors
+
+- **The capture point keeps the proof; this skill says what the proof has to contain and what basis
+  the point produces.** `onsite-capture` writes the handover state (requested message, marketing, pending,
+  suppressed) and stores the consent record for its points. This skill decides which basis makes the
+  marketing state permissible and what the wording has to say for that basis
+  (`references/lawful-basis-and-collection.md`, steps 2 and 3).
+- **Confirmed opt in is a proof, not a basis.** None of the regimes surveyed here requires it. This skill
+  decides whether a point should require it, by regime and by how much control the point has over the
+  address; the confirmation step itself is `onsite-capture`'s and `list-building`'s.
+- **This skill writes the instruction; `email-program` and the channel skills apply it.** The five
+  suppression scopes and their precedence are `email-program`'s construction. This skill sets the scope a
+  withdrawal gets, from the wording the person answered under
+  (`references/preference-center-and-unsubscribe.md`, step 3).
+- **The person's frequency is an instruction here and a cap there.** Collecting "less often" belongs to the
+  preference center; `contact-orchestration` reads the value and lets it outrank the cap when it is lower.
+- **The service exemption is lost by content, and the class is checked at the template.**
+  `transactional-messaging` checks the class at the template version and at the send. This skill says
+  what the person's withdrawal does and does not stop, and that a service row carrying promotion is no
+  longer "always on" in the preference center.
+- **A merge does not move a permission; a withdrawal after a merge takes the widest reading.**
+  `list-building` owns the requirement on the merge. This skill owns what happens to the two basis
+  records and the instructions afterward (`references/lawful-basis-and-collection.md`, edge cases).
 
 ## Words shared with neighbors
 

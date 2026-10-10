@@ -65,12 +65,12 @@ construction of an overloaded base is organizational rather than technical: mess
 on request from internal departments, each requester sees only their own, and nobody reads the
 total.
 
-**7. Join load to outcome at the person level.** Split the reachable base into load buckets for
-the period, then compute per bucket: revenue per person in the bucket, reachability loss (unsubscribes,
-complaints, notifications turned off, hard bounces), and the share that goes silent in the
-following window. Compute the loss the way `SKILL.md` defines it: people addressed in the
-denominator, one loss per person per channel, `not defined` where a bucket addressed nobody in
-that channel. Otherwise the buckets compare to neither each other nor the program total.
+**7. Join load to outcome at the person level.** Split the reachable base into load buckets for the
+period, then compute per bucket: revenue per person in the bucket, reachability loss (unsubscribes,
+complaints, notifications turned off, hard bounces), and the share that goes silent in the following
+window. Compute the loss the way `SKILL.md` and `control-metric.md` define it: people addressed in the
+denominator, one loss per person per channel, `not defined` where a bucket addressed nobody in that
+channel. Otherwise the buckets compare to neither each other nor the program total.
 
 ## Thresholds and timings
 

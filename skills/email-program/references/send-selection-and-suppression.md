@@ -130,7 +130,7 @@ Teams skip this step, and it is the one that makes the next cycle's diagnosis po
   window that applies to you, or you break the rule while looking compliant.
   **Who this does not bind:** a message whose primary purpose is one of the five categories of
   transactional and relationship message; the regimes outside the United States, which set their
-  own windows (`SKILL.md`, and the mechanics of `consent-and-preferences`).
+  own windows (`legal-regimes.md`, and the mechanics of `consent-and-preferences`).
 - **Cancellation window:** how late you can pull a send is a property of the sending platform.
   Find it before the first send you need to pull, not during it.
 

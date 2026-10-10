@@ -99,10 +99,11 @@ the argument runs from the beginning.
 - **Revision cycle:** fixed. Until you have your own history, start with once a quarter. That
   holds where the purchase cycle is shorter than a quarter. Once your own cycle is measured, tie
   revision to it rather than to the calendar quarter, and say what you tied it to.
-- **Self-baseline** for any metric with no citable benchmark: start with eight to twelve of your own
-  stable periods, median and spread. This works where the period is stable; in a category where
-  people buy once a year it asks for eight years of history, so take the longest run you hold and
-  say so. Replace the starting figure once you hold two full cycles of your own data.
+- **Self-baseline** for every metric, since this library carries no market benchmark: start with
+  eight to twelve of your own stable periods, median and spread. This works where the period is
+  stable; in a category where people buy once a year it asks for eight years of history, so take the
+  longest run you hold and say so. Replace the starting figure once you hold two full cycles of your
+  own data.
 
 ## Edge cases
 

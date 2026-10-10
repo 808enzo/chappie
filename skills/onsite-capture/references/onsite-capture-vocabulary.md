@@ -115,3 +115,24 @@ address into a controlled one.
 
 **Cannibalization.** Capture rising while the primary action of the same pages falls. Visible only
 against a group that was not shown the point.
+
+## Seams with neighbors
+
+- **The display rule stays here, for every widget.** `personalization` owns what a recommendation
+  block says, `offer-design` owns how deep its discount goes, `voice-of-customer` owns the survey
+  question. None of them answers how many overlays this page may open today and in what order. That
+  is a property of the site, not of any one widget, and it lives in
+  `references/display-rules.md`.
+- **One touch does cross into load.** An onsite touch addressed to a person you already know,
+  which you would have sent as a message if you had their address, counts toward that person's
+  contact load and belongs to `contact-orchestration`. A display that goes to whoever is in the
+  session does not.
+- **The order of attribute collection belongs to `list-building`.** Which attributes the base
+  needs, and in what sequence they are gathered, is decided there. What stays here is that the
+  first rung of the ladder is a short form on the site. The obligation runs the other way too:
+  the point records what it promised the person at the moment of capture, in the wording it used
+  and at the frequency it stated, and passes that on with the contact. `list-building` stamps it
+  as provenance, and nothing downstream can reconstruct it.
+- **Consent as a lawful basis belongs to `consent-and-preferences`.** What stays here is the
+  obligation of the capture point to record the evidence: what the person saw, when, where, and
+  through which point.

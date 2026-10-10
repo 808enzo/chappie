@@ -205,7 +205,7 @@ path test runs beside it and is not replaced by it.
 | Retention of a pending row | the confirmation window plus the time your review of pending rows takes; longer only where another purpose holds the data | parameter |
 | Review date on consent with no statutory term | your refresh policy, set from how often you are in contact with the person | parameter |
 
-The legal rows carry their sources and the people they do not bind in `SKILL.md`. The rest are yours.
+The legal rows carry their sources and the people they do not bind in `legal-regimes.md`. The rest are yours.
 
 ## Edge cases
 

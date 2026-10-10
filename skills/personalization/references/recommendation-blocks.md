@@ -120,8 +120,7 @@ changes, and separating them takes a third arm with a random selection.
 - **Recommending what the person already bought.** Settled by the catalog field from step 4 rather
   than by a time threshold.
 - **Age restricted and sensitive categories.** They enter no anchor and no output. The list is
-  maintained by hand and checked separately from the algorithm (see the legal section of
-  `SKILL.md`).
+  maintained by hand and checked separately from the algorithm (see `legal-regimes.md`).
 
 ## Failure mode
 

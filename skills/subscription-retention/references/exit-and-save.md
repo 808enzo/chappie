@@ -184,7 +184,7 @@ no message.
 **A reason list of your own.** The sign: the screen's list does not match the themes of
 `voice-of-customer`; the owner of the part of the experience receives no reasons.
 
-**Sources for the rules in this file, each opened 2026-09-15.** The addresses stand in `SKILL.md`:
+**Sources for the rules in this file, each opened 2026-09-15.** The addresses stand in `references/legal-regimes.md`:
 California § 17602; BGB § 312k; Google Play, Subscription lifecycle; Stripe, Configure the customer
 portal, and Pause payment collection; Chargebee, Pause subscription; Paddle, Retain, Cancellation flows;
 J.P. Morgan Payments, Authorization retry logic (code 21).

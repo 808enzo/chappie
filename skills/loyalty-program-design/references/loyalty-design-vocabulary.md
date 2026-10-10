@@ -69,6 +69,25 @@ because the reward to each differs in size, in form and in when it is paid.
 Not the same as repairing execution: if the mechanic is not doing what it was designed to do, that
 is monitoring work and belongs to `program-audit-and-ops`.
 
+## Seams with neighbors
+
+Three seams get crossed by accident, so state them outright:
+
+- **The launch belongs to `loyalty-program-launch`.** That skill tests whether a design can be
+  run: can the till compute it during payment, can staff explain it in one sentence, will finance
+  carry the liability. Failing any of the three sends the design back here, and the return is an
+  entry condition of `references/changing-a-live-program.md` rather than a patch applied at the
+  till.
+- **Discount depth on a single order belongs to `offer-design`.** What separates them is how
+  long the decision lives. What this skill sets gets published to the whole base and changes only
+  through a revision project. What that skill sets lives for one promotion, and size has nothing to
+  do with which is which. "How much do we give
+  to close this order" goes there. "What do we pay, permanently, for people coming back" stays here.
+- **Running the program belongs to `program-audit-and-ops`.** One question separates them: is the
+  mechanic doing what it was designed to do. If it is, and the result is still bad, the design is
+  wrong and the work is here. If it is not, fix the execution first, because changing a rule while
+  it is misfiring means changing it blind.
+
 ## Three words this skill shares with a neighbor
 
 **Reward, shared with `offer-design`.** Here a reward is a property of the construction: the

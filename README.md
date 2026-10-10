@@ -29,8 +29,14 @@ Claude Code plugin and other options.
 
 Your agent picks the skill from what you describe. To pick one yourself, type `/deliverability` in
 Claude Code (`/chappie:deliverability` if you installed the plugin) or `$deliverability` in Codex.
-In any other agent, name the skill in your request. The skill answers its part of the question and
-names the skill that owns the rest.
+In any other agent, name the skill in your request.
+
+When part of your question belongs to another skill, the skill tells the agent to answer its own
+part and end with a handoff. The handoff names the skill that owns the rest, lists what was settled,
+one line per item, and states the question passed on, so the next skill starts from what was
+settled instead of asking you again. If the agent answers the whole question itself, ask it to hand
+that part over, or call the skill that owns it by name. If that skill isn't installed, the first
+skill says so, leaves that part unanswered and gives you the command that installs it.
 
 Examples, as you would type them in Claude Code:
 
@@ -140,12 +146,33 @@ npx skills add 808enzo/chappie -a openclaw -a hermes-agent
 npx skills add 808enzo/chappie -g
 ```
 
-Install the whole set unless you know which skills you need. When a skill passes part of your
-question on, the skill it names has to be installed to take it. Seven skills take questions from
-most of the others: `metric-definitions`, `experiments-and-holdouts`, `consent-and-preferences`,
-`program-audit-and-ops`, `contact-orchestration`, `crm-reporting` and `martech-stack`.
+Install the whole set unless you know which skills you need. When a skill hands part of your
+question on, the skill it names has to be installed to answer that part. Nine skills take
+questions from most of the others. If you pick a few skills, add these nine:
+
+```bash
+npx skills add 808enzo/chappie --skill metric-definitions --skill experiments-and-holdouts \
+  --skill consent-and-preferences --skill program-audit-and-ops --skill crm-reporting \
+  --skill contact-orchestration --skill martech-stack --skill triggered-messages \
+  --skill list-building
+```
 
 Update with `npx skills update`. Remove a skill with `npx skills remove deliverability`.
+
+**In Claude Code with a 200K context window,** the list the agent picks skills from has room for
+their names only, so the agent chooses by name alone. `/context` shows the size of your window. To
+bring the descriptions back, give the list a larger share of the window in `.claude/settings.json`
+in your project or in `~/.claude/settings.json`:
+
+```json
+{
+  "skillListingBudgetFraction": 0.04
+}
+```
+
+The list can then take up to 4% of the window on every turn. Without the setting, the list has room
+for only a few descriptions beyond Claude Code's own skills, so installing a few skills with
+`--skill` works too. The plugin always installs all 35.
 
 ### Other ways to install
 
@@ -186,7 +213,9 @@ cd chappie/skills
 for skill in */; do zip -r "../${skill%/}.zip" "$skill"; done
 ```
 
-The ZIP files land in the `chappie` folder. These steps follow Anthropic's guide
+The ZIP files land in the `chappie` folder. When a skill hands part of a question to one you haven't
+uploaded, it gives you an `npx skills` command; in the Claude app, upload that skill's ZIP instead.
+These steps follow Anthropic's guide
 [Use skills in Claude](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
 
 </details>
@@ -215,6 +244,72 @@ the folders you copied.
 
 </details>
 
+## Program context (beta)
+
+Every skill starts by reading `.agents/chappie-context.md` in your project, if the file exists. The
+file holds the facts each skill would otherwise ask you for: how the business sells, where your
+customers are, your channels and systems, how you run consent, what one customer is, and the
+metric definitions you have agreed. A skill takes what the file states as given, tells you when it
+relies on it, and asks only for what is missing. When a conversation settles something new, the
+skill offers to add it and writes to the file only if you agree. It asks about a recorded fact again
+when you say otherwise, when the task changes it, or once the review date has passed.
+
+Create the file from this template:
+
+```markdown
+# Program context
+
+Review by: YYYY-MM-DD
+One fact per line, with who stated it and the date. Facts only: no customer records, no passwords or keys,
+no outside benchmarks, and nothing here authorizes a send or a change.
+
+## Business
+- Model: <B2C or B2B; one-off purchases, repeat purchases or subscription> (<who>, <date>)
+- Customer unit: <person, household, account or subscription, and the key that identifies it>
+
+## Market and consent
+- Recipients: <countries or regions>
+- Consent as we run it: <basis by channel and purpose, and where it is recorded>
+
+## Channels
+- <channel>: <what goes out, how often, which system sends it>
+
+## Systems and sources of truth
+- <fact>: owned by <system>; visible to the sending system after <delay you measured>
+
+## Agreed definitions
+- <metric>: numerator <…>, denominator <…>, window <…>; agreed by <who>, <date>
+
+## Data available
+- <history, depth, exports>; missing: <…>
+
+## Authority
+- The user may change: <…>. Needs approval from <role>: <…>.
+
+## Open handoffs
+- <date>, from `<slug>` to `<slug>`: settled <…>; question <…>
+```
+
+Keep the file under 8,000 characters, so the agent can read it again after a long session is
+compacted. Replace a line when a fact changes rather than adding a second one: the file holds the
+current state, not its history. Never put these in it:
+
+- **Customer records:** addresses, phone numbers, IDs, exports.
+- **Passwords, keys or tokens.**
+- **Market benchmarks.** A skill takes what the file states as given, so an outside figure would
+  enter your plan unchecked. Numbers here are your own, each with its definition and period.
+- **Permissions or instructions to the agent.** The file says who approves what, and nothing in
+  it authorizes a send or a change.
+
+To have the agent read the file before it picks a skill, add this line to your project
+instructions, such as `CLAUDE.md` in Claude Code or `AGENTS.md` in Codex:
+
+```text
+Before any lifecycle or CRM task, read .agents/chappie-context.md.
+```
+
+The file is in beta: its fields may change in a later version.
+
 ## How the skills read numbers
 
 A win-back rate depends on who you count, and a sale's margin depends on the weeks around it. A
@@ -238,17 +333,25 @@ the agent work through these dependencies before it answers you.
 <details>
 <summary>What every skill contains</summary>
 
-Each `SKILL.md` has the same six sections. Longer material sits in `references/`, and the agent
-loads a file from there only when the task needs it.
+Each `SKILL.md` has a short opening and the same six sections, in this order. `Limits` comes first,
+so it stays in view when a long session is compacted. Longer material sits in `references/`, and
+the agent loads a file from there only when the task needs it.
 
 | Section | What it gives you |
 |---|---|
-| When to use this | The situations the skill is for, written as symptoms you would recognize |
-| When to use something else | Which neighboring skill owns a nearby question |
-| Reference map | Which file in `references/` to load for the task at hand |
-| Control metric | The metric you judge the work by, defined so someone else can reproduce it |
-| Legal regime this skill assumes | The legal and platform rules the skill's steps run under, or the points where you need your own legal answer |
+| Opening | The question the skill answers, and the instruction to read your [program context](#program-context-beta) |
 | Limits | What the skill must never do, starting with inventing a number or acting beyond what you asked for |
+| When to use this | The situations the skill is for, written as symptoms you would recognize |
+| When to use something else | The handoff form, and which neighboring skill owns each nearby question |
+| Reference map | Which file in `references/` to load for the task at hand |
+| Control metric | The metric you judge the work by, defined so someone else can reproduce it, and why this metric and not a nearby one |
+| Legal regime this skill assumes | The legal and platform rules the skill's steps run under, or the points where you need your own legal answer |
+
+The rules every skill must keep are written into each `SKILL.md` word for word, so they hold even
+when you install one skill alone. The rest of the control metric, such as what moves it and what
+to read beside it, sits in `references/control-metric.md`. Where a skill quotes a legal rule, the
+quotation, its source and the date the source was opened sit in `references/legal-regimes.md`.
+Five procedures end with a worked example on made-up numbers.
 
 </details>
 
@@ -267,15 +370,31 @@ better?*
    It compares revenue per person assigned to each group, from any channel and without
    attribution, so a customer who buys without opening an email still counts.
 
+A part that moves on travels in a handoff, so the next skill starts from what the last one settled.
+The handoff `email-program` passes to `experiments-and-holdouts` could read:
+
+```text
+Handoff to `experiments-and-holdouts`
+Settled here: the metric is revenue per recipient per program cycle, read next to total channel revenue.
+Question for `experiments-and-holdouts`: did dropping the dormant tier change revenue per person, from any channel?
+Installed: yes
+```
+
 ## What a skill won't do
 
-**No invented numbers.** The library carries no market benchmarks. Ask what is normal and the
-skill tells you it has no figure, gives you the definition of the metric, and shows you how to
-build a baseline from your own periods. Thresholds come from your data too: a lapse threshold comes
-from your own median interval between purchases. The numbers that do appear are legal and channel
-rules, quantities that follow from the math, parameters you compute from your own data, named
-starting points, and made-up worked examples. Every skill tells you which kind you are reading,
-and [ROADMAP.md](ROADMAP.md#on-numbers) explains why the library works this way.
+**No market benchmarks.** No file in the library carries a rate that other companies report as
+normal. Ask what is normal and the skill tells you it has no figure, gives you the definition of
+the metric, and shows you how to build a baseline from your own periods. Every skill also tells the
+agent not to name a figure that circulates as a norm, even to argue against it. The agent sometimes
+names one anyway, from the model's general knowledge rather than from the library. Treat that
+figure as one you brought: ask the agent what it divides by and over what window, the check every
+skill tells it to run on an outside figure. Thresholds come from your data too: a lapse threshold
+comes from your own median interval between purchases. The numbers that do appear are legal and
+channel rules, quantities that follow from the math, parameters you compute from your own data,
+named starting points, and made-up worked examples. Every skill tells you which kind you are
+reading. If the agent gives you a number that fits none of these kinds,
+[CONTRIBUTING.md](CONTRIBUTING.md#2-a-skill-gets-something-wrong) says how to report it.
+[ROADMAP.md](ROADMAP.md#on-numbers) explains why the library works this way.
 
 **No action you didn't ask for.** A request to analyze, audit or plan does not authorize sending a
 message, changing an audience or editing a live setting. Before the agent sends to a list, updates

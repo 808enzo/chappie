@@ -44,7 +44,7 @@ least likely to have a fact underneath, because nobody went looking for one. **B
 
 **3. Read for the legal line.** Is the urgency real; is the testimonial genuine and not conditioned
 on being positive; can the reader tell this is advertising; does free mean free. The regimes and
-their sources are in `SKILL.md`. **Blocks the send.**
+their sources are in `legal-regimes.md`. **Blocks the send.**
 
 **4. Test the substitution on edge values.** Send tests to addresses where the field is empty, very
 long, in a different grammatical form, and a list with one item. A sentence that breaks **blocks the

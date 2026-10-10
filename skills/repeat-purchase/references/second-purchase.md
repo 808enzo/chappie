@@ -97,7 +97,7 @@ There are five outcomes and each has an address.
 | The first order was returned | a return inside the return window | they leave the cohort, because there was no first purchase, and sit with the people who have never bought (`rfm-segments`) until a new closed order puts them in a new cohort |
 
 The last outcome is not a technicality. The whole mechanic rests on a closed order, and a returned
-order stops meeting that definition after the fact. What follows for the metric is in `SKILL.md`:
+order stops meeting that definition after the fact. What follows for the metric is in `references/control-metric.md`:
 the figure is final only once the return windows on first and second orders and the window itself
 have run out for the whole cohort.
 

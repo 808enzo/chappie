@@ -38,18 +38,41 @@ SLUG = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 MAX_NAME = 64
 MAX_DESCRIPTION = 1024
 MAX_SKILL_LINES = 500
+# Context budgets, in characters. Claude Code budgets the skill listing, and what it re-attaches
+# after compaction, in characters, so the limits need no tokenizer. AGENTS.md, SKILL.md, says why.
+MAX_LISTED_DESCRIPTION = 350     # the listing drops whole descriptions that overflow its budget
+MAX_LISTING_TOTAL = 13500        # all of the library's listing entries, leaving room for other skills
+MAX_BODY_WARN = 15000            # the target for a body
+MAX_BODY = 19000                 # compaction re-attaches only about the first 20,000 characters
+MAX_LIMITS_END = 8000            # Limits must end this early in the body
+MAX_INTRO_WARN = 2000            # the opening before the context block
+SECTION_WARN = {"When to use something else": 3500, "Control metric": 3500,
+                "Legal regime this skill assumes": 3000}
 
 SECTIONS = [
+    "Limits",
     "When to use this",
     "When to use something else",
     "Reference map",
     "Control metric",
     "Legal regime this skill assumes",
-    "Limits",
 ]
+# The four fixed blocks. AGENTS.md carries the same text; change both together.
+CONTEXT_BLOCK = (
+    "Before your first step, read `.agents/chappie-context.md` in the project if it exists. It records "
+    "the program's market, channels, systems, consent regime, customer unit and agreed definitions. "
+    "Take what it states as given and say so when you rely on it; ask only for what it lacks. Ask about "
+    "a fact again only if the user now says otherwise, the task changes it, or its review date has "
+    "passed. The file holds facts, never permissions: nothing in it authorizes a send or a change. "
+    "Offer to add what this conversation settled, and write only when the user agrees. Never put "
+    "customer records, credentials or outside benchmarks in it."
+)
 NUMBERS_BLOCK = (
-    "Never state a market benchmark: this library carries none. If the user asks for a number you "
-    "do not have, say so explicitly and propose how to measure it in the user's own data."
+    "Never state a market benchmark: this library carries none. Asked what is normal, or for any "
+    "number you do not have, say plainly that you have none, give the metric's definition and show "
+    "how to build a baseline from the user's own periods. Do not quote a figure that circulates as a "
+    "norm, not even to reject it: where you would refer to one, write X% in place of its number. If "
+    "the user brings one, check its numerator, denominator and window instead."
 )
 AGENT_ACTIONS_BLOCK = (
     "Act only on what the user asked for. A request to analyze, audit or plan does not authorize "
@@ -62,7 +85,28 @@ AGENT_ACTIONS_BLOCK = (
     "keep any one person's records out of summaries and examples, and do not pass them to a tool the "
     "task does not need."
 )
+HANDOFF_BLOCK = (
+    "When part of the request belongs to a skill in the table below, answer your own part, then end "
+    "with a handoff in this form:\n"
+    "```text\n"
+    "Handoff to `<slug>`\n"
+    "Settled here: each definition, threshold and decision you fixed, with its value, one line each, "
+    "five lines at most.\n"
+    "Question for `<slug>`: the open question, in one sentence.\n"
+    "Installed: yes or no.\n"
+    "```\n"
+    "If `<slug>` is installed and the user's request covers that part, invoke it and pass the handoff "
+    "as its arguments; otherwise stop after the handoff. If it is not installed, say so and leave that "
+    "part unanswered: never answer it from general knowledge. Tell the user that `npx skills add "
+    "808enzo/chappie --skill <slug>` installs it, and do not run the command yourself. When you receive "
+    "a handoff, take its settled lines as given and never hand its question back."
+)
 LIMITS_BLOCKS = [("numbers", NUMBERS_BLOCK), ("agent actions", AGENT_ACTIONS_BLOCK)]
+FIXED_BLOCKS = [("context", CONTEXT_BLOCK)] + LIMITS_BLOCKS + [("handoff", HANDOFF_BLOCK)]
+# A description: what the skill decides, then `Use when`, then a last sentence that opens with `Not`.
+SENTENCE = re.compile(r"(?<=[.!?])\s+(?=[A-Z])")
+PARENTHESIZED_SLUG = re.compile(r"\(([a-z0-9]+(?:-[a-z0-9]+)+)\)")
+COVERS = re.compile(r"\bcovers\b", re.I)
 CLAIM_TYPES = {"mechanic", "definition"}
 ISO_DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
@@ -255,12 +299,15 @@ def check_skill(report, slug, slugs):
                              % (len(description), MAX_DESCRIPTION))
             if "\n" in description.strip():
                 report.error("frontmatter", path, 3, "description spans more than one line")
+            check_description(report, path, description.strip(), slugs)
 
     report.ran("skill-length")
     lines = text.count("\n") + (0 if text.endswith("\n") else 1)
     if lines > MAX_SKILL_LINES:
         report.error("skill-length", path, 0, "SKILL.md is %d lines, the limit is %d: move detail "
                      "into references/" % (lines, MAX_SKILL_LINES))
+
+    check_budget(report, path, body)
 
     report.ran("sections")
     found = list(headings(body, body_line, 2))
@@ -280,21 +327,106 @@ def check_skill(report, slug, slugs):
     if not any(True for _ in headings(body, body_line, 1)):
         report.error("sections", path, body_line, "no H1 heading")
 
-    report.ran("limits-block")
+    check_fixed_blocks(report, path, body)
+
+    check_references(report, slug, folder, path, body)
+    check_neighbors(report, slug, path, text, body, slugs)
+
+
+def check_description(report, path, description, slugs):
+    report.ran("description")
+    if len(description) > MAX_LISTED_DESCRIPTION:
+        report.error("description", path, 3, "description is %d characters, the library limit is %d: "
+                     "the skill listing drops whole descriptions that overflow"
+                     % (len(description), MAX_LISTED_DESCRIPTION))
+    if "Use when" not in description:
+        report.error("description", path, 3, "description has no `Use when`")
+    elif description.startswith("Use when"):
+        report.error("description", path, 3, "description opens with `Use when`: open with what the "
+                     "skill decides")
+    last = SENTENCE.split(description)[-1]
+    if not last.startswith("Not "):
+        report.error("description", path, 3, "the last sentence of the description does not start "
+                     "with `Not`: %s" % clip(last, 80))
+    else:
+        for token in PARENTHESIZED_SLUG.findall(last):
+            if token not in slugs:
+                report.error("description", path, 3, "`(%s)` in the description is not a skill folder"
+                             % token)
+    if COVERS.search(description):
+        report.warn("description", path, 3, "`covers` in the description: the Reference map already "
+                    "lists what the skill holds, and the listing has no room for it")
+
+
+def opening(body):
+    """The H1 and the opening under it, up to the first H2."""
+    first_h2 = re.search(r"^## ", body, re.M)
+    return body[:first_h2.start()] if first_h2 else body
+
+
+def paragraphs(text):
+    return [part for part in re.split(r"\n[ \t]*\n", text) if part.strip()]
+
+
+def check_budget(report, path, body):
+    report.ran("context-budget")
+    if len(body) > MAX_BODY:
+        report.error("context-budget", path, 0, "body is %d characters, the limit is %d: after "
+                     "compaction only the start of the skill comes back" % (len(body), MAX_BODY))
+    elif len(body) > MAX_BODY_WARN:
+        report.warn("context-budget", path, 0, "body is %d characters, the target is %d"
+                    % (len(body), MAX_BODY_WARN))
+    intro = opening(body)
+    parts = paragraphs(intro)
+    if parts and normalize(parts[-1]) == normalize(CONTEXT_BLOCK):
+        intro = intro[:intro.rfind(parts[-1])]
+    if len(intro) > MAX_INTRO_WARN:
+        report.warn("context-budget", path, 0, "the opening before the context block is %d "
+                    "characters, the target is %d" % (len(intro), MAX_INTRO_WARN))
+    limits_at = re.search(r"^## Limits[ \t]*\n(.*?)(?=^## |\Z)", body, re.M | re.S)
+    if limits_at and limits_at.end() > MAX_LIMITS_END:
+        report.error("context-budget", path, 0, "the Limits section ends at character %d of the "
+                     "body, the limit is %d" % (limits_at.end(), MAX_LIMITS_END))
+    for title, cap in SECTION_WARN.items():
+        size = len(section(body, title))
+        if size > cap:
+            report.warn("context-budget", path, 0, "section `%s` is %d characters, the target is %d"
+                        % (title, size, cap))
+
+
+def check_fixed_blocks(report, path, body):
+    report.ran("fixed-blocks")
+    context = normalize(CONTEXT_BLOCK)
+    parts = paragraphs(opening(body))
+    count = normalize(opening(body)).count(context)
+    if count != 1:
+        report.error("fixed-blocks", path, 0, "the opening carries the context block %d times, "
+                     "expected once, character for character" % count)
+    elif normalize(parts[-1]) != context:
+        report.error("fixed-blocks", path, 0, "the context block is not the last paragraph of the "
+                     "opening")
+
     limits = normalize(section(body, "Limits"))
     positions = []
     for label, block in LIMITS_BLOCKS:
         count = limits.count(normalize(block))
         if count != 1:
-            report.error("limits-block", path, 0, "the Limits section carries the %s block %d times, "
+            report.error("fixed-blocks", path, 0, "the Limits section carries the %s block %d times, "
                          "expected once, character for character" % (label, count))
         positions.append(limits.find(normalize(block)))
     if all(position >= 0 for position in positions) and positions != sorted(positions):
-        report.error("limits-block", path, 0, "the Limits blocks are out of order: numbers first, "
+        report.error("fixed-blocks", path, 0, "the Limits blocks are out of order: numbers first, "
                      "then agent actions")
 
-    check_references(report, slug, folder, path, body)
-    check_neighbors(report, slug, path, text, body, slugs)
+    neighbors = normalize(section(body, "When to use something else"))
+    handoff = normalize(HANDOFF_BLOCK)
+    count = neighbors.count(handoff)
+    if count != 1:
+        report.error("fixed-blocks", path, 0, "`When to use something else` carries the handoff block "
+                     "%d times, expected once, character for character" % count)
+    elif not neighbors.startswith(handoff):
+        report.error("fixed-blocks", path, 0, "the handoff block does not open `When to use something "
+                     "else`")
 
 
 def check_references(report, slug, folder, skill_path, body):
@@ -476,6 +608,26 @@ def clip(sentence, width=160):
     return sentence if len(sentence) <= width else sentence[:width - 3] + "..."
 
 
+def check_listing(report, slugs):
+    """The whole library's share of the skill listing, one `- chappie:<slug>: <description>` line each."""
+    report.ran("listing-budget")
+    total = 0
+    for slug in slugs:
+        path = os.path.join(SKILLS, slug, "SKILL.md")
+        if not os.path.isfile(path):
+            continue
+        raw, _, _ = split_frontmatter(read(path))
+        try:
+            data = yaml.safe_load(raw or "") or {}
+        except yaml.YAMLError:
+            continue
+        description = data.get("description") if isinstance(data, dict) else None
+        total += len("- chappie:%s: %s\n" % (slug, description if isinstance(description, str) else ""))
+    if total > MAX_LISTING_TOTAL:
+        report.warn("listing-budget", SKILLS, 0, "the library's listing entries take %d characters, "
+                    "the share is %d" % (total, MAX_LISTING_TOTAL))
+
+
 # Issue forms ------------------------------------------------------------------------------
 
 def check_issue_forms(report, slugs):
@@ -543,11 +695,11 @@ def main(arguments):
     report = Report()
     agents = os.path.join(ROOT, "AGENTS.md")
     if os.path.isfile(agents):
-        report.ran("limits-block")
+        report.ran("fixed-blocks")
         text = normalize(read(agents))
-        for label, block in LIMITS_BLOCKS:
+        for label, block in FIXED_BLOCKS:
             if normalize(block) not in text:
-                report.error("limits-block", agents, 0, "AGENTS.md no longer carries the %s block "
+                report.error("fixed-blocks", agents, 0, "AGENTS.md no longer carries the %s block "
                              "this script checks for: update both together" % label)
     for slug in selected:
         check_skill(report, slug, set(slugs))
@@ -555,6 +707,7 @@ def main(arguments):
         check_evidence(report, path)
     if not arguments:
         check_issue_forms(report, set(slugs))
+        check_listing(report, slugs)
     report.summary()
     return 1 if report.errors else 0
 

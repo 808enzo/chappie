@@ -22,8 +22,8 @@ platform, and it appears there to mark where the library stops rather than as a 
 
 ## On numbers
 
-A skill never invents a number, and the library carries no market benchmarks: no figure for the
-rate other companies report as normal.
+The library carries no market benchmarks, no figure for the rate other companies report as normal,
+and every skill tells the agent not to invent a number.
 
 The library leaves them out on purpose. Whoever publishes a rate measures it on their own platform,
 audience and definition, and the figure ages with the report that carries it. Each skill says why

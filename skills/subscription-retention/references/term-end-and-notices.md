@@ -204,7 +204,7 @@ period falls; "no event" terms accumulate on one billing method. A billing job o
 **The notice became marketing.** The sign: people who withdrew marketing consent got no notice and renewed
 without one; a utility template was recategorized (`messaging-channels`).
 
-**Sources for the rules in this file, each opened 2026-09-15.** The addresses stand in `SKILL.md`:
+**Sources for the rules in this file, each opened 2026-09-15.** The addresses stand in `references/legal-regimes.md`:
 California §§ 17601 and 17602; Visa article AI09067; BGB § 309; DMCC Act 2024 s. 258 and the government
 response of April 2, 2026; Apple, Manage pricing for auto-renewable subscriptions, and Reducing
 involuntary subscriber churn; Google Play, Subscription lifecycle; Stripe, Automate customer emails, How

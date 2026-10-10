@@ -11,6 +11,25 @@ The three mechanics assume these terms. Four of them are units. When two people 
 first whether one of them means the ask and the other the answer, or whether one means the score and the other
 the obligation the score created. Several words are shared with neighbors, and those are marked at the end.
 
+## What sets this work apart
+
+Three properties make this work unlike its neighbors.
+
+1. **An answer is an act of the person, not an event of the system.** The send knows everyone; the answers
+   come from those who chose to answer. Every number from a survey is a number among respondents, the gap
+   between asked and answered is part of the reading rather than a footnote, and no score goes up the chain
+   without the response share next to it (`metric-definitions` wrote that into the definition of NPS; in
+   `crm-reporting` a score alone is a row of the vanity register, and its counterweight stands in the same
+   report row).
+2. **An ask spends the person's attention and their willingness to answer next time.** An ask is a touch
+   under the shared cap (`contact-orchestration`): the person is not waiting for it as a consequence of their
+   own action, so it gets no exemption. The ration is per person, not per event: a customer with three orders
+   this month has three orders and one ask.
+3. **An answer creates an obligation.** A low score nobody acted on is worse than no survey: the person spoke
+   and saw that it changed nothing. The loop closes on two levels, to the person (a substantive reply by the
+   promised time) and into the process (the cause fixed, the change reported back to those who named it). The
+   first is measured per answer; the second per theme.
+
 ## The units
 
 **Ask.** One request to one person about one experience: an order, a visit, a conversation, a refund, a
@@ -119,6 +138,32 @@ of the rest.
 change and its date, the verification metric, and who gets told.
 
 **Self baseline.** A part's own history of scores and excesses, reset only on an instrument change.
+
+## Seams with neighbors
+
+Six seams get crossed by accident, so state them outright.
+
+- **The questions are here; the surface is the neighbor's.** What the survey asks, in what order, with what
+  branch belongs to this skill. Whether it shows on this page today, how many overlays that page may open, and
+  which screen of the app carries it belong to `onsite-capture` and `in-product-messaging`.
+- **The ask is a triggered flow, and a review request is not a service row.** The form of its trigger
+  definition is `triggered-messages`'; what makes the flow an ask (the judging point set by when a defect can
+  show, the ration per person, the promise, the branch by score) is here. The request does not inherit the
+  class of the delivery confirmation even when the same system sends it (`transactional-messaging`).
+- **The formula is the neighbor's; the field is this skill's.** Who is asked, when, how often and what follows
+  a low score are here. Bands, denominators and the response share as part of the definition are in
+  `metric-definitions`.
+- **A low score after a conversation is read twice, on purpose, and neither reading reopens the issue.**
+  `chat-and-bots` excludes a survey reply from its returns by rule, reads the rating beside its first-pass metric
+  as an input, and puts every low score into its reading of the bot's conversations. This skill reads the same
+  score as an obligation: was it closed by the promised time. The issue stays closed with the neighbor; the
+  obligation goes to the conversation's assignee here, and what the assignee then writes to the person runs in
+  the neighbor's thread under the neighbor's marks.
+- **The ask is a touch; the reply to an obligation is not.** The ask gets no exemption from the cap. The reply
+  is what the person is waiting for as a consequence of their own action, so it does
+  (`contact-orchestration`).
+- **A preference answer is not a survey attribute.** "Which messages do you want, how often" goes to the
+  preference center and is `consent-and-preferences`' to hold. A score about an experience stays here.
 
 ## Words shared with neighbors
 

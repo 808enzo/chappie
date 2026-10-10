@@ -190,7 +190,7 @@ withdrawal of your own.
 | Length of a pause | the person's choice from options you offer; offer terms shorter than the lifetime of your shortest event-based basis, so a pause does not outlive the record | parameter |
 | Reason choices on the page | yours, one click each, optional | parameter |
 
-The legal rows carry their sources and the people they do not bind in `SKILL.md`; the platform row binds
+The legal rows carry their sources and the people they do not bind in `legal-regimes.md`; the platform row binds
 mail to that provider's users and nobody else. The rest are yours.
 
 ## Edge cases
@@ -211,8 +211,8 @@ mail to that provider's users and nobody else. The rest are yours.
   stopped, with the required service rows moved to another channel (step 6).
 - **A one-time code the person asks for after STOP.** The stop entry stays. The request is a requested
   message for that one code, sent at once and carrying nothing but the code; log the request and its
-  time beside the stop entry. The FCC texts, the conditions and where counsel decides are in `SKILL.md`,
-  the legal regime.
+  time beside the stop entry. The FCC texts, the conditions and where counsel decides are in
+  `legal-regimes.md`.
 - **A one-click from a service message.** The header belongs on marketing and subscribed messages; a
   service message does not need it (`deliverability`). Where a service message carries one, the click
   is a withdrawal of the sender's marketing in that channel, and the service row continues.

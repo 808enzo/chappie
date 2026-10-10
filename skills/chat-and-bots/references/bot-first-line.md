@@ -42,7 +42,7 @@ data or a written policy at the moment it is given, as with an order status or t
 Second: what does a wrong answer cost, and can it be taken back? A wrong delivery date is corrected by
 the next message. A wrong statement about a refund, a price or what the person is entitled to is a
 statement by the company, and the person may act on it before anyone corrects it (the legal regime in
-`SKILL.md`).
+`references/legal-regimes.md`).
 
 | Scope class | Condition | What the bot does |
 |---|---|---|

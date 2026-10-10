@@ -134,7 +134,7 @@ removal does not depend on the environment.
 
 **What to do:** read the log before the index. The send-level line in step 7 should have returned the
 send to its owner; if it did not, the line was never written or sits too low. The same signal has
-three other causes, one of them this skill's; the order to read them in is in `SKILL.md`.
+three other causes, one of them this skill's; the order to read them in is in `control-metric.md`.
 
 **The second signal, which behaves the opposite way:** the personal block almost never shows. The
 minimum is set too high, or the stand-in fires too early. The share of stand-in and removed states

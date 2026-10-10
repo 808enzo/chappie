@@ -71,8 +71,8 @@ What stays here is that the first rung is short and lives in a form on the site.
 - any screen where another form is already open.
 
 A format limit sits beside these on every page rather than on a list of pages: no overlay that
-obscures the entire page, under the search engine's guidance on intrusive dialogs (`SKILL.md`,
-Platforms).
+obscures the entire page, under the search engine's guidance on intrusive dialogs
+(`references/legal-regimes.md`, Platforms).
 
 The exclusion is about interruption, not about fields. The checkout takes an address for the order,
 and that field is still intake: it is validated in place like any other

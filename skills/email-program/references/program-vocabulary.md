@@ -117,7 +117,7 @@ peak late.
   the message, read from the subject line and the beginning of the body, so a service message with
   a promotional block in it is a commercial message with all the duties attached. **Who this does
   not bind:** the other three regimes, which draw the line between service and marketing in their
-  own terms (`SKILL.md`, and `consent-and-preferences` for the basis behind either class).
+  own terms (`legal-regimes.md`, and `consent-and-preferences` for the basis behind either class).
 - **Mandatory notice.** What you owe somebody by law or by contract: a recall or safety notice, a
   change of terms, points about to expire, a balance statement. It is neither a consequence of a
   transaction nor marketing, so without a name of its own you will file it as a campaign and your

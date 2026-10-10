@@ -10,7 +10,7 @@ checked: 2026-09-05
 Formulas and denominators for the metrics a messaging program is read by. Every entry names what
 it measures, what sits underneath the line, and where the number is observed. No ranges appear
 here: what counts as a good value for any of these depends on the category, the base and the
-method, and this library states a number only with its source.
+method, and this library carries no market benchmark, with a source or without one.
 
 If two systems can report the same metric, the definition has to name which one is the system
 of record. See `reconciling-across-systems.md`.

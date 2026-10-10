@@ -56,7 +56,7 @@ means DMARC fails whatever the individual records say.
 **5. Build the exit route the way providers require it, not only the way the law does.** A
 one-click unsubscribe header plus a visible unsubscribe link in the body. This is a provider
 requirement, and in both regimes named in `SKILL.md` its deadline for honoring a request is the
-shorter one, which makes the provider rule the binding one. The legal side is in `SKILL.md`; the
+shorter one, which makes the provider rule the binding one. The legal side is in `legal-regimes.md`; the
 operational consequence is that your suppression list has to refresh faster than the shortest
 applicable window.
 
@@ -87,7 +87,7 @@ explain.
 
 Every figure below is a provider or protocol requirement rather than a norm of practice. Each is
 dictated by the party named beside it, each moves when that party moves it, and the primary source
-and the date it was opened are in `SKILL.md`.
+and the date it was opened are in `legal-regimes.md`.
 
 | Quantity | Value | Whose, and where it stops |
 |---|---|---|

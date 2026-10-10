@@ -122,7 +122,7 @@ as a broken transfer until you have checked the unit of measurement on both side
   date: export everything that becomes unreachable at switch-off first, then move the flows.
 - **The vendor changes a sub-processor mid-move.** It is an event for your stack rather than
   paperwork for theirs, and the contract terms on sub-processors decide what notice
-  you get and whether you may object (the legal section of `SKILL.md`). Ask about those terms
+  you get and whether you may object (`legal-regimes.md`). Ask about those terms
   while choosing the platform, not when the notice arrives.
 - **The migration stalls halfway.** Some flows on the new platform, some on the old, the dates
   gone. It is a sign the waves were cut too large. The safe move is to finish the current wave and

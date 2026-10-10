@@ -44,7 +44,7 @@ and discovering the difference in the margin.
 maximum absolute benefit; excluded items; the window. All six go in before the first send. Each
 one added afterwards is a narrowing of a promise somebody is already holding, which is the
 withdrawal in step 6 wearing different clothes. Record, for each limit, its own
-reason on every redemption attempt it refuses (the control metric in `SKILL.md`): on absolute
+reason on every redemption attempt it refuses (the control metric, `control-metric.md`): on absolute
 counts, a refusal with no recorded reason looks the same as a lost event.
 
 **3. Control what lives outside your system at issuance, not at redemption.** Benefits running in

@@ -128,3 +128,25 @@ name in ordinary speech and have different fixes, so keep them apart.
 **Price anchor.** The state of a base in which the price without a benefit has stopped reading as
 a price. Signature: the share of orders carrying a benefit rises while revenue per order between
 promotions falls.
+
+## Seams with neighbors
+
+Four seams get crossed by accident, so state them outright.
+
+- **A neighbor decides when somebody needs a monetary argument; this skill decides what it is.**
+  That single split covers four separate handovers: the step in a flow, the welcome benefit spread
+  across first purchases, the money a segment gets, and the content of a widget. Each neighbor
+  keeps the timing and the audience. Depth, condition, window, carrier, and collision are here.
+- **"Precedence" names two different things.** Here it decides which offer applies to one order at
+  checkout. In `contact-orchestration` it decides which message reaches one person in a period.
+  The unit is what makes them two things, and the rest follows from it: a different moment, and a
+  different consequence, since you suppress or defer a message while an offer does not apply at
+  all. `orchestration-vocabulary.md` states the same split from the other side.
+- **A consumable resource is watched by one skill and owed by another.** `program-audit-and-ops`
+  owns the duty roster: the level, the alert, the fact that a pool is nearly gone. This skill owns
+  what you do about promises already sent when it runs out, and it sets the level at which
+  issuing stops.
+- **The reward's value belongs to the loyalty program, the depth of a one-off offer belongs
+  here.** A points balance is a construction that lives for years and obliges you to something.
+  A one-off promise lives for one order. Where a game pays out in program points, the accrual
+  model is `loyalty-program-design` and the cost of running the game is here.
