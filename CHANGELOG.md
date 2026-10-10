@@ -14,7 +14,7 @@ All 35 skills share one version number. No skill has a version of its own.
 - **Patch.** A correction inside a skill: a legal or channel rule updated to match its current
   source, or a step rewritten to read more clearly.
 
-## [1.1.0] - Unreleased
+## [1.1.0] - 2026-10-11
 
 Each skill now takes less of the agent's context: a short description in the list the agent picks
 skills from, the rules that must hold at the top, and a body short enough to come back whole after
