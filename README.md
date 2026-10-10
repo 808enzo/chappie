@@ -382,15 +382,19 @@ Installed: yes
 
 ## What a skill won't do
 
-**No invented numbers.** The library carries no market benchmarks. Ask what is normal and the
-skill tells you it has no figure, gives you the definition of the metric, and shows you how to
-build a baseline from your own periods. It won't repeat a figure that circulates as a norm, even to
-argue against it: if you bring one, it checks what the figure divides by and over what window.
-Thresholds come from your data too: a lapse threshold comes
-from your own median interval between purchases. The numbers that do appear are legal and channel
-rules, quantities that follow from the math, parameters you compute from your own data, named
-starting points, and made-up worked examples. Every skill tells you which kind you are reading,
-and [ROADMAP.md](ROADMAP.md#on-numbers) explains why the library works this way.
+**No market benchmarks.** No file in the library carries a rate that other companies report as
+normal. Ask what is normal and the skill tells you it has no figure, gives you the definition of
+the metric, and shows you how to build a baseline from your own periods. Every skill also tells the
+agent not to name a figure that circulates as a norm, even to argue against it. The agent sometimes
+names one anyway, from the model's general knowledge rather than from the library. Treat that
+figure as one you brought: ask the agent what it divides by and over what window, the check every
+skill tells it to run on an outside figure. Thresholds come from your data too: a lapse threshold
+comes from your own median interval between purchases. The numbers that do appear are legal and
+channel rules, quantities that follow from the math, parameters you compute from your own data,
+named starting points, and made-up worked examples. Every skill tells you which kind you are
+reading. If the agent gives you a number that fits none of these kinds,
+[CONTRIBUTING.md](CONTRIBUTING.md#2-a-skill-gets-something-wrong) says how to report it.
+[ROADMAP.md](ROADMAP.md#on-numbers) explains why the library works this way.
 
 **No action you didn't ask for.** A request to analyze, audit or plan does not authorize sending a
 message, changing an audience or editing a live setting. Before the agent sends to a list, updates

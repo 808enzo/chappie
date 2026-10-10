@@ -50,7 +50,7 @@ Use this form for:
 - a broken link;
 - an agent that gave you a market benchmark, or a figure with no rule, math or recipe behind it.
 
-The last one counts as a defect. The library promises that a skill never invents a number, and
+The last one counts as a defect. Every skill tells the agent not to invent a number, and
 [ROADMAP.md](ROADMAP.md#on-numbers) lists the five kinds of number a skill may use.
 
 Bring the request you gave the agent, the agent and model you ran it on, what came back, and what

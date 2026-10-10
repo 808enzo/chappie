@@ -50,7 +50,8 @@ keep working.
   tables now routes a question the skill's own work leads to, one that users bring to the wrong
   skill, or a question that belongs to one of the skills most others hand work to.
 - The first block of `Limits` also rules out quoting a figure that circulates as a norm, even to
-  reject it. Where a skill would refer to such a figure, it writes X% in place of the number.
+  reject it. Where the agent would refer to such a figure, the block tells it to write X% in place of
+  the number.
 
 ### Fixed
 
