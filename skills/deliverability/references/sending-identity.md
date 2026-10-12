@@ -96,7 +96,7 @@ and the date it was opened are in `legal-regimes.md`.
 | Authentication, bulk senders | SPF and DKIM and DMARC at a policy of at least none | Google, Yahoo, Microsoft |
 | Alignment | From domain aligned with the SPF or the DKIM domain | Google, Yahoo, Microsoft; Yahoo accepts relaxed alignment |
 | DKIM key length | 1024 bits or longer | Google for personal Gmail accounts, Yahoo |
-| DNS lookups inside an SPF record | at most 10 | a limit of the protocol itself; exceeding it breaks the check |
+| DNS lookups inside an SPF record | at most 10 | a limit of the protocol itself (RFC 7208, section 4.6.4); exceeding it breaks the check |
 | Forward and reverse DNS | required, and the sending IP must match the host named in the PTR record | Google, Yahoo |
 | Transport | TLS | Google |
 | Message format | RFC 5322; Yahoo adds RFC 5321 | Google, Yahoo |

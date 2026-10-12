@@ -72,7 +72,7 @@ law and break a provider requirement at the same time, losing reputation while l
 
 ## Sources
 
-**Sources, each opened 2026-09-12.**
+**Sources, each opened 2026-09-12 unless its line gives another date.**
 
 - FTC, *CAN-SPAM Act: A Compliance Guide for Business*:
   https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business
@@ -85,6 +85,8 @@ law and break a provider requirement at the same time, losing reputation while l
   https://sendersupport.olc.protection.outlook.com/pm/policies.aspx
 - IETF, RFC 8058, *Signaling One-Click Functionality for List Email Headers*:
   https://www.rfc-editor.org/rfc/rfc8058.txt
+- IETF, RFC 7208, *Sender Policy Framework (SPF) for Authorizing Use of Domains in Email, Version 1*,
+  section 4.6.4, DNS lookup limits, opened 2026-10-12: https://www.rfc-editor.org/rfc/rfc7208.txt
 - Spamhaus, *Spamhaus Blocklist (SBL)*, listing removal:
   https://www.spamhaus.org/blocklists/spamhaus-blocklist/
 - Spamhaus, *Domain Blocklist (DBL)*, removal:
