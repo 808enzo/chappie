@@ -25,7 +25,8 @@ what has been checked. No skill is renamed and no mechanic is added.
   United States: act on the request without delay and within ten business days at most, and keep
   the unsubscribe mechanism valid for at least sixty days after the send. `references/legal-regimes.md`
   quotes CASL sections 11(2) and 11(3) and says which messages the two periods do not bind.
-- `deliverability` cites RFC 7208, section 4.6.4, for the limit of ten DNS lookups in an SPF check.
+- `deliverability` cites RFC 7208, section 4.6.4, for the limit of ten DNS lookups and counts them
+  across the whole SPF check, including the lookups inside nested `include:` records.
 - [README.md](README.md#install) says which agents have been checked and which are compatible by
   format only, and adds what Gemini CLI, Codex, Windsurf and Kiro CLI do differently.
 - The Claude app instructions name the right settings menu for Team and Enterprise plans, add
