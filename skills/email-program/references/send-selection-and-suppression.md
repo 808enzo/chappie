@@ -131,11 +131,11 @@ Teams skip this step, and it is the one that makes the next cycle's diagnosis po
   refresh faster than the shortest window that applies to you, or you break the rule while looking
   compliant.
   **Who this does not bind:** under CAN-SPAM, a message whose primary purpose is one of the five
-  categories of transactional and relationship message; under CASL, only a message that section 6(5)
-  takes out of section 6; the regimes outside the United States and Canada, which set their own
-  windows (`legal-regimes.md`, and the mechanics of `consent-and-preferences`). A service message that
-  CASL section 6(6) exempts from consent stays bound by both Canadian periods, because it still carries
-  the unsubscribe (`transactional-messaging`).
+  categories of transactional and relationship message; under CASL, a message that section 6(5) or
+  6(7.1) takes out of section 6 altogether; the regimes outside the United States and Canada, which
+  set their own windows (the mechanics of `consent-and-preferences`). A service message that CASL
+  section 6(6) exempts from consent stays bound by both Canadian periods, because it still carries the
+  unsubscribe (`transactional-messaging`).
 - **Cancellation window:** how late you can pull a send is a property of the sending platform.
   Find it before the first send you need to pull, not during it.
 

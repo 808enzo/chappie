@@ -51,9 +51,10 @@ The four regimes ask for this much:
   after the indication has been sent", and keep the address or page it goes to valid "for a minimum of
   60 days after the message has been sent" (section 11(3) and (2)): the same deadline as in the United
   States, and a longer life for the mechanism. **Who this does not bind:** express consent, which does
-  not expire and ends only with an unsubscribe; for the two unsubscribe periods, only a message that
-  section 6(5) takes out of section 6. A service message that section 6(6) exempts from consent stays
-  bound by both periods, because it still carries the unsubscribe (`transactional-messaging`).
+  not expire and ends only with an unsubscribe. Nor do the two unsubscribe periods bind a message that
+  section 6(5) or 6(7.1) takes out of section 6 altogether. A service message that section 6(6)
+  exempts from consent stays bound by both periods, because it still carries the unsubscribe
+  (`transactional-messaging`).
 
 ## Sources
 

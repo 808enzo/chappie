@@ -165,8 +165,9 @@ The list below says only what each rule governs.
 - **United States, CAN-SPAM, as the FTC's compliance guide states it:** the opt-out and how fast it is
   honored, how long the unsubscribe mechanism keeps working, the postal address, and the transactional
   and relationship categories.
-- **Canada, CASL, as the CRTC's guidance on implied consent states it:** express and implied consent,
-  and how long implied consent lasts from the event that created it.
+- **Canada, CASL, as the Act and the CRTC's guidance on implied consent state it:** express and implied
+  consent, how long implied consent lasts from the event that created it, how fast an opt-out is honored,
+  and how long the unsubscribe mechanism keeps working.
 
 Where a step changes with the regime, the mechanic says so at that step. This is not legal
 advice: it marks where the boundary runs and who to check with. Consent capture, preference
