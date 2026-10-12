@@ -10,7 +10,7 @@ body:
 
         Start from the work, not from a skill name. "We host in-store events for existing customers, and no skill says whom to invite, when to remind them or how to follow up with people who didn't come" gives the maintainer something to work with. "Add an events skill" doesn't.
 
-        The maintainer decides whether a request becomes a new skill, a section in an existing one, a line in ROADMAP.md, or a refusal with the reason. Calls and voice, and AI inside the program, are already planned for version 2.
+        The maintainer decides whether a request becomes a new skill, a section in an existing one, a line in ROADMAP.md, or a refusal with the reason. Calls and voice, and AI inside the program, are not planned; ROADMAP.md gives the reason for each.
   - type: markdown
     attributes:
       value: |

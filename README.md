@@ -9,8 +9,8 @@ Each skill gives you the part a framework leaves to you: the sequence of steps, 
 where they come from, the timing, who belongs in each segment, the edge cases and the ways the work
 can fail. Every file is held to one test: after reading it, you know what to do on Monday morning.
 
-The skills work with Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, the Claude app and
-[other agents](#install).
+The skills are checked in Claude Code and, in part, in the Claude app. Codex, Cursor, GitHub
+Copilot, Gemini CLI and [other agents](#install) read the same folder format.
 
 ## Quick start
 
@@ -120,10 +120,28 @@ Examples, as you would type them in Claude Code:
 
 ## Install
 
-Chappie works with Claude Code, Codex, OpenClaw, Hermes Agent, Cursor, GitHub Copilot, Gemini CLI,
-OpenCode, Windsurf, Cline, Roo Code, Kiro CLI, Goose, Amp and the Claude app. Every skill is a
-plain [Agent Skills](https://agentskills.io/specification) folder, so any agent that reads
-`SKILL.md` can load it.
+Every skill is a plain [Agent Skills](https://agentskills.io/specification) folder, so any agent
+that reads `SKILL.md` can load it. Each agent has one of three statuses:
+
+- **Checked:** Claude Code. Installed with `npx skills`, as the plugin and by hand, each into an
+  empty project, on 2026-10-11.
+- **Checked in part:** the Claude app. On 2026-10-12 the plugin installed in chat from the
+  marketplace and a skill was called without being named; one of its reference files did not open
+  ([In the Claude app](#other-ways-to-install) says what to do). The ZIP upload has not been tried.
+- **Compatible by format:** Codex, OpenClaw, Hermes Agent, Cursor, GitHub Copilot, Gemini CLI,
+  OpenCode, Windsurf, Cline, Roo Code, Kiro CLI, Goose and Amp. `npx skills` writes to a folder
+  that the agent's own documentation names. The agents themselves have not been run.
+
+Four of these agents, by their own documentation, behave in a way that affects the skills:
+
+- **Gemini CLI** asks you to confirm each time it loads a skill, so a handoff to a neighbor skill
+  costs a click.
+- **Codex** shortens skill descriptions when the list outgrows the share of context it gives the
+  list. Whether the 35 descriptions together pass that share depends on the model's context window.
+- **Windsurf** calls `.windsurf/skills/`, the folder `npx skills` writes to, a legacy folder. It
+  still reads it.
+- **Kiro CLI** loads skills into a custom agent only when they are listed under `resources` in
+  that agent's `.kiro/agents/<agent>.json`.
 
 ### With `npx skills`, for any agent
 
@@ -156,6 +174,10 @@ npx skills add 808enzo/chappie --skill metric-definitions --skill experiments-an
   --skill contact-orchestration --skill martech-stack --skill triggered-messages \
   --skill list-building
 ```
+
+Keep these nine on even if a usage report suggests otherwise. In Claude Code, `/skill-doctor`
+flags skills that have never been invoked as ones you could turn off, and these nine often wait
+for another skill to hand them a question.
 
 Update with `npx skills update`. Remove a skill with `npx skills remove deliverability`.
 
@@ -194,18 +216,31 @@ Claude Code prefixes plugin skills with the plugin name, so `deliverability` bec
 <details>
 <summary>In the Claude app</summary>
 
-The Claude app takes one skill per ZIP file, and skills there need code execution turned on.
+Skills in the Claude app need code execution. On a Free, Pro or Max plan, turn on
+**Code execution and file creation** in **Settings > Capabilities**. On a Team or Enterprise plan,
+an owner turns on code execution and file creation, and **Skills**, in
+**Organization settings > Plugins & skills**, on the **Policy** tab. Team plans have skills on by
+default.
 
-1. On a Free, Pro or Max plan, turn on **Code execution and file creation** in
-   **Settings > Capabilities**. On a Team or Enterprise plan, if skills are missing, ask an owner
-   to turn them on in **Organization settings > Skills**.
-2. Download this repository (**Code > Download ZIP** on GitHub) and unzip it.
-3. Compress each skill folder you need from `skills/` into its own ZIP file. Keep the folder name
+**As a plugin, on a paid plan.** This installs all 35 skills at once.
+
+1. Open **Customize > Plugins**, click **Add**, then **Add marketplace**, then
+   **Add from a repository**, and enter `808enzo/chappie`.
+2. Add the `chappie` plugin from that marketplace.
+
+In chat, Claude may fail to open one of a skill's reference files and answer from `SKILL.md`
+alone. If the answer says a reference file could not be read, ask Claude to find that file by its
+name and read it. The skill's Reference map lists the file names.
+
+**As ZIP files, on any plan.** The Claude app takes one skill per ZIP file.
+
+1. Download this repository (**Code > Download ZIP** on GitHub) and unzip it.
+2. Compress each skill folder you need from `skills/` into its own ZIP file. Keep the folder name
    as it is: it has to match the skill's name.
-4. Open **Customize > Skills**, click **+**, then **Create skill**, then **Upload a skill**, and
+3. Open **Customize > Skills**, click **+**, then **Create skill**, then **Upload a skill**, and
    choose the ZIP file.
 
-To make all 35 ZIP files at once, run this in a terminal instead of steps 2 and 3:
+To make all 35 ZIP files at once, run this in a terminal instead of steps 1 and 2:
 
 ```bash
 git clone https://github.com/808enzo/chappie.git
@@ -215,8 +250,9 @@ for skill in */; do zip -r "../${skill%/}.zip" "$skill"; done
 
 The ZIP files land in the `chappie` folder. When a skill hands part of a question to one you haven't
 uploaded, it gives you an `npx skills` command; in the Claude app, upload that skill's ZIP instead.
-These steps follow Anthropic's guide
-[Use skills in Claude](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
+These steps follow Anthropic's guides
+[Use skills in Claude](https://support.claude.com/en/articles/12512180-use-skills-in-claude) and
+[Use plugins in Claude](https://support.claude.com/en/articles/13837440-use-plugins-in-claude).
 
 </details>
 
@@ -408,8 +444,8 @@ skill quotes a rule, it names the primary source and the date the source was ope
 ## Scope
 
 Chappie starts where acquisition ends, so paid advertising, search, PR, social publishing and brand
-sit outside it. Two topics wait for version 2: calls and voice, and AI inside the program.
-[ROADMAP.md](ROADMAP.md#not-in-version-1) gives the reason for each.
+sit outside it. Two more topics are not planned: calls and voice, and AI inside the program.
+[ROADMAP.md](ROADMAP.md#not-in-version-1) gives the reason for each and what would bring it back.
 
 ## Help and contributing
 

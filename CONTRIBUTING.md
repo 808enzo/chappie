@@ -90,8 +90,9 @@ A request can end as a new skill, a section in an existing skill, a line in
   own results, `metric-definitions` shows you how to build a baseline from your own periods.
 - **Topics outside the territory.** Chappie starts where acquisition ends, so paid advertising and
   ad platforms, search, PR, social publishing and brand stay out.
-- **Calls and voice, and AI inside the program.** Both are planned for version 2, and
-  [ROADMAP.md](ROADMAP.md#not-in-version-1) gives the reason each one waits. Skip the issue.
+- **Calls and voice, and AI inside the program.** Neither is planned, and
+  [ROADMAP.md](ROADMAP.md#not-in-version-1) gives the reason for each and what would bring it back.
+  Skip the issue.
 - **Setup guides for one platform.** A skill describes the mechanic, and you run it on the stack
   you have. How to configure a specific email platform, CDP or CRM belongs in that vendor's
   documentation.

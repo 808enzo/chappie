@@ -4,8 +4,9 @@ Version 1 ships 35 skills in six blocks, and [README.md](README.md#skills) lists
 
 ## Not in version 1
 
-Version 2 takes both topics below. Neither is missing by oversight, and the reason differs in
-each case.
+Neither topic below is planned for a numbered release, and neither is missing by oversight: the
+table gives the reason for each. A topic returns to the plan when three things exist: sources
+opened and dated, a case from the maintainer's own work, and test cases written before the text.
 
 | Topic | Why it is not here |
 |---|---|

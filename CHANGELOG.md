@@ -14,6 +14,28 @@ All 35 skills share one version number. No skill has a version of its own.
 - **Patch.** A correction inside a skill: a legal or channel rule updated to match its current
   source, or a step rewritten to read more clearly.
 
+## [1.1.1] - 2026-10-12
+
+This release corrects two skills against their sources and makes the README and ROADMAP promise only
+what has been checked. No skill is renamed and no mechanic is added.
+
+### Fixed
+
+- `email-program` now gives Canada's unsubscribe deadlines instead of saying they differ from the
+  United States: act on the request without delay and within ten business days at most, and keep
+  the unsubscribe mechanism valid for at least sixty days after the send. `references/legal-regimes.md`
+  quotes CASL sections 11(2) and 11(3) and says which messages the two periods do not bind.
+- `deliverability` cites RFC 7208, section 4.6.4, for the limit of ten DNS lookups in an SPF check.
+- [README.md](README.md#install) says which agents have been checked and which are compatible by
+  format only, and adds what Gemini CLI, Codex, Windsurf and Kiro CLI do differently.
+- The Claude app instructions name the right settings menu for Team and Enterprise plans, add
+  installing the plugin from the marketplace, and say what to do when a reference file does not open.
+- [README.md](README.md#with-npx-skills-for-any-agent) asks you to keep on the nine skills that
+  others hand questions to, even when a usage report suggests turning them off.
+- Calls and voice, and AI inside the program, are no longer promised for a later release.
+  [ROADMAP.md](ROADMAP.md#not-in-version-1) says neither is planned and names the three things that
+  would bring a topic back.
+
 ## [1.1.0] - 2026-10-11
 
 Each skill now takes less of the agent's context: a short description in the list the agent picks
@@ -96,5 +118,6 @@ First public release.
 Version 2 takes two topics this release leaves out: calls and voice, and AI inside the program.
 [ROADMAP.md](ROADMAP.md#not-in-version-1) gives the reason for each.
 
+[1.1.1]: https://github.com/808enzo/chappie/releases/tag/v1.1.1
 [1.1.0]: https://github.com/808enzo/chappie/releases/tag/v1.1.0
 [1.0.0]: https://github.com/808enzo/chappie/releases/tag/v1.0.0

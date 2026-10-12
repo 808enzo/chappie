@@ -58,7 +58,8 @@ LICENSE              MIT
 
 **Territory.** The library covers everything after the first touch. Paid advertising, search, PR,
 social publishing and brand sit outside it, and so do guides to particular vendors' products.
-Calls and voice, and AI inside the program, wait for version 2 (`ROADMAP.md`).
+Calls and voice, and AI inside the program, are not planned; `ROADMAP.md` gives the reason for each
+and what would bring it back.
 
 ## SKILL.md
 
