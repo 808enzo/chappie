@@ -125,12 +125,17 @@ Teams skip this step, and it is the one that makes the next cycle's diagnosis po
   you owe somebody and what expires today.
 - **Opt-out honoring window:** set by the applicable law, not by the program. In the United States
   CAN-SPAM gives you ten business days for commercial email, and the unsubscribe mechanism has to
-  keep working for at least thirty days after the message went out. Neither one matches what the
-  EU, the UK or Canada asks for. Run your platform's suppression refresh faster than the shortest
-  window that applies to you, or you break the rule while looking compliant.
-  **Who this does not bind:** a message whose primary purpose is one of the five categories of
-  transactional and relationship message; the regimes outside the United States, which set their
-  own windows (`legal-regimes.md`, and the mechanics of `consent-and-preferences`).
+  keep working for at least thirty days after the message went out. Canada asks you to act on the
+  request without delay and within ten business days at most, and to keep the mechanism valid for at
+  least sixty days after the send (CASL, section 11(2) and (3)). Run your platform's suppression
+  refresh faster than the shortest window that applies to you, or you break the rule while looking
+  compliant.
+  **Who this does not bind:** under CAN-SPAM, a message whose primary purpose is one of the five
+  categories of transactional and relationship message; under CASL, only a message that section 6(5)
+  takes out of section 6; the regimes outside the United States and Canada, which set their own
+  windows (`legal-regimes.md`, and the mechanics of `consent-and-preferences`). A service message that
+  CASL section 6(6) exempts from consent stays bound by both Canadian periods, because it still carries
+  the unsubscribe (`transactional-messaging`).
 - **Cancellation window:** how late you can pull a send is a property of the sending platform.
   Find it before the first send you need to pull, not during it.
 

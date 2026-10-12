@@ -46,8 +46,14 @@ The four regimes ask for this much:
   that created it: two years from a purchase, a rental, an accepted business proposal or a written
   contract, six months from an inquiry or an application. CASL sets both periods, so a base of inquiries
   ages four times faster than a base of buyers. The email asking for express consent is itself a
-  commercial message, so you can send it only where implied consent already exists. **Who this does not
-  bind:** express consent, which does not expire and ends only with an unsubscribe.
+  commercial message, so you can send it only where implied consent already exists. On either kind of
+  consent, you act on an unsubscribe "without delay, and in any event no later than 10 business days
+  after the indication has been sent", and keep the address or page it goes to valid "for a minimum of
+  60 days after the message has been sent" (section 11(3) and (2)): the same deadline as in the United
+  States, and a longer life for the mechanism. **Who this does not bind:** express consent, which does
+  not expire and ends only with an unsubscribe; for the two unsubscribe periods, only a message that
+  section 6(5) takes out of section 6. A service message that section 6(6) exempts from consent stays
+  bound by both periods, because it still carries the unsubscribe (`transactional-messaging`).
 
 ## Sources
 
@@ -58,5 +64,7 @@ The four regimes ask for this much:
 - ICO, *Guidance on direct marketing using electronic mail*, opened 2026-09-16:
   https://ico.org.uk/for-organisations/direct-marketing-and-privacy-and-electronic-communications/guidance-on-direct-marketing-using-electronic-mail/how-do-we-comply-with-the-pecr-electronic-mail-marketing-rules/
 - CRTC, *Guidance on Implied Consent*, opened 2026-09-07: https://crtc.gc.ca/eng/com500/guide.htm
+- Canada's Anti-Spam Legislation, S.C. 2010, c. 23, sections 6 and 11, opened 2026-10-12:
+  https://laws-lois.justice.gc.ca/eng/acts/E-1.6/FullText.html
 - Directive 2002/58/EC as amended in 2009, article 13, opened 2026-09-07:
   https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02002L0058-20091219
