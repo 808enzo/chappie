@@ -163,6 +163,23 @@ QUOTATION = re.compile(r'"[^"]*"|\u201c[^\u201d]*\u201d')
 # Hyphenated terms written in code format that are not skill slugs.
 NOT_SLUGS = {"aria-modal"}
 ITEM_START = re.compile(r"^\s*(?:[-*+]\s|\d+[.)]\s|\|)")
+# Form checks. Each one only warns: AGENTS.md, Three passes and Checks, says what to do with a hit.
+DASHES = re.compile("[–—]")
+MARKDOWN_LINK = re.compile(r"\]\(<?([^)\s>]+)>?(?:\s+\"[^\"]*\")?\)")
+URL_SCHEME = re.compile(r"^[a-z][a-z0-9+.-]*:", re.I)
+REFERENCE_POINTER = re.compile(r"`references/([^`\s]+\.md)`")
+BACKTICKED_SLUG = re.compile(r"`([a-z0-9]+(?:-[a-z0-9]+)+)`")
+# A quantity written as words where the reader needs a threshold, a window or a count. The list
+# is narrow on purpose: `several`, `most` or `barely` alone mostly describe, and a warning on every
+# one would bury the few that set a parameter.
+NUMBER_WORDS = re.compile(
+    r"\b(late point|long multiple"
+    r"|several (?:typical |consecutive |full |stable )?(?:periods|cycles|intervals|windows)"
+    r"|(?:more|fewer) than a handful|few percent"
+    r"|(?:in|within|inside|by) which most|for most people|where most \w+ (?:are|is)"
+    r"|(?:if|when|where|until|unless|once) (?:\w+ ){0,3}barely)\b",
+    re.I,
+)
 ISSUE_FORMS = os.path.join(ROOT, ".github", "ISSUE_TEMPLATE")
 # Dropdown ids that list skills in the issue forms, and the options that are not skills.
 SKILL_DROPDOWN_IDS = {"skill", "skills"}
@@ -608,6 +625,77 @@ def clip(sentence, width=160):
     return sentence if len(sentence) <= width else sentence[:width - 3] + "..."
 
 
+# Form -------------------------------------------------------------------------------------
+
+def check_form(report, path, slugs):
+    text = read(path)
+    report.ran("file-end")
+    if text and not text.endswith("\n"):
+        report.warn("file-end", path, text.count("\n") + 1, "the file does not end with a newline: "
+                    "the next edit of its last line also changes the line above it in the diff")
+
+    report.ran("links")
+    check_links(report, path, text)
+    skill = skill_of(path)
+
+    report.ran("dashes")
+    if skill:
+        report.ran("number-words")
+    for first_line, unit in units(text):
+        if skill:
+            check_pointers(report, path, skill, slugs, first_line, unit)
+        # Quoted wording keeps its own punctuation, and code is not prose.
+        prose = QUOTATION.sub(blank, re.sub(r"`[^`\n]*`", blank, unit))
+        for match in DASHES.finditer(prose):
+            report.warn("dashes", path, first_line + prose.count("\n", 0, match.start()),
+                        "a dash outside a quotation: use a comma, a colon, a period or parentheses: %s"
+                        % clip(normalize(unit[max(0, match.start() - 60):match.end() + 60])))
+        # The release notes and the root files describe skills; the parameters live in the skills.
+        for match in NUMBER_WORDS.finditer(prose if skill else ""):
+            report.warn("number-words", path, first_line + prose.count("\n", 0, match.start()),
+                        "`%s` sets a quantity in words: give the recipe (class 4) or name it as a "
+                        "starting point with its three parts (class 5), unless it only describes: %s"
+                        % (normalize(match.group(1)),
+                           clip(normalize(unit[max(0, match.start() - 60):match.end() + 60]))))
+
+
+def skill_of(path):
+    """The slug of the skill folder a file sits in, or None outside skills/."""
+    rel = os.path.relpath(path, SKILLS)
+    return None if rel.startswith("..") else rel.split(os.sep)[0]
+
+
+def check_links(report, path, text):
+    """A relative Markdown link must reach a file or folder in the repository."""
+    fenced = False
+    for number, line in enumerate(text.split("\n"), 1):
+        if FENCE.match(line):
+            fenced = not fenced
+            continue
+        if fenced:
+            continue
+        for match in MARKDOWN_LINK.finditer(re.sub(r"`[^`]*`", blank, line)):
+            target = match.group(1)
+            if URL_SCHEME.match(target) or target.startswith("#"):
+                continue
+            resolved = os.path.normpath(os.path.join(os.path.dirname(path), target.split("#")[0]))
+            if not os.path.exists(resolved):
+                report.warn("links", path, number, "the link `%s` leads to no file" % target)
+
+
+def check_pointers(report, path, skill, slugs, first_line, unit):
+    """`references/<file>` must name a file of this skill, or of a skill the same paragraph names."""
+    named = [slug for slug in BACKTICKED_SLUG.findall(unit) if slug in slugs]
+    for match in REFERENCE_POINTER.finditer(unit):
+        name = match.group(1)
+        owners = [skill] + named
+        if not any(os.path.isfile(os.path.join(SKILLS, owner, "references", name)) for owner in owners):
+            report.warn("links", path, first_line + unit.count("\n", 0, match.start()),
+                        "`references/%s` is not a file of `%s`%s" % (
+                            name, skill, " or of " + ", ".join("`%s`" % s for s in named)
+                            if named else ""))
+
+
 def check_listing(report, slugs):
     """The whole library's share of the skill listing, one `- chappie:<slug>: <description>` line each."""
     report.ran("listing-budget")
@@ -705,6 +793,7 @@ def main(arguments):
         check_skill(report, slug, set(slugs))
     for path in markdown_files(selected, not arguments):
         check_evidence(report, path)
+        check_form(report, path, set(slugs))
     if not arguments:
         check_issue_forms(report, set(slugs))
         check_listing(report, slugs)

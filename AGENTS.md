@@ -418,11 +418,17 @@ Reference map, neighbor slugs, and that every skill list in `.github/ISSUE_TEMPL
 exactly the folders in `skills/`. A run with no slug also adds up the library's share of the skill
 listing. On numbers, it fails a benchmark marker next to a number, and it warns on a sum of money,
 on a percentage next to a metric name, and on wording that pairs a mechanic with a result. The
-number checks skip quotations, code, and paragraphs labeled as a worked example. If you change a
-fixed block in this file, change it in `scripts/validate` too.
+number checks skip quotations, code, and paragraphs labeled as a worked example. In a skill's
+files, it also warns on a quantity written in words where a step needs a threshold, a window or a
+count, such as `a late point` of a distribution or `several periods`: give the recipe or name a
+starting point (see Numbers), or leave the words if they only describe. In every Markdown file, it
+warns on a missing newline at the end, a dash outside a quotation, and a relative link or a
+`references/` path that leads to no file. If you change a fixed block in this file, change it in
+`scripts/validate` too.
 
 A clean run does not clear the numbers. The script sees a marker, never a class, so a hidden
-benchmark with no marker passes. Name the class of every number in a changed file yourself (see
+benchmark with no marker passes, and its list of quantities in words is short, so a parameter
+worded another way passes too. Name the class of every number in a changed file yourself (see
 Numbers). Nor does it compare files: after you move text between `SKILL.md` and `references/`,
 check that every sentence you took out of one file stands word for word in the other.
 
@@ -430,9 +436,6 @@ The searches below cover what the validator does not. Run them with the slug in 
 `<slug>`, and read each hit:
 
 ```bash
-# em and en dashes (quotations may keep them)
-grep -rnE "$(printf '\342\200\224|\342\200\223')" skills/<slug>/
-
 # British spelling (quotations and URLs may keep it)
 grep -rniE "behaviour|neighbour|optimis|organis|prioritis|recognis|utilis|analysing|fulfilment|licence|catalogue|programme|centre|cancelled|modelling|labelled|whilst|amongst" skills/<slug>/
 
