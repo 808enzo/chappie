@@ -229,13 +229,28 @@ benchmark in disguise: cut it.
 | 5. Named starting point | A baseline of 8 to 12 stable periods | A statement that it is a starting point, where it applies and where it does not, and what replaces it once the reader has data |
 | 6. Worked example | 50 conversions out of 1,000 against 55 | A label in the same sentence saying the numbers are made up |
 
-Tell the classes apart with two questions:
+Tell the classes apart by where the number comes from. Ask these questions in order and stop at
+the first yes:
 
-- **Can the reader get this number without leaving their own data?** If not, and it is not a
-  rule, a result of the math or a labeled example, it is a benchmark. `60 days` with nothing
-  behind it is one.
-- **What changes if you pick a different number?** If an equality breaks, the number is class 3.
-  If only a trade-off shifts, it is class 5.
+1. **Does a law, or a channel's own rule or limit, set it?** Class 2.
+2. **Does it follow from an equality?** Class 3. A premise the skill picks gets a class of its own:
+   with a 10% holdout, the 90% who get the message follow from the math, and the 10% is class 5.
+3. **Does the reader compute it from their own data with a recipe?** Class 4. A multiplier or a
+   share the skill picks and applies to that data is not class 4: in "twice the customer's own
+   median interval", the median is class 4 and the two is class 5.
+4. **Does the skill choose it itself, from how the mechanic works or from experience, as a default
+   until the reader has data of their own, or as a multiplier or a share applied to that data?**
+   Class 5. A setting that is common practice, such as an alpha of 0.05, counts. A result other
+   companies report does not, whatever you call it: go on to question 6.
+5. **Is it made up to show a calculation?** Class 6.
+6. **None of these?** Then it is someone else's result, a benchmark. So is a number whose origin the
+   text does not give: `60 days` with nothing behind it is one. To change the class, change where the
+   number comes from.
+
+When a number could be class 3 or class 5, ask what changes if you pick a different one. If an
+equality breaks, it is class 3. If only a trade-off shifts, it is class 5. In classes 2 to 6, keep a
+number only together with what the table puts next to it. Without that, it reads as a benchmark: add
+what is missing or cut the number.
 
 ```text
 Wrong: read the result after 8 to 12 periods.
@@ -285,8 +300,16 @@ what the file settles.
   section and the URL, with the ISO date you opened it, one line per document in the Sources
   block. A blog post that summarizes a law is not a source, and a claim without a primary source
   stays out.
-- **Date a source only after you open it yourself.** A rule a neighbor already quotes can point to
+- **Date a source only after you open it yourself**, which means reading the text the site itself
+  returns; a tool's summary of the page does not count. A rule a neighbor already quotes can point to
   that skill, which keeps the source and its date.
+- **Check every quotation you add or change against the page's own text.** A tool's summary of a
+  page, or its answer when you ask it to quote the page word for word, comes from a model and can
+  change the words. Find the quoted words in the text the site itself returns before you rely on them.
+  If you cannot, leave the new claim out. A quotation already in the file keeps its source and date
+  until someone reads the page again. Read the claim against the document's definitions and the version
+  in force: look for a "current to" or last-amended date on the page, because the date you opened it does
+  not show which version applies.
 - **Quote the rules in `references/legal-regimes.md`, not in `SKILL.md`.** That `definition` file
   holds each rule in its source's words, its `Who this does not bind:` line, and the Sources block
   at the end. The section in `SKILL.md` keeps which skill owns the basis for sending, one line per
