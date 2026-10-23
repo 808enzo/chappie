@@ -66,7 +66,21 @@ changed.
 **7. Build a self-baseline instead of a market number.** Take eight to twelve completed periods as a
 starting point, compute the median and the spread, and state in advance what movement counts as signal and what
 counts as noise. This is the standing answer to what is normal for any metric in the set: this
-library carries no market benchmark.
+library carries no market benchmark. The spread is the band from the lowest to the highest of those
+periods. Read each new completed period against it with the signal rule:
+
+- a period inside the band, an edge value included, is noise;
+- one period outside the band is a flag. It says nothing yet about the work: check the data and the
+  base (`reconciling-across-systems.md`; The base grew or was cleaned, under Edge cases) and wait for
+  the next period. If the check explains the flag (a counting artifact or a change of base), the
+  flag starts no pair: remove the cause, then read the series again;
+- two periods in a row beyond the same edge, both read against the band in force at the first of
+  them, are a signal.
+
+Once the band exists, write the rule with its false-alarm rate for your own n beside it (Thresholds
+and timings), so whoever reads the next period knows how often the rule fires when nothing has
+changed. Asked what is normal before that, give the rule and its formulas, not a figure for some
+other n.
 
 **8. Do not fit an outside benchmark to your own definition.** A market figure is usable only
 together with the numerator, denominator and window its source used. A matching metric name
@@ -78,6 +92,36 @@ guarantees none of the three.
   spread is unreadable; many more and you are averaging across a program that has changed. Revise
   it on your own series: shorten the span where the program changed inside it, lengthen it where
   the spread still moves as periods are added.
+- **The signal rule's false-alarm rate follows from the ranks.** With n periods in the band and
+  nothing changed in the work, each of the n + 1 periods is equally likely to be the lowest, so a
+  new period falls below all n in 1/(n + 1) of periods, and a flag on either edge fires in
+  2/(n + 1). Any two of the n + 2 periods are equally likely to be the two lowest, so two new periods
+  both fall below all n in 2/((n + 1)(n + 2)) of periods, and a signal on either edge fires in
+  4/((n + 1)(n + 2)). With twelve periods, that is 2 in 13 for a flag and 4 in 182, about 1 in 45,
+  for a signal; with eight, 2 in 9 and 4 in 90, about 1 in 22. One edge alone halves both. These are
+  rates per period: on a monthly metric with twelve periods in the band, a false signal fires about
+  once in four years on average. They are averages over all the bands you could build; the rate of
+  any one band runs above or below them.
+- **What the rates assume.** They hold for any shape of distribution, but only while the periods are
+  independent and share one level, with no trend, no season and no period pulling the next one its
+  way. Where values repeat at the edges (counts, rounded rates), an edge value is noise and the
+  rates become ceilings. Where a period pulls the next one its way, both periods of a pair drift
+  together and the signal fires more often than these rates say: name that condition beside the
+  rate, and do not compute a corrected figure. Where the metric has a season, read each period as
+  its ratio to the same period of the previous seasonal cycle (Seasonality against trend, under Edge
+  cases), and build the band from the same ratio over earlier periods; building that band takes n
+  periods plus one full seasonal cycle of the version in force. The rates change with n, so compute
+  them for your own n: a figure for another n does not carry over.
+- **Two periods in a row is a starting point.** It cuts the false-alarm rate to 2/(n + 2) of the
+  flag's, a fifth at eight periods and a seventh at twelve, at the cost of at least one period of
+  delay, and more delay where a shift is small enough that a shifted period still lands inside the
+  band now and then. Where a late catch costs more than a false alarm, act on the flag and state its
+  rate. Where a false alarm costs more, require three periods in a row and work out that rule's rate
+  the same way. Choose the rule first, then compute its rate.
+- **The band stays fixed between rebuilds.** Rebuild it at the review of the set, not every period,
+  and not while a flag waits for its second period. A band rebuilt every period from the latest n
+  periods takes in the shifted periods and moves its own edge toward them, so a shift that does not
+  produce a pair at once is caught later or not at all.
 - **One control metric per program area**, not per company: a channel program, an automated flow
   layer and a loyalty program are accountable for different things.
 - **Review the set at the cadence of the decisions it serves**, and no faster.
@@ -167,24 +211,30 @@ baseline is built on 2026-08-10, once July has closed.
    read against it.
 3. Median of the nine period rates: 3.92%.
 4. Spread: the lowest period, 3.64%, and the highest, 4.21%. That range is the band.
-5. Write the rule before the next period closes: a completed period outside 3.64% to 4.21% is a
-   signal; one inside the band is noise.
+5. Write the rule before the next period closes: a completed period inside 3.64% to 4.21% is noise,
+   one outside it is a flag, and two in a row below 3.64%, or two in a row above 4.21%, are a signal.
+   With nine periods in the band, a flag fires by chance in 2 in 10 periods and a signal in 4 in
+   110, about 1 in 27.
 6. Minimum denominator. One clicker more or one fewer moves a rate on n delivered messages by 1/n, up
    or down, so the nearer edge of the band sets the floor. From the median, that edge is 3.92% minus
    3.64%, 0.28 points, so 1/n stays under 0.0028 only when n is above 357.1: the floor is 358 delivered.
    Publish a send with fewer as counts, not as a rate.
 
 **What it returns in this worked example:** a register line that reads click rate, version 2, median
-3.92%, band 3.64% to 4.21%, built from 2025-11 to 2026-07, minimum denominator 358. August closes at
-3.31%, outside the band, so it is a signal. Its denominator grew from 43,100 to 56,400, so check the
-base before the work (The base grew or was cleaned, under Edge cases). This example assumes the rate
-has no season; where it has one, compare with the same period of the previous cycle.
+3.92%, band 3.64% to 4.21%, built from 2025-11 to 2026-07, minimum denominator 358, flag 2 in 10,
+signal 4 in 110. August closes at 3.31%, below the band: a flag, not yet a signal. Its denominator
+grew from 43,100 to 56,400, so check the base before the work (The base grew or was cleaned, under
+Edge cases). If the check finds no artifact and September also closes below 3.64%, August and
+September together are a signal. September's last send goes out on 2026-09-30, so its collection
+window closes on 2026-10-07. Until then its rate is provisional: do not read it against the band.
+This example assumes the rate has no season; where it has one, compare with the same period of the
+previous seasonal cycle.
 
 **When the data is too little.** Fewer than eight completed periods of the version in force is too
 little: eight is the low end of the starting point in Thresholds and timings. The procedure then
 returns "no base yet" with the date the eighth period closes, and nothing it would have computed: no
-median, no band, no alert, no minimum denominator, since the floor comes from the spread. Until that
-date, publish each period's rate with its denominator beside it. In this worked example, had version
-2 started on 2026-03-01, the register on 2026-08-10 would hold five completed periods and read "no
-base yet, 2026-11-07": October is the eighth period, its last send goes out on 2026-10-31, and the
-collection window closes seven days later.
+median, no band, no flag or signal, no minimum denominator, since the floor comes from the spread.
+Until that date, publish each period's rate with its denominator beside it. In this worked example,
+had version 2 started on 2026-03-01, the register on 2026-08-10 would hold five completed periods
+and read "no base yet, 2026-11-07": October is the eighth period, its last send goes out on
+2026-10-31, and the collection window closes seven days later.

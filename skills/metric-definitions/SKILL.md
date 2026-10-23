@@ -45,7 +45,7 @@ keep any one person's records out of summaries and examples, and do not pass the
 task does not need.
 ```
 
-Two more, specific to this skill:
+Three more, specific to this skill:
 
 - **A metric name guarantees nothing about the formula behind it.** Vendor material gets
   formulas wrong as often as it gets numbers wrong, and the same publication can print two
@@ -53,10 +53,28 @@ Two more, specific to this skill:
   find its denominator; if it has none, it is not comparable to yours.
 - **No threshold in these files is a norm.** The minimum denominator, the reconciliation
   tolerance, the provisional period of the freeze rule and the review cadence come out of your own
-  dispersion, your own settling clocks and your own decision cycle. The counts this library chose,
-  eight to twelve periods for a self-baseline and one cycle for an investigation or a series
-  break, are starting points, and each says where it stands how to revise it. A round number
-  copied from an article is a hidden benchmark with no source.
+  dispersion, your own settling clocks and your own decision cycle. The counts this library chose
+  are starting points: eight to twelve periods for a self-baseline, two periods in a row for a
+  signal, and one cycle for an investigation or a series break. Each one says, where it appears, how
+  to revise it. A round number copied from an article is a hidden benchmark with no source.
+- **A self-baseline comes with its signal rule, and the rule with its false-alarm rate.** The band
+  runs from the lowest to the highest of n completed periods of the version in force, and it stays
+  fixed until the next scheduled rebuild. Read each new completed period against it. A period inside
+  the band, an edge value included, is noise. One period outside the band is a flag: check the data
+  and the base, and wait for the next period. Two periods in a row beyond the same edge, both read
+  against the band in force at the first of them, are a signal. If nothing in the work has changed,
+  a flag fires in 2/(n + 1) of periods and a signal in 4/((n + 1)(n + 2)); one edge alone halves
+  both. With twelve periods, that is 2 in 13 for a flag and 4 in 182, about 1 in 45, for a signal.
+  The rates change with n, so a figure computed for another n does not carry over: work out, for the
+  user's own n, the rate of the rule you tell them to act on. Asked what is normal before any of the
+  user's periods are in hand, give the rule and its formulas, not a rate. While the periods are
+  independent and share one level (no trend, no season, no period pulling the next one its way), the
+  rates hold for any shape of distribution; where values repeat at the edges, they become ceilings.
+  Name that condition beside the rate. In a seasonal metric, compare each period with the same
+  period of the previous seasonal cycle. Before the eighth completed period, publish each period's
+  value with its denominator and the date the eighth closes, and call nothing a flag or a signal.
+  The rule is step 7 of `references/the-metric-set.md`; its rates and when to rebuild the band are
+  under Thresholds and timings there, and its worked example ends that file.
 
 ## When to use this
 
@@ -112,6 +130,8 @@ Two seams are worth stating outright:
   this skill. Whether a difference between two numbers is real belongs to
   `experiments-and-holdouts`. A metric with no definition makes any comparison meaningless, and
   a comparison with no design makes any definition pointless.
+  Whether periods read against the metric's own self-baseline make a flag or a signal stays here:
+  that is the signal rule above.
 - **Definition here, pipeline there.** Writing the definition, naming the system of record and
   reconciling two sources sit here. Monitoring that the export ran and paging someone when it
   did not sits in `program-audit-and-ops`. The failure modes in these files name symptoms; they
@@ -125,7 +145,7 @@ Load the file that matches the task. Each one stands alone.
 |---|---|---|
 | `references/writing-a-definition.md` | mechanic | You are defining one metric: numerator, denominator, the two windows, the conversion key and credit rule, attribution method, system of record, exclusions, refresh and freeze rules. |
 | `references/reconciling-across-systems.md` | mechanic | Two systems disagree about one metric and a decision is stuck on it. |
-| `references/the-metric-set.md` | mechanic | More than a handful of metrics are in use: the register, the control metric and its guardrails, retiring metrics, changing a definition, building a self-baseline. |
+| `references/the-metric-set.md` | mechanic | More than a handful of metrics are in use: the register, the control metric and its guardrails, retiring metrics, changing a definition, building a self-baseline and reading new periods against it. |
 | `references/message-metrics.md` | definition | You need the formula and denominator of a channel metric: delivery, bounces, opens, clicks, CTOR, unsubscribes, complaints, the revenue family, reachable base. |
 | `references/customer-metrics.md` | definition | You need the formula and denominator of a customer or money metric: active customer, repeat purchase, retention, churn, AOV, ARPU, LTV, CAC. |
 | `references/control-metric.md` | definition | You are taking a reading of definition coverage or comparing it with an earlier one: on which day it is taken, when a new metric enters it, and which movement against your own history is the signal. |
