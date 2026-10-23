@@ -135,7 +135,9 @@ starting points this skill chose, and they are marked as such.
 
 How you see that the mechanic is not working, and what you do about it.
 
-- **Revenue per recipient falls for two consecutive cycles while volume rises.** Separate the two
+- **Revenue per recipient closes below the low edge of its band in two cycles in a row while volume
+  rises** (entry condition (a) of `declining-returns.md` without its revenue condition; that file
+  gives the false-alarm rate). Separate the two
   kinds of volume before you act, because the metric answers them differently. More touches to the
   same people leave the denominator where it was, so a fall means the extra sends earned nothing:
   the program is buying revenue with load. Wider reach adds people to the denominator, and a fall

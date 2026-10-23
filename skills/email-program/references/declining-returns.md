@@ -15,19 +15,38 @@ Where two steps do not depend on each other, take the cheaper one first.
 
 ## Entry conditions
 
-- The control metric, revenue per recipient per cycle, has fallen for two consecutive cycles
-  **while total channel revenue did not rise**; **or** the channel's share of revenue is falling
-  while send volume stays flat. A metric falling because the program reached more people while the
-  channel earned more is arithmetic, not decline, and it does not open the mechanic.
-- One cycle is noise and does not open the mechanic. Act on one cycle and you change rhythm every
-  cycle, which leaves you with a program you can never read.
-- Your comparison is like for like: same season, same definition, same attribution. Establish
-  that before you enter, or step 1 will establish it for you.
+- Enter on either of two conditions. (a) The control metric, revenue per recipient per cycle,
+  closes below the low edge of its self-baseline band (the lowest value among the baseline's cycles)
+  in two completed cycles in a row, both read against the band in force at the first of them,
+  **while total channel revenue did not rise**. (b) The channel's share of revenue closes below the
+  low edge of its own band in two completed cycles in a row, read the same way, while send volume
+  stays flat. A metric falling because the program reached more people while the channel earned
+  more is arithmetic, not decline, and it does not open the mechanic.
+- One cycle below the band is a flag, not an entry: run step 1 on it and wait for the next cycle.
+  Act on one cycle and you change rhythm every cycle, which leaves you with a program you can never
+  read.
+- Each condition is the signal rule of `metric-definitions`, applied to the low edge only. With n
+  cycles in the band and nothing changed in the program, two cycles in a row fall below the band by
+  chance in 2/((n + 1)(n + 2)) of cycles: with twelve cycles, 2 in 182, about 1 in 91. The second
+  half of each condition (revenue not rising, volume flat) can only lower that rate for its branch;
+  the two branches together can reach up to twice it. The rate assumes independent cycles with no
+  trend or season; when you report that the program has entered, give it for the user's own n. In a
+  seasonal program, read each cycle as its ratio to the same period of the previous seasonal cycle,
+  and build the band from the same ratio over earlier cycles. Keep the band fixed between rebuilds
+  at the program's review, and never rebuild it while a flag waits for its second cycle.
+- With no band yet (fewer than eight completed cycles since the metric's definition, attribution
+  window or method last changed, or fewer than eight same-period ratios in a seasonal program), say
+  that the entry conditions cannot be checked yet and give the date the eighth closes. Steps 1 and 2
+  check the measurement and the delivery, not the program, so they do not wait for an entry
+  condition: run them on any fall that worries you.
+- Your comparison is like for like: same definition, same attribution, and in a seasonal program
+  the same season. Establish that before you enter, or step 1 will establish it for you.
 
 ## Exit conditions
 
-The metric holds across two consecutive cycles, and you have either walked volume back up to
-plan in steps or left it below plan on purpose. Leaving it below plan is a legitimate exit: a
+The metric that opened the mechanic closes at or above the low edge of the band in force at entry
+in two completed cycles in a row, and you have either walked volume back up to plan in steps or left
+it below plan on purpose. Leaving it below plan is a legitimate exit: a
 smaller program that earns beats a large one that does not.
 
 ## Sequence, and the order is the mechanic
@@ -70,15 +89,16 @@ the earlier ones ruled out is a useful result: it tells the copy team the proble
 
 Run these in order once you have the cause:
 
-1. **Freeze volume.** No new slots until the metric holds for a cycle. The freeze is what makes
-   every later change readable.
+1. **Freeze volume.** No new slots until the metric closes a cycle at or above the low edge of the
+   band in force at entry. The freeze is what makes every later change readable.
 2. **Narrow mass sends to the active tier.** The dormant tier gets anchors only, or one
    deliberate return attempt run as its own campaign. That campaign belongs to
    `lapse-and-winback`, not to the standing program.
 3. **Restore suppression rules** switched off during the push that preceded the decline. Check
    each rule against the plan rather than asking whether anyone changed one.
 4. **Move rhythm one step per cycle**, in the direction the diagnosis pointed.
-5. **Walk volume back up in steps** once the metric is stable. A step is one widening of the
+5. **Walk volume back up in steps** once the metric meets the stability threshold (Thresholds and
+   timings). A step is one widening of the
    audience by recency of response, and it is authorized by signal rather than by the calendar:
    refusals, complaints, the provider's reputation reading and response itself, all of them read
    per provider (`deliverability`, which owns the ladder and whose ceiling outranks the plan while
@@ -87,11 +107,16 @@ Run these in order once you have the cause:
 
 ## Thresholds and timings
 
-- **Entry:** two consecutive cycles of decline.
+- **Entry:** two completed cycles in a row below the low edge of the self-baseline band, either of
+  revenue per recipient with total channel revenue not rising, or of the channel's share of revenue
+  with send volume flat (the full rule and its false-alarm rate: Entry conditions).
 - **Measurement after any change:** not before the end of the cycle in which you made it.
 - **Variables changed at once:** one.
-- **Comparison basis:** the same period of the previous seasonal cycle, not the previous month.
-- **Stability, for exit:** two consecutive cycles.
+- **Comparison basis:** the self-baseline band of the metric's current definition; in a seasonal
+  program, a band built from ratios to the same period of the previous seasonal cycle, never the
+  previous month alone.
+- **Stability, for exit:** two completed cycles in a row at or above the low edge of the band in
+  force at entry, for the metric that opened the mechanic.
 - **Ceiling:** the volume step at which complaints move. One step below it is your working
   ceiling.
 

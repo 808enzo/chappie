@@ -218,8 +218,16 @@ was treated after all and the tier mix no longer means what it did. Freeze the t
 control at the value it had on assignment, and compute the active core with them excluded.
 
 **This library has no citable benchmark for this metric.** Say so when asked, then build a
-self-baseline: take eight to twelve completed cycles, compute the median and the spread, and
-treat movement outside that spread as signal and movement inside it as noise. Eight to twelve is a
-starting point rather than a computed minimum, and a cycle whose attribution window has not closed
-is not one of them. A baseline built this way belongs to the person who built it. It is not a market number and it does not travel to
-anyone else's program.
+self-baseline: take eight to twelve completed cycles and compute the median and the spread, the
+band from the lowest to the highest of them. Eight to twelve is a starting point rather than a
+computed minimum, and a cycle whose attribution window has not closed is not one of them. A baseline
+built this way belongs to the person who built it. It is not a market number and it does not travel
+to anyone else's program.
+
+When you read a new cycle against that band, use the signal rule of `metric-definitions`: a cycle
+inside it is noise, one cycle outside it is a flag that sends you to rule out a measurement
+artifact, and two cycles in a row beyond the same edge, both read against the band in force at the
+first of them, are a signal. With n cycles in the band and nothing changed, a flag fires in
+2/(n + 1) of cycles and a signal in 4/((n + 1)(n + 2)). With twelve cycles, that is 2 in 13 and 4 in
+182, about 1 in 45; one edge alone halves both. Both rates assume independent cycles with no trend
+or season; with none of the user's cycles in hand, give the rule and its formula, not a rate.
