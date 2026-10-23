@@ -73,6 +73,24 @@ that turns quiet into broken, and the slot closes more records than it opens.
    `incident-response.md`, whatever it costs. Everything else waits for the slot. Subscribe to
    everything and alerts become background, at which point none of them work, including the one you
    set up first.
+
+   For an alert on a metric's value rather than on a heartbeat, read the value against the band of
+   the metric's own self-baseline (the lowest to the highest of n completed periods) with the signal
+   rule of `metric-definitions`. One period outside the band is a flag: open a warning (step 5)
+   dated to the close of the next period, check the data and the base, and wait for that period.
+   Two periods in a row beyond the same edge, both read against the band in force at the first of
+   them, are the signal that opens a problem. On an object whose failure would land in a severity
+   class, or wherever a late catch costs more than a false alarm, open the problem on the flag and
+   state the flag's rate. If nothing in the program has changed, a flag fires in 2/(n + 1) of
+   periods and a signal in 4/((n + 1)(n + 2)). With twelve periods, that is 2 in 13 for a flag,
+   about two a year on a monthly metric, and 4 in 182 for a signal, about once in four years. Both
+   rates assume independent periods with no trend or season: state that, and work out, for your own
+   n, the rate of the rule you set. Eight to twelve periods and two in a row are starting points:
+   shorten the span where the program changed inside it, lengthen it where the spread still moves,
+   and require three in a row where a false alarm costs more than a late catch, working out its
+   rate the same way. Keep the band fixed between scheduled rebuilds rather than rolling it forward
+   every period: a rolling band takes in the shifted periods, moves its edge toward them and
+   catches the shift later.
 7. **Run the slot at a fixed time in a fixed order, and put severity ahead of the order.** Take any
    record whose fault falls in one of the three severity classes in `incident-response.md` out of
    the slot the moment you see it and hand it to the person who owns that class, whether it touched
