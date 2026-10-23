@@ -50,9 +50,10 @@ Two more, specific to this skill:
   cycles for a self-baseline, are starting points we chose rather than values read out of anyone's
   data: keep them until the program's own history contradicts them, then say what replaced them
   and why. The rule that a fall counts as a signal only after two cycles in a row below the band
-  is a starting point of another kind. Where a late catch costs more than a false alarm, act on one
-  cycle and state its rate; where a false alarm costs more, require three in a row and work out
-  that rule's rate the same way (`metric-definitions`).
+  is a starting point too, revised by what each error costs rather than by the program's history.
+  Where a late catch costs more than a false alarm, act on one cycle and state its rate; where a
+  false alarm costs more, require three in a row and work out that rule's rate from the ranks
+  (`metric-definitions`).
 - **The program is never the only thing moving revenue.** Assortment, pricing, seasonality and
   the other channels move it too. When a claim about cause matters, it needs a holdout, and that
   design belongs to `experiments-and-holdouts`.
@@ -151,23 +152,24 @@ metric changes shape against a control group and which holdout answers that ques
 When someone asks what a good value looks like: this library has no citable benchmark for that
 metric. Say so, then build a self-baseline from the program's own cycles.
 
-When you read a new cycle against that baseline, or someone asks whether a fall is real, use the
-signal rule of `metric-definitions`. The band says whether a fall is more than noise, never what
+When you read a completed cycle against that baseline, or someone asks whether a fall is real, use
+the signal rule of `metric-definitions`. The band says whether a fall is more than noise, never what
 caused it: whether a change you made, such as a new suppression rule, caused the fall stays open
 until a holdout settles it (`experiments-and-holdouts`). The band runs from the lowest to the
 highest of n completed cycles and stays fixed until the next scheduled rebuild. One cycle outside
-the band is a flag: rule out a measurement artifact (step 1 of `references/declining-returns.md`)
-and wait for the next cycle. Two cycles in a row below the low edge, both read against the band in
-force at the first of them, are a signal; with total channel revenue not rising, they meet entry
-condition (a) of `references/declining-returns.md`. Two in a row above the high edge, with total
-channel revenue not rising, can be a program that got smaller (Read it next to total channel
-revenue, above): check whether reach fell before you call the rise an improvement. If nothing in the
-program has changed, one cycle falls below the band by chance in 1/(n + 1) of cycles, and two in a
-row in 2/((n + 1)(n + 2)). With twelve cycles, that is 1 in 13 and 2 in 182, about 1 in 91; counting
-the high edge as well doubles both. Both rates assume independent cycles with no trend or season; in
-a seasonal program, read each cycle against the same period of the previous seasonal cycle. State
-that assumption, and work out, for the user's own n, the rate of the rule you act on; with none of
-the user's cycles in hand, give the rule and its formula, not a rate.
+the band is a flag: rule out a measurement or delivery artifact (steps 1 and 2 of
+`references/declining-returns.md`) and wait for the next cycle. Two cycles in a row below the low
+edge, both read against the band in force at the first of them, are a signal; with total channel
+revenue not rising, they meet entry condition (a) of `references/declining-returns.md`. Read reach
+beside the band: a fall from wider reach while total channel revenue rose is arithmetic, not
+decline, and two in a row above the high edge with total channel revenue not rising can be a program
+that got smaller. If nothing in the program has changed, one cycle falls below the band by chance in
+1/(n + 1) of cycles, and two in a row in 2/((n + 1)(n + 2)). With twelve cycles, that is 1 in 13 and
+2 in 182, or 1 in 91; counting the high edge as well doubles both. Both rates assume independent
+cycles with no trend or season; in a seasonal program, read each cycle as its ratio to the same
+period of the previous seasonal cycle, against a band of such ratios. State that assumption, and
+work out, for the user's own n, the rate of the rule you act on; with none of the user's cycles in
+hand, give the rule and its formula, not a rate.
 
 ## Legal regime this skill assumes
 

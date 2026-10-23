@@ -22,18 +22,24 @@ Where two steps do not depend on each other, take the cheaper one first.
   low edge of its own band in two completed cycles in a row, read the same way, while send volume
   stays flat. A metric falling because the program reached more people while the channel earned
   more is arithmetic, not decline, and it does not open the mechanic.
-- One cycle below the band is a flag, not an entry: run step 1 on it and wait for the next cycle.
-  Act on one cycle and you change rhythm every cycle, which leaves you with a program you can never
-  read.
+- One cycle below the band is a flag, not an entry: run steps 1 and 2 on it and wait for the next
+  cycle. By chance a flag fires in 1/(n + 1) of cycles, and every entry changes the program and the
+  cycles you read after it. Enter on one cycle only where a late catch costs more than a false
+  alarm, and state that rate (Limits in `SKILL.md`).
 - Each condition is the signal rule of `metric-definitions`, applied to the low edge only. With n
   cycles in the band and nothing changed in the program, two cycles in a row fall below the band by
-  chance in 2/((n + 1)(n + 2)) of cycles: with twelve cycles, 2 in 182, about 1 in 91. The second
-  half of each condition (revenue not rising, volume flat) can only lower that rate for its branch;
-  the two branches together can reach up to twice it. The rate assumes independent cycles with no
-  trend or season; when you report that the program has entered, give it for the user's own n. In a
-  seasonal program, read each cycle as its ratio to the same period of the previous seasonal cycle,
-  and build the band from the same ratio over earlier cycles. Keep the band fixed between rebuilds
-  at the program's review, and never rebuild it while a flag waits for its second cycle.
+  chance in 2/((n + 1)(n + 2)) of cycles: with twelve cycles, 2 in 182, or 1 in 91. The second half
+  of each condition (revenue not rising, volume flat) can only lower that rate for its branch; the
+  two branches together can reach up to the sum of the two bands' rates, each for its own n: twice
+  it where both bands have the same n. The rate assumes independent cycles with no trend or season;
+  when you report that the program has entered, give it for the user's own n. In a seasonal
+  program, read each cycle as its ratio to the same period of the previous seasonal cycle, and build
+  the band from the same ratio over earlier cycles (how many ratios the band can hold before they
+  share cycles with the new ones: `metric-definitions`). Keep the band fixed between scheduled
+  rebuilds rather than rebuilding it at each cycle's review of the plan, and never rebuild it while
+  a flag waits for its second cycle: a band rebuilt every cycle takes in the shifted cycles and
+  moves its low edge toward them, so a fall that does not produce a pair at once can be caught later
+  or not at all (when to rebuild: `metric-definitions`).
 - With no band yet (fewer than eight completed cycles since the metric's definition, attribution
   window or method last changed, or fewer than eight same-period ratios in a seasonal program), say
   that the entry conditions cannot be checked yet and give the date the eighth closes. Steps 1 and 2
@@ -126,7 +132,8 @@ Run these in order once you have the cause:
   a seasonal category gives you a false diagnosis every time the season turns.
 - **The decline follows a list cleanup.** Absolute totals fall while rates rise, which is the
   cleanup working. Read revenue per recipient and total channel revenue separately, or the
-  cleanup looks like the cause.
+  cleanup looks like the cause. Whether rates rose or fell, the pattern does not show whether the
+  cleanup caused the fall: that stays open until a holdout settles it (`experiments-and-holdouts`).
 - **One large segment explains the whole drop.** Fix the segment. Do not restructure the program
   around one cohort's behavior.
 - **A platform migration or a change of measurement method sits inside the window.** The series
