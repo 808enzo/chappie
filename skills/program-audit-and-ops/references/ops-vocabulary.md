@@ -54,7 +54,8 @@ is.
 **Problem.** The object is not doing its work now.
 
 **Warning.** The object works and is going to break: a pool draining, an error share climbing, a
-filter that recalculates more slowly every week.
+filter that recalculates more slowly every week. A flag on a metric's value is filed as a warning
+too, until the next period confirms or clears it (`monitoring-duty.md`, step 6).
 
 **Failure surface.** The level at which the object failed: entrance, condition, state, content,
 channel, or system. It determines who owns the fix, which in practice determines how long the fix

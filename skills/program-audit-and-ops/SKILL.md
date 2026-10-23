@@ -151,18 +151,20 @@ whether the roster is being kept.
 
 When you read a new period against that baseline, or someone asks whether a change in the metric is
 real, use the signal rule of `metric-definitions`. The band runs from the lowest to the highest of
-the n baseline periods and stays fixed until the next scheduled rebuild. One period outside it is a
-flag: check the log, the data and the base, and wait for the next period. Two periods in a row
-beyond the same edge, both read against the band in force at the first of them, are a signal. If
-nothing has changed, a flag fires in 2/(n + 1) of periods and a signal in 4/((n + 1)(n + 2)): with
-twelve periods, 2 in 13 and 4 in 182, about 1 in 45. Both rates assume independent periods with no
-trend or season, and where values repeat at the edges, as whole hours or days do, they are ceilings.
-State that assumption, and work out, for the user's own n, the rate of the rule you act on; with
-none of the user's periods in hand, give the rule and its formula, not a rate. Eight to twelve
-periods and two in a row are starting points we chose. Shorten the span where the program changed
-inside it, and lengthen it where the spread still moves as periods are added. Where a late catch
-costs more than a false alarm, act on the flag and state its rate; where a false alarm costs more,
-require three in a row and work out that rule's rate the same way.
+the n baseline periods of the version in force and stays fixed until the next scheduled rebuild. One
+period outside it is a flag: check the log, the data and the base, and wait for the next period; a
+flag the check explains starts no pair. Two periods in a row beyond the same edge, both read against
+the band in force at the first of them, are a signal. If nothing has changed, a flag fires in
+2/(n + 1) of periods and a signal in 4/((n + 1)(n + 2)): with twelve periods, 2 in 13 and 4 in 182,
+about 1 in 45. Both rates assume independent periods with no trend or season, and where values
+repeat at the edges, as whole hours or days do, they are ceilings. State that assumption, and work
+out, for the user's own n, the rate of the rule you act on; with none of the user's periods in hand,
+give the rule and its formula, not a rate, and before the eighth period closes, call nothing a flag
+or a signal. Eight to twelve periods and two in a row are starting points we chose. Shorten the span
+where the program changed inside it, and lengthen it where the spread still moves as periods are
+added. Where a late catch costs more than a false alarm, act on the flag and state its rate; where a
+false alarm costs more, require three in a row and work out that rule's rate from the ranks
+(`metric-definitions`).
 
 ## Legal regime this skill assumes
 

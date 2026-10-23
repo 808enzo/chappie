@@ -101,7 +101,7 @@ same list again.
   from step six. The next audit will find the same list, and the one after that will too.
 - **Mechanics get judged on conversion detached from volume.** The rare and valuable one gets
   switched off while the frequent and empty one survives.
-- **Things get switched off with no reason recorded.** Six months later the mechanic comes back,
+- **Things get switched off with no reason recorded.** Later the mechanic comes back,
   carrying the defect it had before.
 - **The audit happens once.** Without versions, each new one re-derives the same conclusions, and
   the cost never falls.
