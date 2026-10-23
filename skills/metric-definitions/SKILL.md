@@ -61,20 +61,23 @@ Three more, specific to this skill:
   runs from the lowest to the highest of n completed periods of the version in force, and it stays
   fixed until the next scheduled rebuild. Read each new completed period against it. A period inside
   the band, an edge value included, is noise. One period outside the band is a flag: check the data
-  and the base, and wait for the next period. Two periods in a row beyond the same edge, both read
-  against the band in force at the first of them, are a signal. If nothing in the work has changed,
-  a flag fires in 2/(n + 1) of periods and a signal in 4/((n + 1)(n + 2)); one edge alone halves
-  both. With twelve periods, that is 2 in 13 for a flag and 4 in 182, about 1 in 45, for a signal.
-  The rates change with n, so a figure computed for another n does not carry over: work out, for the
-  user's own n, the rate of the rule you tell them to act on. Asked what is normal before any of the
-  user's periods are in hand, give the rule and its formulas, not a rate. While the periods are
-  independent and share one level (no trend, no season, no period pulling the next one its way), the
-  rates hold for any shape of distribution; where values repeat at the edges, they become ceilings.
-  Name that condition beside the rate. In a seasonal metric, compare each period with the same
-  period of the previous seasonal cycle. Before the eighth completed period, publish each period's
-  value with its denominator and the date the eighth closes, and call nothing a flag or a signal.
-  The rule is step 7 of `references/the-metric-set.md`; its rates and when to rebuild the band are
-  under Thresholds and timings there, and its worked example ends that file.
+  and the base, and wait for the next period; a flag the check explains starts no pair. Two periods
+  in a row beyond the same edge, both read against the band in force at the first of them, are a
+  signal. If nothing in the work has changed, a flag fires in 2/(n + 1) of periods and a signal in
+  4/((n + 1)(n + 2)); one edge alone halves both. With twelve periods, that is 2 in 13 for a flag
+  and 4 in 182, about 1 in 45, for a signal. The rates change with n, so a figure computed for
+  another n does not carry over: work out, for the user's own n, the rate of the rule you tell them
+  to act on. Asked what is normal before any of the user's periods are in hand, give the rule and
+  its formulas, not a rate. While the periods are independent and share one level and one spread
+  (no trend, no season, no period pulling the next one its way, no period on a smaller denominator
+  than any in the band), the rates hold for any shape of distribution; where values repeat at the
+  edges, they become ceilings. Name that condition beside the rate. In a seasonal metric, read each
+  period as its ratio to the same period of the previous seasonal cycle and build the band from
+  that ratio over earlier periods, so the band needs one full seasonal cycle more than n. Before the
+  eighth completed period, or in a seasonal metric the eighth ratio, publish each period's value
+  with its denominator and the date the eighth closes, and call nothing a flag or a signal. The rule
+  is step 7 of `references/the-metric-set.md`; its rates and when to rebuild the band are under
+  Thresholds and timings there, and its worked example ends that file.
 
 ## When to use this
 
@@ -148,7 +151,7 @@ Load the file that matches the task. Each one stands alone.
 | `references/the-metric-set.md` | mechanic | More than a handful of metrics are in use: the register, the control metric and its guardrails, retiring metrics, changing a definition, building a self-baseline and reading new periods against it. |
 | `references/message-metrics.md` | definition | You need the formula and denominator of a channel metric: delivery, bounces, opens, clicks, CTOR, unsubscribes, complaints, the revenue family, reachable base. |
 | `references/customer-metrics.md` | definition | You need the formula and denominator of a customer or money metric: active customer, repeat purchase, retention, churn, AOV, ARPU, LTV, CAC. |
-| `references/control-metric.md` | definition | You are taking a reading of definition coverage or comparing it with an earlier one: on which day it is taken, when a new metric enters it, and which movement against your own history is the signal. |
+| `references/control-metric.md` | definition | You are taking a reading of definition coverage or comparing it with an earlier one: on which day it is taken, when a new metric enters it, and which movement against your own history to act on. |
 | `references/legal-regimes.md` | definition | You are about to state what data a metric may read, how long the rows behind it are kept, whether a cut may become a reporting dimension, or what an opt-out or a deletion does to a denominator: each rule, who it does not bind, one practice that is not law, and where every source is quoted, with its date. |
 
 Read the two dictionaries before the mechanics when the disagreement is about a specific number.
@@ -175,7 +178,7 @@ named owner and a named system of record.**
 
 Before you take a reading or compare it with an earlier one, read `references/control-metric.md`: it
 says on which day a reading is taken, when a new metric enters it, and which movement against your own
-history is the signal.
+history to act on.
 
 This has no market value by construction. It is a property of your organization rather than of
 your industry, so no benchmark for it exists or could exist. Say that plainly when asked, then

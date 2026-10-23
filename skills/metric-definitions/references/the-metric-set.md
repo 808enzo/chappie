@@ -73,7 +73,11 @@ periods. Read each new completed period against it with the signal rule:
 - one period outside the band is a flag. It says nothing yet about the work: check the data and the
   base (`reconciling-across-systems.md`; The base grew or was cleaned, under Edge cases) and wait for
   the next period. If the check explains the flag (a counting artifact or a change of base), the
-  flag starts no pair: remove the cause, then read the series again;
+  flag starts no pair. Fix a counting artifact, then read the period again. Where the base grew or
+  was cleaned and the change stays, read the period again on the people who were in the base both
+  before and after the change, against the lowest and highest of their own rates over the band's
+  periods, and publish the people added beside it with their own denominator; if the people who
+  stayed are still outside their own band, the flag is not explained;
 - two periods in a row beyond the same edge, both read against the band in force at the first of
   them, are a signal.
 
@@ -103,15 +107,20 @@ guarantees none of the three.
   once in four years on average. They are averages over all the bands you could build; the rate of
   any one band runs above or below them.
 - **What the rates assume.** They hold for any shape of distribution, but only while the periods are
-  independent and share one level, with no trend, no season and no period pulling the next one its
-  way. Where values repeat at the edges (counts, rounded rates), an edge value is noise and the
+  independent and share one level and one spread, with no trend, no season and no period pulling the
+  next one its way. A period on a denominator below the smallest in the band swings wider than the
+  band's periods did, so it lands outside the band more often than these rates say: name that beside
+  its flag. Where values repeat at the edges (counts, rounded rates), an edge value is noise and the
   rates become ceilings. Where a period pulls the next one its way, both periods of a pair drift
   together and the signal fires more often than these rates say: name that condition beside the
   rate, and do not compute a corrected figure. Where the metric has a season, read each period as
   its ratio to the same period of the previous seasonal cycle (Seasonality against trend, under Edge
   cases), and build the band from the same ratio over earlier periods; building that band takes n
-  periods plus one full seasonal cycle of the version in force. The rates change with n, so compute
-  them for your own n: a figure for another n does not carry over.
+  periods plus one full seasonal cycle of the version in force. A ratio shares a period with the
+  ratio one seasonal cycle after it, so the rates hold only while the band holds no more ratios than
+  a seasonal cycle has periods, less two: ten for a monthly metric with a yearly season. With more,
+  name that condition beside the rate. The rates change with n, so compute them for your own n: a
+  figure for another n does not carry over.
 - **Two periods in a row is a starting point.** It cuts the false-alarm rate to 2/(n + 2) of the
   flag's, a fifth at eight periods and a seventh at twelve, at the cost of at least one period of
   delay, and more delay where a shift is small enough that a shifted period still lands inside the
@@ -119,9 +128,13 @@ guarantees none of the three.
   rate. Where a false alarm costs more, require three periods in a row and work out that rule's rate
   the same way. Choose the rule first, then compute its rate.
 - **The band stays fixed between rebuilds.** Rebuild it at the review of the set, not every period,
-  and not while a flag waits for its second period. A band rebuilt every period from the latest n
-  periods takes in the shifted periods and moves its own edge toward them, so a shift that does not
-  produce a pair at once is caught later or not at all.
+  and not while a flag waits for its second period. Where the set is reviewed every period, rebuild
+  at most once in n periods, as a starting point, and sooner only where the program changed inside
+  the band's span. A band rebuilt every period from the latest n periods takes in the shifted periods
+  and moves its own edge toward them, so a shift that does not produce a pair at once can be caught
+  later or not at all. A rebuild over a signal's periods does the same, so after a signal keep the
+  band in force until the periods from the signal's first period on are enough for a band of their
+  own (eight, under the starting point above), then build the next band from those periods alone.
 - **One control metric per program area**, not per company: a channel program, an automated flow
   layer and a loyalty program are accountable for different things.
 - **Review the set at the cadence of the decisions it serves**, and no faster.
@@ -227,13 +240,16 @@ grew from 43,100 to 56,400, so check the base before the work (The base grew or 
 Edge cases). If the check finds no artifact and September also closes below 3.64%, August and
 September together are a signal. September's last send goes out on 2026-09-30, so its collection
 window closes on 2026-10-07. Until then its rate is provisional: do not read it against the band.
-This example assumes the rate has no season; where it has one, compare with the same period of the
-previous seasonal cycle.
+This example assumes the rate has no season; where it has one, read each period as its ratio to the
+same period of the previous seasonal cycle, against a band of earlier ratios (What the rates assume,
+under Thresholds and timings).
 
 **When the data is too little.** Fewer than eight completed periods of the version in force is too
-little: eight is the low end of the starting point in Thresholds and timings. The procedure then
-returns "no base yet" with the date the eighth period closes, and nothing it would have computed: no
-median, no band, no flag or signal, no minimum denominator, since the floor comes from the spread.
+little, and in a seasonal metric fewer than eight ratios to the same period of the previous seasonal
+cycle: eight is the low end of the starting point in Thresholds and timings. The procedure then
+returns "no base yet" with the date the eighth period, or the eighth ratio, closes, and nothing it
+would have computed: no median, no band, no flag or signal, no minimum denominator, since the floor
+comes from the spread.
 Until that date, publish each period's rate with its denominator beside it. In this worked example,
 had version 2 started on 2026-03-01, the register on 2026-08-10 would hold five completed periods
 and read "no base yet, 2026-11-07": October is the eighth period, its last send goes out on
