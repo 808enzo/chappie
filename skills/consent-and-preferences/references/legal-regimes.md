@@ -235,8 +235,25 @@ of `lawful-basis-and-collection.md`, step 2, and apply no rule. This is not lega
   and "if you are sending a commercial email or text message, you need to comply with three main
   requirements."
   **Who this does not bind:** messages outside the definition of a commercial electronic message, and
-  messages under the exceptions of section 6(5), 6(6) and 6(8) (`transactional-messaging` for 6(6));
-  express consent's contents beyond section 10(1) are in the regulations, not opened here.
+  messages that section 6 leaves out altogether, where "This section does not apply to a commercial
+  electronic message": one between individuals in a personal or family relationship as the regulations
+  define it (section 6(5)(a)); one sent to a person "engaged in a commercial activity" that "consists
+  solely of an inquiry or application related to that activity" (section 6(5)(b)); one of a class or in
+  circumstances the regulations specify (section 6(5)(c)); one an online undertaking under the Broadcasting Act sends to a person who
+  consented to receive its programs at that address, when the message is or forms part of a program or
+  is sent in the course of its transmission to that address (section 6(7.1)); and "an interactive
+  two-way voice communication between individuals", a fax to a telephone account, or "a voice
+  recording sent to a telephone account" (section 6(8)). Such a message needs neither consent nor the
+  unsubscribe mechanism, so the two periods of section 11(2) and (3) do not reach it. Section 6(6) is
+  narrower: "Paragraph (1)(a) does not apply to a commercial electronic message that solely" provides a
+  quote the person requested, completes or confirms a transaction they agreed to, gives warranty,
+  recall or safety information, reports factual information on an ongoing subscription, membership or
+  account, or delivers what they are entitled to under an earlier transaction. It removes the consent
+  requirement and nothing else: the message still identifies the sender and sets out the unsubscribe
+  mechanism (section 6(1)(b) and (2)), and both periods of section 11(2) and (3) bind it
+  (`transactional-messaging` for 6(6)). Which classes the regulations specify under section 6(5)(c) is
+  yours to check; express consent's contents beyond section 10(1) are in the regulations, not opened
+  here.
 - **Mailbox providers, a platform rule.** Yahoo: "Honor unsubscribes within 2 days"; "verify you're only
   sending mail to users who specifically requested it"; "when users subscribe to your mailing list, send
   them an email asking them to click to confirm their opt-in." Google: "Marketing messages and subscribed
@@ -275,6 +292,8 @@ of `lawful-basis-and-collection.md`, step 2, and apply no rule. This is not lega
 - Canada's Anti-Spam Legislation (S.C. 2010, c. 23), sections 6, 10, 11 and 13:
   https://laws-lois.justice.gc.ca/eng/acts/E-1.6/page-1.html and
   https://laws-lois.justice.gc.ca/eng/acts/E-1.6/page-2.html
+- The same Act, sections 6(1) to 6(8), 10(1), 10(9), 10(10), 11(1) to 11(3) and 13, the text current to
+  2026-09-30, opened 2026-10-25: https://laws-lois.justice.gc.ca/eng/acts/E-1.6/FullText.html
 - Electronic Commerce Protection Regulations (SOR/2013-221), section 4 (the referral):
   https://laws-lois.justice.gc.ca/eng/regulations/SOR-2013-221/page-1.html
 - CRTC, Guidance on Implied Consent: https://crtc.gc.ca/eng/com500/guide.htm

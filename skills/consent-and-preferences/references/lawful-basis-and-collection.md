@@ -216,9 +216,14 @@ The legal rows carry their sources and the people they do not bind in `legal-reg
 - **The person unticks the box on a later form.** That is not a second record; it is an instruction, a
   withdrawal for the scope the box named, and it goes to `preference-center-and-unsubscribe.md`. Do not
   write to them to ask whether they meant it.
-- **An address already in the base with a live record submits a new form.** No second confirmation. Write
-  a second record with the new wording version and point; the older one stays. When the two differ in
-  scope, the permission is the narrower and the instruction, if any, is the wider.
+- **An address already in the base with a live record submits a new form.** The person at the keyboard
+  has not yet shown they hold the address, so the submission widens nothing on the record: no wider
+  scope, no second record, no marketing send that rests on it. Take a withdrawal it carries at once, as
+  in the case above. The rest waits as a pending change until a confirmation click from that address
+  proves control, even on a point that does not otherwise ask for confirmed opt in; `onsite-capture`
+  holds the pending change and sends the confirmation. After the click, write a second record with the
+  new wording version and point; the older one stays. When the two differ in scope, the permission is
+  the narrower and the instruction, if any, is the wider.
 - **Two records for one person after a merge.** `list-building` merges the rows and does not move a
   permission between them. Here: each record keeps its own channel, purpose and lifetime; a withdrawal
   taken on either address after the merge applies to the person, because the wording said "stop writing
