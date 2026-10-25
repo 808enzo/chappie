@@ -116,8 +116,9 @@ Five seams get crossed by accident. Each is spelled out under "Seams with neighb
   (`segmentation`, `onsite-capture`).
 - **`deliverability` sets unreachable, you decide the fate of the record here.**
 - **Merging records is not merging permissions** (`consent-and-preferences`).
-- **A form whose address matches a profile is not a merge:** nothing on the profile changes until a
-  confirmation click from that address proves control (`onsite-capture`).
+- **A form whose address matches a profile is not a merge:** nothing on the profile fills, overwrites
+  or widens until a confirmation click from that address proves control (`onsite-capture`). Take a
+  withdrawal the form carries at once (`consent-and-preferences`).
 
 ## Reference map
 

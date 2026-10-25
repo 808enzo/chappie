@@ -120,7 +120,8 @@ Five seams get crossed by accident, so state them outright.
   the person at the keyboard has not shown they hold the address, so it is no second record and the
   match does not start `identity-and-merging.md`, steps 3 and 4: no field fills or overwrites from the
   form, no consent widens, no bonus goes out again. The submission waits on the profile as a pending
-  change until a confirmation click from that address proves control. The pending change, the
+  change until a confirmation click from that address proves control. A withdrawal the form carries
+  does not wait: take it at once, as `consent-and-preferences` does. The pending change, the
   confirmation and what applies after the click belong to `onsite-capture`; the basis the new form
   records belongs to `consent-and-preferences`.
 
