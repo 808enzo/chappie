@@ -76,24 +76,34 @@ that turns quiet into broken, and the slot closes more records than it opens.
 
    For an alert on a metric's value rather than on a heartbeat, read the value against the band of
    the metric's own self-baseline with the signal rule of `metric-definitions`. The band runs from the
-   lowest to the highest of n completed periods of the version in force, leaving out any period inside
-   a failure window in the incident log. Keep it fixed between scheduled rebuilds rather than rolling
+   lowest to the highest of n completed periods of the version in force, leaving out any period that
+   overlaps a failure window in the incident log, even in part; n counts only the periods left in. Keep it fixed between scheduled rebuilds rather than rolling
    it forward every period: a rolling band takes in the shifted periods and moves its edge toward
    them, so a shift that does not produce the signal at once can be caught later or not at all.
-   Rebuild it at the review of the metric set (`metric-definitions`), never while a flag waits for its
-   second period.
+   Rebuild it at the review of the metric set, at most once in n periods where the set is reviewed
+   every period, never while a flag waits for its second period and never over a signal's periods:
+   after a signal, the band stays in force until the periods from the signal's first period on are
+   enough for a band of their own, as `metric-definitions` sets out.
 
    One completed period outside the band is a flag: open a warning (step 5) dated to the day the next
    period completes, its end plus the provisional period of the metric's freeze rule
    (`metric-definitions`), check the data and the base, and read that period on that day, not before.
-   If it comes back inside the band, or the check explains the flag (stale data, a change of base),
-   close the record filed on the flag as noise with both values on it: an explained flag starts no
-   pair, and stale data is a problem on the export behind the metric (step 1). Two periods in a row
+   If it comes back inside the band, or the check explains the flag, close the record filed on the
+   flag as noise with both values on it: an explained flag starts no pair. The check explains it only
+   when the period, read again on fixed data or, where the base grew or was cleaned and the change
+   stays, on the people in the base both before and after it against their own band
+   (`metric-definitions`), is back inside; otherwise the flag stands. Stale data is a problem on the
+   export behind the metric either way (step 1). Two periods in a row
    beyond the same edge, both read against the band in force at the first of them, are the signal
    that opens a problem in place of the warning. The signal says the value left its noise, not
    whether the object broke or where: walk the cause ladder (`incident-response.md`, step 7) before
-   step 4 names an owner, and where no rung shows a fault, write the outside cause beside the record,
-   as for an object silent for a good reason (Edge cases). On an object whose failure would land in a
+   step 4 of this file names an owner. Where no rung shows a fault, close the problem as accepted as
+   tolerable until the band is next rebuilt (step 8), with the outside cause on it, as for an object
+   silent for a good reason (Edge cases), or, where none turns up, with the signal's rate. Until that
+   rebuild, a later period beyond the same edge is noted on that record and opens no new one. A
+   problem opened on the signal closes as fixed only when the first period that runs wholly after the
+   fix, read on its date, is back inside the band: the heartbeat cannot confirm it, because it never
+   stopped. On an object whose failure would land in a
    severity class, or wherever a late catch costs more than a false alarm, open the problem on the
    flag and state the flag's rate.
 
@@ -103,9 +113,10 @@ that turns quiet into broken, and the slot closes more records than it opens.
    rates assume independent periods with no trend or season: state that, and work out, for your own
    n, the rate of the rule you set. In a seasonal metric, read each period as its ratio to the same
    period of the previous seasonal cycle and build the band from the same ratio, as
-   `metric-definitions` does. Before the eighth completed period (in a seasonal metric, the eighth
-   ratio), call nothing a flag or a signal: give the date the eighth completes, and watch the object
-   by its heartbeat until then. Eight to twelve periods and two in a row are starting points: shorten
+   `metric-definitions` does. Until the band holds eight completed periods outside failure windows
+   (in a seasonal metric, eight ratios with neither period overlapping one), call nothing a flag or a
+   signal: give the date the eighth such period completes, and watch the object by its heartbeat
+   until then. Eight to twelve periods and two in a row are starting points: shorten
    the span where the program changed inside it, lengthen it where the spread still moves, and
    require three in a row where a false alarm costs more than a late catch, working out its rate from
    the ranks (`metric-definitions`).
@@ -119,7 +130,7 @@ that turns quiet into broken, and the slot closes more records than it opens.
    list top to bottom sorts your attention by whatever is noisiest.
 8. **Close every record with one of four outcomes:** fixed; handed to an owner with a date;
    accepted as tolerable until a named date; object retired. A record filed on a flag that the
-   next period does not confirm closes as noise instead (step 6). A record with no outcome is why
+   next period does not confirm, or that the check explains (step 6), closes as noise instead. A record with no outcome is why
    rosters stop being opened.
 
 ## Objects that neighboring skills define

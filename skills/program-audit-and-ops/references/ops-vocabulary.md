@@ -51,11 +51,13 @@ against points earned. Here the word points at a remaining quantity that can run
 watched. A rule cannot go quiet and is not an object of this skill; the pool behind it can, and
 is.
 
-**Problem.** The object is not doing its work now.
+**Problem.** The object is not doing its work now. A signal on a metric's value is filed as a
+problem too, until the cause ladder clears the object (`monitoring-duty.md`, step 6).
 
 **Warning.** The object works and is going to break: a pool draining, an error share climbing, a
 filter that recalculates more slowly every week. A flag on a metric's value is filed as a warning
-too, until the next period confirms or clears it (`monitoring-duty.md`, step 6).
+too, until the check explains it or the next period confirms or clears it; where step 6 opens the
+problem on the flag, it is filed as a problem at once (`monitoring-duty.md`, step 6).
 
 **Failure surface.** The level at which the object failed: entrance, condition, state, content,
 channel, or system. It determines who owns the fix, which in practice determines how long the fix
