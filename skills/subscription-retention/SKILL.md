@@ -106,7 +106,8 @@ and never hand its question back.
 |---|---|
 | The general form of churn, retention and net revenue retention | `metric-definitions` |
 | Signals that somebody is drifting away before any threshold, and the one attempt to bring back a person already gone | `lapse-and-winback` |
-| The renewal of a contract billed by invoice, account health, expansion, the quarterly review | `b2b-retention` |
+| A contract billed by invoice and held by an account manager: its renewal, account health, expansion, the quarterly review | `b2b-retention` |
+| Upgrades, extra seats or more volume on a subscription with no contract and no account manager | outside this library |
 | The trial itself: activation, first value, the pitch to convert | `welcome-and-activation` |
 | How deep a retention discount may go, and its margin | `offer-design` |
 | A cheaper alternative offered on a refusal over price at the order | `repeat-purchase` |

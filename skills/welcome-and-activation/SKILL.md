@@ -113,7 +113,8 @@ and never hand its question back.
 | Which system owns a fact, how fresh events are, and changing platforms | `martech-stack` |
 | Something you launched that stopped working: a flow gone quiet, an incident, the duty roster | `program-audit-and-ops` |
 | The regular report to the business: cohorts, and attribution credit for revenue | `crm-reporting` |
-| Renewal, account health, expansion inside a customer | `b2b-retention` |
+| Renewal, account health and expansion under a contract held by an account manager | `b2b-retention` |
+| Upgrades, extra seats or more volume on a subscription with no contract and no account manager | outside this library |
 
 Four seams get crossed by accident. Each is spelled out under "Seams with neighbors" in
 `references/welcome-vocabulary.md`; read it before you hand a case to a neighbor.

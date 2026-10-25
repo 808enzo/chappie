@@ -126,6 +126,7 @@ and never hand its question back.
 | Something you launched that stopped working: a flow gone quiet, an incident, the duty roster | `program-audit-and-ops` |
 | Reading a trial's activation event as a qualification signal, and what a fit account gets when its trial ends | `b2b-lifecycle` |
 | The save screen in a cancellation flow | `subscription-retention` |
+| Upgrades, extra seats or more volume on a subscription with no contract and no account manager | outside this library |
 | Points, expiry and tiers shown in the account | `loyalty-program-design` |
 
 Five seams get crossed by accident. Each is spelled out under "Seams with neighbors" in
@@ -145,7 +146,7 @@ Five seams get crossed by accident. Each is spelled out under "Seams with neighb
 | `references/slots-and-message-contract.md` | mechanic | The inventory of screens and formats, protected screens, message classes, eligibility as state, binding a message to its screen, the contract of one job and one action, expiry and the queue, completion events, guidance sequences, the register and its owner |
 | `references/session-budget-and-precedence.md` | mechanic | The open cadence, one blocking display per session across every source, frequency from the message's window, lowering the volume after a close, suppression by completion, precedence and the order of asks, one executing layer, the decision log |
 | `references/handoff-with-outside-channels.md` | mechanic | A display's positions in a cascade, displays as touches and the in flight state, no repeat of a pitch, outcomes as events for the neighbors, the notification center, the reading rule with the holdout population, switching the promotional layer by class |
-| `references/in-product-vocabulary.md` | definition | Every term the three mechanics and the metric rest on, from session, message and display to wasted interruption and budget breach; what sets this work apart; the seams with neighbors in full; the words shared with neighbors |
+| `references/in-product-vocabulary.md` | definition | Every term the mechanics and the metric rest on; what sets this work apart; the seams with neighbors in full, and the shared words |
 | `references/control-metric.md` | definition | What moves the wasted interruption share, and the reach of appearances, the budget breach share and the holdout read beside it |
 | `references/legal-regimes.md` | definition | Each rule on electronic mail, storage on the device, financial incentives, nudges toward children and the store rating request, quoted with who it does not bind, and every source with its date |
 

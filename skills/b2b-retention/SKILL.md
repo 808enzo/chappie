@@ -100,7 +100,8 @@ and never hand its question back.
 |---|---|
 | The general form of churn, revenue churn and net revenue retention | `metric-definitions` |
 | Scoring the signals of a departure, account health included, and the one attempt to bring back an account that left | `lapse-and-winback` |
-| A subscription charged to a card, a direct debit or an app store, whoever pays | `subscription-retention` |
+| The term, charges and cancellation of a subscription on a card, a direct debit or an app store, whoever pays | `subscription-retention` |
+| Upgrades, extra seats or more volume on a subscription with no contract and no account manager | outside this library |
 | The account before the deal, the won-deal record, a new buying unit at an existing customer | `b2b-lifecycle` |
 | The activation event of the customer's users and the series toward it | `welcome-and-activation` |
 | A message shown inside the product, at a limit or anywhere else | `in-product-messaging` |

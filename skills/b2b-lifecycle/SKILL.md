@@ -107,7 +107,7 @@ and never hand its question back.
 | A qualifying bot's script, the route key of an existing relationship, the contractual response time of an account | `chat-and-bots` |
 | The first weeks to a first purchase or a first use, the activation event and the series toward it | `welcome-and-activation` |
 | A trial nudged toward its activation event inside the product | `in-product-messaging` |
-| Renewal, account health, expansion inside a customer, the quarterly review | `b2b-retention` |
+| Renewal, account health, expansion inside a customer and the quarterly review, under a contract held by an account manager | `b2b-retention` |
 | A failed charge, the cancel screen, dunning | `subscription-retention` |
 | The lawful basis of a contact, the preference center, an account-level "do not contact" as a scope | `consent-and-preferences` |
 | How many messages one person gets across channels, quiet hours, and which message wins when two collide | `contact-orchestration` |

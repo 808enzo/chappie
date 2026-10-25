@@ -111,6 +111,7 @@ Almost everything a triggered message touches belongs to a neighbor, so hold thi
 | Whether a change caused anything: test design, control groups, holdouts, and reading the result | `experiments-and-holdouts` |
 | What a metric means: its numerator, denominator and window | `metric-definitions` |
 | On what basis you may write to a person, the preference center, and how far and fast a withdrawal reaches | `consent-and-preferences` |
+| Upgrades, extra seats or more volume on a subscription with no contract and no account manager | outside this library |
 
 This skill decides which event earns a message, how long after it, and when the flow stops. The
 neighboring skills decide what goes inside the message, how much a person receives in total,

@@ -140,7 +140,8 @@ Six seams get crossed by accident, so state them outright.
   rather than an argument to send. Everything past the threshold is a win-back, and a unit does
   not get scored in both.
 - **A failed payment and a cancel screen are not lapse.** Those are `subscription-retention`, and
-  the renewal of a contract billed by invoice, the QBR and expansion are `b2b-retention`. What
+  the renewal, the QBR and expansion of a contract billed by invoice and held by an account manager are
+  `b2b-retention`. What
   arrives here from that side is
   the part before and after: signals of a departure forming, and an attempt to bring back somebody
   already gone. An account under contract gets its criteria from `b2b-retention`

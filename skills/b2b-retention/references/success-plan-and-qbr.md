@@ -23,7 +23,8 @@ timers. The record written before the deal is `b2b-lifecycle`'s; scoring the sig
 - An account manager is assigned, and the contract has been in the register since the day it was signed
   (`renewal-case.md`, step 1).
 - The contract is held by an account manager. A subscription on a card, a direct debit or an app store with no contract
-  and no account manager belongs to `subscription-retention`, whoever pays; a contract with an account manager that is
+  and no account manager belongs to `subscription-retention`, whoever pays, and its upgrades and extra seats are
+  outside this library; a contract with an account manager that is
   paid by card keeps its charge there and its plan here (`renewal-case.md`, edge cases).
 
 ## Exit conditions

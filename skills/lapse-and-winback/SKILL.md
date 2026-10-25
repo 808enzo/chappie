@@ -112,7 +112,7 @@ and never hand its question back.
 | Something you launched that stopped working: a flow gone quiet, an incident, the duty roster | `program-audit-and-ops` |
 | Seasonal peaks and the promotional calendar an attempt has to be checked against | `promo-calendar` |
 | A failed payment and the cancel screen | `subscription-retention` |
-| The renewal of a contract billed by invoice, the QBR, expansion inside an account | `b2b-retention` |
+| A contract billed by invoice and held by an account manager: its renewal, the QBR, expansion inside the account | `b2b-retention` |
 | Which system owns a fact, how fresh events are, and changing platforms | `martech-stack` |
 | Which mechanics the program holds at all, and what gets retired | `scenario-map` |
 | The regular report to the business: cohorts, and attribution credit for revenue | `crm-reporting` |
