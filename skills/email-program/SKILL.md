@@ -152,16 +152,17 @@ metric changes shape against a control group and which holdout answers that ques
 When someone asks what a good value looks like: this library has no citable benchmark for that
 metric. Say so, then build a self-baseline from the program's own cycles.
 
-When you read a completed cycle against that baseline, or someone asks whether a fall is real, use
+When you read a cycle whose attribution window has closed against that baseline, or someone asks whether a fall is real, use
 the signal rule of `metric-definitions`. The band says whether a fall is more than noise, never what
 caused it: whether a change you made, such as a new suppression rule, caused the fall stays open
 until a holdout settles it (`experiments-and-holdouts`). The band runs from the lowest to the
-highest of n completed cycles and stays fixed until the next scheduled rebuild. One cycle outside
-the band is a flag: rule out a measurement or delivery artifact (steps 1 and 2 of
-`references/declining-returns.md`) and wait for the next cycle. Two cycles in a row below the low
+highest of n completed cycles and stays fixed until the next scheduled rebuild; after a signal, it
+stays in force until the cycles from the signal's first cycle on are enough for a band of their own
+(`metric-definitions`). One cycle outside the band is a flag: rule out a measurement, delivery or
+list cause (steps 1 to 3 of `references/declining-returns.md`) and wait for the next cycle. Two cycles in a row below the low
 edge, both read against the band in force at the first of them, are a signal; with total channel
-revenue not rising, they meet entry condition (a) of `references/declining-returns.md`. Read reach
-beside the band: a fall from wider reach while total channel revenue rose is arithmetic, not
+revenue not rising, they meet entry condition (a) of `references/declining-returns.md`. A fall from
+wider reach while total channel revenue rose is arithmetic, not
 decline, and two in a row above the high edge with total channel revenue not rising can be a program
 that got smaller. If nothing in the program has changed, one cycle falls below the band by chance in
 1/(n + 1) of cycles, and two in a row in 2/((n + 1)(n + 2)). With twelve cycles, that is 1 in 13 and

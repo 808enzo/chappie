@@ -143,8 +143,8 @@ How you see that the mechanic is not working, and what you do about it.
   the program is buying revenue with load. Wider reach adds people to the denominator, and a fall
   there is arithmetic rather than fatigue, which is why total channel revenue is read next to it: if
   the channel earns more in total, reach is working. Freeze volume and switch to
-  `declining-returns.md` in the first case; in the second, decide whether the reach is worth its
-  cost and record the decision.
+  `declining-returns.md` in the first case, and in the second when total channel revenue did not
+  rise; when it rose, decide whether the reach is worth its cost and record the decision.
 - **Unsubscribes and complaints rise in a tier right after its rhythm went up.** Roll that tier
   back one step. This is the only change you revert without waiting for the cycle to finish,
   because you pay for the wait in list damage.

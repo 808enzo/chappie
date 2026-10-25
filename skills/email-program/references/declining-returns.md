@@ -22,7 +22,7 @@ Where two steps do not depend on each other, take the cheaper one first.
   low edge of its own band in two completed cycles in a row, read the same way, while send volume
   stays flat. A metric falling because the program reached more people while the channel earned
   more is arithmetic, not decline, and it does not open the mechanic.
-- One cycle below the band is a flag, not an entry: run steps 1 and 2 on it and wait for the next
+- One cycle below the band is a flag, not an entry: run steps 1 to 3 on it and wait for the next
   cycle. By chance a flag fires in 1/(n + 1) of cycles, and every entry changes the program and the
   cycles you read after it. Enter on one cycle only where a late catch costs more than a false
   alarm, and state that rate (Limits in `SKILL.md`).
@@ -37,14 +37,17 @@ Where two steps do not depend on each other, take the cheaper one first.
   the band from the same ratio over earlier cycles (how many ratios the band can hold before they
   share cycles with the new ones: `metric-definitions`). Keep the band fixed between scheduled
   rebuilds rather than rebuilding it at each cycle's review of the plan, and never rebuild it while
-  a flag waits for its second cycle: a band rebuilt every cycle takes in the shifted cycles and
-  moves its low edge toward them, so a fall that does not produce a pair at once can be caught later
-  or not at all (when to rebuild: `metric-definitions`).
-- With no band yet (fewer than eight completed cycles since the metric's definition, attribution
-  window or method last changed, or fewer than eight same-period ratios in a seasonal program), say
-  that the entry conditions cannot be checked yet and give the date the eighth closes. Steps 1 and 2
-  check the measurement and the delivery, not the program, so they do not wait for an entry
-  condition: run them on any fall that worries you.
+  a flag waits for its second cycle or over a signal's cycles: a band rebuilt every cycle takes in
+  the shifted cycles and moves its low edge toward them, so a fall that does not produce a pair at
+  once can be caught later or not at all, and a band rebuilt over a signal reads a fall that stays
+  at the signal's level as noise (when to rebuild, and how long the band holds after a signal:
+  `metric-definitions`).
+- With no band yet (fewer than eight completed cycles that closed before the first cycle you read
+  and after the metric's definition, attribution window or method last changed, or, in a seasonal
+  program, fewer than eight such ratios to the same period of the previous seasonal cycle), say that
+  the entry conditions cannot be checked yet and give the date the eighth closes, and say so plainly
+  where that date is years away. Steps 1 to 3 check the measurement, the delivery and the list, not
+  the program, so they do not wait for an entry condition: run them on any fall that worries you.
 - Your comparison is like for like: same definition, same attribution, and in a seasonal program
   the same season. Establish that before you enter, or step 1 will establish it for you.
 
@@ -130,9 +133,9 @@ Run these in order once you have the cause:
 
 - **The decline coincides with a season.** Compare year over year. Month-over-month comparison in
   a seasonal category gives you a false diagnosis every time the season turns.
-- **The decline follows a list cleanup.** Absolute totals fall while rates rise, which is the
-  cleanup working. Read revenue per recipient and total channel revenue separately, or the
-  cleanup looks like the cause. Whether rates rose or fell, the pattern does not show whether the
+- **The decline follows a list cleanup.** Absolute totals fall while rates rise, which is what
+  removing the least responsive addresses does to the arithmetic. Read revenue per recipient and
+  total channel revenue separately: a higher rate does not mean the cleanup cost nothing. Whether rates rose or fell, the pattern does not show whether the
   cleanup caused the fall: that stays open until a holdout settles it (`experiments-and-holdouts`).
 - **One large segment explains the whole drop.** Fix the segment. Do not restructure the program
   around one cohort's behavior.

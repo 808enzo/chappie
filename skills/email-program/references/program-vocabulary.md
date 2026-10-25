@@ -219,17 +219,19 @@ control at the value it had on assignment, and compute the active core with them
 
 **This library has no citable benchmark for this metric.** Say so when asked, then build a
 self-baseline: take eight to twelve completed cycles that closed before the first cycle you read
-against them, since a band that takes in a cycle can never flag it, and compute the median and the
-spread, the band from the lowest to the highest of them. Eight to twelve is a starting point rather
+against them, since a band that takes in a cycle can never flag it. When someone asks about a fall already under
+way, the first cycle you read is the first one they ask about, and you read the cycles since
+against the band in order. Compute the median and the spread, the band from the lowest to the highest of them. Eight to twelve is a starting point rather
 than a computed minimum, and a cycle whose attribution window has not closed is not one of them. A
 baseline built this way belongs to the person who built it. It is not a market number and it does
 not travel to anyone else's program.
 
 When you read a new cycle against that band once its attribution window has closed, use the signal
 rule of `metric-definitions`: a cycle inside it is noise, one cycle outside it is a flag that sends
-you to rule out a measurement or delivery artifact, and two cycles in a row beyond the same edge,
+you to rule out a measurement, delivery or list cause (steps 1 to 3 of `declining-returns.md`), and two cycles in a row beyond the same edge,
 both read against the band in force at the first of them, are a signal. With n cycles in the band
 and nothing changed, a flag fires in 2/(n + 1) of cycles and a signal in 4/((n + 1)(n + 2)). With
 twelve cycles, that is 2 in 13 and 4 in 182, about 1 in 45; one edge alone halves both. Both rates
-assume independent cycles with no trend or season; with none of the user's cycles in hand, give the
-rule and its formula, not a rate.
+assume independent cycles with no trend or season; in a seasonal program, read each cycle as its
+ratio to the same period of the previous seasonal cycle (`declining-returns.md`, Entry conditions);
+with none of the user's cycles in hand, give the rule and its formula, not a rate.
