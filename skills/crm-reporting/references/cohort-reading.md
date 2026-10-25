@@ -54,9 +54,12 @@ unmarked partial value. Never compare a partial cell with final cells at the sam
 inside a promotional window (the register of `promo-calendar`). Read tagged cohorts on rows of their own: a
 cohort recruited in a sale is not the program getting worse.
 
-**7. Compare at equal age, against the spread of earlier cohorts at that age.** A change is a cohort whose cell
-at age k falls outside the band of the earlier stable cohorts at age k. A comparison of calendar months mixes
-ages.
+**7. Compare at equal age, against the spread of earlier cohorts at that age.** The band at age k runs from the
+lowest to the highest final cell of the earlier stable cohorts at age k. Read each new final cell at age k against
+it with the signal rule of `metric-definitions`, and give that rule's false-alarm rate for your own number of
+cohorts: one cohort outside the band is a flag, and a change is two consecutive cohorts beyond the same edge,
+both read against the band in force at the first of them. Two ages of one cohort are not a pair: both cells
+count the same people. A comparison of calendar months mixes ages.
 
 **8. Split a base-wide change before it goes into the report.** A base-wide rate is the weighted average of the
 rates at each age, weighted by the share of the base standing at that age. Recompute the current period with
@@ -96,7 +99,7 @@ health (`rfm-segments`).
 |---|---|---|
 | Cohort period | no shorter than the period that reaches the minimum denominator; no longer than the decision's cadence | parameter |
 | Maturity of a cell | the cell's age plus the spans that settle it: return windows, the lag of offline data | follows from the definition |
-| Band at age k | the spread of earlier stable cohorts at age k | parameter |
+| Band at age k | the lowest to the highest final cell of earlier stable cohorts at age k, fixed until the next scheduled rebuild | parameter |
 | Age at which a stage is read | the point where your own distribution of time to that stage levels off | parameter |
 
 ## Edge cases
