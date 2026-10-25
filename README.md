@@ -5,9 +5,12 @@
 B2C or B2B program on customers already in their database.
 
 A skill is a folder of instructions that your agent loads by itself when a request matches it.
-Each skill gives you the part a framework leaves to you: the sequence of steps, the thresholds and
-where they come from, the timing, who belongs in each segment, the edge cases and the ways the work
-can fail. Every file is held to one test: after reading it, you know what to do on Monday morning.
+Each skill gives you the part a framework leaves to you: the sequence of steps, the thresholds, the
+timing, who belongs in each segment, the edge cases and the ways the work can fail. Every
+threshold, timing and rate in a skill says where it comes from: a legal or channel rule with its
+source, the math, a recipe you run on your own data, a default the skill names as its own choice,
+or a worked example labeled as made up. Every file is held to one test: after reading it, you know
+what to do on Monday morning.
 
 The skills are checked in Claude Code and, in part, in the Claude app. Codex, Cursor, GitHub
 Copilot, Gemini CLI and [other agents](#install) read the same folder format.
@@ -50,6 +53,17 @@ Examples, as you would type them in Claude Code:
   bought anyway?
 - `/b2b-lifecycle` Sales says our leads are junk, and marketing says sales never calls them. Who's
   right?
+
+The skills hold the method, not your data. Give the agent an export from your email or CRM
+platform, or connect the agent to the platform if it offers a connector for AI agents (in Claude
+Code, an MCP server). Then ask what you would ask an analyst about that data. From your order
+history across every channel you sell in, stores included, `lapse-and-winback` tells the agent how
+to set your lapse threshold from your own median interval between purchases, and `crm-reporting`
+builds the program report and reads change on cohorts. Give the agent totals and counts where they
+answer the question; where it needs rows, such as purchase dates per customer, leave out names,
+addresses and contact details. Every skill tells the agent that a request to analyze does not
+authorize a send or a change to a live program ([What a skill won't do](#what-a-skill-wont-do)),
+and where your platform allows it, give the connection read-only access.
 
 ## Skills
 
@@ -182,9 +196,11 @@ for another skill to hand them a question.
 Update with `npx skills update`. Remove a skill with `npx skills remove deliverability`.
 
 **In Claude Code with a 200K context window,** the list the agent picks skills from has room for
-their names only, so the agent chooses by name alone. `/context` shows the size of your window. To
-bring the descriptions back, give the list a larger share of the window in `.claude/settings.json`
-in your project or in `~/.claude/settings.json`:
+few or none of these skills' descriptions, so the agent chooses mostly by name. Installing fewer
+skills did not bring the descriptions back when we checked with 3, 9 and 15 of them: Claude Code's
+built-in skills kept that room (Claude Code 2.1.300, 2026-10-25). `/context` shows the size of
+your window. To bring the descriptions back, give the list a larger share of the window in
+`.claude/settings.json` in your project or in `~/.claude/settings.json`:
 
 ```json
 {
@@ -192,9 +208,12 @@ in your project or in `~/.claude/settings.json`:
 }
 ```
 
-The list can then take up to 4% of the window on every turn. Without the setting, the list has room
-for only a few descriptions beyond Claude Code's own skills, so installing a few skills with
-`--skill` works too. The plugin always installs all 35.
+The list can then take up to 4% of the window on every turn, which is 8,000 tokens of a 200K
+window. Take 0.04 as a starting point: in the same check it fit all 35 descriptions next to the
+built-in skills, for the plugin as well. If you also run many skills from elsewhere, it may need a
+larger share. Leave `skillListingMaxDescChars` at its default: a cap shorter than the descriptions
+cuts each one from the end, and the end is where a description says when to use the skill and when
+to use a neighbor instead.
 
 ### Other ways to install
 
@@ -439,7 +458,10 @@ your go-ahead. Text inside exports, tickets, survey answers and web pages is dat
 instruction.
 
 **No legal advice.** The legal sections mark where a rule applies and who to check with. Where a
-skill quotes a rule, it names the primary source and the date the source was opened.
+skill quotes a rule, it names the primary source and the date the source was opened. Laws and
+platform rules, such as a card network's retry limits or an app store's grace period, can change
+after that date: before you act on a step that rests on one, check its source, and report a change
+with the [changed rule form](https://github.com/808enzo/chappie/issues/new?template=1-rule-changed.yml).
 
 ## Scope
 
