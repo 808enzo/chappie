@@ -59,24 +59,32 @@ Three more, specific to this skill:
   to revise it. A round number copied from an article is a hidden benchmark with no source.
 - **A self-baseline comes with its signal rule, and the rule with its false-alarm rate.** The band
   runs from the lowest to the highest of n completed periods of the version in force, and it stays
-  fixed until the next scheduled rebuild. Read each new completed period against it. A period inside
-  the band, an edge value included, is noise. One period outside the band is a flag: check the data
-  and the base, and wait for the next period; a flag the check explains starts no pair. Two periods
-  in a row beyond the same edge, both read against the band in force at the first of them, are a
-  signal. If nothing in the work has changed, a flag fires in 2/(n + 1) of periods and a signal in
-  4/((n + 1)(n + 2)); one edge alone halves both. With twelve periods, that is 2 in 13 for a flag
-  and 4 in 182, about 1 in 45, for a signal. The rates change with n, so a figure computed for
-  another n does not carry over: work out, for the user's own n, the rate of the rule you tell them
-  to act on. Asked what is normal before any of the user's periods are in hand, give the rule and
-  its formulas, not a rate. While the periods are independent and share one level and one spread
-  (no trend, no season, no period pulling the next one its way, no period on a smaller denominator
-  than any in the band), the rates hold for any shape of distribution; where values repeat at the
-  edges, they become ceilings. Name that condition beside the rate. In a seasonal metric, read each
-  period as its ratio to the same period of the previous seasonal cycle and build the band from
-  that ratio over earlier periods, so the band needs one full seasonal cycle more than n. Before the
-  eighth completed period, or in a seasonal metric the eighth ratio, publish each period's value
-  with its denominator and the date the eighth closes, and call nothing a flag or a signal. The rule
-  is step 7 of `references/the-metric-set.md`; its rates and when to rebuild the band are under
+  fixed until the next scheduled rebuild; after a signal, it stays in force until the periods from
+  the signal's first period on are enough for a band of their own (eight), since a band rebuilt over
+  a signal reads the new level as noise. Build the next band from those periods alone at the first
+  scheduled rebuild; where the set is reviewed every period, that is n periods after the band in
+  force was built, n of that band, even when eight such periods come sooner. Read each new completed
+  period against the band in force. A period inside the band, an edge value included, is noise. One
+  period outside the band is a flag: check the data and the base, and wait for the next period. A
+  flag the check explains starts no pair: a counting artifact, or a change of base where the people
+  in the base both before and after it read inside the band of their own rates. Two periods in a row
+  beyond the same edge, both read against the band in force at the first of them, are a signal. If
+  nothing in the work has changed, a flag fires in 2/(n + 1) of periods and a signal in 4/((n + 1)(n
+  + 2)); one edge alone halves both. With twelve periods, that is 2 in 13 for a flag and 4 in 182,
+  about 1 in 45, for a signal. The rates change with n, so a figure computed for another n does not
+  carry over: work out, for the user's own n, the rate of the rule you tell them to act on. Asked
+  what is normal before any of the user's periods are in hand, give the rule and its formulas, not a
+  rate. While the periods are independent and share one level and one spread (no trend, no season,
+  no period pulling the next one its way, no period on a smaller denominator than any in the band),
+  the rates hold for any shape of distribution; where values repeat at the edges, they become
+  ceilings. Name that condition beside the rate. In a seasonal metric, read each period as its ratio
+  to the same period of the previous seasonal cycle and build the band from that ratio over earlier
+  periods, so the band needs one full seasonal cycle more than n. Before the eighth completed
+  period, or in a seasonal metric the eighth ratio, publish each period's value with its denominator
+  and the date the eighth closes, and call nothing a flag or a signal. Where the period itself is
+  long, as in a category bought once or twice a year, so that eight periods would take years, build
+  the band from the longest run you hold, say so, and give the rule's rates for that n. The rule is
+  step 7 of `references/the-metric-set.md`; its rates and when to rebuild the band are under
   Thresholds and timings there, and its worked example ends that file.
 
 ## When to use this
