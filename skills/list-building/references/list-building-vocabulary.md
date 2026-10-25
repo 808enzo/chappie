@@ -99,7 +99,7 @@ being carried in from one.
 
 ## Seams with neighbors
 
-Four seams get crossed by accident, so state them outright.
+Five seams get crossed by accident, so state them outright.
 
 - **"Deduplication" names two different jobs.** Here it means merging several records of one person
   into one. Not repeating the same argument to that person in a second channel is
@@ -116,6 +116,13 @@ Four seams get crossed by accident, so state them outright.
   consents, their subscriptions and their loyalty obligations do not pool. The legal side of
   consent is `consent-and-preferences`; the requirement that a merge must not move a permission
   from one record to another is a property of the merge, and it lives here.
+- **A form whose address matches a profile is not a merge.** A submission is what somebody typed, and
+  the person at the keyboard has not shown they hold the address, so it is no second record and the
+  match does not start `identity-and-merging.md`, steps 3 and 4: no field fills or overwrites from the
+  form, no consent widens, no bonus goes out again. The submission waits on the profile as a pending
+  change until a confirmation click from that address proves control. The pending change, the
+  confirmation and what applies after the click belong to `onsite-capture`; the basis the new form
+  records belongs to `consent-and-preferences`.
 
 ## Two words this skill shares with a neighbor
 

@@ -108,7 +108,7 @@ and never hand its question back.
 | The regular report to the business: cohorts, and attribution credit for revenue | `crm-reporting` |
 | Everything about the send itself once you have the row | `email-program` |
 
-Four seams get crossed by accident. Each is spelled out under "Seams with neighbors" in
+Five seams get crossed by accident. Each is spelled out under "Seams with neighbors" in
 `references/list-building-vocabulary.md`; read it before you hand a case to a neighbor.
 
 - **"Deduplication" names two different jobs** (`contact-orchestration`).
@@ -116,6 +116,8 @@ Four seams get crossed by accident. Each is spelled out under "Seams with neighb
   (`segmentation`, `onsite-capture`).
 - **`deliverability` sets unreachable, you decide the fate of the record here.**
 - **Merging records is not merging permissions** (`consent-and-preferences`).
+- **A form whose address matches a profile is not a merge:** nothing on the profile changes until a
+  confirmation click from that address proves control (`onsite-capture`).
 
 ## Reference map
 

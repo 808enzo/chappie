@@ -138,6 +138,10 @@ turned it on. It stops new ones and clears none of the stock.
 - **An offline buyer arrives on the site for the first time.** Until they present a key these are
   two records: purchases with no address, visits with no name. Only something the person offers
   connects them, such as a card, a number, or an account login. A matching cart is a hint.
+- **A form submission matches an existing address.** The person who typed the address has not shown
+  they hold it, so steps 3 and 4 do not run on the submission: it fills no empty field and overwrites
+  none. It waits as a pending change until a confirmation click from that address proves control
+  (`onsite-capture`).
 - **Two brands are being joined.** Beyond merging rows, there is the question of whose customer the
   person now is. The answer is both, and their subscriptions and consents stay separate under step
   5. The first message from a sender the person has not heard from before needs its own basis, not
