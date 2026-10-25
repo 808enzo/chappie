@@ -14,6 +14,65 @@ All 35 skills share one version number. No skill has a version of its own.
 - **Patch.** A correction inside a skill: a legal or channel rule updated to match its current
   source, or a step rewritten to read more clearly.
 
+## [1.2.0] - 2026-10-26
+
+This release gives the measurement skills one rule for telling a real change from noise in your own
+periods, and corrects two seams: section 6(6) of Canada's anti-spam law (CASL), and a form
+submitted with an address already in your base. No skill is renamed, so commands such as
+`/chappie:deliverability` keep working.
+
+### Added
+
+- A signal rule for reading a metric against its own baseline, in `metric-definitions`. The band
+  runs from the lowest to the highest of your completed periods. A period inside it is noise, one
+  period outside it is a flag to check, and two periods in a row beyond the same edge are a signal.
+  The skill gives the false-alarm rate of a flag and of a signal as formulas of the number of
+  periods in the band, so the agent computes the rate for your own history instead of quoting one.
+  The rule also covers seasonal metrics, read as a ratio to the same period of the previous season;
+  long periods, where the band takes the longest run you hold; what to publish before the eighth
+  period; and how long a band holds after a signal. It is step 7 of
+  `references/the-metric-set.md`, and the worked example at the end of that file now runs it.
+- `email-program`, `program-audit-and-ops` and `crm-reporting` read change by the same rule:
+  `email-program` enters its decline diagnosis on a signal, `program-audit-and-ops` reads value
+  alerts with it, and `crm-reporting` reads cohorts at equal age with it.
+
+### Changed
+
+- `email-program` anchors the band of a fall that is already under way, runs the first three steps
+  of the decline diagnosis before a band exists, freezes volume when more reach did not lift
+  revenue, rebuilds the band on schedule, and leaves the question of whether a list cleanup caused
+  a fall to a holdout.
+- `program-audit-and-ops` leaves out of the band every period a failure window touches, even in
+  part, closes an explained flag only on its criterion, and closes a signal with no fault behind it
+  as accepted.
+- An upgrade, extra seats or more volume on a subscription with no contract and no account manager
+  is now outside this library in `welcome-and-activation`, `subscription-retention`,
+  `b2b-retention`, `triggered-messages` and `in-product-messaging`. `b2b-retention` takes expansion
+  only where an account manager holds a contract, and `b2b-lifecycle` and `lapse-and-winback` hand
+  it over on the same terms. Before, the question went from skill to skill and came back with no
+  owner.
+- [README.md](README.md) says where every threshold, timing and rate in a skill comes from, how to
+  give the agent your platform's data with the least personal data, and that laws and platform
+  rules can change after the date a skill opened them, with the form to report a change.
+- The 200K advice in [README.md](README.md#with-npx-skills-for-any-agent) no longer suggests
+  installing fewer skills, since that did not bring the descriptions back. It gives the setting's
+  size in tokens and asks you to leave `skillListingMaxDescChars` at its default.
+- [AGENTS.md](AGENTS.md) classes a number by asking, in order, where it comes from, and asks you to
+  find every quotation you add in the text the site itself returns.
+- `scripts/validate` also warns on a missing newline at the end of a file, a relative link or a
+  `references/` path that leads to no file, a dash outside a quotation, and a quantity written in
+  words where a step needs a threshold, a window or a count.
+
+### Fixed
+
+- `consent-and-preferences` no longer groups CASL section 6(6) with the messages that
+  section 6 leaves out altogether. Section 6(6) removes only the consent requirement: the message
+  still sets out the unsubscribe mechanism, and both periods of section 11(2) and (3) bind it.
+  `references/legal-regimes.md` quotes sections 6(5), 6(6), 6(7.1) and 6(8).
+- When a form arrives with an address already in your base, `consent-and-preferences` and
+  `list-building` widen, fill or overwrite nothing on the record until a confirmation click from
+  that address. A withdrawal the form carries applies at once.
+
 ## [1.1.1] - 2026-10-12
 
 This release corrects two skills against their sources and makes the README and ROADMAP promise only
@@ -119,6 +178,7 @@ First public release.
 Version 2 takes two topics this release leaves out: calls and voice, and AI inside the program.
 [ROADMAP.md](ROADMAP.md#not-in-version-1) gives the reason for each.
 
+[1.2.0]: https://github.com/808enzo/chappie/releases/tag/v1.2.0
 [1.1.1]: https://github.com/808enzo/chappie/releases/tag/v1.1.1
 [1.1.0]: https://github.com/808enzo/chappie/releases/tag/v1.1.0
 [1.0.0]: https://github.com/808enzo/chappie/releases/tag/v1.0.0
