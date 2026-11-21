@@ -42,7 +42,7 @@ the time a phone stays off.
 - **Stop and block events per thousand delivered**, per origin and template: the person's verdict,
   which the gatekeeper turns into standing. It feeds the loss events of `contact-orchestration`.
 - **The standing register** (`references/origin-and-standing.md`, step 5): a state, not a metric.
-- **The distribution lag of a STOP across systems** (`references/keywords-and-replies.md`, step 8).
+- **Distribution lag from receipt of a valid withdrawal request** (`references/keywords-and-replies.md`, step 8).
 
 ## What it cannot see
 

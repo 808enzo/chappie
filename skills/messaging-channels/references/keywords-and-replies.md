@@ -8,23 +8,21 @@ checked: 2026-09-15
 # Keywords and replies
 
 The unit here is **the inbound**: a message that arrives on an origin. It can be a keyword, a tapped
-button, or a free-text reply. Check for a revocation before routing a reply to `chat-and-bots`. This
-file sets the provider and record steps, what a confirmation can say, and where other replies go.
+button, or a free-text reply. Check for a revocation before routing a reply to `chat-and-bots`.
+This file also covers withdrawals received outside the origin, how to apply them, and what to confirm.
 
 ## Entry conditions
 
-Messages leave from an origin that can receive replies: a ten-digit number, a short code, a
-toll-free number, a WhatsApp business number, an RCS agent. A one-way origin, such as an alphanumeric
-sender ID, has no inbound; its texts carry the disclosure and the alternative route
-(`references/origin-and-standing.md`, step 2), and the withdrawal arrives by that route and is handled
-from step 2 below.
+For an origin that can receive replies, start with the keyword table. For a withdrawal through an
+alternative route, start at step 2. A one-way origin, such as an alphanumeric sender ID, cannot
+receive replies; its texts carry the disclosure and the alternative route
+(`references/origin-and-standing.md`, step 2).
 
 ## Exit conditions
 
-A keyword table per origin and language. The catch on two levels, provider and record, with the
-distribution of the recorded scope to every system that texts. A confirmation without a duplicate
-if one is used or required. The HELP reply. The routing of every other reply. An inbound
-ledger with the lag per system.
+A keyword table per origin and language. A person-level withdrawal record and confirmation that
+each affected system applied it. A separate entry for any provider block. No duplicate confirmation
+to the person. The HELP reply and the route for every other reply. A ledger with the lag per system.
 
 ## Steps
 
@@ -40,23 +38,32 @@ equivalents in that language, which the RCS policy names outright ("'STOP' messa
 agent's language"). The provider keeps its own reserved words; on Twilio "stop", "start", "unstop"
 and "help" cannot be removed.
 
-**2. Catch the keyword on two levels.** The provider blocks the number in its own pool: on Twilio the
-number goes onto a list of blocked numbers, and later messages from your account to it fail with error
-21610. Log the request and its receipt time in the **record** (`consent-and-preferences`). For a valid
-TCPA revocation that responds to advertising or telemarketing, record all covered advertising and
-telemarketing calls and texts from that caller as stopped, across its origins. For a valid revocation
-in response to an informational call or text, record the category it targets unless it expressly
-reaches further. Pass the scope to every sending system so it can suppress the affected streams. The provider's block follows
-its pool and can be broader or narrower than the legal withdrawal. Check the remaining basis and
-channel rules before keeping another stream. See the edge cases below for a separately requested code.
+**2. Record the withdrawal and check for a provider block separately.** At receipt, capture the route,
+the request wording, the number, the origin if known, and the receipt time. Use
+`consent-and-preferences` to check whether the request is valid and what it covers. Write a valid
+revocation to the **person-level record** with that scope and the original receipt details. A valid
+web request from a one-way origin needs no keyword or provider event to enter the record.
+
+For a valid TCPA revocation in response to advertising or telemarketing, stop all covered advertising
+and telemarketing calls and texts from that caller, across its origins. For a valid revocation in
+response to an informational call or text, stop the category it targets unless the request expressly
+reaches further. Pass the recorded scope to each affected sending system (step 4). Check the
+remaining basis and channel rules before keeping another stream.
+
+If the provider blocks the number, record and respect that block separately. For example, when
+Twilio matches an opt-out keyword, it blocks the number in its pool, and subsequent sends subject
+to the block fail with error 21610. The pool can be broader or narrower than the withdrawal's scope.
+See the edge cases below for a separately requested code.
 
 **3. If you confirm the withdrawal, use a plain confirmation and avoid a duplicate.** Where the
 provider answers a keyword itself (on Twilio, Advanced Opt-Out matches the keyword and "returns the
 confirmation message"), use that answer and do not send an extra copy. The FCC does not require a
-confirmation. If you use one under its rule, confirm what stopped and leave out promotions and
+confirmation text. If you send one under its rule, confirm what stopped and leave out promotions and
 questions. Apply the revocation without waiting for a reply. The timing table gives the presumption
-and what a late confirmation needs. If a required service notice loses its basis on this channel,
-use `transactional-messaging`'s failover to a permitted channel. The carriers' principles ask for
+and what a late confirmation needs. For a web request, confirm the affected category and number on
+the page without promising a provider block or reply. Do not send a text to repeat the page's
+confirmation. If a required service notice loses its basis on this channel, use
+`transactional-messaging`'s failover to a permitted channel. The carriers' principles ask for
 "one final opt-out confirmation message per campaign" and say "no further messages should be sent
 following the confirmation message". Apply those principles separately from the FCC rule.
 On WhatsApp, requests "either on or off WhatsApp" are honored, "including
@@ -65,9 +72,11 @@ promotional agents".
 
 **4. Distribute inside the propagation deadline.** Honor a valid TCPA revocation within a reasonable
 time from receipt; see the ceiling below. `consent-and-preferences` sets the propagation deadline for
-texts, using the shortest window that applies. A send within the withdrawn scope after the deadline
-is unsupported. Read sends within the window as lag, by system. Step 8 tracks that lag,
-and the system with the longest lag is the one to fix.
+texts, using the shortest window that applies. Have each affected system apply the instruction to
+the streams it covers and cancel their queued sends. Get a timestamped acknowledgment from each
+affected system that it applied the instruction, including the queue changes. Acknowledging receipt
+of the instruction does not confirm application. A send within the withdrawn scope after the deadline
+is unsupported. Log any sends within the window by system and track application lag in step 8.
 
 **5. Answer HELP with the program's card.** The program's name, a way to reach customer care, how to
 stop; the same elements the carriers' principles put in the opt-in confirmation of a recurring
@@ -79,14 +88,17 @@ be answered says in its own text whether replies are read, so that a person who 
 unattended origin learns it before they wait. Check a STOP reply to an authentication code under the
 same route and scope rules as other replies (steps 1 and 2).
 
-**7. Treat a start keyword as a basis event, not as a flag flip.** Start and unstop lift the
-provider's block, and on Twilio they are reserved for that. For the record, the
-keyword is an event with a source ("reply START"), a date, and the text the person was replying to,
-and `consent-and-preferences` writes the basis from it. A keyword alone creates no record.
+**7. Log a start keyword without assuming it restores permission.** Start and unstop lift the
+provider's block, and on Twilio they are reserved for that. Log the keyword's source ("reply START"),
+date, and the text the person was replying to. Use `consent-and-preferences` to verify and record
+any basis before resuming sends. The keyword or lifted block alone does not establish that basis.
 
-**8. Keep an inbound ledger.** The keyword, the time, the origin, and the action in every system with
-its timestamp. The lag from the keyword to the last system's action is read beside the control metric,
-per system; the system with the longest lag is the one to fix.
+**8. Log and verify application.** Log the receipt details and scope, any keyword, provider block,
+or provider reply, and each affected system's application timestamp. Measure each system's lag from
+receipt of the request to its application of the instruction. Keep the check open until each affected
+system confirms application. Flag any missing confirmation at the deadline and use the last
+application timestamp for the overall lag. Read the per-system lag beside the control metric to find
+which system to fix.
 
 ## Thresholds and timings
 
@@ -112,8 +124,9 @@ The platform rows carry their sources below. The last row is yours.
   apply the scope from steps 1 and 2. A different number does not create a different caller or basis.
 - **A typo, or another language.** Without a valid exclusive designation, honor a reasonable TCPA
   request. Check any separate carrier or platform requirement to act on ordinary language or equivalents.
-- **A one-way origin.** The withdrawal arrives by the alternative route the text named, and runs
-  from step 2 on the same clock.
+- **A one-way origin.** Take a valid withdrawal through the disclosed alternative route. Start at
+  step 2 and count from receipt on that route. For a designated web page, confirm there as in step 3
+  and verify application in steps 4 and 8 even when there is no provider block or reply.
 - **A reply after the platform's window closed.** It opens a new one: answer freely, and the
   conversation is `chat-and-bots`'.
 - **A stop in reply to an authentication code.** Record the valid revocation's scope (steps 1 and 2).

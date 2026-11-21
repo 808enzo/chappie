@@ -22,7 +22,7 @@ A ten-digit number under its registered campaign, a short code, a toll-free numb
 sender ID, a WhatsApp business phone number inside its portfolio, an RCS agent. Standing, limits and
 pauses live on it. The unit of the second is **the send**: one message to one phone number from one
 origin, in one class. The unit of the third is **the inbound**: a keyword, a tapped button or free text
-that arrives on an origin.
+that arrives on an origin. That mechanic also handles withdrawals received outside the origin.
 
 Before your first step, read `.agents/chappie-context.md` in the project if it exists. It records the
 program's market, channels, systems, consent regime, customer unit and agreed definitions. Take what it states
@@ -125,7 +125,7 @@ Six seams get crossed by accident. Each is spelled out under "Seams with neighbo
 - **The reply window is not the settle window** (`chat-and-bots`).
 - **A class is the neighbors' word; a category is the gatekeeper's** (`transactional-messaging`,
   `contact-orchestration`).
-- **The keyword is caught on two levels** (`consent-and-preferences`).
+- **A provider block and a recorded withdrawal are separate** (`consent-and-preferences`).
 - **The price of a text decides where the in-product message comes first** (`in-product-messaging`).
 
 ## Reference map
@@ -133,8 +133,8 @@ Six seams get crossed by accident. Each is spelled out under "Seams with neighbo
 | File | Type | What is in it |
 |---|---|---|
 | `references/origin-and-standing.md` | mechanic | The inventory of origins, registration, the one-way origin, the split of classes across origins, the ramp, the standing register and the reaction to a drop, number hygiene, the move to another provider |
-| `references/send-and-cost.md` | mechanic | Class to category, the reply window against templates, the reachability check, the template lifecycle, segments and encoding, expiry, the price before the send, the statuses and the no-receipt class, pacing |
-| `references/keywords-and-replies.md` | mechanic | The keyword table, the catch on two levels, the single confirmation, the distribution deadline, HELP and other replies, re-opt-in, the inbound ledger |
+| `references/send-and-cost.md` | mechanic | Class to category, the reply window against templates, checks for basis and reachability, the template lifecycle, segments and encoding, expiry, the price before the send, the statuses and the no-receipt class, pacing |
+| `references/keywords-and-replies.md` | mechanic | The keyword table, withdrawals by reply or another route, provider blocks, when and how to confirm, application by each affected system, HELP and other replies, re-opt-in, the ledger |
 | `references/messaging-vocabulary.md` | definition | Every term the three mechanics and the metric rest on, what sets the channel apart, the seams with neighbors in full, and the words shared with neighbors |
 | `references/control-metric.md` | definition | Each class of the people not reached, when a period's reading closes, what moves the share, the lines read beside it, and what the share cannot see |
 | `references/legal-regimes.md` | definition | Each platform, carrier and federal rule the mechanics rest on, quoted with who it does not bind, and every source with its date |

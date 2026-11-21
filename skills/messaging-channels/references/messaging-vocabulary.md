@@ -163,24 +163,29 @@ other words or ordinary language under their own rules.
 account with that provider; later messages from that account to them fail at the provider. Not the
 record.
 
-**Record.** The person's basis record and its instructions in `consent-and-preferences`, which every
-system that texts reads. The withdrawal lives here. The provider block list holds the stops that
-reached that provider, and a number on it with no instruction here is a stop the record missed.
+**Record.** The person's basis record and its instructions in `consent-and-preferences`. A valid
+withdrawal belongs here with its route, wording, receipt time, and scope, even when the provider
+has no block to report. Each affected sending system reads the instruction and confirms application.
 
-**Confirmation.** A text that states what stopped, without promotions or questions. The FCC does not
-require it; see [US TCPA revocation](legal-regimes.md#us-tcpa-revocation) for the timing and limits.
-Keep carrier and platform requirements separate and do not duplicate the provider's reply.
+**Confirmation.** The acknowledgment to the person of what stopped. For a web request, the page
+names the affected category and number without promising a provider block or reply. A confirmation
+text states what stopped, without promotions or questions. The FCC does not require the text; see
+[US TCPA revocation](legal-regimes.md#us-tcpa-revocation) for its timing and limits. Keep carrier and
+platform requirements separate and do not duplicate the provider's reply.
 
 **Scope of revocation.** The streams a valid opt-out reaches. For TCPA-covered traffic, it depends on
 the caller and whether the communication was advertising, telemarketing, or informational. The
 provider's pool block is separate. See [US TCPA revocation](legal-regimes.md#us-tcpa-revocation).
 
-**Distribution lag.** The time from a keyword to the last system's action on it, per system, read
-beside the control metric.
+**Distribution lag.** For each affected sending system, the time from receipt of a valid withdrawal
+request to that system's confirmed application of the instruction. The last application sets the
+overall lag. An acknowledgment of receipt alone does not close the check. Read lag beside the
+control metric.
 
 **One-way origin.** An origin that cannot receive a reply, such as an alphanumeric sender ID. Its
 texts carry the disclosure that two-way texting is not available and an alternative route for
-withdrawal.
+withdrawal. That route can receive a valid request without a keyword or provider block. Count the
+lag from receipt on that route.
 
 ## Seams with neighbors
 
@@ -199,9 +204,10 @@ withdrawal.
 - **A class is the neighbors' word; a category is the gatekeeper's.** `transactional-messaging` and
   `contact-orchestration` give a message its class. This skill maps the class onto the category the
   platform approves and prices, and the mapping is not free: mixed content is marketing on both sides.
-- **The keyword is caught on two levels.** The provider blocks the number in its own pool. The record
-  receives the instruction and carries it to every other system that texts. Only the second is the
-  withdrawal `consent-and-preferences` measures.
+- **A provider block and a recorded withdrawal are separate.** `consent-and-preferences` determines
+  validity and scope. Apply that scope and verify application in each affected system, including for
+  a web request with no block. Respect a real provider block within its pool; lifting it does not
+  establish a basis to send.
 - **The price of a text decides where the in-product message comes first.** `in-product-messaging`
   shows a pitch inside the product first to people who open the product more often than the pitch's
   window lasts, and the text goes only to those who did not appear by its cut-off. The price sits here;

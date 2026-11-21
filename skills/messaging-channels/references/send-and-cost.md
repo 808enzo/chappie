@@ -51,16 +51,29 @@ the keyword table (`references/keywords-and-replies.md`). Marketing inside an op
 on an opt-in for marketing: the platform's opt-in covers categories, and a reply that carries a
 promotional block is a touch for `contact-orchestration`, as `chat-and-bots` already counts it.
 
-**3. Check reachability on the platform before the request, not after the refusal.** RCS: run the
+**3. Check the basis, channel rules, and reachability before sending.** Check whether a valid
+withdrawal in the person's `consent-and-preferences` record covers this send. If it does, stop the
+send on the withdrawn basis, including any matching sends still in the queue. If it does not,
+continue the checks only if the basis still holds and the channel rules allow the send.
+
+Log a send stopped for lack of a basis as not sent, with the reason. Do not mark the number
+unreachable or count a delivery failure. Keep the request history and apply the existing definition
+of addressed in `SKILL.md`: if the program had already handed off a qualifying request to the
+channel layer, keep the person in the addressed population. Do not add an exclusion for withdrawals.
+
+Check reachability before requesting a send where the platform lets you. RCS: run the
 capability check; a device without RCS returns a 404 from the platform, and the agent falls back to
 another technology, such as SMS, whose text has to fit the segment budget of step 5. WhatsApp: where
 your provider returns an error for a number with no account, record the number as unreachable in this
 channel, with the date, and stop requesting it here until the person writes to you there or a new basis
-for this channel is recorded. SMS: the number is mobile, is not on the provider's block list, has no
-withdrawal in the record, and has not appeared in a deactivation file. A person found unreachable here
-goes to the next channel in `triggered-messages`' order and is not requested from this channel, so that
-the control metric's denominator holds only people this channel could have reached. The people kept out
-this way are a pool of their own, read beside the control metric in `SKILL.md`.
+for this channel is recorded. SMS: check that the number is mobile and has not appeared in a
+deactivation file. Check the provider's block separately. Do not send on a blocked route or switch
+origins to get around the block. Lifting a block does not establish a basis to send.
+
+If the reachability check rules out the number before handoff, skip the request on this channel and
+use the next permitted channel in `triggered-messages`' order. Read the pool kept out by the
+reachability check beside the control metric in `SKILL.md`. Keep stops for lack of a basis out of
+that pool.
 
 A message goes to one number of the person: the one the record marks as the number for this channel.
 A person with two numbers is one person with two addresses, and a message sent to both is two sends
