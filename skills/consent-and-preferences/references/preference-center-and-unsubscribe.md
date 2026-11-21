@@ -111,8 +111,9 @@ wider reading. Scopes remove people; none widens a permission. A preference cent
 `lawful-basis-and-collection.md`, step 3, not a checkbox.
 
 **4. Build the unsubscribe page in this order.** First the withdrawal completes: one click from the
-message, no login, no reason required, no delay announced. Then the confirmation, on the page: what was
-stopped, for which address, and that service messages continue. Then, after the fact and optional, the
+message, no login, no reason required, no delay announced. Then confirm on the page what you stopped
+and for which address or number. List a stream as continuing only after you verify that the withdrawal
+does not cover it and that its basis remains valid (step 6). Then, after the fact and optional, the
 alternatives: a type, a frequency, a channel, a pause. Then a way back: a link that starts a new request
 (step 8). Then, optional, a reason as choices, one click each, with a free text field nobody has to fill.
 No promotion on the page: an offer to stay is a step between the person and the route out, and the US
