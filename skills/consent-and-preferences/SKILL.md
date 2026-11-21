@@ -226,10 +226,9 @@ below says only what each rule governs.
 - **United Kingdom, PECR regulation 22 and the ICO:** consent or the soft opt-in for individual subscribers,
   the charitable soft opt-in, what a consent record keeps, and the refresh recommendation.
 - **United States, CAN-SPAM:** the opt-out regime for commercial email and its honoring deadline.
-- **United States, TCPA rules, 47 CFR 64.1200:** consent for texts and calls, revocation by any reasonable
-  method, and the one confirmation text.
-- **United States, FCC 15-72 and FCC 24-24:** the library's reading of a code the person asks for after a
-  stop.
+- **United States, TCPA:** consent for calls and texts. For method, scope, and confirmation, read
+  [US TCPA revocation](references/legal-regimes.md#us-tcpa-revocation).
+- **United States, FCC 15-72:** see [a code requested after STOP](references/legal-regimes.md#us-requested-code).
 - **United States, COPPA, 16 CFR part 312:** verifiable parental consent for children's personal
   information collected online.
 - **United States, California, CCPA:** the opt-out of sale and sharing, the global privacy control, minors,

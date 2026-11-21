@@ -43,35 +43,37 @@ instructions per period.
 - **pause**: silence for a term the person picks, with an end date and an automatic resume into the
   normal cadence.
 
-And, at all times and on every page, **stop everything**: the withdrawal of all marketing from this
-sender in this channel, in one action. The US rule allows a menu and requires the option to stop all; the
-Canadian mechanism covers "any commercial electronic messages, or any specified class". Each type and
-channel on offer corresponds to a stream that exists, and each stream that sends is covered by a type; a
-type nobody sends is a lie, and a stream no type covers is one the person cannot switch off. Service rows
-and mandatory notices are listed and marked as continuing, so the person knows the order updates will keep
-coming, and they are not switchable here; a service row that carries promotion has left that list (step
-6). One thing the person can set about a service row: the channel it is delivered in, where more than
-one can carry it. That is a routing preference, not a switch; `transactional-messaging` reads it as the
-row's default channel and fails over past it on a fact, and `push-notifications` keeps service and
-marketing in separate categories so that switching one off does not switch off the other.
+Keep **stop everything** on every page of the preference center: one action to withdraw all marketing
+from this sender in this channel. The US commercial email rule allows a menu and requires the option
+to stop all; the Canadian mechanism covers "any commercial electronic messages, or any specified
+class". For TCPA-covered calls and texts, use the route and scope rules in steps 2 and 3.
+Each type and channel on offer corresponds to a stream that exists, and each stream that sends is covered by a type; a
+type nobody sends is a lie, and a stream no type covers is one the person cannot switch off. List service
+rows and mandatory notices separately. Show which streams continue and which can be stopped (step 6).
+Where more than one channel can carry a service row, let the person choose a default.
+`transactional-messaging` uses that default and fails over when its conditions are met. `push-notifications` keeps service
+and marketing in separate categories so that switching one off does not switch off the other.
 
 **2. Take the instruction through every route, and let every route write the same object.** The routes:
 
-- the link in every marketing message to a page where the withdrawal completes in one action; the US
-  rule allows no step beyond "sending a reply email or visiting a single page", no fee and no information
-  beyond the email address; the Canadian mechanism uses "the same electronic means by which the message
+- a link in every marketing message to a page where withdrawal completes in one action. For TCPA-covered
+  calls and texts, check the route rule below. The US commercial email rule allows no step beyond
+  "sending a reply email or visiting a single page", no fee and no information beyond the email address;
+  the Canadian mechanism uses "the same electronic means by which the message
   was sent" or, where not practicable, another electronic means; the CRTC's example of a path through a
   login and a "delete account" page is the path not to build;
-- the reply: an email reply that says stop; for texts, the words the FCC lists ("stop," "quit," "end,"
-  "revoke," "opt out," "cancel," "unsubscribe") as revocation per se, and any other words a reasonable
-  person would read as a request to stop, treated the same;
+- the reply: an email reply that says stop. For TCPA-covered US calls and texts, check whether the
+  caller properly designated and disclosed an exclusive method before you decide which requests count.
+  A designated keyword reply must accept all the listed words, even if the message names only one.
+  Without a valid exclusive designation, process reasonable requests, including replies in ordinary
+  language that convey a revocation. See [US TCPA revocation](legal-regimes.md#us-tcpa-revocation);
 - the account settings and the preference center reached from them;
 - the mailbox provider's one-click, from the header `deliverability` owns; here, what it maps to: the
   widest scope for that channel, the sender as a whole;
 - a person: support, a letter, a call, a message on a social account, the sales rep. The GDPR makes
-  withdrawal "as easy ... as to give", and the ICO says to publicize the phone route too; under the
-  FCC's rule a revocation by other means creates a rebuttable presumption. The person who receives it
-  writes the instruction with the route "human", and the deadline runs from receipt;
+  withdrawal "as easy ... as to give", and the ICO says to publicize the phone route too. The person
+  who receives the request logs it with the route "human" and the time of receipt. For TCPA-covered
+  traffic, distinguish the recorded request from a valid revocation under the route rule above;
 - a spam complaint returned by a mailbox provider's feedback loop: `deliverability` reads it for the
   identity; here it is an instruction of the widest scope for that channel, written the day it arrives;
 - a browser signal about sale and sharing (the GPC): an instruction with the scope "sale and sharing",
@@ -87,25 +89,26 @@ honoring log of step 5 is where it shows.
 program, plus one from `b2b-lifecycle`: the account. The scope is not chosen by the platform's list
 structure; it is read from what the person was offered and what they answered:
 
-- a one-click header, a reply "stop", a "stop everything" button: the sender as a whole, in that
-  channel (`email-program`'s global scope). The sender is the identity the message went out under: the
-  From identity the header names, the code or number the text came from. A brand that sends under its
-  own identity is the sender; brands that share one identity are all the sender, whatever the platform's
-  lists say;
+- an email one-click header, a reply "stop" to an email, a "stop everything" button: the sender as a
+  whole in that channel (`email-program`'s global scope). In email, use the From identity. A brand
+  that sends under its own identity is the sender; brands that share one identity are all the sender,
+  whatever the platform's lists say;
 - a type checkbox: that type, across the brand that holds the preference;
 - a brand's own unsubscribe, where brands are separate senders holding separate permissions: that brand;
   a wording that names the group: every brand in it;
-- a "stop" in reply to a text on a code that serves several programs: every text that rests on consent
-  under the FCC's rule, marketing and service alike where the service texts rest on the consent of
-  paragraph (a)(1), unless the person keeps some of them by answering the one confirmation text the rule
-  allows (step 6);
+- a valid revocation in response to a TCPA-covered US call or text: identify the caller and read the
+  content that prompted the request. If it contained advertising or telemarketing, stop all covered
+  advertising and telemarketing calls and texts from that caller. If it was informational, you can
+  apply the request to the category it targets unless the person expressly revoked more. A number,
+  provider list, or brand label alone does not define the caller. See step 6 for affected service rows;
 - a request from a role with authority to speak for an organization, "do not write to anyone at X": the
   account, which suppresses the program's touches to every contact of that account; one contact's
   unsubscribe stays that contact's and does not suppress the account (`b2b-lifecycle`).
 
-Ambiguous wording gets the wider reading. Scopes remove people; none of them widens a permission, and a
-preference center that lets a person "subscribe" to a type they had no basis for is writing a basis
-record, which needs the request of `lawful-basis-and-collection.md`, step 3, not a checkbox.
+For covered US calls and texts, apply the FCC scope rule above. Elsewhere, give ambiguous wording the
+wider reading. Scopes remove people; none widens a permission. A preference center that lets a person
+"subscribe" to a type they had no basis for is writing a basis record, which needs the request of
+`lawful-basis-and-collection.md`, step 3, not a checkbox.
 
 **4. Build the unsubscribe page in this order.** First the withdrawal completes: one click from the
 message, no login, no reason required, no delay announced. Then the confirmation, on the page: what was
@@ -116,41 +119,41 @@ No promotion on the page: an offer to stay is a step between the person and the 
 rule allows none. A forwarded message carries the original recipient's token, so the page names the
 address it will affect before it acts, and the person who is not that address sees whose withdrawal they
 are about to make. No confirmation email after an email withdrawal: the page confirmed, and a message
-after a withdrawal is a send to read against the metric. For texts, the one-time confirmation text within
-five minutes, confirming and nothing else, is allowed by the FCC's rule and is the one exception.
+after a withdrawal is a send to read against the metric. For covered US calls and texts, the FCC rule
+does not require a confirmation. If you use a confirmation text, state what stopped, without promotion
+or a question about scope. Apply the revocation without waiting for a reply. See the timing table below.
 
 **5. Propagate inside the shortest applicable window, and log every system's write.** The instruction is
 written to the person-level store first. From there it reaches every system that sends under the
 company's name: the email platform, the text provider, push, messaging apps, the CRM's sequences, the
-call list, the audience exports. The deadline is the shortest of the windows that apply to that channel
-and that base: ten business days under the US email rule, the Canadian rule and the FCC's rule; two days
+call list, the audience exports. Pass along the scope so each system suppresses only the streams the
+instruction reaches. The deadline is the shortest of the windows that apply to that channel
+and that base: ten business days under the US email rule and the Canadian rule; two days
 under Yahoo's requirement for mail to its users; "promptly" under the ICO; "as easy as to give" under
 the GDPR. Where no window that applies to a channel is a number, set one of your own for that channel,
 no longer than the shortest number that applies to any channel of yours, and record it once: the control
 metric reads sends after an instruction against this deadline. Where any Yahoo address is in the base,
 two days is the ceiling for email, and refreshing the suppression list faster than that is the practice,
-because the law's window and the platform's are both in force and the platform enforces by filtering. A
-withdrawal cancels marketing steps already queued for the person: flow steps scheduled for later, a
-campaign segmented but not sent. A message in flight at the moment of the instruction cannot be
+because the law's window and the platform's are both in force and the platform enforces by filtering.
+For a valid TCPA revocation, honor it within a reasonable time from receipt, subject to the ceiling in
+the timing table below. Cancel queued steps within the withdrawal's scope: flow steps scheduled for
+later, a campaign segmented but not sent. A message in flight at the moment of the instruction cannot be
 recalled; it is the cost of the lag, and the deadline is measured to the last system's write. The
 honoring log holds, per instruction and per system, the time of the write; the maximum across systems is
 the lag, and a system with no write by the deadline is the broken link.
 
-**6. Leave service rows alone, and take them out of "always on" when they stop being service.** A
-withdrawal does not stop service messages, the confirmation of an order, the code, the delay notice, nor
-the mandatory notices of `contact-orchestration`'s class, a recall, a change of terms. The US email rule
+**6. Check the basis and scope before keeping a service row.** The US email rule
 exempts transactional and relationship messages from most of its provisions; the ICO says routine
 customer service is not direct marketing; in Canada the service message is exempt from the consent
 requirement and still carries an unsubscribe mechanism. What the person's unsubscribe from a Canadian
-service message does is a question for counsel. Texts in the United States are the exception written in
-the rule itself: a "stop" revokes consent for every text that rests on it under the FCC's rule, and a
-service text sent with an automatic telephone dialing system to a wireless number rests on the prior
-express consent of paragraph (a)(1). So on a code that carries both, the one confirmation text asks
-which texts the person meant; an answer that keeps the service texts is written as the scope; silence
-stops every text for which consent is required, and a required service row then goes by
-`transactional-messaging`'s next channel. Whether your service texts fall under the federal definition
-is the question for counsel named in `SKILL.md`; until it is answered, the program reads them as if they
-did. The exemption is lost by content, in each regime by its own test (`transactional-messaging`, class
+service message does is a question for counsel. For TCPA-covered US calls and texts, apply step 3. A
+marketing revocation does not by itself stop a separate informational stream whose basis remains valid.
+A valid revocation that reaches an informational category stops use of the revoked consent for that
+category. If that interrupts a required notice, use `transactional-messaging`'s failover to a channel
+with a valid basis. A separate number or a service label does not preserve revoked consent. Ask counsel
+if you cannot establish that the rule applies or that the affected stream still has a basis. Hold
+the affected stream while the basis is unresolved.
+The exemption is lost by content, in each regime by its own test (`transactional-messaging`, class
 check at the template version and at the send). From the version that carried promotion, the row is a
 marketing send for this skill: the instruction applies to it, and it leaves the "continuing" list of
 step 1. The sign that this went wrong: a promotional block switched on by the recipient's consent flag
@@ -182,7 +185,7 @@ withdrawal of your own.
 | Quantity | Where it comes from | Class |
 |---|---|---|
 | US email: honor an opt-out within 10 business days; the mechanism works for at least 30 days after the send; no fee, no information beyond the address, no step beyond a reply or a single page | FTC compliance guide, opened 2026-09-14 | legal |
-| US texts: honor a revocation within ten business days; a one-time confirmation text within five minutes, with no marketing, is presumed to fall within consent | 47 CFR 64.1200(a)(10) and (a)(12), opened 2026-09-14 | legal |
+| TCPA-covered US calls and texts: honor a valid revocation within a reasonable time, at most 10 business days from receipt. An optional text that only confirms the revocation and carries no promotion is presumed within prior express consent if sent within 5 minutes of receipt; later, show that the delay was reasonable | [US TCPA revocation](legal-regimes.md#us-tcpa-revocation), FCC 26-67, opened 2026-11-21 | legal |
 | Canada: effect given without delay and no later than 10 business days; the address or page valid for at least 60 days after the send; no further action by the person | CASL section 11(2) and (3), opened 2026-09-14 | legal |
 | Yahoo: honor unsubscribes within 2 days | Yahoo sender best practices, opened 2026-09-14; a platform rule | platform |
 | UK and EU: "promptly"; "as easy to withdraw as to give" | ICO PECR guidance; GDPR Article 7(3), opened 2026-09-14 | legal |
@@ -195,9 +198,10 @@ mail to that provider's users and nobody else. The rest are yours.
 
 ## Edge cases
 
-- **The withdrawal arrives on paper, by phone or in a chat.** The person who receives it writes the
-  instruction with route "human" and the time of receipt; the deadline runs from then, not from the
-  moment somebody found the note.
+- **The request arrives on paper, by phone or in a chat.** The person who receives it logs the request
+  with route "human" and the time of receipt. For covered US calls or texts, apply the route check in
+  step 2 before recording a TCPA revocation. If the request qualifies, measure the deadline from
+  receipt, not from the time someone finds the note.
 - **An unsubscribe from one address of a merged person.** The scope is the person, not the address, when
   the wording said "stop writing to me"; the second address is suppressed with the first. A type
   preference set on one address is a preference of the person as well.
@@ -205,14 +209,13 @@ mail to that provider's users and nobody else. The rest are yours.
   day it arrives, whatever the program thinks the person meant.
 - **A withdrawal while a campaign is in flight.** The send that already left counts as the cost of the
   lag; the send scheduled for tomorrow is canceled. Read the two apart in the honoring log.
-- **STOP on a short code that serves several programs.** Every text that rests on consent stops, the
-  service texts on that code included where they rest on the consent of paragraph (a)(1); the one
-  confirmation text may ask which, an answer that keeps some is the scope, and silence keeps them all
-  stopped, with the required service rows moved to another channel (step 6).
-- **A one-time code the person asks for after STOP.** The stop entry stays. The request is a requested
-  message for that one code, sent at once and carrying nothing but the code; log the request and its
-  time beside the stop entry. The FCC texts, the conditions and where counsel decides are in
-  `legal-regimes.md`.
+- **STOP on a short code that serves several programs.** For a valid TCPA revocation, apply the
+  advertising or informational scope from step 3 across the caller's systems. Keep provider blocks
+  separate from that decision. If a required service row loses its basis on this channel, use the
+  failover in step 6.
+- **A one-time code the person asks for after STOP.** Keep the stop entry and log the separate request
+  and its time. Check [the FCC ruling on a separately requested code](legal-regimes.md#us-requested-code)
+  for the conditions and the question for counsel. The request does not lift the provider's block.
 - **A one-click from a service message.** The header belongs on marketing and subscribed messages; a
   service message does not need it (`deliverability`). Where a service message carries one, the click
   is a withdrawal of the sender's marketing in that channel, and the service row continues.
@@ -223,9 +226,8 @@ mail to that provider's users and nobody else. The rest are yours.
   forwarded link cannot be used to read a profile.
 - **A group of brands with one center.** Each brand's types are listed under the brand; "stop
   everything" names its scope on the button: this brand, or all brands of the group, as the request of
-  `lawful-basis-and-collection.md`, step 3, named them. A one-click or a reply "stop" from a message
-  of one brand reaches the identity that message went out under (step 3), and a shared center does not
-  widen it to the group on its own.
+  `lawful-basis-and-collection.md`, step 3, named them. Apply step 3 to find the email sender or the
+  caller for a covered US call or text. A shared center does not turn independent callers into one.
 - **A parent's instruction about a child's data.** Written as the parent's, with the scope of the child's
   record, and read in `processing-beyond-sending.md`, step 4.
 - **An instruction from a role with authority in an organization.** Account scope; the record names the

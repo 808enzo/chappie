@@ -122,51 +122,63 @@ of `lawful-basis-and-collection.md`, step 2, and apply no rule. This is not lega
   prior express written consent of the called party" (paragraph (a)(2)); that consent is "an
   agreement, in writing, bearing the signature of the person called that clearly authorizes the seller
   to deliver or cause to be delivered to the person called advertisements or telemarketing messages",
-  naming the telephone number (paragraph (f)(9)). The revocation and confirmation rules speak of
-  "calls or text messages" and of "robocalls and robotexts" directly; the sentence that "the term
+  naming the telephone number (paragraph (f)(9)). The sentence that "the term
   'call' includes a text message, including a short message service (SMS) call" is scoped to the
   exemptions of paragraph (a)(9), and the reading of texts as calls under the statute itself is a
-  question for counsel. A called party "may revoke prior express consent, including prior express
-  written consent, to receive calls or text messages made pursuant to paragraphs (a)(1) through (3)
-  and (c)(2) of this section by using any reasonable method to clearly express a desire not to receive
-  further calls or text messages from the caller or sender", after which "the caller may not send
-  additional robocalls and robotexts"; the words "stop," "quit," "end," "revoke," "opt out," "cancel,"
-  or "unsubscribe" in reply to a text "constitutes a reasonable means per se", a reply in other words
-  must be treated as revocation "if a reasonable person would understand those words to have conveyed
-  a request to revoke consent", and all such requests "must be honored within a reasonable time not to
-  exceed ten business days from receipt" (paragraph (a)(10)). A revocation by other means, such as a
-  voicemail or an email to an address meant to reach the caller, "creates a rebuttable presumption
-  that the consumer has revoked consent" (paragraph (a)(11)). "A one-time text message confirming a
-  request to revoke consent" is allowed "as long as the confirmation text merely confirms the text
-  recipient's revocation request and does not include any marketing or promotional information, and is
-  the only additional message sent"; sent within five minutes it "will be presumed to fall within the
-  consumer's prior express consent"; where the person consented to several categories, it "may request
-  clarification as to whether the revocation request was meant to encompass all such messages; the
-  sender must cease all further texts for which consent is required absent further clarification"
-  (paragraph (a)(12)).
+  question for counsel.
   **Who this does not bind:** calls and texts sent without an automatic telephone dialing system or an
   artificial or prerecorded voice as the federal definition reads them, which is a question for counsel
   about your sending setup; messages made by or on behalf of a tax-exempt nonprofit and health care
   messages under the HIPAA definitions, for which paragraph (a)(2) states different consent; the
-  exemptions of paragraph (a)(9), not surveyed here; state telemarketing and texting laws, not surveyed
-  here. Note what the revocation rule does bind: a service text that rests on the prior express consent
-  of paragraph (a)(1) is a text "for which consent is required", and a "stop" reaches it unless the
-  person keeps it by the clarification of paragraph (a)(12)
-  (`references/preference-center-and-unsubscribe.md`, step 6).
-- **United States, FCC Declaratory Ruling and Order FCC 15-72 (released 2015-07-10), paragraphs 103 to
-  106, and Report and Order FCC 24-24 (released 2024-02-16), paragraphs 28 and 29: a code the person
-  asks for after a stop.** The 2015 ruling found that "a one-time text sent in response to a consumer's
+  exemptions of paragraph (a)(9), not surveyed here; state telemarketing and texting laws, not surveyed here.
+- <a name="us-tcpa-revocation"></a>**United States, TCPA revocation, 47 CFR 64.1200(a)(10) through (12).**
+  FCC 26-67 takes effect November 25, 2026. For earlier requests, check the rule in force at receipt.
+  The new (a)(10) replaces the delayed provision that would have extended an informational opt-out to
+  unrelated categories on January 31, 2027. It covers revocation of prior express consent, including
+  written consent, for calls and texts under (a)(1) through (3) and (c)(2).
+
+  **Route, (a)(10) and (11).** A caller can designate one or more exclusive methods: an automated
+  interactive voice or key-press opt-out on a call, a reply to an incoming text with `stop`, `quit`,
+  `end`, `revoke`, `opt out`, `cancel`, or `unsubscribe`, or a website or phone number the caller
+  provides for opt-outs. "The caller must clearly and conspicuously disclose the designated method to
+  revoke consent on the call or in the text." If keyword reply is the exclusive method, disclose at
+  least one of those words in every text and accept all seven. A caller that properly designates an
+  exclusive method need not process requests made by other means under this rule. Otherwise, (a)(11)
+  says callers "must process revocation requests made by any reasonable means." For a method outside
+  the list, evidence from the recipient that they made the request creates a rebuttable presumption
+  absent contrary evidence; a dispute turns on the totality of the circumstances. If the texting
+  protocol cannot receive replies, disclose that technical limitation and give reasonable alternatives,
+  both clearly and conspicuously in every text. Honor valid requests within a reasonable time, no later
+  than ten business days from receipt.
+
+  **Scope, (a)(10).** For a reply to an informational call or text (no advertising or telemarketing),
+  the caller may limit the revocation to the informational category the request targets. Honor a valid
+  request that expressly reaches further. "Revocation requests made in response to calls or text
+  messages that contain an advertisement or constitute telemarketing revoke consent to all future
+  calls or text messages containing an advertisement or constitute telemarketing from that caller."
+  Check who the caller is across numbers and systems. A separate informational stream needs its own
+  still-valid basis and must meet its channel's rules. A service label or another number supplies no basis.
+
+  **Confirmation, (a)(12).** This paragraph addresses (a)(1) and (2) only. A confirmation is optional
+  under the FCC rule and qualifies only if it "merely confirms the text recipient's revocation request
+  and does not include any marketing or promotional information." The rule says: "If the confirmation
+  text is sent within five minutes of receipt, it will be presumed to fall within the consumer's prior
+  express consent. If it takes longer, however, the sender will have to make a showing that such delay
+  was reasonable." Confirm the scope already recorded, without asking a question or waiting for an
+  answer to apply the revocation. Check separate carrier and platform requirements.
+
+  **Who this does not bind:** traffic outside the cited TCPA provisions, including email and push.
+  Ask counsel how the federal definitions, state law and separate do-not-call rules apply to your setup.
+- <a name="us-requested-code"></a>**United States, FCC Declaratory Ruling and Order FCC 15-72 (released
+  2015-07-10), paragraphs 103 to 106: a code the person asks for after a stop.** The ruling found that
+  "a one-time text sent in response to a consumer's
   request for information does not violate the TCPA or the Commission's rules so long as it: (1) is
   requested by the consumer; (2) is a one-time only message sent immediately in response to a specific
   consumer request; and (3) contains only the information requested by the consumer with no other
   marketing or advertising information", and that the consumer's initiating text "clearly constitutes
-  consent to an informational reply in fulfillment of the consumer request." The 2024 order applies a
-  revocation "only to those robocalls and robotexts for which consent is required under the TCPA" and,
-  absent an affirmative response, "no further robocalls or robotexts for which consent is required can
-  be made to this consumer"; it does not mention the 2015 ruling. The library's reading of the two
-  together: a stop ends the standing consent, and a code the person asks for afterward rests on the new
-  request, which is a requested message for that one code. Send the code only when all three conditions
-  hold, and change nothing else: the stop state on the number stays, the request restarts no program,
+  consent to an informational reply in fulfillment of the consumer request." Assess a separately
+  requested code on its own basis under this ruling, apart from the confirmation of the revocation.
+  The recorded revocation stays in force for its scope, the request restarts no program,
   and the next code needs its own request. Log the request with its time beside the stop entry, so an
   audit can trace the send after the stop to its basis. **Who this does not bind:** the ruling was made
   on the facts of a text the consumer sent to the business, so whether a code requested on a login
@@ -279,12 +291,12 @@ of `lawful-basis-and-collection.md`, step 2, and apply no rule. This is not lega
   https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/consent/how-should-we-obtain-record-and-manage-consent/
 - FTC, CAN-SPAM Act: A Compliance Guide for Business:
   https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business
-- 47 CFR 64.1200, Delivery restrictions, paragraphs (a)(1), (a)(2), (a)(9), (a)(10) to (a)(12) and (f)(9):
+- 47 CFR 64.1200, Delivery restrictions, paragraphs (a)(1), (a)(2), (a)(9) and (f)(9):
   https://www.ecfr.gov/current/title-47/chapter-I/subchapter-B/part-64/subpart-L/section-64.1200
+- FCC, FCC 26-67, final rule, FR Doc. 2026-21821, Discussion I.E and Final Rules, 47 CFR 64.1200(a)(10)
+  through (12), opened 2026-11-21: https://www.federalregister.gov/documents/full_text/html/2026/10/26/2026-21821.html
 - FCC, Declaratory Ruling and Order, FCC 15-72, paragraphs 103 to 106, opened 2026-09-16:
   https://docs.fcc.gov/public/attachments/FCC-15-72A1.pdf
-- FCC, Report and Order and Further Notice of Proposed Rulemaking, FCC 24-24, paragraphs 28 and 29,
-  opened 2026-09-16: https://docs.fcc.gov/public/attachments/FCC-24-24A1.pdf
 - 16 CFR part 312, Children's Online Privacy Protection Rule, sections 312.2, 312.3 and 312.5:
   https://www.ecfr.gov/current/title-16/chapter-I/subchapter-C/part-312
 - State of California Department of Justice, California Consumer Privacy Act (CCPA):
