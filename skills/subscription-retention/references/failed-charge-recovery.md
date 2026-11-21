@@ -103,10 +103,13 @@ term: Apple cuts a 16 or 28 day grace to 6 days on a weekly subscription "to ens
 the subscription itself", and the same ceiling holds for you.
 
 **4. Time the messages to the retry schedule, not to the calendar.** The class of every message is a
-service row: an exception fired by a state change in `transactional-messaging`; a row a withdrawal does
-not stop in `consent-and-preferences`; a utility template with no offer inside in `messaging-channels`;
-a mandatory notice in `contact-orchestration`, never suppressed and counted against the cap, since that
-skill exempts only what the person is waiting for. The order: (a) at the decline, when the class needs
+service row: an exception fired by a state change in `transactional-messaging`; a utility template
+with no offer inside in `messaging-channels`; a mandatory notice in `contact-orchestration`. Count the
+notice toward the cap; neither the cap nor a marketing pause blocks it on a permitted channel.
+Check the scope of the withdrawal with `consent-and-preferences`. If a valid withdrawal covers payment
+SMS, stop sending those texts on the withdrawn consent, including queued texts. Use
+`transactional-messaging` to send any required notice when due through a fallback channel that has a
+valid basis and meets the notice and channel rules. The order: (a) at the decline, when the class needs
 the person (hard, authentication required), the message goes at once
 with the link to update the payment method and the date access changes; when the class is soft, the first
 retry runs in silence and the message follows the first failed retry; (b) before the last retry, with
