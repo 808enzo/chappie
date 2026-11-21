@@ -109,7 +109,12 @@ notice toward the cap; neither the cap nor a marketing pause blocks it on a perm
 Check the scope of the withdrawal with `consent-and-preferences`. If a valid withdrawal covers payment
 SMS, stop sending those texts on the withdrawn consent, including queued texts. Use
 `transactional-messaging` to send any required notice when due through a fallback channel that has a
-valid basis and meets the notice and channel rules. The order: (a) at the decline, when the class needs
+valid basis and meets the notice and channel rules, including any contract restrictions. If no channel
+qualifies, record the notice as unsent and why you ruled out each candidate channel. Give the record
+and the original notice deadline to the owner of the obligation before that deadline. Keep the
+obligation outstanding. Do not mark the notice delivered or resume SMS on the withdrawn consent.
+
+The order: (a) at the decline, when the class needs
 the person (hard, authentication required), the message goes at once
 with the link to update the payment method and the date access changes; when the class is soft, the first
 retry runs in silence and the message follows the first failed retry; (b) before the last retry, with
@@ -210,8 +215,11 @@ subscription falls; cases with no deadline.
 **A message to the wrong payer.** The sign: "update your card" emails to people whose payment the store
 holds; the link leads to an empty page.
 
-**A case with no messages.** The sign: cases closed on the deadline with zero messages. The row's route is
-down, which `program-audit-and-ops` reads as the row's heartbeat (`transactional-messaging`).
+**A case with no messages.** If a case closes on its deadline with zero messages, check which notices
+were due. For a due notice with no permitted channel, read the recorded reason and verify that the owner
+of the obligation got the record before the notice deadline (step 4). For a due notice with a permitted
+channel, trace the event and send logs. Report a sender failure to `program-audit-and-ops` only when the
+evidence points to the sender.
 
 **Sources for the rules in this file, each opened 2026-09-15.** The addresses stand in `references/legal-regimes.md`: Visa
 article AI10325; J.P. Morgan Payments, Authorization retry logic; Stripe, Automate payment retries, How
