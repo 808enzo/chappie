@@ -71,28 +71,41 @@ Eight rules, each with the boundary it does not cross.
   arrangements" (5.5.1).
   **Who this does not bind:** senders outside the United States. They are industry principles, not a
   statute; carriers apply them through their own terms, and the FCC rule below is the law.
-- **United States, 47 CFR 64.1200 (a)(10) and (a)(12): what the origin's code has to execute.** The
-  rule is the neighbor's; these are the lines it hands to the channel. Replies using "stop," "quit,"
-  "end," "revoke," "opt out," "cancel," or "unsubscribe" constitute "a reasonable means per se to
-  revoke consent", and other words must be treated as revocation "if a reasonable person would
-  understand those words to have conveyed a request to revoke consent". A sender that uses "a texting
-  protocol that does not allow reply texts" must "provide a clear and conspicuous disclosure on each
-  text to the consumer that two-way texting is not available due to technical limitations of the
-  texting protocol, and clearly and conspicuously provide on each text reasonable alternative ways to
-  revoke consent". Requests "must be honored within a reasonable time not to exceed ten business days
-  from receipt", and senders "may not designate an exclusive means to request revocation of consent"
-  (paragraph (a)(10)). "A one-time text message confirming a request to revoke consent" is allowed
-  "as long as the confirmation text merely confirms the text recipient's revocation request and does
-  not include any marketing or promotional information, and is the only additional message sent";
-  "sent within five minutes of receipt, it will be presumed to fall within the consumer's prior express
-  consent"; where the person consented to several categories, "the confirmation message may request
-  clarification as to whether the revocation request was meant to encompass all such messages; the
-  sender must cease all further texts for which consent is required absent further clarification"
-  (paragraph (a)(12)).
-  **Who this does not bind:** the same boundary the neighbor states: texts sent without an automatic
-  telephone dialing system or an artificial or prerecorded voice as the federal definition reads them,
-  which is a question for counsel about your setup; nonprofit and HIPAA messages, which paragraph (a)(2)
-  treats separately; state law, not surveyed here.
+- <a name="us-tcpa-revocation"></a>**United States, 47 CFR 64.1200(a)(10) through (12): revocation at the origin.**
+  FCC 26-67 takes effect November 25, 2026. For earlier requests, check the rule in force at receipt.
+  This rule covers revocation of prior express consent, including written consent, for calls and texts
+  under (a)(1) through (3) and (c)(2). `consent-and-preferences` owns the basis and recorded scope.
+
+  **Route, (a)(10) and (11).** A caller can designate one or more exclusive methods: an automated
+  interactive voice or key-press opt-out on a call, a reply to an incoming text with `stop`, `quit`,
+  `end`, `revoke`, `opt out`, `cancel`, or `unsubscribe`, or a website or phone number the caller
+  provides for opt-outs. "The caller must clearly and conspicuously disclose the designated method to
+  revoke consent on the call or in the text." For exclusive keyword replies, disclose at least one of
+  the words in each text and accept all seven. If the caller properly designates an exclusive method,
+  the FCC rule does not require processing requests by other means. Otherwise, (a)(11) says callers
+  "must process revocation requests made by any reasonable means." For a method outside the list,
+  evidence from the recipient that they made the request creates a rebuttable presumption absent
+  contrary evidence. A dispute turns on the totality of the circumstances. If the texting protocol
+  cannot receive replies, disclose that technical limitation and give reasonable alternatives, both
+  clearly and conspicuously in each text. Honor valid requests within a reasonable time, no later than
+  ten business days from receipt.
+
+  **Scope, (a)(10).** The caller may limit a revocation in response to an informational call or text
+  to the category it targets, unless the request expressly reaches further. A valid revocation in
+  response to a call or text containing advertising or telemarketing stops all covered advertising
+  and telemarketing calls and texts from that caller. The provider's pool block can have a different
+  scope. Verify the remaining basis and channel rules before keeping any separate stream.
+
+  **Confirmation, (a)(12).** This paragraph addresses (a)(1) and (2) only. The FCC does not require a
+  confirmation. To qualify, the text "merely confirms the text recipient's revocation request and
+  does not include any marketing or promotional information." The rule says: "If the confirmation
+  text is sent within five minutes of receipt, it will be presumed to fall within the consumer's prior
+  express consent. If it takes longer, however, the sender will have to make a showing that such delay
+  was reasonable." Apply the recorded scope without a question in the confirmation or a wait for a
+  reply. Check carrier and platform rules separately.
+
+  **Who this does not bind:** traffic outside the cited TCPA provisions, including email and push.
+  Ask counsel how the federal definitions, state law and separate do-not-call rules apply to your setup.
 - **Google, RCS for Business: consent, STOP in the agent's language, brand-wide revocation.** The
   Acceptable Use Policy requires that "you must first provide end users with notice and obtain consent
   prior to soliciting any end user"; "all agents must comply with a user's request to opt-out (for
@@ -117,7 +130,7 @@ Eight rules, each with the boundary it does not cross.
 
 ## Sources
 
-**Sources, each opened 2026-09-15.**
+**Sources, opened 2026-09-15 unless dated separately.**
 
 - WhatsApp Business Messaging Policy: https://whatsappbusiness.com/policy/
 - Meta, WhatsApp Business Platform, Getting opt-in:
@@ -143,8 +156,8 @@ Eight rules, each with the boundary it does not cross.
 - CTIA, Messaging Principles and Best Practices, May 2023 (sections 5.1.2.1, 5.1.2.2, 5.1.3, 5.1.4,
   5.1.5, 5.5.1, 5.5.2; Exhibit II):
   https://api.ctia.org/wp-content/uploads/2023/05/230523-CTIA-Messaging-Principles-and-Best-Practices-FINAL.pdf
-- 47 CFR § 64.1200, paragraphs (a)(10) and (a)(12), eCFR edition of 2026-09-11 (read through the eCFR
-  API): https://www.ecfr.gov/current/title-47/chapter-I/subchapter-B/part-64/subpart-L/section-64.1200
+- FCC, FCC 26-67, final rule, FR Doc. 2026-21821, Final Rules, 47 CFR 64.1200(a)(10) through (12),
+  opened 2026-11-21: https://www.federalregister.gov/documents/full_text/html/2026/10/26/2026-21821.html
 - Google, RCS for Business, Acceptable Use Policy:
   https://developers.google.com/business-communications/rcs-business-messaging/terms-and-policies/aup
 - Google, RCS for Business, How it works (capability check, fallback to SMS):

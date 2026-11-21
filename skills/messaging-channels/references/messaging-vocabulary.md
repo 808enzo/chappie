@@ -154,9 +154,10 @@ sends outside a reply window.
 **Keyword.** A word the origin's code acts on without a person: a stop word, a start word, a help
 word, in the program's language.
 
-**Stop words.** Stop, quit, end, revoke, opt out, cancel, unsubscribe: the words the United States
-rule names as a reasonable means per se; the provider's defaults; and normal language a reasonable
-person would read the same way.
+**Stop words.** The terms an origin recognizes as opt-out requests. For TCPA-covered US texts, see
+[US TCPA revocation](legal-regimes.md#us-tcpa-revocation) for the FCC's keyword list, the conditions
+for an exclusive method, and the rule for reasonable requests. Providers and platforms can recognize
+other words or ordinary language under their own rules.
 
 **Provider block list.** The provider's list of numbers that replied with a stop word, kept in your
 account with that provider; later messages from that account to them fail at the provider. Not the
@@ -166,12 +167,13 @@ record.
 system that texts reads. The withdrawal lives here. The provider block list holds the stops that
 reached that provider, and a number on it with no instruction here is a stop the record missed.
 
-**Single confirmation.** The one message after a stop word: sent within five minutes, confirming the
-withdrawal, carrying no marketing, the only message after the request. Where the person holds several
-text programs, it may ask about scope.
+**Confirmation.** A text that states what stopped, without promotions or questions. The FCC does not
+require it; see [US TCPA revocation](legal-regimes.md#us-tcpa-revocation) for the timing and limits.
+Keep carrier and platform requirements separate and do not duplicate the provider's reply.
 
-**Scope question.** The line in the single confirmation that asks whether the request covers all the
-person's text programs. Silence means all texts that stand on consent stop.
+**Scope of revocation.** The streams a valid opt-out reaches. For TCPA-covered traffic, it depends on
+the caller and whether the communication was advertising, telemarketing, or informational. The
+provider's pool block is separate. See [US TCPA revocation](legal-regimes.md#us-tcpa-revocation).
 
 **Distribution lag.** The time from a keyword to the last system's action on it, per system, read
 beside the control metric.

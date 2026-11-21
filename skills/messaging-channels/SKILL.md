@@ -238,8 +238,9 @@ The list below says only what each rule governs.
   number, and the fee on unregistered traffic.
 - **United States, the CTIA Messaging Principles and Best Practices, industry principles:** consent by
   kind of content, the opt-in confirmation, opt-out words, rented lists, deactivation files, snowshoeing.
-- **United States, 47 CFR 64.1200 (a)(10) and (a)(12):** the words that revoke consent, what a one-way
-  origin must disclose, the deadline to honor a revocation, and the single confirmation text.
+- **United States, 47 CFR 64.1200(a)(10) through (12):** before you decide which requests count, what
+  they stop, what a one-way origin must disclose, or what a confirmation may say, read
+  [US TCPA revocation](references/legal-regimes.md#us-tcpa-revocation).
 - **Google, RCS for Business Acceptable Use Policy, a platform rule:** consent before contact, STOP in the
   agent's language, and revocation across all of a brand's promotional agents.
 - **Twilio, one provider's product behavior:** its keywords, how far its block reaches, and what its

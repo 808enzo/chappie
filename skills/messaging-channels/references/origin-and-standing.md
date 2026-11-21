@@ -48,9 +48,9 @@ verification or with 2,000 messages delivered outside reply windows to unique nu
 moving period using templates with a high quality rating. The limit belongs to the portfolio and every
 number in it spends the same limit. RCS: an agent, verified and launched. Alphanumeric sender IDs: the
 registration rules differ by country and are left to you, and the ID cannot receive a reply. Under the
-United States rule, a texting protocol that does not allow reply texts obliges the sender to put on
-each text a clear disclosure that two-way texting is not available and a reasonable alternative way to
-revoke consent (47 CFR 64.1200(a)(10); the rule and its boundary are in `legal-regimes.md`). A one-way origin
+United States TCPA rule, if the texting protocol does not allow replies, disclose that technical
+limitation and give reasonable ways to revoke consent, both clearly and conspicuously in each text.
+See [US TCPA revocation](legal-regimes.md#us-tcpa-revocation). A one-way origin
 therefore carries that line in every text and an opt-out route that works without a reply.
 
 **3. Split the classes across origins, and write down the question that decided it.** Ask of every
@@ -191,7 +191,7 @@ carriers' principles rule out, or a list whose basis does not cover this channel
   https://www.twilio.com/docs/messaging/compliance/a2p-10dlc
 - CTIA, Messaging Principles and Best Practices, May 2023, sections 5.1.2.2, 5.1.4, 5.1.5, 5.5.1, 5.5.2:
   https://api.ctia.org/wp-content/uploads/2023/05/230523-CTIA-Messaging-Principles-and-Best-Practices-FINAL.pdf
-- 47 CFR § 64.1200(a)(10), the one-way protocol disclosure, eCFR edition of 2026-09-11:
-  https://www.ecfr.gov/current/title-47/chapter-I/subchapter-B/part-64/subpart-L/section-64.1200
+- FCC, 47 CFR 64.1200(a)(10), the one-way protocol disclosure: see the rule and source in
+  [US TCPA revocation](legal-regimes.md#us-tcpa-revocation).
 - Twilio, Advanced Opt-Out (the list of blocked numbers; later messages from your account fail):
   https://www.twilio.com/docs/messaging/tutorials/advanced-opt-out
