@@ -57,8 +57,11 @@ largest campaign send, the tail latency of service rows stays inside their deadl
 - **Progress** goes to the channel that shows on a device when the event matters: a displayable push
   endpoint under `push-notifications`' fan-out rule, otherwise failover (step 5). An email copy is
   optional.
-- **Exception** goes by the fastest channel available, plus a durable copy by email, because it carries
-  the options and what happens without an answer.
+- **Exception.** Use the fastest permitted channel. Check that it has a valid basis and meets the notice
+  and channel rules, including any contract restrictions. If you send through another channel, add a
+  durable copy by email only if email meets those same conditions. The copy records the options and what
+  happens without an answer. Apply the same checks to fallback channels in step 5. If no channel qualifies,
+  leave the exception unsent.
 
 A person's own choice of channel for service messages (the preference center, `consent-and-preferences`)
 changes the default channel. It does not switch off a required row.
