@@ -169,9 +169,15 @@ stays with the skill that defines it; whether it went silent is read here.
 - **Subscription terms and cases** (`subscription-retention`). Four silent objects: a term past the
   platform's collection window with no charge event, where billing is silent and the subscription
   still reads "active"; a recovery case past its deadline with no closing entry; a cancel request
-  made by message past its promised time with no closing entry; a pause with no resume date. For
-  recovery cases, read the heartbeat on closure: a case closed on its deadline with zero messages
-  means the row's route is down. Definitions: `term-end-and-notices.md`, step 5; `failed-charge-recovery.md`, steps 2 and 6;
+  made by message past its promised time with no closing entry; a pause with no resume date. If a
+  recovery case closes on its deadline with no messages, check which notices were due and why no
+  message went out. If no channel was permitted, check the recorded reason and verify that the owner
+  of the obligation received it before the notice deadline. If a channel was permitted, check
+  the event and send logs. Diagnose a sender failure only if the evidence points to the sender.
+  If a required notice went unsent past its deadline, follow the missed-obligation route in
+  `incident-response.md`, step 3, whatever the cause. Definitions: `term-end-and-notices.md`, step 5;
+  `failed-charge-recovery.md`, steps 2 and 6 for the case deadline and closure, and step 4 and the
+  failure mode on a case with no messages for the notice;
   `exit-and-save.md`, steps 1 and 7.
 - **Contract terms billed by invoice** (`b2b-retention`). Seven silent objects: a won-deal record not
   accepted by its promised time; a contract that bills invoices and has no row in the contract
