@@ -54,8 +54,9 @@ largest campaign send, the tail latency of service rows stays inside their deadl
 **4. Choose channels by kind.**
 
 For each route, including a copy or a second message, check the basis, notice and channel rules, and contract
-for this notice and recipient. Among permitted routes, check which can meet the original deadline
-using the latency from step 2. Apply the defaults below only to routes that pass these checks.
+for this notice and recipient. Among permitted routes, check which can meet the original deadline.
+Include any wait for quiet hours to end (step 7) when you estimate arrival from the hops in step 2.
+Apply the defaults below only to routes that pass these checks.
 
 - **Access** goes where the screen told the person it would go, and nowhere else.
 - **Confirmation** goes by email, the durable record the person keeps (in the EU and the UK, the durable
@@ -116,8 +117,11 @@ On push, collapse only repeated updates about the same thing (`push-notification
 
 **7. Apply quiet hours by kind.** Access, and exceptions whose deadline falls inside the night, go at
 once. Progress and confirmation that the person cannot act on before morning wait, in channels that make a
-sound on a device, until quiet hours end in the recipient's local time (`contact-orchestration`); when the
-next moment comes before quiet hours end, send the row at once. Apply the cap by the row's contact class.
+sound on a device, until quiet hours end in the recipient's local time (`contact-orchestration`). If the
+person needs to act before quiet hours end, send at once on a permitted route. An earlier contractual
+deadline does not by itself lift the hold on a confirmation. If the hold would make it late, check the
+other routes under step 4. If none can arrive in time, give the obligation owner the timing constraint
+and the original deadline now. Apply the cap by the row's contact class.
 A service message sits outside the cap but still appears on the timing chart. A mandatory notice, such
 as a change of terms, counts toward the cap and still goes if the cap is full. Use the mandatory notice's
 own deadline for quiet hours (`contact-orchestration`, `contact-policy.md`, steps 1 and 4).
