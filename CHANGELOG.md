@@ -14,6 +14,26 @@ All 35 skills share one version number. No skill has a version of its own.
 - **Patch.** A correction inside a skill: a legal or channel rule updated to match its current
   source, or a step rewritten to read more clearly.
 
+## [1.2.1] - 2026-11-22
+
+### Fixed
+
+- Updated `consent-and-preferences` and `messaging-channels` for the US FCC rule on revoking
+  consent to covered calls and texts (FCC 26-67, effective November 25, 2026). A valid opt-out in
+  response to advertising or telemarketing covers all such calls and texts from that caller. An
+  opt-out in response to an informational message can be narrower. The skills explain how to check
+  the request's scope and method and when the caller may send a confirmation text.
+- `subscription-retention` and `transactional-messaging` keep the original deadline for a required
+  notice when the planned channel is no longer permitted. Check quiet hours and delivery time on
+  each permitted route. Tell the owner as soon as no route can meet the deadline, and report an
+  actual miss separately. After an outage, keep each notice still owed to its own recipient.
+- `messaging-channels` counts delivery in the week of channel handoff, including when the receipt
+  arrives the following week. If a device cannot receive a promised RCS access code, the screen
+  offers a permitted alternative at the deadline instead of sending the code by SMS automatically.
+- `program-audit-and-ops` counts each notice due once, even if a copy went out on another channel.
+  A period with no expected sends has no send rate. A notice that was due but never sent on an
+  available, permitted route still counts as missed.
+
 ## [1.2.0] - 2026-10-26
 
 This release gives the measurement skills one rule for telling a real change from noise in your own
@@ -178,6 +198,7 @@ First public release.
 Version 2 takes two topics this release leaves out: calls and voice, and AI inside the program.
 [ROADMAP.md](ROADMAP.md#not-in-version-1) gives the reason for each.
 
+[1.2.1]: https://github.com/808enzo/chappie/releases/tag/v1.2.1
 [1.2.0]: https://github.com/808enzo/chappie/releases/tag/v1.2.0
 [1.1.1]: https://github.com/808enzo/chappie/releases/tag/v1.1.1
 [1.1.0]: https://github.com/808enzo/chappie/releases/tag/v1.1.0
