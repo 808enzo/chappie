@@ -51,25 +51,33 @@ largest campaign send, the tail latency of service rows stays inside their deadl
 
 **4. Choose channels by kind.**
 
+For each route, including a copy or a second message, check the basis, notice and channel rules, and contract
+for this notice and recipient. Among permitted routes, check which can meet the original deadline
+using the latency from step 2. Apply the defaults below only to routes that pass these checks.
+
 - **Access** goes where the screen told the person it would go, and nowhere else.
 - **Confirmation** goes by email, the durable record the person keeps (in the EU and the UK, the durable
   medium in `legal-regimes.md`), with the order page as its twin.
 - **Progress** goes to the channel that shows on a device when the event matters: a displayable push
   endpoint under `push-notifications`' fan-out rule, otherwise failover (step 5). An email copy is
   optional.
-- **Exception.** Use the fastest permitted channel. Check that it has a valid basis and meets the notice
-  and channel rules, including any contract restrictions. If you send through another channel, add a
-  durable copy by email only if email meets those same conditions. The copy records the options and what
-  happens without an answer. Apply the same checks to fallback channels in step 5.
+- **Exception.** Use the fastest route that passes these checks. If the primary route is not email,
+  add a durable copy by email only if email passes the same checks. The copy records the
+  options and what happens without an answer.
 
 If a withdrawal rules out the planned channel before a required notice goes out, choose a permitted
 route now, using the notice's kind and original deadline. Do not wait for a provider failure.
 
-Whenever no channel qualifies, leave the notice unsent. Record "no permitted channel" under the
+If no channel is permitted for the notice, leave it unsent. Record "no permitted channel" under the
 service row and idempotency key from step 6, with the reason you ruled out each route. If the notice
 is required, give the owner of the obligation those reasons and the original deadline as soon as you
 rule out the last route, before the deadline. Keep the obligation open: that handoff counts as
 neither a send nor delivery. If the deadline passes without a send, follow step 8.
+
+If a route is permitted but none can arrive in time, record the timing constraint against the same
+row and key. For a required notice, give the owner that record and the original deadline as soon as
+you know. Do not record a permission exclusion or move the deadline. Count any actual send under
+step 8 and judge on-time delivery separately. Report an actual miss even if you warned the owner.
 
 A person's own choice of channel for service messages (the preference center, `consent-and-preferences`)
 changes the default channel. It does not switch off a required row.
@@ -80,9 +88,11 @@ permitted channel when the current one
 confirms failure (a hard bounce, an invalid number, no displayable endpoint, a provider rejection), or
 when the deadline minus the next channel's own tail latency passes with no delivery receipt, in a channel
 that issues receipts. Do not fail over on "not opened": machines register some opens, and a person may
-read a push without tapping it. For an exception that asks for an action by a deadline, send the second
-message when the action has not happened by a fixed point before the deadline; a missing action is a fact
-too. The message sent on failover carries the same reference and says it repeats the earlier one. An
+read a push without tapping it. On a route that issues no receipts, a missing receipt tells you
+nothing about failure. For an exception that requires action, set a checkpoint before the original
+deadline that leaves time for a second message. If the action is still missing then, send the second
+message on a permitted route under step 4, even if the first route issues no receipts. The message
+sent on failover carries the same reference and says it repeats the earlier one. An
 access row does not fail over on its own: it goes where the screen said, and at its deadline the screen
 offers the other channel and the person chooses (the edge case below). The order of channels in a
 marketing cascade, and the waits between them, belong to `triggered-messages`; the wait before a service
@@ -131,7 +141,7 @@ Do not wait for a technical diagnosis or for the case to close.
 |---|---|---|
 | Deadline of a row | the earlier of: the person's next event minus the time they need to act; the low tail of time to the first chase about that state | parameter |
 | Low tail of time to the first chase | start with the 10th percentile for each state over a period, on the transactions with no delivered message about the state at the moment of the chase; this holds where a state collects such chases in every period, and where it does not, pool the states of one kind, and where the period has none, keep the last value; revise when chases on the on-promise path arrive before the deadline | starting heuristic |
-| Wait before failover | the deadline minus the tail latency of the next channel | follows from the definition |
+| Cutoff while waiting for a receipt on a route that issues them | the deadline minus the tail latency of the next channel; for other triggers and access rows, use step 5 | follows from the definition |
 | Floor of latency behind a batch sync | the sync interval; the fifteen minutes in step 2 are an illustration | follows from the definition |
 | Validity of an access code | yours | parameter |
 | Quiet hours | `contact-orchestration`, in the recipient's local time | neighbor |
@@ -150,10 +160,11 @@ Do not wait for a technical diagnosis or for the case to close.
   displace an awaited service push. While a service push may still be undelivered, send no promotion to
   that endpoint.
 - **A corporate mail filter holds the message.** No receipt comes back, and the delay sits outside your
-  queue. For an exception that asks for an action, send the second channel on the missing action
-  (step 5).
-- **The person left only a checkout email.** Failover has nowhere to go; the order page is the
-  substitute, and the confirmation screen says that status shows there.
+  queue. For an exception that requires action, check the action at the checkpoint in step 5
+  before sending the second message.
+- **The person left only a checkout email.** Tell them on the confirmation screen where to check
+  their order status. Use the order page for a required notice only if it passes step 4 for that
+  notice. Posting a status does not by itself establish delivery.
 - **A warmup of the service identity.** Keep the service stream running (`deliverability`, its edge case
   on service mail during a warmup).
 - **Two transactions in a row.** Each gets its own messages. Different transactions do not merge; repeated

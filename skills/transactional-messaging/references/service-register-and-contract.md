@@ -195,10 +195,11 @@ people it does not bind in `legal-regimes.md`.
 
 ## Edge cases
 
-- **Guest checkout.** The address given at checkout belongs to this transaction: service messages go
-  there, and it does not become a marketing address (the *requested message* handover state in
-  `onsite-capture`). With a typo, the confirmation bounces; the confirmation screen and the order page
-  show that and let the person correct the address. The email is the durable copy, not the only one.
+- **Guest checkout.** The checkout email belongs to this transaction, not to a marketing list (the
+  *requested message* handover state in `onsite-capture`). Choose the route and any copy under
+  `deadline-channel-and-failover.md`, step 4. Giving an address does not authorize every notice there.
+  If a permitted confirmation email bounces because of a typo, show the bounce on the confirmation
+  screen and the order page and let the guest correct the address.
 - **A gift: the recipient is not the buyer.** Progress and access (the pickup code) go to the recipient
   when their contact is given; the confirmation and exceptions go to the buyer; the recipient sees no
   prices. For a surprise, ask at checkout whether to write to the recipient before delivery.

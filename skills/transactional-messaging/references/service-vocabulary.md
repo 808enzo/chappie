@@ -102,8 +102,10 @@ request, provider acceptance, delivery receipt.
 
 ## Delivery
 
-**Failover.** Sending the same row through the next channel, on a confirmed failure or on a deadline
-passing with no receipt. Not a *fallback*, which in this library always names substitute content:
+**Failover.** Sending the same row through the next permitted channel. Use the triggers and the
+access exception in `deadline-channel-and-failover.md`, step 5. For a notice that requires action,
+the action checkpoint is independent of delivery receipts. A withdrawal before submission calls for
+channel selection in step 4. Not a *fallback*, which in this library always names substitute content:
 `personalization`'s fallback ladder for an empty value, `email-design`'s fallback part of a message,
 `email-copy`'s fallback wording.
 
