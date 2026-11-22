@@ -1,3 +1,5 @@
+![Chappie Marketing Agent Skills](.github/chappie-banner.png)
+
 # Chappie
 
 **Marketing skills that don't stop at the framework.** Chappie gives your AI agent
