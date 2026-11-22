@@ -12,8 +12,8 @@ moment it stops being worth anything. Whether the rows are the right ones is `ch
 
 ## Entry conditions
 
-Register rows with a kind and a promised time. At least one channel for each person, if only the address
-given at checkout.
+Register rows with a kind and a promised time. For each person, list the channels available to check,
+including the address given at checkout if there is one. An address alone does not qualify a channel.
 
 ## Exit conditions
 
@@ -60,13 +60,23 @@ largest campaign send, the tail latency of service rows stays inside their deadl
 - **Exception.** Use the fastest permitted channel. Check that it has a valid basis and meets the notice
   and channel rules, including any contract restrictions. If you send through another channel, add a
   durable copy by email only if email meets those same conditions. The copy records the options and what
-  happens without an answer. Apply the same checks to fallback channels in step 5. If no channel qualifies,
-  leave the exception unsent.
+  happens without an answer. Apply the same checks to fallback channels in step 5.
+
+If a withdrawal rules out the planned channel before a required notice goes out, choose a permitted
+route now, using the notice's kind and original deadline. Do not wait for a provider failure.
+
+Whenever no channel qualifies, leave the notice unsent. Record "no permitted channel" under the
+service row and idempotency key from step 6, with the reason you ruled out each route. If the notice
+is required, give the owner of the obligation those reasons and the original deadline as soon as you
+rule out the last route, before the deadline. Keep the obligation open: that handoff counts as
+neither a send nor delivery. If the deadline passes without a send, follow step 8.
 
 A person's own choice of channel for service messages (the preference center, `consent-and-preferences`)
 changes the default channel. It does not switch off a required row.
 
-**5. Fail over on a fact, never on an open.** Send the row through the next channel when the current one
+**5. Fail over on a fact, never on an open.** If a withdrawal stopped the notice before submission,
+use step 4 to choose the channel; there is no provider outcome to wait for. Otherwise use the next
+permitted channel when the current one
 confirms failure (a hard bounce, an invalid number, no displayable endpoint, a provider rejection), or
 when the deadline minus the next channel's own tail latency passes with no delivery receipt, in a channel
 that issues receipts. Do not fail over on "not opened": machines register some opens, and a person may
