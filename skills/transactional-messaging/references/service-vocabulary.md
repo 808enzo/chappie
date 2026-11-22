@@ -93,9 +93,9 @@ time minus a lead time.
 
 **Lead time.** How far ahead of a promised moment the person acts on it.
 
-**Deadline.** The moment by which a row has to arrive: the earlier of the person's next event minus the
-time they need to act, and the low tail of time from the state change to the first chase about it, taken
-on the transactions that had no delivered message about the state when the chase came.
+**Deadline.** The moment by which a row has to arrive. Use the obligation's deadline where it sets one.
+For a service row, also check the person's next event and the time to the first chase as described in
+`deadline-channel-and-failover.md`, step 1; keep the earliest applicable deadline.
 
 **Hop.** The stretch of a send's path between two timestamps: system of record, messaging layer, send
 request, provider acceptance, delivery receipt.
@@ -113,8 +113,9 @@ channel selection in step 4. Not a *fallback*, which in this library always name
 than one; for an exception row, plus the promised time the message corrects. A retry carrying the same
 key does not send again.
 
-**Current-state rule.** Before a send, the transaction's state is read again, and a state older than the
-last one sent does not go out.
+**Current-state rule.** Recheck each outstanding notice before sending. A newer progress update can
+supersede an older one for the same shipment and recipient. It does not discharge another notice still
+owed (`deadline-channel-and-failover.md`, step 6).
 
 ## Reading
 
@@ -156,9 +157,10 @@ transactions in the cohort, by type and path.
   the marketing identity, on a lawful basis, inside the cap (`triggered-messages`, `repeat-purchase`).
   Carrying promotion inside a service message is a change of class made in the register, not an edit of
   content (`references/service-register-and-contract.md`, step 8).
-- **Precedence and the cap are `contact-orchestration`'s; this skill decides which rows are service and
-  which are required.** Every row in the register is service in that skill's classes. Quiet hours apply by
-  kind (`references/deadline-channel-and-failover.md`, step 7).
+- **Use the row's contact class for precedence and the cap.** The register can hold both service
+  messages and mandatory notices. Requiring a confirmation does not change its service class; recording
+  a mandatory notice in the register does not exempt it from the cap. See `contact-orchestration`'s
+  `contact-policy.md` and `deadline-channel-and-failover.md`, step 7.
 - **A review request after delivery is `voice-of-customer`'s**, even when the same system sends it. It is
   not a row of this register and does not inherit its class.
 - **Service messages are judged here on chases and on time, not on revenue.** `program-audit-and-ops`

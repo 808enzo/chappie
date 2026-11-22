@@ -50,7 +50,7 @@ period, and tie each contact to the transaction's state at the moment the person
 ask in are candidates for a row, or for a better one. `chase-reading-and-repair.md` runs this step on a
 schedule.
 
-**4. Give every row a kind.**
+**4. Record the contact class. Give each service row a kind.**
 
 - **Access:** without it the person cannot go on right now. A sign-in code, a password reset link, an
   email verification link, a pickup code, a ticket, a download link.
@@ -68,8 +68,9 @@ Where a law requires the row (the confirmation in the EU and the UK, the delay n
 `legal-regimes.md`), write that into the row: its failure is a missed obligation in
 `program-audit-and-ops`'s severity classes.
 
-Subscriptions and contracts bring rows of their own, and their deadlines come from the obligation, not
-from a next event.
+The register also holds mandatory notices, such as a change of terms. Record the contact class from
+`contact-orchestration` separately from whether the notice is required. For subscription and contract
+obligations, take the deadline from the obligation itself.
 
 - **Required by law or by a card network, from `subscription-retention`.** The reminder before the
   first charge after a trial or a promotional period ends, or after the agreement changed: Visa, at least

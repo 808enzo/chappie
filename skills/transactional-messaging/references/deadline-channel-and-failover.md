@@ -12,8 +12,9 @@ moment it stops being worth anything. Whether the rows are the right ones is `ch
 
 ## Entry conditions
 
-Register rows with a kind and a promised time. For each person, list the channels available to check,
-including the address given at checkout if there is one. An address alone does not qualify a channel.
+Register rows with their contact class, deadline anchor and any promised time; for service rows, include
+the kind. For each person, list the channels available to check, including the address given at checkout
+if there is one. An address alone does not qualify a channel.
 
 ## Exit conditions
 
@@ -23,11 +24,12 @@ identity of their own. A send heartbeat for each row.
 
 ## Steps
 
-**1. Set each row's deadline from the next moment in the person's world.** The deadline is the earlier of
-two: (a) the person's next event (the courier's arrival, the start of a pickup hold, a code's expiry) minus
-the time they need to act on the message; (b) the low tail of the time from the state change to the first
-chase about it, in your own data. Take (b) from the transactions that had no delivered message about the
-state at the moment of the chase (gap classes b, c and e in `chase-reading-and-repair.md`, step 3): that
+**1. Set the deadline for each row.** For a mandatory notice, use the deadline set by the obligation.
+For a service row, take the earlier of (a) the person's next event (the courier's arrival, the start
+of a pickup hold, a code's expiry) minus the time they need to act, and (b) the low tail of time from
+the state change to the first chase about it. Keep any earlier deadline the obligation sets. Take (b)
+from your own transactions with no delivered message about the state at the moment of the chase
+(gap classes b, c and e in `chase-reading-and-repair.md`, step 3): that
 is how long people wait before asking when nobody tells them. The chases that follow a delivered message
 measure its content, and a row that works removes the early chases from the whole set, so a tail taken
 from all chases drifts later as the row improves and loosens the deadline that made it work. When the
@@ -40,9 +42,9 @@ promise timer in `service-register-and-contract.md`, step 5).
 **2. Timestamp every hop.** The event occurs in the system of record; it reaches the messaging layer; the
 messaging layer requests a send; the channel's provider accepts it; a delivery receipt comes back, where
 the channel issues one. Read latency hop by hop and at the tail, not on the average: the median send can
-be fast while the tail misses the deadline. A batch sync sets a floor under every latency behind it: with
-a sync every fifteen minutes, an interval picked here only to illustrate, fifteen minutes is the best case
-for every row that waits on it.
+be fast while the tail misses the deadline. For a batch sync, start with the next run that can pick up
+this event, allowing for any backlog. Add the remaining hops' tail latency to that pickup time. With a
+sync every fifteen minutes, for example, an event ready just before pickup need not wait fifteen minutes.
 
 **3. Give service sends a queue of their own.** A separate queue, or a priority of their own, on the
 sending platform, apart from campaigns, and a sending identity of their own (`deliverability`). A rate
@@ -106,16 +108,19 @@ twice. Before sending, read the transaction's current state again, and hold back
 than the last one sent: events arrive out of order ("delivered" before "out for delivery"). Drop an
 exception whose promised state arrived in the meantime, for the same reason. The confirmation is not a
 progress state, and a progress state never holds it back: it is the record, and it goes even when the
-order has shipped since, because the person keeps it and a regime may require it. After an outage or a
-backlog, send one message per transaction, about its current state, with its promised time checked again,
-plus the confirmation for every transaction that never got one; do not replay the queue. Collapse
-repeated updates of the same thing on push under a collapse key (`push-notifications`).
+order has shipped since, because the person keeps it and a regime may require it. After an outage,
+check each outstanding row against the current state, promised time and send log for its recipient and
+shipment. Drop superseded updates and duplicates. Keep each distinct notice still owed, including a
+missing confirmation. Use its own recipient, permitted route and original deadline (steps 4 and 8).
+On push, collapse only repeated updates about the same thing (`push-notifications`).
 
 **7. Apply quiet hours by kind.** Access, and exceptions whose deadline falls inside the night, go at
 once. Progress and confirmation that the person cannot act on before morning wait, in channels that make a
 sound on a device, until quiet hours end in the recipient's local time (`contact-orchestration`); when the
-next moment comes before quiet hours end, send the row at once. Service rows sit outside the cap, and the
-timing chart still counts them (`contact-orchestration`, the edge case on a transactional spike).
+next moment comes before quiet hours end, send the row at once. Apply the cap by the row's contact class.
+A service message sits outside the cap but still appears on the timing chart. A mandatory notice, such
+as a change of terms, counts toward the cap and still goes if the cap is full. Use the mandatory notice's
+own deadline for quiet hours (`contact-orchestration`, `contact-policy.md`, steps 1 and 4).
 
 **8. Define the send heartbeat for each row.** Count notices, using the row and the idempotency key
 from step 6 to match each notice to its sends. Group notices by their original deadlines, not by
@@ -139,10 +144,10 @@ Do not wait for a technical diagnosis or for the case to close.
 
 | Quantity | Where it comes from | Class |
 |---|---|---|
-| Deadline of a row | the earlier of: the person's next event minus the time they need to act; the low tail of time to the first chase about that state | parameter |
+| Deadline of a row | for a mandatory notice, the obligation's deadline; for service, the earliest applicable deadline in step 1 | parameter |
 | Low tail of time to the first chase | start with the 10th percentile for each state over a period, on the transactions with no delivered message about the state at the moment of the chase; this holds where a state collects such chases in every period, and where it does not, pool the states of one kind, and where the period has none, keep the last value; revise when chases on the on-promise path arrive before the deadline | starting heuristic |
 | Cutoff while waiting for a receipt on a route that issues them | the deadline minus the tail latency of the next channel; for other triggers and access rows, use step 5 | follows from the definition |
-| Floor of latency behind a batch sync | the sync interval; the fifteen minutes in step 2 are an illustration | follows from the definition |
+| Time waiting for a batch sync | from event readiness to the run that picks it up; add downstream latency separately (step 2) | follows from the definition |
 | Validity of an access code | yours | parameter |
 | Quiet hours | `contact-orchestration`, in the recipient's local time | neighbor |
 | Push expiry and collapse key | `push-notifications` | neighbor, platform rule |
