@@ -119,11 +119,11 @@ that fits 70. Which one applies is decided by the final text, not by the templat
 WhatsApp, the validity period on a text. Set from the content; the platform's defaults are as long as
 30 days.
 
-**Capability check.** The query to the RCS platform whether a device can receive RCS; a device that
-cannot returns a 404, and the send falls back to a text.
+**Capability check.** A query to the RCS platform about a device. A 404 rules out RCS on that device.
+Choose any other route under `send-and-cost.md`, step 3, including the screen choice for access codes.
 
-**Fallback.** The message that goes when the rich one cannot: a text in place of an RCS card or an
-MMS, written as its own version inside the segment budget.
+**Fallback.** The text version to use if SMS is selected in place of an RCS card or an MMS. Write it
+to fit the segment budget. Having that version ready does not select the channel.
 
 **Statuses.** Queued, sending, sent, delivered, undelivered, failed, read. Sent is the carrier's
 acceptance; delivered is confirmation from the carrier and, where available, the handset; read exists
@@ -239,7 +239,7 @@ lag from receipt on that route.
 - **suppression**: the neighbors use it in several senses already; this skill avoids the word and
   says provider block list or record.
 - **fallback**: `personalization` means what a message carries when a substitution cannot resolve,
-  taken down its fallback ladder; here it is the text that goes when the rich message cannot. Moving a
+  taken down its fallback ladder; here it is the text version for a separately selected route. Moving a
   required notice off a channel that lost its basis calls for channel selection in
   `transactional-messaging`. Technical failover there requires a separate trigger. For a marketing
   cascade, `triggered-messages` chooses the next channel.

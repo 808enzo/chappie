@@ -196,8 +196,9 @@ falls when marketing goes out as utility, the miscategorization this skill works
 platform recategorizes the template; it is read beside, as cost per reached person, and not promoted.
 
 **What raises it without better work.** Reachability checked before the request keeps people this
-channel cannot reach out of the denominator: they go to the next channel in `triggered-messages`' order
-and are never addressed here. That rise is built in: the first period on a new list reads every number
+channel cannot reach out of the denominator: they were never addressed here. For the next route,
+including the person's choice for an access code, use `references/send-and-cost.md`, step 3.
+That rise is built in: the first period on a new list reads every number
 without an account, and every later period leaves those numbers out.
 
 **What it cannot see.** The metric reads high when the program requests sends only for people who are

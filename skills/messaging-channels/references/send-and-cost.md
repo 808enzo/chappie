@@ -63,19 +63,21 @@ if the send qualifies under `SKILL.md`. A stop before handoff adds no one to tha
 mark the number unreachable or record a provider refusal, delivery failure, or missing receipt for
 the cancellation.
 
-Check reachability before requesting a send where the platform lets you. RCS: run the
-capability check; a device without RCS returns a 404 from the platform, and the agent falls back to
-another technology, such as SMS, whose text has to fit the segment budget of step 5. WhatsApp: where
+Check reachability before requesting a send where the platform lets you. If the RCS capability check
+returns a 404, skip RCS for this device. It does not select SMS. WhatsApp: where
 your provider returns an error for a number with no account, record the number as unreachable in this
 channel, with the date, and stop requesting it here until the person writes to you there or a new basis
 for this channel is recorded. SMS: check that the number is mobile and has not appeared in a
 deactivation file. Check the provider's block separately. Do not send on a blocked route or switch
 origins to get around the block. Lifting a block does not establish a basis to send.
 
-If the reachability check rules out the number before handoff, skip the request on this channel and
-use the next permitted channel in `triggered-messages`' order. Read the pool kept out by the
-reachability check beside the control metric in `SKILL.md`. Keep stops for lack of a basis out of
-that pool.
+If the check rules out the number before handoff, skip the request on this channel. For marketing,
+use the next permitted channel in `triggered-messages`' order, if there is one. For service, use
+`transactional-messaging`'s `deadline-channel-and-failover.md`, steps 4 and 5. In particular, if
+the screen promised a code by RCS, do not send it by SMS on a 404. At the original deadline, offer
+a permitted alternative on screen if one exists; send there only if the person chooses it.
+Read the pool kept out by the reachability check beside the control metric in `SKILL.md`. Keep stops
+for lack of a basis out of that pool.
 
 A message goes to one number of the person: the one the record marks as the number for this channel.
 A person with two numbers is one person with two addresses, and a message sent to both is two sends
@@ -129,7 +131,7 @@ the cascade outcomes from the provider and from your own send log:
 |---|---|---|
 | reached | delivered, read | the message landed. For marketing, use the response condition in `triggered-messages`; for a service exception that requires action, use the checkpoint in `transactional-messaging`'s `deadline-channel-and-failover.md`, step 5 |
 | failed | undelivered, failed; on WhatsApp, no delivered status for a submitted message before the time-to-live | use the next permitted channel in the order. For service, follow the failover and access rules in `transactional-messaging`'s `deadline-channel-and-failover.md`, step 5 |
-| held | refused or never submitted for the state of your own channel: a paused template, the limit, code 131049 | the order decides: the next channel now, or the same channel after the wait the refusal names (131049: at least 24 hours) |
+| held | refused or never submitted for the state of your own channel: a paused template, the limit, code 131049 | for marketing, follow the order: the next permitted channel or the same one after the required wait (131049: at least 24 hours). For service, apply the deadline and access rules in step 3; do not retry before the channel allows it |
 | canceled for lack of a basis | your log records this outcome after handoff to the channel layer and before submission to the provider | carry the logged reason with the outcome. Stop this send without a retry or technical failover. For a required service notice, pass the reason and original deadline to `transactional-messaging` to check for a permitted route without waiting for a provider event |
 | no receipt | sent, on a route that returns no delivery receipts | delivery unknown. A marketing cascade uses its response condition. For service, a missing receipt alone triggers nothing; apply `transactional-messaging`'s `deadline-channel-and-failover.md`, step 5, for a confirmed failure or a required action still missing at its checkpoint |
 
@@ -178,9 +180,9 @@ The platform rows are class 2 and carry their sources below. The last two are yo
 - **An authentication code.** The default expiry is 10 minutes. The code does not fail over on its
   own: at its deadline the screen offers the other channel and the person chooses
   (`transactional-messaging`), and "sent" moves nothing.
-- **A rich message with a text fallback.** An RCS rich card or an MMS falls back to a text without
-  the image and the buttons. The fallback text is a version of its own inside the segment budget, not
-  a truncation.
+- **A rich message with a text fallback.** If step 3 selects SMS in place of an RCS card or an MMS,
+  use a text version written to fit the segment budget without the image or buttons. Do not truncate
+  the rich version.
 
 ## Failure modes
 
