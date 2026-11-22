@@ -161,7 +161,8 @@ transactions in the cohort, by type and path.
   not a row of this register and does not inherit its class.
 - **Service messages are judged here on chases and on time, not on revenue.** `program-audit-and-ops`
   and `scenario-map` hand that criterion to this skill. Watching running rows stays with
-  `program-audit-and-ops`; this skill defines the expected ratio of messages to events for each row.
+  `program-audit-and-ops`; this skill defines the send heartbeat for each row
+  (`references/deadline-channel-and-failover.md`, step 8).
 
 ## Words shared with neighbors
 

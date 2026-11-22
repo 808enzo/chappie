@@ -45,11 +45,17 @@ the first; both fulfilled and kept, and they were two transactions, each in the 
 chased.
 
 **3. Place each chase on the transaction's timeline.** For every chase, look at the person-facing state at
-that moment, the last message sent and its delivery state, the active promised time and whether it had
-passed. Then give the gap a class:
+that moment, the last message sent and its delivery state, the notice's original deadline, and the
+active promised time for the next state. Check which times had passed when the person asked. Then give
+the gap a class:
 
 - **(a) no row for this state:** a gap in the register;
-- **(b) a row exists and nothing went out:** a send failure;
+- **(b) a row exists, the notice was due, and nothing went out:** check channel eligibility and the
+  event and send logs.
+  - If the record shows no permitted channel was available, record that as the reason the notice went
+    unsent.
+  - If a permitted channel was available and the logs confirm a sender fault, record a send failure.
+  - If the records do not establish the cause, leave it unknown.
 - **(c) it went out and arrived late or not at all:** the channel or the queue;
 - **(d) it arrived before the chase and the person asked anyway.** Two causes with two repairs, told
   apart by the active promised time at the moment of the chase: passed, and the promise broke (repair 3
@@ -59,6 +65,12 @@ passed. Then give the gap a class:
 - **(f) not about the transaction's state:** a mislabeled topic, which leaves the numerator. A contact
   that takes an action the message offered (cancel, change the address) through support instead of the
   link goes here too; read it beside the metric as a sign that the self-service route failed.
+
+In class (b), count the chase in the chase share under the usual cohort and window rules. Keep the
+transaction in the denominator of the row's on-time share (`control-metric.md`). If a required notice
+went unsent by its original deadline, route the missed obligation to its owner immediately
+(`deadline-channel-and-failover.md`, step 8), even if the owner received the reason before the
+deadline. The missed deadline alone does not establish a sender fault.
 
 **4. Read a random sample of timelines every period, not only the chased ones.** Draw random transactions
 across all paths and look at states, promised times, messages and deliveries side by side. The sample
@@ -71,8 +83,12 @@ a sample drawn from the whole cohort, and such a sample can miss a rare exceptio
 
 1. Disclosure and wrong data, at once, by severity class.
 2. Missing exception rows, and promised times with no timer.
-3. Promised times the operation breaks.
-4. Send failures and late sends.
+3. Fix promised times the operation breaks. If a required notice had no permitted channel, check the
+   recorded reasons for ruling out each channel. Verify that the owner of the obligation received the
+   record and the original deadline before it passed. Follow up with that owner. Leave the notice
+   unsent while no channel qualifies.
+4. Fix confirmed send failures and late sends. If the cause of an unsent notice is unknown, check the event
+   and send logs before assigning a repair.
 5. Content that does not answer.
 6. Progress rows that do not reduce chases, removed.
 

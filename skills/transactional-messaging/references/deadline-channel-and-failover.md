@@ -19,7 +19,7 @@ given at checkout.
 
 For every row: the deadline anchor and the deadline, the order of channels, the failover condition, the
 idempotency key and the collapse key, the quiet hours rule. Timestamps on every hop. A queue and a sending
-identity of their own. An expected ratio of messages to events.
+identity of their own. A send heartbeat for each row.
 
 ## Steps
 
@@ -97,12 +97,23 @@ sound on a device, until quiet hours end in the recipient's local time (`contact
 next moment comes before quiet hours end, send the row at once. Service rows sit outside the cap, and the
 timing chart still counts them (`contact-orchestration`, the edge case on a transactional spike).
 
-**8. Define the expected ratio of messages to events for each row.** Messages sent for a row should match
-the transactions that entered its state, minus the exclusions you wrote down (no channel, a marketplace
-order). A ratio that falls while the events hold means a broken row; events that stop mean a fault in the
-system of record or the integration. Watching the ratio, and the incident route, belong to
-`program-audit-and-ops` (the heartbeat and the expected silence); this file defines what counts as
-expected.
+**8. Define the send heartbeat for each row.** Count notices, using the row and the idempotency key
+from step 6 to match each notice to its sends. Group notices by their original deadlines, not by
+when the events or sends occurred. At each check, count only notices in the window whose deadlines
+have arrived. Leave out recorded exclusions, such as no permitted channel or an excluded marketplace
+order. Keep a notice in the denominator if a permitted channel was available but the send failed.
+
+Divide the number of those notices with a logged send on a permitted channel by the number expected.
+Use sends through the original deadline, including sends before the window opened. Count each
+notice once across copies, retries, and failover. Count sends, not send requests or delivery receipts.
+If none were expected, record "no sends expected" and leave the ratio blank. Do not use that blank
+ratio to judge the sender. Read input events separately.
+
+`program-audit-and-ops` watches the heartbeat. Check the event and send logs for a shortfall, and
+the system of record and integration logs if expected input events stop. Name a technical fault
+only when the logs confirm it. If a required notice went unsent by its original deadline, route
+the missed obligation immediately to its owner, even if you excluded the notice from the heartbeat.
+Do not wait for a technical diagnosis or for the case to close.
 
 ## Thresholds and timings
 
