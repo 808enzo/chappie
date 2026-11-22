@@ -234,9 +234,9 @@ stays with the skill that defines it; whether it went silent is read here.
   as a rank: this object deserves a shorter interval than that one. Do not read it as a number of
   hours. Take whatever interval it produces as a starting position and move it against what the
   object turns out to do.
-- **Expected silence is the longest gap observed in a healthy period, plus margin.** For a rare
-  object that gap is long, which is not a reason to leave it off the roster: for rare objects, the
-  heartbeat is the arriving event rather than the send.
+- **Keep rare objects on the roster.** A long gap between sends can be normal. Watch for expected
+  input at the source. For a service row, also check each expected send at its original deadline
+  under "The status map and service rows" above. An input event is not evidence of a send.
 - **Seasonal objects get seasonal expectations.** A mechanic that runs three months a year is
   silent correctly for the other nine, and one flat threshold manufactures the same false problem
   every year.

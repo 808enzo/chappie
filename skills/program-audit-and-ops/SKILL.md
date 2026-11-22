@@ -146,8 +146,11 @@ against that.
 
 Read two more numbers beside it without promoting either one. The share of incidents found by
 something other than duty, meaning a complaint or a colleague, tells you whether detection works at
-all. The share of roster objects whose heartbeat is fresher than their expected silence tells you
-whether the roster is being kept.
+all. To check roster freshness, start with the objects due for a heartbeat at this check. Divide
+the number whose heartbeat is within its expected silence by the number due. For a service row,
+leave it out if no sends were due after exclusions. Otherwise check the sends against their own
+deadlines (`references/monitoring-duty.md`, "The status map and service rows"). A recent send for
+another notice or a fresh input does not cover a missing send. Leave the share blank if none were due.
 
 When you read a new period against that baseline, or someone asks whether a change in the metric is
 real, use the signal rule of `metric-definitions`. The band runs from the lowest to the highest of

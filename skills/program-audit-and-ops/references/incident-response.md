@@ -55,8 +55,10 @@ either way, and the log carries a cause class and the check that would have caug
    and route to them. `consent-and-preferences` covers lawful basis and the records you keep,
    `transactional-messaging` covers what a required message must contain and how fast it has to
    go.
-4. **Stop before you diagnose.** Pause the object, halt the send, pull the message where the channel
-   allows it. Diagnosis without stopping is diagnosis while the affected population grows.
+4. **Stop an ongoing fault before you diagnose it.** Pause the affected object, halt the faulty
+   send or pull the message where the channel allows it. Reporting one missed obligation does not
+   by itself warrant pausing the row. Keep permitted sends to other people running unless the fault
+   affects them too.
 5. **Size what already went out:** how many people, which ones, what they saw. Do this before the
    correction decision, because the decision follows from the size and the content rather than from
    how bad it feels.
