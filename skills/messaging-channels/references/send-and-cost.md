@@ -23,8 +23,8 @@ class in this channel (`consent-and-preferences`). The origin exists and its sta
 
 Named for the send: the gatekeeper's category; the regime, window or template; the reachability
 check; a template approved and not paused, with every substitution given a fallback; the segment
-budget for a text; the expiry; the price before the send; the status that will come back and what
-each status means to the cascade.
+budget for a text; the expiry; the price before the send; the outcome to report to the cascade,
+whether it comes from the provider or your own send log.
 
 ## Steps
 
@@ -56,10 +56,12 @@ withdrawal in the person's `consent-and-preferences` record covers this send. If
 send on the withdrawn basis, including any matching sends still in the queue. If it does not,
 continue the checks only if the basis still holds and the channel rules allow the send.
 
-Log a send stopped for lack of a basis as not sent, with the reason. Do not mark the number
-unreachable or count a delivery failure. Keep the request history and apply the existing definition
-of addressed in `SKILL.md`: if the program had already handed off a qualifying request to the
-channel layer, keep the person in the addressed population. Do not add an exclusion for withdrawals.
+Log a send you stop for lack of a basis as not sent, with the reason. If the program already handed
+the send to the channel layer and you stop it before submitting it to the provider, log the outcome
+as **canceled for lack of a basis**. Keep the handoff in the log and count the person as addressed
+if the send qualifies under `SKILL.md`. A stop before handoff adds no one to that population. Do not
+mark the number unreachable or record a provider refusal, delivery failure, or missing receipt for
+the cancellation.
 
 Check reachability before requesting a send where the platform lets you. RCS: run the
 capability check; a device without RCS returns a 404 from the platform, and the agent falls back to
@@ -103,9 +105,9 @@ is 10 minutes for authentication templates (30 days for authentication templates
 October 23, 2024) and 30 days for utility and marketing; you can set authentication to between 30
 seconds and 15 minutes, utility to between 30 seconds and 12 hours, marketing to between 12 hours
 and 30 days. A marketing template left at its default delivers an offer to a phone that comes back
-online three weeks after the offer ended. If no delivered status arrives before the expiry, assume the
-message was dropped. A text has the provider's validity period, under the same rule: the moment the
-content stops being true, as `push-notifications` sets it.
+online three weeks after the offer ended. If no delivered status arrives for a submitted WhatsApp
+message before the expiry, assume it was dropped. A text has the provider's validity period, under
+the same rule: the moment the content stops being true, as `push-notifications` sets it.
 
 **7. Price the send before it leaves.** A text costs the price of a part times the number of parts,
 billed for what was submitted; an undelivered text still costs. A WhatsApp template costs per
@@ -120,14 +122,15 @@ cut-off (`in-product-messaging`).
 **8. Hand the cascade a status it can act on.** The statuses a provider reports run queued, sending,
 sent, delivered, undelivered, failed, and read; read exists only on RCS and WhatsApp with receipts on.
 **Sent means the carrier accepted the message; it is not delivery.** Delivered means the carrier
-confirmed it, and, where available, the handset did; receipts are not returned on every route. The
-classes the cascade gets:
+confirmed it, and, where available, the handset did; receipts are not returned on every route. Give
+the cascade outcomes from the provider and from your own send log:
 
-| Class | Statuses | What the cascade does |
+| Class | Evidence | What the cascade does |
 |---|---|---|
 | reached | delivered, read | the message landed; whether the cascade moves on is the response condition `triggered-messages` sets for the step, not a status |
-| failed | undelivered, failed; on WhatsApp, no delivered status before the time-to-live | the next channel in the order, at once |
+| failed | undelivered, failed; on WhatsApp, no delivered status for a submitted message before the time-to-live | the next channel in the order, at once |
 | held | refused or never submitted for the state of your own channel: a paused template, the limit, code 131049 | the order decides: the next channel now, or the same channel after the wait the refusal names (131049: at least 24 hours) |
+| canceled for lack of a basis | your log records this outcome after handoff to the channel layer and before submission to the provider | carry the logged reason with the outcome. Stop this send without a retry or technical failover. For a required service notice, pass the reason and original deadline to `transactional-messaging` to check for a permitted route without waiting for a provider event |
 | no receipt | sent, on a route that returns no delivery receipts | unknown, never reached: a marketing cascade moves on its response condition; a service line follows `transactional-messaging`, which fails over in such a channel only on a confirmed failure |
 
 A send still at sent on a route that returns receipts is not in a class yet: it waits for its receipt,

@@ -133,7 +133,7 @@ Six seams get crossed by accident. Each is spelled out under "Seams with neighbo
 | File | Type | What is in it |
 |---|---|---|
 | `references/origin-and-standing.md` | mechanic | The inventory of origins, registration, the one-way origin, the split of classes across origins, the ramp, the standing register and the reaction to a drop, number hygiene, the move to another provider |
-| `references/send-and-cost.md` | mechanic | Class to category, the reply window against templates, checks for basis and reachability, the template lifecycle, segments and encoding, expiry, the price before the send, the statuses and the no-receipt class, pacing |
+| `references/send-and-cost.md` | mechanic | Class to category, the reply window against templates, checks for basis and reachability, the template lifecycle, segments and encoding, expiry, the price before the send, outcomes for the cascade, pacing |
 | `references/keywords-and-replies.md` | mechanic | The keyword table, withdrawals by reply or another route, provider blocks, when and how to confirm, application by each affected system, HELP and other replies, re-opt-in, the ledger |
 | `references/messaging-vocabulary.md` | definition | Every term the three mechanics and the metric rest on, what sets the channel apart, the seams with neighbors in full, and the words shared with neighbors |
 | `references/control-metric.md` | definition | Each class of the people not reached, when a period's reading closes, what moves the share, the lines read beside it, and what the share cannot see |
@@ -145,9 +145,10 @@ Six seams get crossed by accident. Each is spelled out under "Seams with neighbo
 classes.**
 
 - **Addressed** is a person for whom the program handed a send of the class to the channel layer, in
-  this channel, outside a reply window, during the period. It includes the people the channel then
-  held. It is `contact-orchestration`'s word, narrowed to one channel and to sends outside a reply
-  window. Whether the send had a basis is not read here: the same marketing sends stand in
+  this channel, outside a reply window, during the period. Include people whose sends the channel
+  held, and those whose sends it canceled for lack of a basis before provider submission. A stop
+  before handoff adds no one. It is `contact-orchestration`'s word, narrowed to one channel and to
+  sends outside a reply window. Audit the basis separately: the same marketing sends stand in
   `consent-and-preferences`' join line, which reads the record by fields that resolve. A delivered
   send that line calls unsupported is reached here and unsupported there, and neither line corrects
   the other.
@@ -157,14 +158,14 @@ classes.**
   templates alike, go to a person who wrote within the day, and the platform's messaging limit does
   not count them. Authentication codes go to a number the person just typed while they wait for it.
   Read codes on a line of their own and never pool them with anything.
-- **The remainder falls into three classes, and a fourth stays out of the share.** Read every class
-  and who owns it: the split says which part of the work failed. A person who was not reached takes
-  the class of their last requested send in the period.
+- **The remainder includes held, refused, expired and canceled for lack of a basis.** Count each in
+  the denominator only. Keep the no-receipt class out of both halves. A person who was not reached
+  takes the outcome of their last qualifying send handed to the channel in the same reporting cut.
 - **The period** is a week; **the cut** is origin by class, marketing and service on separate lines;
   the country comes with the origin.
 
-Before you sort the people not reached into held, refused, expired and no receipt, close a period's
-reading, explain a move in the share, or report cost per reached person or stop and block events, read
+Before you classify people not reached, close a period's reading, explain a move in the share, or
+report cost per reached person or stop and block events, read
 `references/control-metric.md`: it gives each class with what it says and where it goes, how long the
 reading waits, what moves the share, and the other lines read beside it.
 
@@ -206,7 +207,7 @@ pool the reachability check keeps out, which is read beside.
   everyone with a number on record for the class. It grows with an import full of numbers without an
   account and with a refusal recorded by mistake, and the control metric sees neither.
 
-**An empty period leaves it undefined**, not zero.
+**A zero denominator leaves the share undefined.**
 
 I do not have a citable benchmark for this metric, and a published figure would not fit it: published
 delivery rates are shares of submitted sends at one provider, with no held class and no window cut.
