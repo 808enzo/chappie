@@ -62,8 +62,10 @@ schedule.
   partial shipment, an item out of stock, a substitute that needs the person's approval, a failed payment,
   a failed delivery attempt, a pickup hold about to end, an address problem, a sign-in from a new device.
 
-The kind decides the deadline anchor, the channels, failover, whether repeated updates collapse, and the
-severity class when the row fails. In `contact-orchestration`'s classes all four kinds are service.
+Use the kind to choose channels, set failover, decide which repeated updates to collapse and assess the
+severity of a failure. Set the deadline under `deadline-channel-and-failover.md`, step 1. Record the
+contact class separately: a failed renewal that requires a new payment method is an exception here and
+a mandatory notice for the cap (`subscription-retention`, `failed-charge-recovery.md`, step 4).
 Where a law requires the row (the confirmation in the EU and the UK, the delay notice in the US, both in
 `legal-regimes.md`), write that into the row: its failure is a missed obligation in
 `program-audit-and-ops`'s severity classes.
@@ -235,8 +237,7 @@ people it does not bind in `legal-regimes.md`.
   the credentials that may be compromised.
 - **A notice the law requires with no action by the person** (a recall, a change of terms). That is a
   mandatory notice in `contact-orchestration`'s classes. The register can hold its row; the deadline
-  comes from the obligation, not from a next event. The notices subscriptions and contracts require are
-  rows of this kind, listed in step 4.
+  comes from the obligation, not from a next event. For subscription and contract notices, see step 4.
 
 ## Failure modes
 

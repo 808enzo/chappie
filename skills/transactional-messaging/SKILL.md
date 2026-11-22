@@ -58,9 +58,10 @@ Two more, specific to this skill:
   mail is opened by construction and judged on chases, and figures of that shape send a program looking
   for money in its confirmations. Give the person the chase share by path and the on-time share for each
   row instead.
-- **Never state a deadline or a legal time limit without its source.** A row's deadline comes from the
-  person's next event in your own operation. Each legal limit in this skill carries a source and the date
-  it was opened, and a change after that date means opening the source again.
+- **Never state a deadline or a legal time limit without its source.** For a mandatory notice, use the
+  obligation's deadline. For a service row, use `references/deadline-channel-and-failover.md`, step 1,
+  and keep any earlier deadline the obligation sets. Each legal limit in this skill carries a source
+  and the date it was opened, and a change after that date means opening the source again.
 
 ## When to use this
 
@@ -138,7 +139,7 @@ Five seams get crossed by accident. Each is spelled out under "Seams with neighb
 | File | Type | What is in it |
 |---|---|---|
 | `references/service-register-and-contract.md` | mechanic | The inventory of what every system already sends, the status map from internal statuses to person-facing states, asking the chases where the gaps are, the four kinds, triggers by state change or by promise timer, the content contract, every date as a promised time, what a service message may carry and where its class is checked, owner, version and test path |
-| `references/deadline-channel-and-failover.md` | mechanic | The deadline of a row from the person's next event and from the time to the first chase, timestamps on every hop, a queue of its own, channels by kind, failover on facts rather than opens, each state sent once and only while current, quiet hours by kind, the send heartbeat for each row |
+| `references/deadline-channel-and-failover.md` | mechanic | Deadlines for service rows and mandatory notices, timestamps on every hop, a queue of its own, channels by kind, failover on facts rather than opens, each state sent once and only while current, quiet hours by kind, the send heartbeat for each row |
 | `references/chase-reading-and-repair.md` | mechanic | Tying a contact to a transaction when it opens, repeated requests as chases, placing each chase on the transaction's timeline, reading a random sample of timelines, the repair order, reading a change without withholding required rows, retiring rows by chases, reporting broken promised times to operations |
 | `references/service-vocabulary.md` | definition | Transaction, person-facing state, internal status, status map, service register and row, kind, promised time, promise timer, deadline, hop, failover, idempotency key, chase, repeated request, tied contact, path, tail window, reading ceiling, timeline, optional row; what sets this work apart; the seams with neighbors in full; the words shared with neighbors |
 | `references/control-metric.md` | definition | What moves the chase share, the on-time share for each row, timeline sample findings and untied status contacts read beside it, and what the share cannot see |

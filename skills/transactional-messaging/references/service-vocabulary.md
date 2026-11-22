@@ -18,8 +18,8 @@ Three properties make this work unlike the marketing channels in this library.
 
 1. **The person is waiting for the message, because they caused it.** They notice when it does not
    come, and lateness has a moment after which the message is worth nothing: the courier already came,
-   the code expired, the pickup hold ended. So the next event in the person's world sets the deadline,
-   not a response curve.
+   the code expired, the pickup hold ended. Use the deadline rule below for service rows and mandatory
+   notices.
 2. **A service message keeps its exemptions only while it stays a service message.** Exemptions from
    consent requirements, from the frequency cap, from marketing suppression. Content is what loses them,
    so "what else can go in" is a question of class, not of layout.
@@ -36,10 +36,11 @@ booking, a payment, an account request. The unit of reading. Its type is one of 
 are read on separate lines. A payment is a transaction of its own only when it is not part of an order
 (an invoice, a top-up, a subscription charge); the payment of an order belongs to the order.
 
-**Service register.** The list of service messages, one row per message.
+**Service register.** The list of service messages and mandatory notices, one row per message.
 
-**Row.** One service message: kind, trigger, content contract, promised time it writes, deadline, channels,
-class, whether a law requires it, owner, template version, test path. The unit of construction.
+**Row.** One entry in the register: kind if applicable, trigger, content contract, promised time it writes,
+deadline, channels, contact class, whether a law requires it, owner, template version, test path. The
+unit of construction.
 
 **Send.** One message to one person, on one attempt, in one channel. The unit of delivery.
 
@@ -60,9 +61,9 @@ refunded, or the request completed.
 
 ## Kinds
 
-**Kind.** Access, confirmation, progress or exception. Not a class: a class is one of
-`contact-orchestration`'s five, and it sets precedence and exemption from the cap. A kind is one of four
-inside the service class, and it sets the deadline anchor, the channels and failover.
+**Kind.** Access, confirmation, progress or exception. The kind guides delivery; it does not set the
+contact class. Use the row's class in `contact-orchestration` for precedence and the cap. See
+`service-register-and-contract.md`, step 4, for an exception that counts as a mandatory notice.
 
 **Access.** A row without which the person cannot go on right now: a code, a reset link, a verification
 link, a pickup code, a ticket, a download link.
