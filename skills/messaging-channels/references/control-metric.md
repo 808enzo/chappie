@@ -24,7 +24,10 @@ kept out beside it. This file holds how to read it.
 
 ## When a period's reading closes
 
-- **The reading waits** until the longest expiry among the period's sends has passed.
+- **Close the weekly reading** for each origin and class once the week has ended and no qualifying
+  send still awaits an outcome. A cancellation before provider submission is final when you log it:
+  close a cut with only cancellations at the end of the week without assigning an expiry or waiting
+  for a receipt. In a mixed cut, wait only for pending sends to resolve or reach their own expiry.
 
 ## What moves it
 

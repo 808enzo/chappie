@@ -130,7 +130,7 @@ acceptance; delivered is confirmation from the carrier and, where available, the
 only where receipts are on. Dropped is the platform's word for a message that reached its expiry
 undelivered.
 
-**No receipt.** The class for a send on a route that returns no delivery receipts. Neither reached
+**No receipt.** The provider reports sent on a route that returns no delivery receipts. Neither reached
 nor failed: unknown, out of both halves of the control metric, with its share read beside.
 
 **Held.** The control metric's class for a send stopped on the state of your own channel, whether your
@@ -142,8 +142,9 @@ traffic: unregistered or filtered traffic, a block by the person, an invalid or 
 account on the platform. Only the refusals that are properties of the number (the block, the invalid or
 deactivated number, no account) are loss events for `contact-orchestration`.
 
-**Addressed.** A person for whom the program requested a send in this channel outside a reply window
-in the period, held sends included, whatever the basis: the basis is read in
+**Addressed.** A person for whom the program handed a send of the class to this channel outside a
+reply window during the period. Held sends and cancellations after handoff count; a request stopped
+before handoff does not. Check the basis separately in
 `consent-and-preferences`' join line. `contact-orchestration`'s word, narrowed to one channel and to
 sends outside a reply window.
 
@@ -236,14 +237,15 @@ lag from receipt on that route.
   says provider block list or record.
 - **fallback**: `personalization` means what a message carries when a substitution cannot resolve,
   taken down its fallback ladder; here it is the text that goes when the rich message cannot. Moving a
-  message to another channel is never a fallback: it is failover in `transactional-messaging`'s word,
-  and the next channel of a cascade in `triggered-messages`'.
+  required notice off a channel that lost its basis calls for channel selection in
+  `transactional-messaging`. Technical failover there requires a separate trigger. For a marketing
+  cascade, `triggered-messages` chooses the next channel.
 - **provider**: `deliverability` means the mailbox provider that receives email; here the provider is
   the company that carries your texts and messaging app messages and reports their statuses.
 - **held**: in `contact-orchestration` a send its policy stopped, suppressed or deferred, which then
   never reaches this skill as a request (its delivery state before the send is *reserved*); here held is a send stopped on the state of the channel.
-  That skill's unknown, a receipt window that closed empty, splits here: no receipt on a route that
-  returns none, failed on a route that does.
+  That skill's unknown, a receipt window that closed empty, splits here: no receipt if the provider
+  reported sent on a route that returns none, failed on a route that issues receipts.
 - **expiry**: `push-notifications` and `in-product-messaging` use the same idea for their surfaces, the
   moment set from the content; `consent-and-preferences`' expiry event is another thing, the event a
   basis's lifetime counts from.

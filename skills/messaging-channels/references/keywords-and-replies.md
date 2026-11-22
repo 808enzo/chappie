@@ -62,8 +62,9 @@ confirmation text. If you send one under its rule, confirm what stopped and leav
 questions. Apply the revocation without waiting for a reply. The timing table gives the presumption
 and what a late confirmation needs. For a web request, confirm the affected category and number on
 the page without promising a provider block or reply. Do not send a text to repeat the page's
-confirmation. If a required service notice loses its basis on this channel, use
-`transactional-messaging`'s failover to a permitted channel. The carriers' principles ask for
+confirmation. If a required service notice loses its basis on this channel, pass the reason and
+original notice deadline to `transactional-messaging` immediately so it can choose a permitted
+channel. Do not wait for a provider event or count the handoff as delivery. The carriers' principles ask for
 "one final opt-out confirmation message per campaign" and say "no further messages should be sent
 following the confirmation message". Apply those principles separately from the FCC rule.
 On WhatsApp, requests "either on or off WhatsApp" are honored, "including

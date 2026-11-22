@@ -159,7 +159,8 @@ classes.**
   not count them. Authentication codes go to a number the person just typed while they wait for it.
   Read codes on a line of their own and never pool them with anything.
 - **The remainder includes held, refused, expired and canceled for lack of a basis.** Count each in
-  the denominator only. Keep the no-receipt class out of both halves. A person who was not reached
+  the denominator only. Use the no-receipt class only when the provider reports sent on a route
+  without delivery receipts; keep that class out of both halves. A person who was not reached
   takes the outcome of their last qualifying send handed to the channel in the same reporting cut.
 - **The period** is a week; **the cut** is origin by class, marketing and service on separate lines;
   the country comes with the origin.
@@ -181,8 +182,8 @@ receipts would hide failures, and the no-receipt share read beside the metric sh
 
 **Why not the provider response index.** `deliverability` divides one mailbox provider's response rate
 on a send by the rate across all mailbox providers, among the messages they accepted. Here the
-population is the people the program requested sends for, including sends never submitted, and the
-numerator is delivery, not response. The denominators nest: requested contains accepted.
+population starts at handoff to the channel, even if the channel never submits the send to the
+provider. A request that stops before handoff adds no one. The numerator counts people reached.
 
 **Why not reachability loss.** That metric's numerator is the loss event; this one's is the reach.
 The STOP and the block that end reachability are read beside this metric and handed to that one.
