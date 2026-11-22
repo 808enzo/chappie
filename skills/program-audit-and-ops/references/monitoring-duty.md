@@ -49,8 +49,12 @@ that turns quiet into broken, and the slot closes more records than it opens.
 
 2. **Set expected silence from your own history, not from instinct.** Take a period when the object
    worked, find the longest gap between heartbeats, and add margin. Silence longer than that opens
-   a record. Silence shorter than that is normal, however uneasy it makes you. One class in the
-   table does not work this way: a consumable resource reports a level rather than an event, so it
+   a record for an expected heartbeat. For service rows, first check which notices were due and
+   expected as described under "The status map and service rows" below. When none were expected,
+   do not open a sender problem for silence, however long it lasts. Check missing expected input
+   separately, and route any missed obligation to its owner at the notice deadline.
+   For other event counts, silence shorter than the historical threshold is normal. A consumable
+   resource reports a level rather than an event, so it
    is never silent and has no gap to measure. Its line is what is left, counted in days of supply at
    the current rate of use, and crossing that line opens a warning rather than a problem. An open
    record does not work this way either: its line is written on the record itself, as the promised

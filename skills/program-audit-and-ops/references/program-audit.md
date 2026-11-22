@@ -30,7 +30,10 @@ same list again.
    same as sends; money, counted by the rules in `metric-definitions`; and the cost of keeping it,
    meaning how many manual steps one issue takes.
 3. **Run five checks:**
-   - **dead**, meaning nothing has gone out for longer than its expected silence;
+   - **dead**, meaning nothing has gone out for longer than the mechanic's expected silence despite
+     expected sends. For a service row, count the notices due after recorded exclusions as described
+     in `monitoring-duty.md`. If no sends were expected, leave the row out of this class. If expected
+     input stopped, check the source and integration logs;
    - **duplicates and overlaps**, meaning identical or intersecting send conditions, or two
      mechanics competing for the same person;
    - **empty**, meaning it sends and produces neither money nor the target action on its own control
@@ -70,8 +73,10 @@ same list again.
 - **Timing comes from the state of duty, not from the calendar.** An audit is due when the roster
   outgrew the slot, when a system or the team changed, or when the share of ownerless mechanics
   became visible. A date on its own is not a reason.
-- **Switching off a dead mechanic takes two conditions together:** silence longer than its expected
-  silence, and no seasonal explanation. Silence alone is not enough.
+- **Before proposing to switch off a dead mechanic**, verify that sends were expected during the
+  gap, that the gap exceeded the expected silence and that seasonality does not explain it. A service
+  row with no expected sends is not a retirement candidate on that evidence. If a required notice
+  missed its original deadline, route the miss to its owner immediately, even for an excluded notice.
 - **After a migration, start with the base rather than the mechanics.** Part of the base may not
   have made it across, and then "the mechanic does not cover these people" means "these
   people are not in the system". Check in that order: people, then coverage, then configuration.

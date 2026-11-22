@@ -23,8 +23,9 @@ contacts accepted, a recompute finishing, what is left in a pool, a closing entr
 remembered.
 
 **Expected silence.** The longest gap between heartbeats observed while the object was healthy, plus
-margin. It is the line that turns "quiet" into "broken", and you set it from your own history rather
-than from a number somebody quotes. It applies to objects that report events; a consumable resource
+margin. Set it from your own history and use it only for a heartbeat you expected. For a service
+row with no expected sends due, "quiet" does not mean "broken", however long the gap lasts.
+Check expected input separately. A consumable resource
 reports a level instead, so its line is what is left, measured in days of supply at the current rate
 of use. An open record carries its line on itself, as the time a neighboring skill wrote on it.
 
@@ -97,7 +98,8 @@ contained.
 **Recall.** Pulling a message that has already been shown, in channels that support it. Email does
 not.
 
-**Dead mechanic.** Silent for longer than its expected silence, with no seasonal explanation.
+**Dead mechanic.** A mechanic whose expected sends have stopped for longer than its expected
+silence, with no seasonal explanation. A service row with no expected sends due is not dead.
 
 **Empty mechanic.** Sends, and produces no target action on its own control metric.
 
