@@ -150,9 +150,10 @@ The platform and industry rows are class 2 and carry their sources below; the bo
 - **A shared short code.** The standing is shared: a drop caused by another sender on the code reads
   as yours. The arrangement with the provider decides what you can read about the others; if it
   reads nothing, the code carries nothing you cannot afford to lose.
-- **A manager's own phone.** It is an origin without registration. Its messages do not travel
-  through the program and are not counted here, but a STOP said to it is a withdrawal for the record
-  (`consent-and-preferences`), and `b2b-retention` decides who writes in which stage.
+- **A manager's own phone.** It is an origin without registration. Do not count its messages as
+  program sends. If the manager receives a stop request, capture it at receipt and follow
+  `keywords-and-replies.md`, step 2. Have `consent-and-preferences` check the method and scope
+  before applying a withdrawal. `b2b-retention` decides who writes in which stage.
 
 ## Failure modes
 

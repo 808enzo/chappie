@@ -28,6 +28,8 @@ kept out beside it. This file holds how to read it.
   send still awaits an outcome. A cancellation before provider submission is final when you log it:
   close a cut with only cancellations at the end of the week without assigning an expiry or waiting
   for a receipt. In a mixed cut, wait only for pending sends to resolve or reach their own expiry.
+  Credit a confirmed delivery before expiry to the week of its handoff. Use the delivery time to
+  check expiry, not the time the receipt arrived. Neither event starts a new week's attempt.
 
 ## What moves it
 

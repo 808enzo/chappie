@@ -144,11 +144,13 @@ deactivated number, no account) are loss events for `contact-orchestration`.
 
 **Addressed.** A person for whom the program handed a send of the class to this channel outside a
 reply window during the period. Held sends and cancellations after handoff count; a request stopped
-before handoff does not. Check the basis separately in
+before handoff does not. Audit marketing sends that went out separately in
 `consent-and-preferences`' join line. `contact-orchestration`'s word, narrowed to one channel and to
 sends outside a reply window.
 
-**Reached.** At least one message of the class delivered in the period. Delivered, not sent.
+**Reached.** An addressed person with at least one confirmed delivery before expiry from a handoff
+in that week's origin and class. The handoff fixes the week, not the delivery or receipt date.
+Delivered, not sent.
 
 ## The inbound
 
@@ -197,8 +199,9 @@ lag from receipt on that route.
 - **The cascade decides the order; this skill decides what each status means.** `triggered-messages`
   says SMS comes after the app message and how long to wait. This skill says which statuses count as
   reached, which as failed, which as held and which as unknown, so that a message that never landed
-  moves the cascade on a fact. Once a message is delivered, whether the cascade moves on is the
-  response condition `triggered-messages` sets for the step.
+  moves the cascade on a fact. For marketing, use the response condition `triggered-messages` sets
+  for the step. For a required service action, use the checkpoint in `transactional-messaging`'s
+  `deadline-channel-and-failover.md`, step 5.
 - **The reply window is not the settle window.** The platform's window says how long you may answer
   freely, and belongs here. How long `chat-and-bots` waits before an issue counts as settled is its own
   window, with the same person and a different clock.

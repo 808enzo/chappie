@@ -127,15 +127,15 @@ the cascade outcomes from the provider and from your own send log:
 
 | Class | Evidence | What the cascade does |
 |---|---|---|
-| reached | delivered, read | the message landed; whether the cascade moves on is the response condition `triggered-messages` sets for the step, not a status |
-| failed | undelivered, failed; on WhatsApp, no delivered status for a submitted message before the time-to-live | the next channel in the order, at once |
+| reached | delivered, read | the message landed. For marketing, use the response condition in `triggered-messages`; for a service exception that requires action, use the checkpoint in `transactional-messaging`'s `deadline-channel-and-failover.md`, step 5 |
+| failed | undelivered, failed; on WhatsApp, no delivered status for a submitted message before the time-to-live | use the next permitted channel in the order. For service, follow the failover and access rules in `transactional-messaging`'s `deadline-channel-and-failover.md`, step 5 |
 | held | refused or never submitted for the state of your own channel: a paused template, the limit, code 131049 | the order decides: the next channel now, or the same channel after the wait the refusal names (131049: at least 24 hours) |
 | canceled for lack of a basis | your log records this outcome after handoff to the channel layer and before submission to the provider | carry the logged reason with the outcome. Stop this send without a retry or technical failover. For a required service notice, pass the reason and original deadline to `transactional-messaging` to check for a permitted route without waiting for a provider event |
-| no receipt | sent, on a route that returns no delivery receipts | unknown, never reached: a marketing cascade moves on its response condition; a service line follows `transactional-messaging`, which fails over in such a channel only on a confirmed failure |
+| no receipt | sent, on a route that returns no delivery receipts | delivery unknown. A marketing cascade uses its response condition. For service, a missing receipt alone triggers nothing; apply `transactional-messaging`'s `deadline-channel-and-failover.md`, step 5, for a confirmed failure or a required action still missing at its checkpoint |
 
 A send still at sent on a route that returns receipts is not in a class yet: it waits for its receipt,
-and the requester's deadline, not the validity period, decides how long. `transactional-messaging` fails
-a service line over when its deadline minus the next channel's tail latency passes with no receipt. With
+and the requester's deadline, not the validity period, sets the wait for a service failover decision.
+Use `transactional-messaging`'s `deadline-channel-and-failover.md`, step 5, including its access exception. With
 no deadline, the wait ends at the expiry, and the send counts as failed, as the platform tells you to
 assume on WhatsApp.
 

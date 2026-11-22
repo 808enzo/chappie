@@ -148,12 +148,13 @@ classes.**
   this channel, outside a reply window, during the period. Include people whose sends the channel
   held, and those whose sends it canceled for lack of a basis before provider submission. A stop
   before handoff adds no one. It is `contact-orchestration`'s word, narrowed to one channel and to
-  sends outside a reply window. Audit the basis separately: the same marketing sends stand in
-  `consent-and-preferences`' join line, which reads the record by fields that resolve. A delivered
+  sends outside a reply window. Audit the basis separately: `consent-and-preferences`' join line
+  counts marketing sends that went out, not attempts that stopped before submission. A delivered
   send that line calls unsupported is reached here and unsupported there, and neither line corrects
   the other.
-- **Reached** is at least one message of the class in the period with a delivered status: the
-  carrier's or the platform's confirmation, not "sent".
+- **Reached** means the carrier or platform confirmed delivery for at least one qualifying handoff
+  to that person. Count delivery before expiry in the week of handoff, even if delivery happens the
+  following week or the confirmation arrives later. A status of "sent" is not delivery.
 - **Two populations stay out of the denominator.** Sends inside an open reply window, replies and
   templates alike, go to a person who wrote within the day, and the platform's messaging limit does
   not count them. Authentication codes go to a number the person just typed while they wait for it.
