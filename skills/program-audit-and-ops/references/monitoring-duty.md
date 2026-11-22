@@ -150,11 +150,22 @@ stays with the skill that defines it; whether it went silent is read here.
 - **The status map and service rows** (`transactional-messaging`). The status map is an object: an
   internal status that holds transactions and has no line in the map reads as "no change", with the
   timer still running and a signal to the map's owner, and that signal is a roster record. The
-  heartbeat of a service row is the ratio of messages sent for it to the transactions that entered
-  its state, minus the exclusions written for the row. A ratio that falls while events hold is a
-  broken row; events that stop are a fault in the system of record or the integration. The expected
-  ratio is defined there (`deadline-channel-and-failover.md`, step 8); you watch it here, and a
-  required row that fails is a missed obligation (`incident-response.md`, step 3).
+  send heartbeat comes from `deadline-channel-and-failover.md`, step 8. Group notices by their
+  original deadlines and count only those in the window whose deadlines have arrived. Leave out
+  recorded exclusions, including no permitted channel. Keep a notice in the denominator if a
+  permitted channel was available but the send failed. Match sends to notices by service row and
+  idempotency key. Divide the number of expected notices with a logged send on a permitted channel
+  by the number expected. Count sends through each notice's original deadline, even before the
+  window opened. Count each notice once across copies, retries, and failover. Count sends, not send
+  requests or delivery receipts.
+
+  If none were expected, record "no sends expected" and leave the ratio blank. Do not use that blank
+  ratio to judge the sender. Read input events separately. Check the event and send logs for a
+  shortfall, and the system of record and integration logs if expected input events stop. Name a
+  technical fault only when the logs confirm it. If a required notice went unsent by its original
+  deadline, follow the missed-obligation route (`incident-response.md`, step 3) to its owner
+  immediately. Do this even for a notice you excluded from the heartbeat, without waiting for a
+  technical diagnosis or for the case to close.
 - **The ask flow** (`voice-of-customer`). Its heartbeat is asks per closing state, read by part of the
   experience. A part that has asks and no answers is a silent object, not a healthy one. An obligation
   (an answer below the threshold, which owes the person an action) still open past its promised
