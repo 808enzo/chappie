@@ -59,11 +59,8 @@ each of the two thresholds, so take them one at a time.
   answer to the same question: it is the same axis read at a later point, a threshold of **ending**
   against the one computed here, which is a threshold of **starting**.
 
-That leaves an ordering check rather than a ranking. **The entry threshold you compute here has to
-fall earlier than the deletion threshold in `list-building`**, and one median interval plus a
-tolerance against two median intervals leaves the attempt room to run between them. If the two land
-on top of each other, one of them sits on the wrong population, and you can schedule neither the
-attempt nor the cleanup until you find out which.
+Check when `list-building` takes the person out of the active base. Use the first day they are
+ineligible, not the later date when their record is deleted. The attempt must finish before that day.
 
 **3. Derive the threshold from your own distribution rather than assigning it.** The threshold is
 a multiple of your own median interpurchase interval for the category, not a number of days
@@ -74,9 +71,27 @@ typical cycles; take the median rather than the mean, because a tail of long int
 mean upward and pushes the threshold past the point where an attempt is still worth making; the
 entry threshold is one median interval plus a tolerance.
 
-The deletion threshold is a different number on the same axis, read later: two median interpurchase
-intervals with no reaction and no purchase (step 2). Everything this skill does happens between the
-two, and the ordering check is what protects that room.
+Use whole days on the same local calendar: the last qualifying purchase is day zero. For each
+candidate cutoff at or above the median, make one row with these columns:
+
+- **Later purchases:** count completed gaps strictly longer than the cutoff and divide by all
+  completed gaps in the same slice. Count each gap once, including ties; a purchase on the cutoff
+  day is not late. This describes gaps that ended in a purchase, not the chance that a buyer still
+  absent today will return.
+- **Today's review list:** list each in-scope repeat buyer once if their latest qualifying purchase
+  across all channels was strictly more than that many days ago. Record why others stay out.
+  Use the separate first-purchase cohort window below for anyone who has bought only once.
+- **Time left:** count from the first whole day strictly past the cutoff, or from today if later.
+  Stop before the first ineligible day. If the finite attempt cannot fit, schedule nothing. If the
+  cleanup date or attempt length is unknown, flag it for confirmation. Revisit an empty window
+  only when an agreed change leaves enough time; do not move cleanup to make the attempt fit.
+
+Apply the team's stated rule. For a fixed tolerance, add it to the median. For a maximum share
+of later purchases, start at the first whole day at or above the median and take the first day
+whose share is at or below that limit. The tolerance is that cutoff minus the median. If the team
+has not chosen a rule, show the rows side by side: who would enter earlier and how much time waiting
+would leave. Keep the lists provisional. Record the rule, data window and review date so the team
+can repeat the calculation on new completed gaps.
 
 **4. Have as many threshold steps as you have distinguishable routes, and no more.** One step is
 one attempt with one set of content. Running four steps is worth it exactly when each has its own
@@ -126,7 +141,7 @@ attempt has an end, and its last message says what happens next.
 | Entry threshold | your own median interpurchase interval for the category, plus a tolerance |
 | Number of threshold steps | the number of distinguishable routes, not round calendar numbers |
 | The cut the threshold is computed on | a segment with its own purchase cycle, not the whole base |
-| Deletion threshold | owned by `list-building`: two median interpurchase intervals with no reaction and no purchase |
+| End of eligibility | `list-building` sets the active-base cutoff; its starting point is two median interpurchase intervals with no reaction and no purchase |
 | Moment recency is rechecked | immediately before the send, not at assembly |
 
 ## Edge cases
@@ -215,12 +230,12 @@ intervals fall into these bands:
 5. Entry threshold: one median interval plus a tolerance. In this worked example the tolerance is
    seven days, a value the team sets, so the threshold is 31 plus 7, 38 days without a purchase in
    the category. Taken from the mean it would be 47 days, nine days later.
-6. Ordering check: the deletion threshold in `list-building` sits at two median intervals, 62 days.
-   38 falls before 62, which leaves 24 days for the attempt.
+6. Ordering check: if eligibility ends at the start of day 62 (two median intervals), the first
+   eligible day is 39. Days 39 through 61 leave 23 days for the attempt.
 
 **What it returns in this worked example:** dog food, entry threshold 38 days, built on 2026-10-01
-from the median of 31 days plus a tolerance of 7, with 24 days of room before the deletion threshold
-at 62 days. Another category in the same base gets its own run on its own intervals (step 4).
+from the median of 31 days plus the team's tolerance of 7. Check the time left for each buyer as
+of the review date. Another category in the same base gets its own run on its own intervals (step 4).
 Recompute and redate the threshold when the assortment or the price moves.
 
 **When the data is too little.** A period that covers fewer than two typical cycles is too little:
@@ -230,4 +245,5 @@ and nobody in it enters a win-back attempt; a person with one purchase there bel
 so a median read this early runs short rather than long. In this worked example, a raw food line
 launched on 2026-08-17 holds 44 days of history on 2026-09-30, and its intervals so far give a
 median of 26 days. Two cycles of 26 are 52 days, more than 44, so the line reads "no threshold yet,
-recheck on 2026-10-08", 52 days after launch. If the median has grown by then, the date moves later.
+recheck on 2026-10-08", 52 days after launch. At the review, recompute with newly completed gaps.
+If none have closed or the updated cycles still exceed the history, keep the threshold unset.
