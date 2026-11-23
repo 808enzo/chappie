@@ -19,9 +19,9 @@ median (`repeat-purchase` defines the interval, `rfm-segments` computes it on th
 
 ## Exit conditions
 
-Named: the action, the threshold, the threshold steps, the part of the population that is out of
-scope, and the rule for rechecking recency at selection. The list of lapsed people is
-reproducible: two people building it independently get the same set.
+With an agreed cutoff, record the action, threshold steps, exclusions and recency check so another
+person can reproduce the review list. Without an agreed rule for choosing the cutoff, return the
+comparison in step 3 instead of a working threshold or list.
 
 ## Steps
 
@@ -88,10 +88,14 @@ candidate cutoff at or above the median, make one row with these columns:
 
 Apply the team's stated rule. For a fixed tolerance, add it to the median. For a maximum share
 of later purchases, start at the first whole day at or above the median and take the first day
-whose share is at or below that limit. The tolerance is that cutoff minus the median. If the team
-has not chosen a rule, show the rows side by side: who would enter earlier and how much time waiting
-would leave. Keep the lists provisional. Record the rule, data window and review date so the team
-can repeat the calculation on new completed gaps.
+whose share is at or below that limit. The tolerance is that cutoff minus the median.
+
+If the team has not set a tolerance or a limit, leave the cutoff unset, even if they ask for one
+number or say they would rather wait. Show what each candidate would mean for late purchases,
+today's buyers and the time left. Ask: "What share of completed gaps are you willing to count as
+late?" Do not pick a percentile to use in the meantime. Once the team answers, apply its rule to
+the same rows and return one review list. Record the rule and data window; recalculate the rows
+at the next review with newly completed gaps, including longer gaps that have since closed.
 
 **4. Have as many threshold steps as you have distinguishable routes, and no more.** One step is
 one attempt with one set of content. Running four steps is worth it exactly when each has its own
