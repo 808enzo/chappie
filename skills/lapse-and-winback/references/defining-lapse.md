@@ -91,11 +91,16 @@ of later purchases, start at the first whole day at or above the median and take
 whose share is at or below that limit. The tolerance is that cutoff minus the median.
 
 If the team has not set a tolerance or a limit, leave the cutoff unset, even if they ask for one
-number or say they would rather wait. Show what each candidate would mean for late purchases,
-today's buyers and the time left. Ask: "What share of completed gaps are you willing to count as
-late?" Do not pick a percentile to use in the meantime. Once the team answers, apply its rule to
-the same rows and return one review list. Record the rule and data window; recalculate the rows
-at the next review with newly completed gaps, including longer gaps that have since closed.
+number or say they would rather wait. Give the team the following in the same reply:
+
+- Show what each candidate would mean for late purchases, today's buyers and the time left.
+- Ask: "What share of completed gaps are you willing to count as late?"
+- Tell them when to update the comparison: at the next review with newly completed purchase gaps,
+  add those gaps to the same segment's history and recalculate the candidate cutoffs and late shares.
+
+Do not pick a percentile to use in the meantime. Once the team answers, apply its rule to the
+current rows and return one review list. Record the rule and data window so the team can apply
+the same rule when it updates the comparison.
 
 **4. Have as many threshold steps as you have distinguishable routes, and no more.** One step is
 one attempt with one set of content. Running four steps is worth it exactly when each has its own
