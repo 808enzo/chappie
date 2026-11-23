@@ -14,9 +14,6 @@ source, the math, a recipe you run on your own data, a default the skill names a
 or a worked example labeled as made up. Every file is held to one test: after reading it, you know
 what to do on Monday morning.
 
-The skills are checked in Claude Code and, in part, in the Claude app. Codex, Cursor, GitHub
-Copilot, Gemini CLI and [other agents](#install) read the same folder format.
-
 ## Quick start
 
 Run this in your project folder to install all 35 skills. The installer needs
