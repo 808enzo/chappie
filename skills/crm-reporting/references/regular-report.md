@@ -54,8 +54,12 @@ yet" and the date it will have one, and it states no direction.
 
 **4. Where a base exists, write the conclusion as above, below, or within.** Against a plan, use the tolerance
 written into the line's definition; against a control group, use the interval from the test read. To judge
-whether a nonseasonal value stands out, use the line's own stable periods. Set the noise band before
-publication (`metric-definitions`, the metric set, step 7). No adjectives: "strong growth" is not a category.
+whether a nonseasonal value stands out, report where it falls relative to the range of its own prior stable
+periods. If all you have is the observed range, describe the comparison and make the flag conditional:
+if the team adopted those limits and the two-period rule before this reading, the first close outside is a
+flag. Check the data and the population behind the rate. An explained flag starts no pair; call it a signal
+only when two consecutive unexplained closes fall beyond the same edge of the unchanged band
+(`metric-definitions`, the metric set, step 7). No adjectives: "strong growth" is not a category.
 
 To read seasonal change, divide each closed period's value by the value for the same period of the previous
 seasonal cycle. Report that change. To judge whether it stands out, compare the new ratio with the band of
@@ -65,6 +69,9 @@ year-over-year ratio. Keep the new ratio out of the band used to assess it.
 If there are too few earlier ratios for a band, report the values and the ratio you can measure. Write
 "no base yet" and say when enough comparable ratios will have closed to build a band for future reports.
 Give no flag, signal or within-band verdict. The spread of raw monthly values cannot fill that gap.
+
+When a band is already in use, give a rebuild date only if you know the rebuild rule and which close starts
+the count. If you illustrate a possible date, state whether that starting close counts as the first period.
 
 **5. Put every rate beside the count and the base it stands on, every share beside its total, and every metric
 in the vanity register beside its counterweight, in the same row.** The register is `vanity-metrics.md`. "The
