@@ -14,6 +14,14 @@ All 35 skills share one version number. No skill has a version of its own.
 - **Patch.** A correction inside a skill: a legal or channel rule updated to match its current
   source, or a step rewritten to read more clearly.
 
+## [1.3.0] - 2026-11-24
+
+### Changed
+
+- `lapse-and-winback`: Compare purchase-gap cutoffs using your own repeat buyers' history. For each cutoff, see who would enter today's review list and whether there is time for a win-back attempt before cleanup. If your team has not chosen a rule, keep the cutoff open and revisit the options when more purchase gaps close.
+- `crm-reporting`: Compare seasonal change with earlier changes measured the same way. If you have too few prior ratios, report the values and the change without calling it unusual. The spread of raw monthly values cannot stand in for that history.
+- `push-notifications`: For an existing audience, distinguish a lost device from a person losing push or losing every channel. Measure push loss among people you tried to reach by push, and total loss among people you tried to reach by any channel. Leave unchecked channels unknown. The metric for new installs still uses the original install cohort.
+
 ## [1.2.1] - 2026-11-22
 
 ### Fixed
@@ -198,6 +206,7 @@ First public release.
 Version 2 takes two topics this release leaves out: calls and voice, and AI inside the program.
 [ROADMAP.md](ROADMAP.md#not-in-version-1) gives the reason for each.
 
+[1.3.0]: https://github.com/808enzo/chappie/releases/tag/v1.3.0
 [1.2.1]: https://github.com/808enzo/chappie/releases/tag/v1.2.1
 [1.2.0]: https://github.com/808enzo/chappie/releases/tag/v1.2.0
 [1.1.1]: https://github.com/808enzo/chappie/releases/tag/v1.1.1
