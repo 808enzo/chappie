@@ -52,12 +52,19 @@ One base per line. Two questions about one metric make two lines. Changing a lin
 definition and goes through the protocol in `metric-definitions`. A new line with no history says "no base
 yet" and the date it will have one, and it states no direction.
 
-**4. Write each conclusion as a category against the base: above, below, or within.** The noise band is the
-spread of the line across its own stable periods, set before publication (`metric-definitions`, the metric set,
-step 7). Against a plan, the band is the tolerance written into the line's definition; against a control
-group, it is the interval from the test read; against the same period of the previous cycle, it is the spread
-of that same comparison across earlier cycles, and with no such history the line's own noise band, marked on
-the line. No adjectives: "strong growth" is not a category.
+**4. Where a base exists, write the conclusion as above, below, or within.** Against a plan, use the tolerance
+written into the line's definition; against a control group, use the interval from the test read. To judge
+whether a nonseasonal value stands out, use the line's own stable periods. Set the noise band before
+publication (`metric-definitions`, the metric set, step 7). No adjectives: "strong growth" is not a category.
+
+To read seasonal change, divide each closed period's value by the value for the same period of the previous
+seasonal cycle. Report that change. To judge whether it stands out, compare the new ratio with the band of
+earlier comparable ratios. For a monthly line with an annual season, each month contributes its own
+year-over-year ratio. Keep the new ratio out of the band used to assess it.
+
+If there are too few earlier ratios for a band, report the values and the ratio you can measure. Write
+"no base yet" and say when enough comparable ratios will have closed to build a band for future reports.
+Give no flag, signal or within-band verdict. The spread of raw monthly values cannot fill that gap.
 
 **5. Put every rate beside the count and the base it stands on, every share beside its total, and every metric
 in the vanity register beside its counterweight, in the same row.** The register is `vanity-metrics.md`. "The
