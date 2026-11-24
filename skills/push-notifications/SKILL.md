@@ -139,11 +139,11 @@ Five seams get crossed by accident. Each is spelled out under "Seams with neighb
 
 ## Control metric
 
-Identify the population and period first. For losses from an existing base, link endpoints to people:
-a person loses push when their last displayable endpoint goes. Check which other channels still reach
-them at period end. For loss among people you tried to contact, follow the handoff to
-`contact-orchestration`: its Control metric and its `references/control-metric.md` match losses to
-distinct people addressed in push and across channels separately. Use the cohort below for new installs.
+For new installs, use the cohort below. For the existing base, link endpoints to people for the period.
+Losing the last displayable endpoint means losing push. At period end, mark unchecked channels unknown,
+including email. Count total loss only when every channel is unavailable; unresolved cases add only to
+the upper bound. For rates, follow the `contact-orchestration` handoff: its Control metric and
+`references/control-metric.md` match each loss to people you tried to reach by push or by any channel.
 
 **Displayable share of an install cohort at the check age.**
 
